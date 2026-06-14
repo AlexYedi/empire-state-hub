@@ -1,3 +1,12 @@
 ignoredBuiltDependencies:
   - sharp
   - unrs-resolver
+# Fetch native binaries for both Mac architectures + Linux, so local builds work under
+# either Node arch (x64 or arm64) and Vercel's Linux build resolves correctly too.
+supportedArchitectures:
+  os:
+    - darwin
+    - linux
+  cpu:
+    - x64
+    - arm64

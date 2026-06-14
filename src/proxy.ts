@@ -4,7 +4,8 @@ import { NextResponse, type NextRequest } from "next/server";
 // - Local dev with no password set: allowed (so building isn't blocked).
 // - Production with no password set: denied (deploy-safe by default — you must set
 //   OPS_PASSWORD in the Vercel env to open it). Upgrade path: Auth.js (M3 / YED-76).
-export function middleware(req: NextRequest) {
+// (Next 16 "proxy" convention — successor to the deprecated "middleware" file.)
+export function proxy(req: NextRequest) {
   const password = process.env.OPS_PASSWORD;
 
   if (!password) {
