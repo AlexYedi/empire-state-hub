@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useLens } from "./lens-provider";
+import { SYSTEM } from "@/data/architecture";
 
 /** The thesis in the hero itself: the same project, told two ways. */
 export function Hero() {
@@ -28,15 +29,15 @@ function EditorialHero() {
         account of the ones worth remembering — the panels, the demos, the off-hand lines that
         turn out to matter — and the system I built to turn each night into something that lasts.
       </p>
-      <div className="mt-10 flex items-center gap-5 text-sm">
+      <div className="mt-10 flex flex-wrap items-center gap-5 text-sm">
         <Link
-          href="/pipeline"
+          href="/architecture"
           className="rounded-full bg-accent px-5 py-2.5 font-medium text-bg transition-opacity hover:opacity-90"
         >
-          Read the story
+          See the system
         </Link>
         <span className="text-muted">
-          or flip to <span className="text-fg">Technical</span> to see how it&apos;s built →
+          or flip to <span className="text-fg">Technical</span> to read it as engineering →
         </span>
       </div>
     </div>
@@ -44,10 +45,11 @@ function EditorialHero() {
 }
 
 function TechnicalHero() {
-  const stats: [string, string][] = [
-    ["27", "skills"],
-    ["20", "subagents"],
-    ["12", "workflows"],
+  const { counts } = SYSTEM;
+  const stats: [number, string][] = [
+    [counts.skills, "skills"],
+    [counts.agents, "subagents"],
+    [counts.commands, "workflows"],
   ];
 
   return (
@@ -64,17 +66,17 @@ function TechnicalHero() {
       <dl className="mt-10 grid grid-cols-3 gap-px overflow-hidden rounded-lg border border-border bg-border">
         {stats.map(([value, label]) => (
           <div key={label} className="bg-surface px-4 py-5 text-center">
-            <dt className="text-2xl font-semibold text-fg">{value}</dt>
+            <dt className="text-2xl font-semibold text-fg tabular-nums">{value}</dt>
             <dd className="mt-1 text-[11px] uppercase tracking-widest text-muted">{label}</dd>
           </div>
         ))}
       </dl>
-      <div className="mt-10 flex items-center gap-5 text-sm">
+      <div className="mt-10 flex flex-wrap items-center gap-5 text-sm">
         <Link
-          href="/pipeline"
+          href="/architecture"
           className="rounded bg-accent px-5 py-2.5 font-medium text-bg transition-opacity hover:opacity-90"
         >
-          See it run
+          The system →
         </Link>
         <span className="text-muted">
           or flip to <span className="text-fg">Editorial</span> for the story →
