@@ -61,3 +61,22 @@ export async function getContentDraftBoard(): Promise<KanbanColumn[]> {
     drafts: drafts.filter((d) => d.status === status),
   }));
 }
+
+// Public showcase: only output-grade types (no DMs/notes/questions), no PII.
+const SHOWCASE_TYPES = new Set([
+  "linkedin_post_post",
+  "linkedin_post_pre",
+  "linkedin_post_synthesis",
+  "research_brief",
+  "post_event_brief",
+]);
+
+export async function getShowcase(): Promise<ContentDraft[]> {
+  const drafts = await getContentDrafts();
+  const rank = (s: string | null) =>
+    s === "published" ? 0 : s === "approved" ? 1 : s === "needs_review" ? 2 : 3;
+  return drafts
+    .filter((d) => d.type !== null && SHOWCASE_TYPES.has(d.type))
+    .sort((a, b) => rank(a.status) - rank(b.status))
+    .slice(0, 60);
+}

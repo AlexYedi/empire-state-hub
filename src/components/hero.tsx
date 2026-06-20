@@ -31,10 +31,10 @@ function EditorialHero() {
       </p>
       <div className="mt-10 flex flex-wrap items-center gap-5 text-sm">
         <Link
-          href="/architecture"
+          href="/pipeline"
           className="rounded-full bg-accent px-5 py-2.5 font-medium text-bg transition-opacity hover:opacity-90"
         >
-          See the system
+          Read the story
         </Link>
         <span className="text-muted">
           or flip to <span className="text-fg">Technical</span> to read it as engineering →
@@ -73,10 +73,10 @@ function TechnicalHero() {
       </dl>
       <div className="mt-10 flex flex-wrap items-center gap-5 text-sm">
         <Link
-          href="/architecture"
+          href="/pipeline"
           className="rounded bg-accent px-5 py-2.5 font-medium text-bg transition-opacity hover:opacity-90"
         >
-          The system →
+          See it run →
         </Link>
         <span className="text-muted">
           or flip to <span className="text-fg">Editorial</span> for the story →
