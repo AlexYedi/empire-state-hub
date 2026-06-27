@@ -73,3 +73,74 @@ export const getBuildTelemetry = unstable_cache(fetchBuildTelemetry, ["build-tel
   revalidate: 60,
   tags: ["build-telemetry"],
 });
+
+// --- Build-quality judge runs (projected from Take-3's .claude/evals/logs via emit-judge-runs.sh) ---
+export type JudgeQuality = {
+  available: boolean;
+  runs: number;
+  avgScore: number | null;
+  passRate: number | null; // 0..1
+  lastScore: number | null;
+  lastVerdict: string | null;
+  acked: number; // how many runs Alex has acked (calibration sample size)
+  ackAgreement: number | null; // agreements / acked — judge is advisory until >=0.8 over ~20
+};
+
+const EMPTY_JUDGE: JudgeQuality = {
+  available: false,
+  runs: 0,
+  avgScore: null,
+  passRate: null,
+  lastScore: null,
+  lastVerdict: null,
+  acked: 0,
+  ackAgreement: null,
+};
+
+async function fetchJudgeQuality(): Promise<JudgeQuality> {
+  if (!PROJECT || !KEY) return EMPTY_JUDGE;
+  const query = `
+    SELECT
+      count() AS runs,
+      round(avg(toFloat(properties.weighted_score)), 3) AS avg_score,
+      countIf(properties.verdict = 'pass') AS passes,
+      argMax(toFloat(properties.weighted_score), timestamp) AS last_score,
+      argMax(properties.verdict, timestamp) AS last_verdict,
+      countIf(properties.acked = true) AS acked,
+      countIf(properties.ack_agree = true) AS ack_agree
+    FROM events
+    WHERE event = 'judge_run' AND timestamp > now() - INTERVAL 180 DAY`;
+  try {
+    const res = await fetch(`${HOST}/api/projects/${PROJECT}/query/`, {
+      method: "POST",
+      headers: { Authorization: `Bearer ${KEY}`, "Content-Type": "application/json" },
+      body: JSON.stringify({ query: { kind: "HogQLQuery", query } }),
+    });
+    if (!res.ok) return EMPTY_JUDGE;
+    const data = (await res.json()) as { results?: unknown[][] };
+    const row = data.results?.[0];
+    if (!row) return { ...EMPTY_JUDGE, available: true };
+    const runs = Number(row[0] ?? 0);
+    const passes = Number(row[2] ?? 0);
+    const acked = Number(row[5] ?? 0);
+    const ackAgree = Number(row[6] ?? 0);
+    return {
+      available: true,
+      runs,
+      avgScore: num(row[1]),
+      passRate: runs > 0 ? passes / runs : null,
+      lastScore: num(row[3]),
+      lastVerdict: (row[4] as string) ?? null,
+      acked,
+      ackAgreement: acked > 0 ? ackAgree / acked : null,
+    };
+  } catch {
+    return EMPTY_JUDGE;
+  }
+}
+
+/** Cached 60s. */
+export const getJudgeQuality = unstable_cache(fetchJudgeQuality, ["judge-quality"], {
+  revalidate: 60,
+  tags: ["judge-quality"],
+});

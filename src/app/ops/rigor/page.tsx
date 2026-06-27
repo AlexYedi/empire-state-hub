@@ -1,5 +1,5 @@
 import { getActedOnValue } from "@/lib/content-drafts";
-import { getBuildTelemetry } from "@/lib/posthog";
+import { getBuildTelemetry, getJudgeQuality } from "@/lib/posthog";
 
 export const dynamic = "force-dynamic";
 
@@ -11,7 +11,11 @@ const OUTCOME_ACCENT = {
 } as const;
 
 export default async function RigorPage() {
-  const [v, t] = await Promise.all([getActedOnValue(), getBuildTelemetry()]);
+  const [v, t, j] = await Promise.all([
+    getActedOnValue(),
+    getBuildTelemetry(),
+    getJudgeQuality(),
+  ]);
 
   return (
     <div>
@@ -85,13 +89,45 @@ export default async function RigorPage() {
         </div>
       )}
 
+      <h2 className="mb-3 mt-10 text-sm font-medium text-muted">Build quality (judge)</h2>
+      {!j.available || j.runs === 0 ? (
+        <p className="rounded-md border border-border bg-surface p-4 text-sm text-muted">
+          No judge runs projected yet. Runs appear after <code className="text-fg">/judge-build</code> +{" "}
+          <code className="text-fg">emit-judge-runs.sh</code>.
+        </p>
+      ) : (
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-5">
+          <Stat
+            label="Avg score"
+            value={j.avgScore ?? "—"}
+            accent={(j.avgScore ?? 0) >= 0.7 ? "text-emerald-400" : "text-rose-400"}
+          />
+          <Stat
+            label="Pass rate"
+            value={j.passRate === null ? "—" : `${Math.round(j.passRate * 100)}%`}
+            accent="text-emerald-400"
+          />
+          <Stat label="Runs" value={j.runs} accent="text-fg" />
+          <Stat
+            label="Last verdict"
+            value={j.lastVerdict ?? "—"}
+            accent={j.lastVerdict === "pass" ? "text-emerald-400" : "text-rose-400"}
+          />
+          <Stat
+            label={`Calibration · n=${j.acked}`}
+            value={j.ackAgreement === null ? "—" : `${Math.round(j.ackAgreement * 100)}%`}
+            accent={(j.ackAgreement ?? 0) >= 0.8 ? "text-emerald-400" : "text-amber-400"}
+          />
+        </div>
+      )}
+
       <p className="mt-6 max-w-2xl text-[11px] leading-relaxed text-muted/80">
         North-star = realized <strong>outcome vs assigned goal</strong>. Outcomes are{" "}
         <strong>manually tagged</strong> (<code className="text-fg">/tag-outcome</code>) and lagging —{" "}
         <em>pending</em> means published but not yet observed, not a miss. Hit-rate is over graded items
-        only. Build telemetry is from PostHog (<code className="text-fg">build_session</code> events);
-        feedback-rounds/session is the friction proxy. Judge-quality panel lands next (judge scores are
-        local eval logs until projected).
+        only. Build telemetry + judge quality are from PostHog (<code className="text-fg">build_session</code>{" "}
+        / <code className="text-fg">judge_run</code> events); feedback-rounds/session is the friction proxy.
+        The judge stays <strong>advisory</strong> until ≥80% agreement across ~20 acked runs (calibration).
       </p>
     </div>
   );
