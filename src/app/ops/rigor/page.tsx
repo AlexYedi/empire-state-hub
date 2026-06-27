@@ -1,4 +1,5 @@
 import { getActedOnValue } from "@/lib/content-drafts";
+import { getBuildTelemetry } from "@/lib/posthog";
 
 export const dynamic = "force-dynamic";
 
@@ -10,7 +11,7 @@ const OUTCOME_ACCENT = {
 } as const;
 
 export default async function RigorPage() {
-  const v = await getActedOnValue();
+  const [v, t] = await Promise.all([getActedOnValue(), getBuildTelemetry()]);
 
   return (
     <div>
@@ -68,11 +69,29 @@ export default async function RigorPage() {
         </>
       )}
 
+      <h2 className="mb-3 mt-10 text-sm font-medium text-muted">Build telemetry (last 30d)</h2>
+      {!t.available ? (
+        <p className="rounded-md border border-border bg-surface p-4 text-sm text-muted">
+          No build-session telemetry yet (or PostHog unreachable). Sessions appear once the{" "}
+          <code className="text-fg">build-session-emit</code> hook fires in a fresh Empire State session.
+        </p>
+      ) : (
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-5">
+          <Stat label="Sessions" value={t.sessions} accent="text-fg" />
+          <Stat label="Build sessions" value={t.buildSessions} accent="text-fg" />
+          <Stat label="Feedback rounds / sess" value={t.avgUserPrompts ?? "—"} accent="text-amber-400" />
+          <Stat label="Tool uses / sess" value={t.avgToolUses ?? "—"} accent="text-fg" />
+          <Stat label="Output tokens (30d)" value={t.totalOutputTokens?.toLocaleString() ?? "—"} accent="text-fg" />
+        </div>
+      )}
+
       <p className="mt-6 max-w-2xl text-[11px] leading-relaxed text-muted/80">
         North-star = realized <strong>outcome vs assigned goal</strong>. Outcomes are{" "}
         <strong>manually tagged</strong> (<code className="text-fg">/tag-outcome</code>) and lagging —{" "}
         <em>pending</em> means published but not yet observed, not a miss. Hit-rate is over graded items
-        only. Build-session telemetry + judge-quality panels (from PostHog) land next.
+        only. Build telemetry is from PostHog (<code className="text-fg">build_session</code> events);
+        feedback-rounds/session is the friction proxy. Judge-quality panel lands next (judge scores are
+        local eval logs until projected).
       </p>
     </div>
   );
