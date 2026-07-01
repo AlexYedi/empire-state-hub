@@ -10,6 +10,7 @@ const NAV = [
   { href: "/ops/ideas", label: "Ideas" },
   { href: "/ops/backlog", label: "Backlog" },
   { href: "/ops/entities", label: "Entities" },
+  { href: "/ops/market-intel", label: "Market Intel" },
 ];
 
 export default function OpsLayout({ children }: { children: React.ReactNode }) {
