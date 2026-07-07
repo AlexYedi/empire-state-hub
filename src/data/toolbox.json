@@ -1,0 +1,562 @@
+{
+  "generated_note": "Snapshot of .claude/{commands,skills,agents} frontmatter. Regenerate via /toolbox generator. The live /toolbox command is always-current.",
+  "counts": {
+    "command": 22,
+    "skill": 26,
+    "agent": 21
+  },
+  "items": [
+    {
+      "type": "command",
+      "name": "/analyze-competitive-landscape",
+      "description": "Executive competitive-landscape brief \u2014 threat levels, differentiators, counter-plays. Use when sizing up rivals in a segment before a GTM push, board update, or competitive deal. Fans out market-insights-director + battlecard-program-manager.",
+      "args": "[scope + audience + window + format, e.g. 'enterprise-saas, exec, 30d, deck']",
+      "group": "Research & strategy",
+      "tier": "T1"
+    },
+    {
+      "type": "command",
+      "name": "/check-new-events",
+      "description": "Pull events from the 'Going to Events' Google Calendar (next 14 days), find new ones with a PIPELINE block in the description, and run /event-deep-research + pre-event-content on each \u2014 one event at a time with continue-or-quit control between events.",
+      "args": "",
+      "group": "Event research & prep",
+      "tier": "T2"
+    },
+    {
+      "type": "command",
+      "name": "/create-messaging-brief",
+      "description": "Messaging brief \u2014 headline, pillars, proof points, hook bank, CTA strategy. Use when launching or repositioning an offer, or standing up copy for a persona/channel, before writing the actual copy.",
+      "args": "[goal + persona + offer, e.g. 'pipeline, RevOps, AI copilot']",
+      "group": "Content",
+      "tier": "T1"
+    },
+    {
+      "type": "command",
+      "name": "/event-deep-research",
+      "description": "Workflow A \u2014 full event research pipeline. Parses a pasted calendar invite, runs entity triage, fans out 4 parallel research subagents from this conversation, dispatches synthesizer for the brief, and writes to Notion + HubSpot. Replaces the monolithic event-research skill flow with a multi-agent architecture.",
+      "args": "[paste calendar invite text after the command]",
+      "group": "Event research & prep",
+      "tier": "T2"
+    },
+    {
+      "type": "command",
+      "name": "/evergreen-deep-dive",
+      "description": "Turn any past or future event into N evergreen, presenter-level deep-dive posts \u2014 decoupled from event timing. Marries the live transcript + the post-event brief + matched slide photos into one teardown per speaker, with a radar/job-search layer. Builds a content bank to drip over weeks.",
+      "args": "[event name as it appears in Notion] [optional: --speakers \\\"Name1,Name2\\\"]",
+      "group": "Content",
+      "tier": "T2"
+    },
+    {
+      "type": "command",
+      "name": "/generate-channel-copy",
+      "description": "Channel-ready copy variations (email/ads/social/landing) with A/B variants + QA checklist. Use when you have a messaging brief and need the actual drafts per channel.",
+      "args": "[channels + persona + offer, e.g. 'email,linkedin, CIO, data platform']",
+      "group": "Content",
+      "tier": "T1"
+    },
+    {
+      "type": "command",
+      "name": "/ingest-recording",
+      "description": "Turn an event recording (.m4a) into a clean, diarized, proper-noun-correct transcript (ElevenLabs scribe_v2 + roster-seeded keyterms) that feeds /post-event-content. Use after an event once the audio is in the event folder \u2014 beats the recorder-app transcript by ~50pts on spoken proper nouns. Manual command, not a folder-watch.",
+      "args": "[audio path in the event folder; optional --num-speakers N \u2014 keyterms auto-seed from the event roster]",
+      "group": "Content",
+      "tier": "T2"
+    },
+    {
+      "type": "command",
+      "name": "/interview-prep",
+      "description": "Market-Intelligence Engine \u2014 Job-Search lens. Generate a 4-axis interview-prep dossier (company \u00d7 role \u00d7 stage \u00d7 interviewer) by fanning out the reused research specialists from this thread, synthesizing via dossier-synthesizer, judge-gating, then persisting to the Postgres graph spine + Notion. Milestone 1 of the engine.",
+      "args": "[paste JD + company + interviewer + stage, or say 'prep me for [company]']",
+      "group": "Job search & market-intel",
+      "tier": "T2"
+    },
+    {
+      "type": "command",
+      "name": "/judge-build",
+      "description": "Score a build artifact (skill/command/hook/ref/code) against the build-quality rubric \u2014 per-criterion 0\u20131 + reasoning, weighted composite, pass/flag verdict \u2014 write an authoritative run-log, and capture your ack (calibration). Advisory until \u226580% agreement. Never rewrites, never blocks.",
+      "args": "[artifact path or pasted content] [+ optional: the issue/AC it should satisfy]",
+      "group": "Measurement & rigor",
+      "tier": "T1"
+    },
+    {
+      "type": "command",
+      "name": "/post-event-content",
+      "description": "Workflow B-lite \u2014 take a manually-uploaded post-event transcript, condition it against the event roster, then run content-correspondent to produce LinkedIn drafts + outreach in Notion Content Drafts. Manual-upload anchored (Granola auto-fetch DISABLED 2026-05-27 \u2014 app nonoperational on Alex's device; do not fire the Granola API or MCP).",
+      "args": "[event name as it appears in Notion / Google Calendar / Granola]",
+      "group": "Content",
+      "tier": "T2"
+    },
+    {
+      "type": "command",
+      "name": "/post-event-synthesis",
+      "description": "Workflow B (SCAFFOLD \u2014 not yet wired) \u2014 turns raw post-event material (Granola transcripts, voice notes, observations) into structured intel + content drafts. Chains transcript-analysis \u2192 objection-mining \u2192 commercial-insight-generator \u2192 content-correspondent \u2192 pattern-synthesis \u2192 voice-pass.",
+      "args": "[paste transcript or notes, or reference event name to pull from Notion]",
+      "group": "Content",
+      "tier": "T2"
+    },
+    {
+      "type": "command",
+      "name": "/rigor-review",
+      "description": "The weekly \u226410-min rigor review (manual learning loop): review the week's build sessions, judge scores, DoD waivers, and outcomes against the value-action registry; spot recurring corrections; propose\u2192approve a codified fix so feedback becomes durable improvement. HITL, not automation.",
+      "args": "[optional: window, e.g. 'last 2 weeks']",
+      "group": "Measurement & rigor",
+      "tier": "T1"
+    },
+    {
+      "type": "command",
+      "name": "/run-market-landscape-study",
+      "description": "End-to-end market study \u2014 TAM/SAM/SOM, trends, competitor map, scenarios. Use when entering a new market/category or pressure-testing a thesis and you need the full landscape, not a quick scan.",
+      "args": "[scope + regions + horizon + format, e.g. 'AI Sales Tech, na,emea, 3y, deck']",
+      "group": "Research & strategy",
+      "tier": "T1"
+    },
+    {
+      "type": "command",
+      "name": "/scan-roles",
+      "description": "Signal scanner \u2014 aggregate relevant roles from legitimate sources (Dice MCP, Apollo job-postings, RSS.app feeds from saved LinkedIn searches), dedupe, score against Alex's ICP rubric, and track them in a Notion Roles DB. Notion-only, human-in-the-loop. No LinkedIn scraping.",
+      "args": "[optional: role focus + location + recency, e.g. 'GTM engineer + RevOps, NYC + remote, last 3 days']",
+      "group": "Signal scanners",
+      "tier": "T2"
+    },
+    {
+      "type": "command",
+      "name": "/scan-trends",
+      "description": "Signal scanner \u2014 scan what's rising in AI/tech from legitimate non-LinkedIn sources (HackerNews, HuggingFace, curated newsletters), rank by recency-decayed cross-source score, and log approved topics to the Notion Topics DB. Notion-only, human-in-the-loop. No scraping.",
+      "args": "[optional: lookback window + focus, e.g. 'last 3 days, agents and evals']",
+      "group": "Signal scanners",
+      "tier": "T2"
+    },
+    {
+      "type": "command",
+      "name": "/scan-voices",
+      "description": "Signal scanner \u2014 who's trending / social listening. Seeds a watchlist from Alex's existing Notion People DB, tracks those voices OFF LinkedIn (Substack/blog/GitHub/Reddit/podcast RSS + Google Alerts), optionally enriches via Apollo/Clay (credit-gated), and flags net-new voices. Notion-only, human-in-the-loop. Legitimate-only \u2014 no LinkedIn/X scraping.",
+      "args": "[optional: watchlist scope + topic lens + window, e.g. 'people from last 3 events, evals, last 2 weeks']",
+      "group": "Signal scanners",
+      "tier": "T2"
+    },
+    {
+      "type": "command",
+      "name": "/systems-analyze",
+      "description": "Workflow E \u2014 run a deep systems-thinking diagnostic on a problem. Dispatches the systems-analyst subagent from the parent thread for the full eight-phase Meadows analysis. Use for chronic dysfunction, multi-stakeholder problems, 'why does this keep happening' questions, or second-opinion analyses on high-stakes decisions.",
+      "args": "[problem statement, Notion URL, pipeline component name, or artifact path]",
+      "group": "Measurement & rigor",
+      "tier": "T1"
+    },
+    {
+      "type": "command",
+      "name": "/tag-outcome",
+      "description": "Manual outcome-tagging ritual (<5 min): for published Content Drafts with an assigned Goal but no Outcome, pull the realized signal (HubSpot for connections/meetings; LinkedIn-native numbers for reach/engagement), grade Outcome vs Goal/Target, and write it back. Closes the acted-on-value loop. HITL, Notion-only, no scraping.",
+      "args": "[optional: scope, e.g. 'last week's posts' or an event/artifact name]",
+      "group": "Content",
+      "tier": "T2"
+    },
+    {
+      "type": "command",
+      "name": "/test-and-report",
+      "description": "Copy-experimentation plan \u2014 hypotheses, sample-size/duration, reporting template, action items. Use when A/B testing copy rigorously and tracking results to significance.",
+      "args": "[channels + kpis + window, e.g. 'email,ads, ctr,conversion, 14d']",
+      "group": "Content",
+      "tier": "T1"
+    },
+    {
+      "type": "command",
+      "name": "/toolbox",
+      "description": "Your tool wall \u2014 list every Empire State slash command, skill, and agent (grouped by workflow, one line each with 'use when' + args), scanned live from frontmatter so it never drifts. Optional filter/keyword, or 'plugins <keyword>' to search the alex-plugin skills.",
+      "args": "[optional: keyword or group to filter, e.g. 'content' or 'market-intel' \u2014 or 'plugins <keyword>' for plugin skills]",
+      "group": "Meta",
+      "tier": "T1"
+    },
+    {
+      "type": "command",
+      "name": "/voice-pass",
+      "description": "Workflow D (SCAFFOLD \u2014 not yet wired) \u2014 runs voice-editor agent over Content Drafts in needs_review status, outputs voice deltas + before/after suggestions. Polish layer for any drafts produced by Workflow A/B/C.",
+      "args": "[optional: specific Content Draft ID or 'all' to process the entire needs_review queue]",
+      "group": "Content",
+      "tier": "T2"
+    },
+    {
+      "type": "command",
+      "name": "/weekly-recap",
+      "description": "Workflow C (SCAFFOLD \u2014 not yet wired) \u2014 weekly synthesis of all events, content, and outreach activity. Builds 'The Upcoming Week' Sunday LinkedIn post, runs pattern-synthesis if \u22652 briefs have opposing theses, polishes via voice-pass. Designed for Sunday evening cadence.",
+      "args": "[optional: ISO week date, defaults to this week]",
+      "group": "Content",
+      "tier": "T2"
+    },
+    {
+      "type": "skill",
+      "name": "ai-product-strategy",
+      "description": "Help users define AI product strategy. Use when someone is building an AI product, deciding where to apply AI in their product, planning an AI roadmap, evaluating build vs buy for AI capabilities, or figuring out how to integrate AI into existing products.",
+      "args": "",
+      "group": "Research & strategy",
+      "tier": "T1"
+    },
+    {
+      "type": "skill",
+      "name": "brand-storytelling",
+      "description": "Help users craft compelling brand narratives. Use when someone is defining brand strategy, writing company positioning, creating pitch narratives, developing messaging frameworks, or trying to make their company story more memorable.",
+      "args": "",
+      "group": "Content",
+      "tier": "T1"
+    },
+    {
+      "type": "skill",
+      "name": "conducting-user-interviews",
+      "description": "Help users run better customer and user interviews. Use when someone is preparing for user research, planning discovery interviews, writing interview questions, analyzing interview findings, or trying to understand customer needs.",
+      "args": "",
+      "group": "Job search & market-intel",
+      "tier": "T1"
+    },
+    {
+      "type": "skill",
+      "name": "content-correspondent",
+      "description": "Post-event content and outreach sequencing for NYC AI/tech events. Use this skill any time Alex mentions attending an event, returning from an event, or wants to follow up after one \u2014 even casually (\"just got back from a founder session\", \"I'm at PMF x AI tonight\", \"need to write something about last night\"). Also triggers for: drafting LinkedIn posts from event observations, classifying contacts from an event, writing follow-up DMs after meeting someone, building a content sequence from field notes, or converting Wispr/Granola notes into outreach and posts. Also use when Alex asks about post-event strategy or how to turn room conversations into content. For reviewing how posts or outreach performed after the fact, use the event-signal-tracker skill instead.",
+      "args": "",
+      "group": "Content",
+      "tier": "T2"
+    },
+    {
+      "type": "skill",
+      "name": "defining-product-vision",
+      "description": "Help users create compelling product visions. Use when someone is writing a vision statement, defining a long-term product direction, aligning teams on the future state, or distinguishing vision from strategy.",
+      "args": "",
+      "group": "Research & strategy",
+      "tier": "T1"
+    },
+    {
+      "type": "skill",
+      "name": "event-research",
+      "description": "Research an upcoming event from a pasted calendar invite. Produces a structured brief, writes to Notion (5 databases) and HubSpot (contacts, companies, notes), and optionally enriches speakers via Apollo.",
+      "args": "",
+      "group": "Event research & prep",
+      "tier": "T1"
+    },
+    {
+      "type": "skill",
+      "name": "head-of-product-engineering",
+      "description": "Use this skill when a product initiative needs end-to-end orchestration \u2014 from discovery through launch and post-launch risk \u2014 especially when the user mentions a new project, an iteration on an existing product (n+1 turn), or asks for a full product plan. Hard-invokes the 10 product specialists in sequence, maintains a persistent Future-State Register, and emits a PRD + Orchestration Log + Linear-ready sprint issues.",
+      "args": "",
+      "group": "Research & strategy",
+      "tier": "T1"
+    },
+    {
+      "type": "skill",
+      "name": "interview-prep-dossier",
+      "description": "Generate a job-search interview-prep dossier tailored on four axes \u2014 company \u00d7 role \u00d7 interview stage \u00d7 interviewer. The first lens of the Market-Intelligence Engine. Use when Alex has an interview coming up and pastes a JD + company + interviewer + stage. Produces a synthesized dossier (Quick Take, Fit Thesis, company/market/competitor/funding context, decoded role, interviewer profile, org map, stage-specific prep, curiosity-demonstrating questions, blind-spot closer) written to Notion for comment review and persisted to the Postgres graph spine. Triggers on \"prep me for [company] interview\", \"interview dossier for [role]\", \"I have a [stage] with [interviewer] at [company]\".",
+      "args": "",
+      "group": "Job search & market-intel",
+      "tier": "T2"
+    },
+    {
+      "type": "skill",
+      "name": "judge-build",
+      "description": "LLM-as-judge for build artifacts (skills/commands/hooks/refs/code). Scores an artifact against the build-quality rubric per-criterion (0\u20131 + reasoning), aggregates a weighted composite, writes an authoritative run-log, and prompts Alex to ack/disagree (the calibration field). Lean single-judge, cheap-model-first. ADVISORY until it reaches \u226580% human agreement. Coordinates with eval-harness; never auto-rewrites, never hard-blocks.",
+      "args": "",
+      "group": "Measurement & rigor",
+      "tier": "T1"
+    },
+    {
+      "type": "skill",
+      "name": "launch-tiering",
+      "description": "Use when sizing go-to-market launches by impact, resources, and governance needs.",
+      "args": "",
+      "group": "Research & strategy",
+      "tier": "T1"
+    },
+    {
+      "type": "skill",
+      "name": "marketing-autoresearch",
+      "description": "Run Karpathy-style autoresearch optimization on any content. Generates 50+ variants, scores with a 5-expert simulated panel, evolves winners through multiple rounds, outputs optimized version + full experiment log. Use when optimizing landing pages, email sequences, ad copy, headlines, form pages, CTA text, or any conversion-focused content. Triggers on \"optimize this page\", \"run autoresearch\", \"score these variants\", \"A/B test this copy\". In the Empire State pipeline, used as Step 5 of pre-event-content to push LinkedIn posts from \"good draft\" to \"best draft\" before posting.",
+      "args": "",
+      "group": "Content",
+      "tier": "T1"
+    },
+    {
+      "type": "skill",
+      "name": "pattern-synthesis",
+      "description": "Generate a two-thesis synthesis LinkedIn post from two event research briefs. Use this skill when Alex wants to contrast two events into a single strategic post, when two event briefs in the same week pose opposing theses, when synthesizing ephemeral NYC AI/tech experiences into a recognizable documentarian format, or when Alex says \"synthesis post\", \"two-thesis post\", \"pattern post\", \"contrast these events\", \"write the post from [Event A] and [Event B]\", or anything similar. Triggers for phrases like \"same week two-thesis\", \"platform vs bespoke post\", \"infrastructure vs integration post\", or when Alex flags two recent briefs as a viable pairing. Also triggers when `post-event-content` or `pre-event-content` skills detect a viable synthesis opportunity across two briefs. This is the canonical format for Alex's documentarian angle \u2014 use it over ad-hoc synthesis prose whenever two briefs exist that meet the pattern's trigger conditions.",
+      "args": "",
+      "group": "Content",
+      "tier": "T2"
+    },
+    {
+      "type": "skill",
+      "name": "pre-event-content",
+      "description": "Generate pre-event content for NYC AI/tech events from completed research briefs. Produces LinkedIn posts (personal and \"The Upcoming Week\" roundup), speaker/host connection request notes (200-char free-tier cap), and prepared questions. Writes to Notion Content Drafts database. Use when Alex says \"draft pre-event content for [event]\", \"write the LinkedIn post for [event]\", \"DMs for [speaker/host]\", \"connection notes for [speaker/host]\", \"Sunday roundup post\", or anything similar. Requires a completed research brief in Notion.",
+      "args": "",
+      "group": "Event research & prep",
+      "tier": "T2"
+    },
+    {
+      "type": "skill",
+      "name": "prioritizing-roadmap",
+      "description": "Help users prioritize product roadmaps and backlogs. Use when someone is deciding what to build next, sequencing features, allocating resources across projects, handling stakeholder requests, or struggling with too many competing priorities.",
+      "args": "",
+      "group": "Research & strategy",
+      "tier": "T1"
+    },
+    {
+      "type": "skill",
+      "name": "project-ideation",
+      "description": "Generate project proposals from event topic intersections. Produces 3 scored ideas (2 feasible + 1 stretch) with architecture, timeline, and content moment analysis. Writes to Notion Project Ideas database.",
+      "args": "",
+      "group": "Event research & prep",
+      "tier": "T2"
+    },
+    {
+      "type": "skill",
+      "name": "rigor-review",
+      "description": "The weekly \u226410-min rigor review \u2014 the manual learning loop. Reviews the week's build sessions, judge scores, DoD waivers, and outcomes against the value-action registry; spots recurring corrections; and (HITL) proposes a codified fix for any correction past threshold so feedback turns into durable improvement. A manual ritual, NOT automation.",
+      "args": "",
+      "group": "Measurement & rigor",
+      "tier": "T1"
+    },
+    {
+      "type": "skill",
+      "name": "risk-playbooks",
+      "description": "Use when identifying launch risks, mitigation plans, and escalation owners.",
+      "args": "",
+      "group": "Research & strategy",
+      "tier": "T1"
+    },
+    {
+      "type": "skill",
+      "name": "role-radar",
+      "description": "Signal scanner \u2014 job search & tracking. Aggregates relevant roles from legitimate sources (Dice MCP, Apollo job-postings at target companies, RSS.app feeds generated from saved LinkedIn searches), dedupes, scores each against Alex's ICP rubric, and lands them in a Notion Roles DB as a status Kanban. Notion-only, manual trigger, human-in-the-loop. No LinkedIn scraping \u2014 RSS.app reads a saved-search feed, never the account.",
+      "args": "",
+      "group": "Signal scanners",
+      "tier": "T1"
+    },
+    {
+      "type": "skill",
+      "name": "shipping-products",
+      "description": "Help users ship products faster and with higher quality. Use when someone is planning a launch, struggling to release features, dealing with shipping velocity issues, or trying to establish better release practices.",
+      "args": "",
+      "group": "Research & strategy",
+      "tier": "T1"
+    },
+    {
+      "type": "skill",
+      "name": "steering-interview",
+      "description": "A short, 4-question intake that captures Alex's deliverable-specific steering context BEFORE research/content is generated \u2014 what to say, how to shape it, what to research deeper, and any personal context/goals/relationships to keep top of mind. Use at the start of any content flow (pre-event, post-event, weekly recap, project ideation, or any standalone content request). Invoke when Alex says \"steer this\", \"interview me first\", \"before you build it ask me\", or automatically as the first step of the event content flows. Runs in the main conversation (it is an interactive interview, NOT a subagent).",
+      "args": "",
+      "group": "Job search & market-intel",
+      "tier": "T1"
+    },
+    {
+      "type": "skill",
+      "name": "systems-thinking",
+      "description": "Help users think in systems and understand complex dynamics. Use when someone is dealing with multi-stakeholder problems, trying to understand second-order effects, managing platform ecosystems, analyzing complex organizational dynamics, diagnosing chronic issues, or making decisions where leverage matters.",
+      "args": "",
+      "group": "Measurement & rigor",
+      "tier": "T1"
+    },
+    {
+      "type": "skill",
+      "name": "tag-outcome",
+      "description": "Manual outcome-tagging ritual (<5 min) that closes the acted-on-value loop. Finds published Content Drafts that have an assigned Goal but no recorded Outcome, pulls the realized signal by goal type (HubSpot for connection/meeting; LinkedIn-native numbers for reach/engagement; owned-asset web analytics later), grades Outcome vs the Goal/Target, and writes Outcome + Outcome Value + Outcome Date back to the artifact. HITL, Notion-only, legitimate-only, no entity-spine.",
+      "args": "",
+      "group": "Content",
+      "tier": "T2"
+    },
+    {
+      "type": "skill",
+      "name": "trend-radar",
+      "description": "Signal scanner \u2014 trending topics. Pulls what's rising in AI/tech from legitimate non-LinkedIn sources (HackerNews via Algolia, HuggingFace papers/models via MCP, curated newsletters via Gmail MCP), normalizes topics, scores with recency decay + cross-source blending, and surfaces a ranked digest. On approval, writes dated trend notes to the Notion Topics DB that the content pipeline reads. Notion-only, manual trigger, human-in-the-loop. No scraping, ever.",
+      "args": "",
+      "group": "Signal scanners",
+      "tier": "T1"
+    },
+    {
+      "type": "skill",
+      "name": "voice-radar",
+      "description": "Signal scanner \u2014 who's trending / social listening. Seeds a watchlist from Alex's existing Notion People DB (NOT external sources), tracks those voices OFF LinkedIn where they cross-post (Substack/blog/GitHub/Reddit/podcast RSS) plus Google Alerts mentions, optionally enriches via Apollo/Clay (credit-gated), and cross-references Notion People/Companies to flag net-new voices. Notion-only, manual, human-in-the-loop. Legitimate-only \u2014 no LinkedIn or X scraping.",
+      "args": "",
+      "group": "Signal scanners",
+      "tier": "T1"
+    },
+    {
+      "type": "skill",
+      "name": "writing-north-star-metrics",
+      "description": "Help users define their North Star metric. Use when someone is choosing their primary success metric, trying to align the team around a key measure, struggling with metric proliferation, or setting up their measurement strategy.",
+      "args": "",
+      "group": "Research & strategy",
+      "tier": "T1"
+    },
+    {
+      "type": "skill",
+      "name": "writing-prds",
+      "description": "Help users write effective PRDs. Use when someone is documenting product requirements, preparing specs for engineering, writing feature briefs, or defining what to build for their team.",
+      "args": "",
+      "group": "Research & strategy",
+      "tier": "T1"
+    },
+    {
+      "type": "agent",
+      "name": "cold-email-specialist",
+      "description": "Researches prospects, finds custom signals, and drafts high-converting cold emails using the \"poke the bear\" philosophy.",
+      "args": "",
+      "group": "Agents (invoked by workflows)",
+      "tier": "\u2014"
+    },
+    {
+      "type": "agent",
+      "name": "conversion-copywriter",
+      "description": "Writes high-converting copy for emails, ads, landing pages, and in-product prompts.",
+      "args": "",
+      "group": "Agents (invoked by workflows)",
+      "tier": "\u2014"
+    },
+    {
+      "type": "agent",
+      "name": "copy-strategist",
+      "description": "Develops messaging frameworks, hooks, and CTA strategy across channels.",
+      "args": "",
+      "group": "Agents (invoked by workflows)",
+      "tier": "\u2014"
+    },
+    {
+      "type": "agent",
+      "name": "voice-editor",
+      "description": "Ensures copy adheres to brand voice, style guidelines, and compliance requirements.",
+      "args": "",
+      "group": "Agents (invoked by workflows)",
+      "tier": "\u2014"
+    },
+    {
+      "type": "agent",
+      "name": "notion-writer",
+      "description": "Handles the dependency-ordered MCP writes to Notion (Companies \u2192 Topics \u2192 People \u2192 Event \u2192 Content Draft) per the event-research skill's Step 4. Receives an approved research brief plus the entity triage plan and executes create / refresh / skip writes with full property mapping and gotcha-aware formatting. Use when the parent session is ready to commit a brief to Notion. Returns confirmation of writes with all created page URLs and any errors. Does NOT do HubSpot \u2014 that's a separate write phase the parent handles.",
+      "args": "",
+      "group": "Agents (invoked by workflows)",
+      "tier": "\u2014"
+    },
+    {
+      "type": "agent",
+      "name": "systems-analyst",
+      "description": "Run a deep systems-thinking analysis on a complex situation \u2014 multi-stakeholder problem, chronic dysfunction, second-order risk, organizational dynamics, or any \"why does this keep happening\" question. Performs the full eight-phase Meadows-style analysis (bound system \u2192 stocks/flows \u2192 loops \u2192 archetypes \u2192 players \u2192 leverage points \u2192 second-order \u2192 posture) and returns a structured diagnostic with named leverage points and recommended interventions. Delegate to this agent when you want depth without burning main-context tokens, or when you want an independent second-opinion analysis.",
+      "args": "",
+      "group": "Agents (invoked by workflows)",
+      "tier": "\u2014"
+    },
+    {
+      "type": "agent",
+      "name": "battlecard-program-manager",
+      "description": "Maintains battlecards, objection handling, and enablement motions for priority competitors.",
+      "args": "",
+      "group": "Agents (invoked by workflows)",
+      "tier": "\u2014"
+    },
+    {
+      "type": "agent",
+      "name": "company-researcher",
+      "description": "Researches companies surfaced from an event invite. Produces structured per-company output covering description, recent news, funding, industry classification, relevance to the event, and headwinds. Use when invoked from /event-deep-research (parent thread) with a list of Company entities and their triage paths (NEW / REFRESH-light / REFRESH-full / SKIP). Returns one company block per entity in the schema defined by event-research SKILL.md Step 2c.",
+      "args": "",
+      "group": "Agents (invoked by workflows)",
+      "tier": "\u2014"
+    },
+    {
+      "type": "agent",
+      "name": "competitive-signal-scanner",
+      "description": "Scans across all companies surfaced from an event (including SKIP entities) for market signals in the last 60 days \u2014 funding moves, executive changes, product launches, public POV shifts, layoffs, acquisitions, and rumored direction changes. Tags each signal with severity + confidence + relevance to event topics. Use when invoked from /event-deep-research (parent thread) after company list is finalized. Returns a single Signal Log block that event-research-synthesizer merges into the brief and that surfaces non-obvious things to bring up in the room.",
+      "args": "",
+      "group": "Agents (invoked by workflows)",
+      "tier": "\u2014"
+    },
+    {
+      "type": "agent",
+      "name": "dossier-synthesizer",
+      "description": "Takes the four specialist research returns (company-researcher, topic-landscape-analyst, competitive-signal-scanner, person-researcher) plus the four intake axes (company, role/JD, interview stage, interviewer) and Alex's stated focus, and synthesizes them into the final interview-prep dossier in the schema defined by the interview-prep-dossier skill. Use when invoked from /interview-prep after the parent has fanned out and collected the specialist returns. Does NOT research, does NOT dispatch sub-agents, does NOT write to Notion/Postgres. Returns a finished dossier ready for the judge gate + Alex review.",
+      "args": "",
+      "group": "Agents (invoked by workflows)",
+      "tier": "\u2014"
+    },
+    {
+      "type": "agent",
+      "name": "event-research-synthesizer",
+      "description": "Takes the four specialist research returns (company-researcher, person-researcher, topic-landscape-analyst, competitive-signal-scanner) plus the entity triage plan and raw invite text, and synthesizes them into the final event research brief in the schema defined by event-research SKILL.md Step 3. Use when invoked from /event-deep-research after the parent has fanned out and collected all four specialist returns. Does NOT do research itself, does NOT dispatch sub-agents (subagents cannot spawn sub-agents per Anthropic SDK design \u2014 fan-out happens in the parent thread). Returns a fully-assembled brief ready for Alex review.",
+      "args": "",
+      "group": "Agents (invoked by workflows)",
+      "tier": "\u2014"
+    },
+    {
+      "type": "agent",
+      "name": "insights-research-director",
+      "description": "Leads full-stack market research programs from scoping through executive readouts.",
+      "args": "",
+      "group": "Agents (invoked by workflows)",
+      "tier": "\u2014"
+    },
+    {
+      "type": "agent",
+      "name": "market-insights-director",
+      "description": "Synthesizes competitive signals into strategy updates and exec-ready narratives.",
+      "args": "",
+      "group": "Agents (invoked by workflows)",
+      "tier": "\u2014"
+    },
+    {
+      "type": "agent",
+      "name": "person-researcher",
+      "description": "Researches speakers, hosts, and notable attendees for an upcoming event. Produces per-person output with Bio/Known POV, Recent Activity (last 6 months), Talking Points (split personal/professional hooks), and Prioritization Signals (prioritize/de-prioritize/open on-site). Use when invoked from /event-deep-research (parent thread) with a list of Person entities and their triage paths. Returns one person block per entity in the schema defined by event-research SKILL.md Step 2b.",
+      "args": "",
+      "group": "Agents (invoked by workflows)",
+      "tier": "\u2014"
+    },
+    {
+      "type": "agent",
+      "name": "qualitative-field-lead",
+      "description": "Oversees qualitative research execution including interviews, focus groups, and diary studies.",
+      "args": "",
+      "group": "Agents (invoked by workflows)",
+      "tier": "\u2014"
+    },
+    {
+      "type": "agent",
+      "name": "quant-insights-architect",
+      "description": "Designs and analyzes quantitative research, segmentation models, and forecasting studies.",
+      "args": "",
+      "group": "Agents (invoked by workflows)",
+      "tier": "\u2014"
+    },
+    {
+      "type": "agent",
+      "name": "topic-landscape-analyst",
+      "description": "Researches each topic surfaced from an event invite across 5 dimensions \u2014 Current Events, Opportunities, Challenges, Use Cases & Practical Applications, Top Questions. Designed for depth that lets Alex hold a 5-minute conversation with an expert and ask follow-ups demonstrating genuine engagement. Use when invoked from /event-deep-research (parent thread) with a list of Topic entities and their triage paths. Returns one topic block per entity in the schema defined by event-research SKILL.md Step 2a.",
+      "args": "",
+      "group": "Agents (invoked by workflows)",
+      "tier": "\u2014"
+    },
+    {
+      "type": "agent",
+      "name": "win-loss-analyst",
+      "description": "Runs structured win/loss interviews, synthesizes insights, and routes actions.",
+      "args": "",
+      "group": "Agents (invoked by workflows)",
+      "tier": "\u2014"
+    },
+    {
+      "type": "agent",
+      "name": "commercial-insight-generator",
+      "description": "Generate commercial insights and Reframes at the segment level \u2014 the marketing-side \"insight generation machine\" that the Challenger framework requires. Use when Alex says \"build the insight for [segment]\", \"what's our reframe for [persona]\", \"insight machine on [vertical]\", \"what's the heart-and-soul question answer for [segment]\", or when starting a new account / segment / GTM motion and there is no defensible Reframe yet. Triggers when Alex is at Stage 0 (account selection + insight prep), launching a new product line, entering a new vertical, or noticing that across deals reps are inventing their own pitches (the \"100 reps, 100 answers\" failure). Produces a segment-level Reframe candidate, a 3-challenge Warmer hypothesis, the heart-and-soul question answer, and a Rule 1\u20134 pressure test before any account-level work begins.",
+      "args": "",
+      "group": "Agents (invoked by workflows)",
+      "tier": "\u2014"
+    },
+    {
+      "type": "agent",
+      "name": "mobilizer-mapper",
+      "description": "Classify every named stakeholder on a deal as Mobilizer (Go-Getter / Teacher / Skeptic), Talker (Friend / Guide / Climber), or Blocker \u2014 using the Mobilizer diagnostic question, behavior signals, and Champion Test results. Use when Alex says \"Mobilizer check on [account]\", \"is [contact] a Mobilizer\", \"who's the Mobilizer\", \"am I talking to a Talker\", \"score the buying committee\", \"stakeholder map for [deal]\", or any time a deal has multiple named contacts and Alex isn't sure which ones can actually drive consensus. Triggers when a deal has stalled at the buying-committee stage, when Alex wants a gut-check on whether his champion is actually a Mobilizer, when first-meeting reactions need classification, or when a Champion Test is overdue. Returns per-contact classifications with confidence and evidence, deal-level rollup (number of Mobilizers, EB connectivity, fake-champion flags), and the next-action move per stakeholder.",
+      "args": "",
+      "group": "Agents (invoked by workflows)",
+      "tier": "\u2014"
+    },
+    {
+      "type": "agent",
+      "name": "reframe-architect",
+      "description": "Build the Commercial Teaching pitch for a specific account \u2014 translate a segment-level insight into a 6-step pitch, with the Reframe slide, Rational Drowning math, Emotional Impact peer story, A New Way capability list, and Your Solution differentiator landing. Use when Alex says \"build the pitch for [account]\", \"Reframe for [account]\", \"teaching pitch for [exec]\", \"build the deck for [meeting]\", \"construct the 6-step on [deal]\", \"build the reframe slide for [account]\", or when an executive meeting is on the calendar and the rep needs the Choreography in account-specific form. Triggers when Alex has a segment-level insight (or one is generated) and now needs to deploy it on a real deal. Produces the one-sentence Reframe, the full 6-step pitch with target buyer reactions per step, the SAFE-BOLD self-audit, and the Rule 1\u20134 pressure test before delivery.",
+      "args": "",
+      "group": "Agents (invoked by workflows)",
+      "tier": "\u2014"
+    }
+  ]
+}
