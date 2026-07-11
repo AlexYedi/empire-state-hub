@@ -8,6 +8,7 @@ const NAV = [
   { href: "/ops/rigor", label: "Rigor" },
   { href: "/ops/events", label: "Events" },
   { href: "/ops/ideas", label: "Ideas" },
+  { href: "/ops/learning-path", label: "Learning Path" },
   { href: "/ops/backlog", label: "Backlog" },
   { href: "/ops/entities", label: "Entities" },
   { href: "/ops/market-intel", label: "Market Intel" },
