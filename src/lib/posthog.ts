@@ -3,10 +3,13 @@ import { unstable_cache } from "next/cache";
 
 // Read-only PostHog client for the /ops rigor dashboard (US-6 / YED-92).
 // Queries build_session telemetry (emitted by Take-3's build-session-emit.sh hook) via the
-// HogQL query API. Uses the personal (phx_) key — query/read only; never reaches the browser.
+// HogQL query API. Read/query only; never reaches the browser.
 const HOST = process.env.POSTHOG_HOST ?? "https://us.posthog.com";
 const PROJECT = process.env.POSTHOG_PROJECT_ID;
-const KEY = process.env.POSTHOG_API_KEY; // phx_ personal key (query API)
+// The HogQL query API accepts ONLY a personal (phx_) key (verified 2026-07-22: the project-secret
+// phs_ key is rejected as "invalid" here). The key must be scoped to POSTHOG_PROJECT_ID and carry
+// query:read scope, else reads 403 and the panels degrade to their graceful empty state.
+const KEY = process.env.POSTHOG_PERSONAL_API_KEY;
 
 export type BuildTelemetry = {
   available: boolean; // false if unconfigured or the query failed — render a graceful placeholder
