@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "gen:toolbox": "node scripts/gen-toolbox.mjs"
   },
   "dependencies": {
     "@linear/sdk": "^86.0.0",
