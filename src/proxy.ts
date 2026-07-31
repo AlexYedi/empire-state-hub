@@ -4,9 +4,12 @@ import { NextResponse, type NextRequest } from "next/server";
 // - Local dev with no password set: allowed (so building isn't blocked).
 // - Production with no password set: denied (deploy-safe by default — you must set
 //   OPS_PASSWORD in the Vercel env to open it). Upgrade path: Auth.js (M3 / YED-76).
+// Preview fallback: Vercel's UI wouldn't let a second OPS_PASSWORD be scoped to Preview
+//   alongside the Production one, so the Preview value lives in OPS_PASSWORD_PREVIEW; prefer
+//   OPS_PASSWORD (prod) and fall back to it. Production is unaffected (OPS_PASSWORD wins there).
 // (Next 16 "proxy" convention — successor to the deprecated "middleware" file.)
 export function proxy(req: NextRequest) {
-  const password = process.env.OPS_PASSWORD;
+  const password = process.env.OPS_PASSWORD ?? process.env.OPS_PASSWORD_PREVIEW;
 
   if (!password) {
     if (process.env.NODE_ENV === "production") {
