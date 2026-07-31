@@ -1,30 +1,34 @@
-// Single source of truth for the system's shape. Counts verified from the skills
-// repo on 2026-06-11 (find SKILL.md / agents / commands; git rev-list).
-// Update via the same counts when the pipeline grows.
+// Single source of truth for the system's shape. COUNTS are imported from toolbox.json, which is
+// generated from the live .claude/ frontmatter (run `pnpm gen:toolbox` after adding/removing a tool).
+// The narrative below (agent roles, workflows, constraint) is hand-authored.
+import toolbox from "./toolbox.json";
+
+const c = toolbox.counts;
+const g = toolbox.agentsByGroup as Record<string, number>;
 
 export const SYSTEM = {
-  counts: { skills: 38, agents: 20, commands: 12, commits: 160 },
-  span: { from: "2026-04-09", to: "2026-06-11", label: "~2 months, solo" },
+  counts: { skills: c.skill, agents: c.agent, commands: c.command, commits: c.commits ?? 0 },
+  span: { from: "2026-04-09", to: toolbox.generated_at, label: "solo build" },
 
   agentGroups: [
     {
       name: "research",
-      count: 11,
+      count: g["research"] ?? 0,
       role: "Per-entity depth — companies, people, topics, competitive signals — fanned out in parallel from the parent thread, then converged by a synthesizer.",
     },
     {
       name: "content",
-      count: 4,
+      count: g["content"] ?? 0,
       role: "Voice, copy, conversion — drafting and editing every output against a codified style guide and anti-pattern list.",
     },
     {
       name: "sales-methodology",
-      count: 3,
+      count: g["sales-methodology"] ?? 0,
       role: "Commercial insight, reframes, and buying-committee mapping — the GTM brain.",
     },
     {
       name: "ops",
-      count: 2,
+      count: g["ops"] ?? 0,
       role: "Dependency-ordered Notion writes and Meadows-style systems-thinking diagnostics.",
     },
   ],
