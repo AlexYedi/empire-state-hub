@@ -2,9 +2,13 @@
 // history), plus the raw commit cadence. More readable than raw commit messages.
 
 export const CHANGELOG = {
-  commits: 160,
-  span: "Apr 9 – Jun 11, 2026",
+  commits: 239,
+  span: "Apr 9 – Jul 31, 2026",
   entries: [
+    { date: "2026-07-31", title: "Toolbox generator", body: "A drift-proof generator scans the live skill, agent, and command set — the counts on this site regenerate from source instead of being hand-typed." },
+    { date: "2026-07-30", title: "Live operator dashboards", body: "A dedicated telemetry project now backs the /ops surfaces: build-rigor on /ops/rigor and the market-intelligence feed on /ops/market-intel." },
+    { date: "2026-07-17", title: "Cross-provider judge", body: "The build-quality judge became a two-provider quorum — a Claude seat plus an independent Gemini seat — so it can't just prefer its own family's work." },
+    { date: "2026-06-25", title: "Build-rigor + measurement layer", body: "A definition-of-done gate and build-session telemetry: every non-trivial build leaves a durable trace instead of shipping on green checks." },
     { date: "2026-06-12", title: "Empire State Hub", body: "This site — a dual-lens portfolio and live operator cockpit, built on the pipeline's own data." },
     { date: "2026-06-11", title: "Execution-focus window closed", body: "Retired the no-build rule once it inverted, and replaced it with a steering bias: build only what removes real publishing friction." },
     { date: "2026-05-30", title: "Voice system v0.5", body: "Stance must be earned by space and expertise; decenter the self; the weekly roundup sets the table, it doesn't take a side." },
