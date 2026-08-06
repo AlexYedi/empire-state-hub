@@ -1,7 +1,7 @@
 "use client";
 
 import { useLens } from "@/components/lens-provider";
-import { BUILD_ARCS } from "@/data/build-arcs";
+import { BUILD_ARCS, THEMES } from "@/data/build-arcs";
 
 const FACETS = [
   { key: "what", label: "What it is" },
@@ -16,6 +16,8 @@ const FACETS = [
 export default function BuildArcsPage() {
   const { lens } = useLens();
   const ed = lens === "editorial";
+
+  let arcIndex = 0;
 
   return (
     <div className="mx-auto w-full max-w-3xl px-6 py-20">
@@ -33,37 +35,61 @@ export default function BuildArcsPage() {
       </h1>
       <p className="mt-5 text-lg leading-relaxed text-muted">{BUILD_ARCS.intro}</p>
 
-      <div className="mt-16 space-y-16">
-        {BUILD_ARCS.arcs.map((arc, i) => (
-          <section key={arc.id} className="scroll-mt-24" id={arc.id}>
-            <div className="font-mono text-[11px] uppercase tracking-widest text-accent">
-              Arc {String(i + 1).padStart(2, "0")} · {arc.tagline}
+      {THEMES.map((theme) => {
+        const arcs = BUILD_ARCS.arcs.filter((a) => a.theme === theme.id);
+        if (arcs.length === 0) return null;
+        return (
+          <section key={theme.id} className="mt-16">
+            <div className="border-b border-border pb-4">
+              <h2
+                className={
+                  ed
+                    ? "font-display text-2xl tracking-tight sm:text-3xl"
+                    : "font-mono text-xl font-semibold tracking-tight"
+                }
+              >
+                {theme.label}
+              </h2>
+              <p className="mt-1.5 text-sm text-muted">{theme.blurb}</p>
             </div>
-            <h2
-              className={
-                ed
-                  ? "mt-2 font-display text-2xl tracking-tight sm:text-3xl"
-                  : "mt-2 text-xl font-semibold tracking-tight"
-              }
-            >
-              {arc.name}
-            </h2>
 
-            <dl className="mt-6 space-y-5 border-l border-border pl-6">
-              {FACETS.map((f) => (
-                <div key={f.key}>
-                  <dt className="font-mono text-[11px] uppercase tracking-widest text-muted">
-                    {f.label}
-                  </dt>
-                  <dd className="mt-1.5 text-sm leading-relaxed text-fg/90">
-                    {arc[f.key]}
-                  </dd>
-                </div>
-              ))}
-            </dl>
+            <div className="mt-10 space-y-14">
+              {arcs.map((arc) => {
+                arcIndex += 1;
+                return (
+                  <article key={arc.id} className="scroll-mt-24" id={arc.id}>
+                    <div className="font-mono text-[11px] uppercase tracking-widest text-accent">
+                      Arc {String(arcIndex).padStart(2, "0")} · {arc.tagline}
+                    </div>
+                    <h3
+                      className={
+                        ed
+                          ? "mt-2 font-display text-xl tracking-tight sm:text-2xl"
+                          : "mt-2 text-lg font-semibold tracking-tight"
+                      }
+                    >
+                      {arc.name}
+                    </h3>
+
+                    <dl className="mt-5 space-y-4 border-l border-border pl-6">
+                      {FACETS.map((f) => (
+                        <div key={f.key}>
+                          <dt className="font-mono text-[11px] uppercase tracking-widest text-muted">
+                            {f.label}
+                          </dt>
+                          <dd className="mt-1.5 text-sm leading-relaxed text-fg/90">
+                            {arc[f.key]}
+                          </dd>
+                        </div>
+                      ))}
+                    </dl>
+                  </article>
+                );
+              })}
+            </div>
           </section>
-        ))}
-      </div>
+        );
+      })}
 
       <div className="mt-16 rounded-lg border border-border bg-surface p-6">
         <div className="font-mono text-[11px] uppercase tracking-widest text-accent">
