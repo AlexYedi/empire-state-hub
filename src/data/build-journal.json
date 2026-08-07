@@ -1,13 +1,48 @@
 {
-  "generated_at": "2026-08-07T02:40:32Z",
+  "generated_at": "2026-08-07T04:15:13Z",
   "since": "2026-07-01",
   "entries": [
+    {
+      "date": "2026-08-07",
+      "headline": "The portfolio starts maintaining itself",
+      "summary": "Shipped the self-instrumenting build journal — a generator that assembles each build day's facts from git and telemetry, a human-owned prose sidecar, a /journal page on the hub, and a Stop hook that regenerates it automatically. Also restructured the build arcs into foundation-anchored themes and made one canonical JSON the single source for both the hub page and the shareable artifact. The portfolio now documents itself, and two surfaces can no longer drift apart.",
+      "curated": true,
+      "shipped": [
+        {
+          "repo": "pipeline",
+          "num": 26,
+          "title": "Add build-arcs Artifact generator (single-source, anti-drift)",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/26"
+        },
+        {
+          "repo": "hub",
+          "num": 8,
+          "title": "Arcs: foundation hierarchy + single-source the data (canonical JSON)",
+          "url": "https://github.com/AlexYedi/empire-state-hub/pull/8"
+        }
+      ],
+      "linear": [],
+      "metrics": {
+        "prs": 2,
+        "commits": 3,
+        "sessions": 1,
+        "dod_met": false,
+        "dod_waived": false,
+        "correction_rounds": 0
+      }
+    },
     {
       "date": "2026-08-06",
       "headline": "The build-arcs surface + the first live intelligence run",
       "summary": "Shipped the public Build Arcs page (3 → 13 arcs, themed) and a shareable artifact, so a month of work is legible to a hiring manager at a glance. Ran the progressive market-intelligence engine live for the first time — seven cited signals, a new topic, a recomputed viewpoint — entirely on subscription, zero API tokens. The portfolio now shows an instrumented system that documents and re-ranks itself, not just claims it does.",
       "curated": true,
       "shipped": [
+        {
+          "repo": "pipeline",
+          "num": 25,
+          "title": "YED-119 V1: build-journal generator + curated prose sidecar",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/25"
+        },
         {
           "repo": "pipeline",
           "num": 24,
@@ -34,6 +69,12 @@
         },
         {
           "repo": "hub",
+          "num": 7,
+          "title": "Add /journal — the self-instrumenting build journal (YED-119 V1)",
+          "url": "https://github.com/AlexYedi/empire-state-hub/pull/7"
+        },
+        {
+          "repo": "hub",
           "num": 6,
           "title": "Expand Build Arcs to 13, grouped into five themes",
           "url": "https://github.com/AlexYedi/empire-state-hub/pull/6"
@@ -51,8 +92,8 @@
         "YED-121"
       ],
       "metrics": {
-        "prs": 6,
-        "commits": 15,
+        "prs": 8,
+        "commits": 16,
         "sessions": 0,
         "dod_met": false,
         "dod_waived": false,
@@ -107,10 +148,10 @@
       "metrics": {
         "prs": 2,
         "commits": 4,
-        "sessions": 52,
+        "sessions": 55,
         "dod_met": true,
         "dod_waived": true,
-        "correction_rounds": 0
+        "correction_rounds": 1
       }
     },
     {
