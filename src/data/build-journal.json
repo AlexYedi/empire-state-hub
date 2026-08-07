@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-07T04:37:39Z",
+  "generated_at": "2026-08-07T08:57:45Z",
   "since": "2026-07-01",
   "entries": [
     {
@@ -8,6 +8,12 @@
       "summary": "Shipped the self-instrumenting build journal — a generator that assembles each build day's facts from git and telemetry, a human-owned prose sidecar, a /journal page on the hub, and a Stop hook that regenerates it automatically. Also restructured the build arcs into foundation-anchored themes and made one canonical JSON the single source for both the hub page and the shareable artifact. The portfolio now documents itself, and two surfaces can no longer drift apart.",
       "curated": true,
       "shipped": [
+        {
+          "repo": "pipeline",
+          "num": 29,
+          "title": "Fix judge findings on the session's generators (build-quality quorum)",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/29"
+        },
         {
           "repo": "pipeline",
           "num": 28,
@@ -50,9 +56,10 @@
         "YED-119"
       ],
       "metrics": {
-        "prs": 6,
-        "commits": 7,
-        "sessions": 1,
+        "prs": 7,
+        "commits": 10,
+        "sessions": 12,
+        "tools": 507,
         "dod_met": false,
         "dod_waived": false,
         "correction_rounds": 0
@@ -122,6 +129,7 @@
         "prs": 8,
         "commits": 16,
         "sessions": 0,
+        "tools": 0,
         "dod_met": false,
         "dod_waived": false,
         "correction_rounds": 0
@@ -147,6 +155,7 @@
         "prs": 1,
         "commits": 2,
         "sessions": 0,
+        "tools": 0,
         "dod_met": false,
         "dod_waived": false,
         "correction_rounds": 0
@@ -175,10 +184,11 @@
       "metrics": {
         "prs": 2,
         "commits": 4,
-        "sessions": 56,
+        "sessions": 62,
+        "tools": 11753,
         "dod_met": true,
         "dod_waived": true,
-        "correction_rounds": 1
+        "correction_rounds": 2
       }
     },
     {
@@ -205,6 +215,7 @@
         "prs": 2,
         "commits": 7,
         "sessions": 2,
+        "tools": 13,
         "dod_met": false,
         "dod_waived": false,
         "correction_rounds": 0
@@ -223,6 +234,7 @@
         "prs": 0,
         "commits": 1,
         "sessions": 0,
+        "tools": 0,
         "dod_met": false,
         "dod_waived": false,
         "correction_rounds": 0
@@ -239,6 +251,7 @@
         "prs": 0,
         "commits": 6,
         "sessions": 27,
+        "tools": 2923,
         "dod_met": true,
         "dod_waived": true,
         "correction_rounds": 3
@@ -255,6 +268,7 @@
         "prs": 0,
         "commits": 2,
         "sessions": 0,
+        "tools": 0,
         "dod_met": false,
         "dod_waived": false,
         "correction_rounds": 0
@@ -271,6 +285,7 @@
         "prs": 0,
         "commits": 4,
         "sessions": 82,
+        "tools": 7044,
         "dod_met": true,
         "dod_waived": true,
         "correction_rounds": 7
