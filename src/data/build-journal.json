@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-07T08:57:45Z",
+  "generated_at": "2026-08-07T09:59:12Z",
   "since": "2026-07-01",
   "entries": [
     {
@@ -8,6 +8,54 @@
       "summary": "Shipped the self-instrumenting build journal — a generator that assembles each build day's facts from git and telemetry, a human-owned prose sidecar, a /journal page on the hub, and a Stop hook that regenerates it automatically. Also restructured the build arcs into foundation-anchored themes and made one canonical JSON the single source for both the hub page and the shareable artifact. The portfolio now documents itself, and two surfaces can no longer drift apart.",
       "curated": true,
       "shipped": [
+        {
+          "repo": "pipeline",
+          "num": 37,
+          "title": "roadmap: mark graph-consolidation DIRECTION provisional (neutral investigation)",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/37"
+        },
+        {
+          "repo": "pipeline",
+          "num": 36,
+          "title": "roadmap: add the shared mission — employment as a balanced component, not an imperative",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/36"
+        },
+        {
+          "repo": "pipeline",
+          "num": 35,
+          "title": "roadmap: record M3 decisions (RAG-first kickoff; graph consolidation onto empire-state)",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/35"
+        },
+        {
+          "repo": "pipeline",
+          "num": 34,
+          "title": "CLAUDE.md rule #13: Claude-design default, Gamma removed (recovered — completes v0.7 batch)",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/34"
+        },
+        {
+          "repo": "pipeline",
+          "num": 33,
+          "title": "visual-briefs: Claude-design default, Gamma removed (recovered, matches style-guide v0.7)",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/33"
+        },
+        {
+          "repo": "pipeline",
+          "num": 32,
+          "title": "content-voice v0.7: Gamma removed; Claude-design default for structured visuals (recovered)",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/32"
+        },
+        {
+          "repo": "pipeline",
+          "num": 31,
+          "title": "content-voice v0.6: never-lead-with-I opener rule (recovered orphaned work)",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/31"
+        },
+        {
+          "repo": "pipeline",
+          "num": 30,
+          "title": "Strategic re-anchor: durable roadmap + refresh CLAUDE.md + repoint plans (YED-124)",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/30"
+        },
         {
           "repo": "pipeline",
           "num": 29,
@@ -53,13 +101,14 @@
       ],
       "linear": [
         "YED-106",
-        "YED-119"
+        "YED-119",
+        "YED-124"
       ],
       "metrics": {
-        "prs": 7,
-        "commits": 10,
-        "sessions": 12,
-        "tools": 507,
+        "prs": 15,
+        "commits": 24,
+        "sessions": 15,
+        "tools": 742,
         "dod_met": false,
         "dod_waived": false,
         "correction_rounds": 0
@@ -184,11 +233,11 @@
       "metrics": {
         "prs": 2,
         "commits": 4,
-        "sessions": 62,
-        "tools": 11753,
+        "sessions": 67,
+        "tools": 14138,
         "dod_met": true,
         "dod_waived": true,
-        "correction_rounds": 2
+        "correction_rounds": 3
       }
     },
     {
