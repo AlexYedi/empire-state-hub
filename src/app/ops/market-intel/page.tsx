@@ -3,9 +3,11 @@ import {
   getSignalFeed,
   getWatchlist,
   getTrustStrip,
+  getTopByRelevance,
   type SignalEvent,
   type WatchlistEntity,
   type ProducerHealth,
+  type RelevanceTopic,
 } from "@/lib/market-intel";
 
 export const dynamic = "force-dynamic";
@@ -13,11 +15,12 @@ export const dynamic = "force-dynamic";
 const STALE_DAYS = 7; // matches trend-radar's 7-day half-life + the stalest-producer registry row
 
 export default async function MarketIntelPage() {
-  const [counts, feed, watchlist, trust] = await Promise.all([
+  const [counts, feed, watchlist, trust, relevance] = await Promise.all([
     getGraphCounts(),
     getSignalFeed(),
     getWatchlist(),
     getTrustStrip(),
+    getTopByRelevance(),
   ]);
   const now = Date.now();
   const lastRefresh = new Date(now);
@@ -49,6 +52,9 @@ export default async function MarketIntelPage() {
         ))}
       </div>
 
+      {/* The evolving viewpoint — relevance-ranked topics (rising × relevant); the "what to post now" answer */}
+      <RelevancePanel topics={relevance} now={now} />
+
       {/* Recent signal feed — the primary surface */}
       <section className="mt-8">
         <h2 className="mb-3 text-xs uppercase tracking-widest text-muted">Recent signals</h2>
@@ -69,10 +75,52 @@ export default async function MarketIntelPage() {
         <WatchList title="Topics" items={watchlist.topics} />
       </div>
       <p className="mt-3 text-[11px] text-muted/70">
-        Watchlist ordered by recent signal activity (raw touch count), not a computed relevance score — the
-        relevance recompute is a deferred producer. People are counted only (privacy by design).
+        Watchlist ordered by raw signal activity (touch count). For the ranked, freshness-weighted view, see
+        the evolving viewpoint above. People are counted only (privacy by design).
       </p>
     </div>
+  );
+}
+
+function RelevancePanel({ topics, now }: { topics: RelevanceTopic[]; now: number }) {
+  if (topics.length === 0) return null;
+  const max = Math.max(...topics.map((t) => t.relevanceScore), 0.0001);
+  return (
+    <section className="mt-8">
+      <h2 className="mb-1 text-xs uppercase tracking-widest text-muted">Evolving viewpoint — what to post now</h2>
+      <p className="mb-3 text-[11px] text-muted/70">
+        Topics ranked by recomputed relevance (recency-decay × confidence-weighted signal + event proximity).
+        Refreshed each <code className="rounded bg-border/40 px-1 py-0.5 font-mono">/morning-refresh</code>; dormant
+        topics decay off.
+      </p>
+      <ol className="space-y-1.5">
+        {topics.map((t, i) => (
+          <li key={t.id} className="flex items-center gap-3 rounded-md border border-border bg-surface px-3 py-2">
+            <span className="w-5 shrink-0 text-right font-mono text-[11px] tabular-nums text-muted/60">
+              {i + 1}
+            </span>
+            <span className="min-w-0 flex-1 truncate text-sm" title={t.name}>
+              {t.name}
+            </span>
+            <span className="hidden h-1.5 w-28 shrink-0 overflow-hidden rounded-full bg-border sm:block" aria-hidden>
+              <span
+                className="block h-full rounded-full bg-accent"
+                style={{ width: `${Math.round((t.relevanceScore / max) * 100)}%` }}
+              />
+            </span>
+            <span className="w-12 shrink-0 text-right font-mono text-xs tabular-nums" title="relevance score">
+              {t.relevanceScore.toFixed(2)}
+            </span>
+            <span
+              className="w-8 shrink-0 text-right text-[11px] tabular-nums text-muted/70"
+              title={`${t.engagementCount} signals · last ${ago(t.lastEngagedAt, now)}`}
+            >
+              {ago(t.lastEngagedAt, now)}
+            </span>
+          </li>
+        ))}
+      </ol>
+    </section>
   );
 }
 
