@@ -1,7 +1,7 @@
 import "server-only";
 import { unstable_cache } from "next/cache";
 import { z } from "zod";
-import { graphGet, graphCount } from "./supabase/client";
+import { graphGet, graphGetFrom, graphCount } from "./supabase/client";
 
 // Data access for the Market-Intelligence graph (read-only). Mirrors the Notion lib pattern
 // (server-only + Zod + unstable_cache). Powers /ops/market-intel.
@@ -192,6 +192,104 @@ async function fetchTrustStrip(): Promise<TrustStrip> {
   return TrustStripSchema.parse({ producers, pctCited, recentWindow: rows.length });
 }
 export const getTrustStrip = unstable_cache(fetchTrustStrip, ["mi-trust-strip"], {
+  revalidate: 60,
+  tags: ["market-intel"],
+});
+
+// ---------- Topic intelligence (signal_read anon-safe views — YED-130) ----------
+// The carried-forward topic-intelligence layer, read through the counts-only `signal_read`
+// views (k>=5 suppressed in-view; no PII). The SAME shared read contract the gtm-os-hub /signal
+// surface consumes — one graph, two lenses. Honest-empty if `signal_read` isn't reachable yet
+// (e.g. pre-cutover canonical), so the page never breaks.
+export const TopicMovementSchema = z.object({
+  theme: z.string(),
+  eventCount: z.coerce.number().nullable(),
+  distinctSpeakerCount: z.coerce.number().nullable(),
+  trend: z.enum(["rising", "falling", "steady", "new"]),
+  isLowConfidence: z.boolean(),
+});
+export type TopicMovement = z.infer<typeof TopicMovementSchema>;
+
+export const ThemeIntersectionSchema = z.object({
+  themeA: z.string(),
+  themeB: z.string(),
+  bridgePersonCount: z.coerce.number().nullable(),
+  intersectionScore: z.coerce.number().nullable(),
+  isNewPair: z.boolean(),
+});
+export type ThemeIntersection = z.infer<typeof ThemeIntersectionSchema>;
+
+export type TopicIntelligence = { movement: TopicMovement[]; intersections: ThemeIntersection[] };
+
+// Reconcile gtm-os's upstream trend vocabulary (heating/cooling/steady/new/insufficient_data)
+// to a small directional set. Unknown/insufficient_data -> steady (caveat rides on isLowConfidence).
+function mapTrend(raw: string | null): TopicMovement["trend"] {
+  switch ((raw ?? "").toLowerCase()) {
+    case "heating":
+    case "rising":
+      return "rising";
+    case "cooling":
+    case "falling":
+      return "falling";
+    case "new":
+      return "new";
+    default:
+      return "steady";
+  }
+}
+
+type MovementRow = {
+  theme: string;
+  event_count: number | string | null;
+  distinct_speaker_count: number | string | null;
+  trend_label: string | null;
+  is_low_confidence: boolean | null;
+};
+type IntersectionRow = {
+  theme_a: string;
+  theme_b: string;
+  bridge_person_count: number | string | null;
+  intersection_score: number | string | null;
+  is_new_pair: boolean | null;
+};
+
+async function fetchTopicIntelligence(): Promise<TopicIntelligence> {
+  try {
+    const [mv, ix] = await Promise.all([
+      graphGetFrom<MovementRow>(
+        "signal_read",
+        "/v_topic_movement?select=theme,event_count,distinct_speaker_count,trend_label,is_low_confidence&window_type=eq.all_time&order=event_count.desc.nullslast&limit=14",
+      ),
+      graphGetFrom<IntersectionRow>(
+        "signal_read",
+        "/v_topic_intersections?select=theme_a,theme_b,bridge_person_count,intersection_score,is_new_pair&window_type=eq.all_time&order=intersection_score.desc.nullslast&limit=12",
+      ),
+    ]);
+    return {
+      movement: mv.map((r) =>
+        TopicMovementSchema.parse({
+          theme: r.theme,
+          eventCount: r.event_count,
+          distinctSpeakerCount: r.distinct_speaker_count,
+          trend: mapTrend(r.trend_label),
+          isLowConfidence: r.is_low_confidence === true,
+        }),
+      ),
+      intersections: ix.map((r) =>
+        ThemeIntersectionSchema.parse({
+          themeA: r.theme_a,
+          themeB: r.theme_b,
+          bridgePersonCount: r.bridge_person_count,
+          intersectionScore: r.intersection_score,
+          isNewPair: r.is_new_pair === true,
+        }),
+      ),
+    };
+  } catch {
+    return { movement: [], intersections: [] }; // honest-empty: signal_read not reachable yet
+  }
+}
+export const getTopicIntelligence = unstable_cache(fetchTopicIntelligence, ["mi-topic-intel"], {
   revalidate: 60,
   tags: ["market-intel"],
 });

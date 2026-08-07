@@ -4,10 +4,13 @@ import {
   getWatchlist,
   getTrustStrip,
   getTopByRelevance,
+  getTopicIntelligence,
   type SignalEvent,
   type WatchlistEntity,
   type ProducerHealth,
   type RelevanceTopic,
+  type TopicIntelligence,
+  type TopicMovement,
 } from "@/lib/market-intel";
 
 export const dynamic = "force-dynamic";
@@ -15,12 +18,13 @@ export const dynamic = "force-dynamic";
 const STALE_DAYS = 7; // matches trend-radar's 7-day half-life + the stalest-producer registry row
 
 export default async function MarketIntelPage() {
-  const [counts, feed, watchlist, trust, relevance] = await Promise.all([
+  const [counts, feed, watchlist, trust, relevance, intel] = await Promise.all([
     getGraphCounts(),
     getSignalFeed(),
     getWatchlist(),
     getTrustStrip(),
     getTopByRelevance(),
+    getTopicIntelligence(),
   ]);
   const now = Date.now();
   const lastRefresh = new Date(now);
@@ -54,6 +58,9 @@ export default async function MarketIntelPage() {
 
       {/* The evolving viewpoint — relevance-ranked topics (rising × relevant); the "what to post now" answer */}
       <RelevancePanel topics={relevance} now={now} />
+
+      {/* Topic intelligence — carried-forward from the signal graph via signal_read (one graph, two lenses) */}
+      <TopicIntelligencePanel intel={intel} />
 
       {/* Recent signal feed — the primary surface */}
       <section className="mt-8">
@@ -120,6 +127,109 @@ function RelevancePanel({ topics, now }: { topics: RelevanceTopic[]; now: number
           </li>
         ))}
       </ol>
+    </section>
+  );
+}
+
+const TREND_GLYPH: Record<TopicMovement["trend"], string> = {
+  rising: "↑",
+  falling: "↓",
+  steady: "→",
+  new: "✦",
+};
+
+function TopicIntelligencePanel({ intel }: { intel: TopicIntelligence }) {
+  const { movement, intersections } = intel;
+  if (movement.length === 0 && intersections.length === 0) {
+    return (
+      <section className="mt-8">
+        <h2 className="mb-1 text-xs uppercase tracking-widest text-muted">Topic intelligence</h2>
+        <div className="rounded-md border border-dashed border-border bg-surface/50 px-4 py-8 text-center text-xs text-muted">
+          ⊘ instrumenting — the <code className="rounded bg-border/40 px-1 py-0.5 font-mono">signal_read</code> views
+          aren&rsquo;t reachable yet. Carried-forward topic-intelligence lights up here once the graph is wired.
+        </div>
+      </section>
+    );
+  }
+  const maxEv = Math.max(...movement.map((m) => m.eventCount ?? 0), 1);
+  const maxScore = Math.max(...intersections.map((i) => i.intersectionScore ?? 0), 1);
+  return (
+    <section className="mt-8">
+      <h2 className="mb-1 text-xs uppercase tracking-widest text-muted">Topic intelligence — theme movement</h2>
+      <p className="mb-3 text-[11px] text-muted/70">
+        Carried-forward from the signal graph, read through counts-only{" "}
+        <code className="rounded bg-border/40 px-1 py-0.5 font-mono">signal_read</code> views (k≥5, no PII) — the same
+        contract the public <code className="rounded bg-border/40 px-1 py-0.5 font-mono">/signal</code> surface renders.
+      </p>
+      <ol className="space-y-1.5">
+        {movement.map((m, i) => (
+          <li key={m.theme} className="flex items-center gap-3 rounded-md border border-border bg-surface px-3 py-2">
+            <span className="w-5 shrink-0 text-right font-mono text-[11px] tabular-nums text-muted/60">{i + 1}</span>
+            <span className="w-4 shrink-0 text-center text-xs" title={m.trend} aria-hidden>
+              {TREND_GLYPH[m.trend]}
+            </span>
+            <span className="min-w-0 flex-1 truncate text-sm" title={m.theme}>
+              {m.theme}
+              {m.isLowConfidence && (
+                <span className="ml-1.5 text-[10px] uppercase tracking-wide text-muted/50" title="low confidence">
+                  low-conf
+                </span>
+              )}
+            </span>
+            <span className="hidden h-1.5 w-24 shrink-0 overflow-hidden rounded-full bg-border sm:block" aria-hidden>
+              <span
+                className="block h-full rounded-full bg-accent"
+                style={{ width: `${Math.round(((m.eventCount ?? 0) / maxEv) * 100)}%` }}
+              />
+            </span>
+            <span className="w-8 shrink-0 text-right font-mono text-xs tabular-nums" title="events">
+              {m.eventCount ?? "—"}
+            </span>
+            <span className="w-12 shrink-0 text-right text-[11px] tabular-nums text-muted/70" title="distinct speakers">
+              {m.distinctSpeakerCount != null ? `${m.distinctSpeakerCount} spk` : "—"}
+            </span>
+          </li>
+        ))}
+      </ol>
+
+      {intersections.length > 0 && (
+        <>
+          <h2 className="mb-1 mt-6 text-xs uppercase tracking-widest text-muted">Theme intersections</h2>
+          <p className="mb-3 text-[11px] text-muted/70">
+            Where two themes co-occur — ranked by intersection score. Bridge = shared people (count only, never names).
+          </p>
+          <ol className="space-y-1.5">
+            {intersections.map((x, i) => (
+              <li
+                key={`${x.themeA}|${x.themeB}`}
+                className="flex items-center gap-3 rounded-md border border-border bg-surface px-3 py-2"
+              >
+                <span className="w-5 shrink-0 text-right font-mono text-[11px] tabular-nums text-muted/60">{i + 1}</span>
+                <span className="min-w-0 flex-1 truncate text-sm" title={`${x.themeA} × ${x.themeB}`}>
+                  {x.themeA} <span className="text-muted/50">×</span> {x.themeB}
+                  {x.isNewPair && (
+                    <span className="ml-1.5 rounded border border-border px-1 py-0.5 text-[10px] uppercase tracking-wide text-accent">
+                      new
+                    </span>
+                  )}
+                </span>
+                <span className="hidden h-1.5 w-24 shrink-0 overflow-hidden rounded-full bg-border sm:block" aria-hidden>
+                  <span
+                    className="block h-full rounded-full bg-accent"
+                    style={{ width: `${Math.round(((x.intersectionScore ?? 0) / maxScore) * 100)}%` }}
+                  />
+                </span>
+                <span className="w-8 shrink-0 text-right font-mono text-xs tabular-nums" title="intersection score">
+                  {x.intersectionScore ?? "—"}
+                </span>
+                <span className="w-12 shrink-0 text-right text-[11px] tabular-nums text-muted/70" title="bridge people (count only)">
+                  {x.bridgePersonCount != null ? `${x.bridgePersonCount} br` : "—"}
+                </span>
+              </li>
+            ))}
+          </ol>
+        </>
+      )}
     </section>
   );
 }
