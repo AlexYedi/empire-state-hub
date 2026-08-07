@@ -1,7 +1,7 @@
 "use client";
 
 import { useLens } from "@/components/lens-provider";
-import { BUILD_ARCS, THEMES } from "@/data/build-arcs";
+import { BUILD_ARCS, THEMES, type BuildArc } from "@/data/build-arcs";
 
 const FACETS = [
   { key: "what", label: "What it is" },
@@ -17,7 +17,7 @@ export default function BuildArcsPage() {
   const { lens } = useLens();
   const ed = lens === "editorial";
 
-  let arcIndex = 0;
+  let childIndex = 0; // continuous numbering across the arcs built on the foundations
 
   return (
     <div className="mx-auto w-full max-w-3xl px-6 py-20">
@@ -38,6 +38,8 @@ export default function BuildArcsPage() {
       {THEMES.map((theme) => {
         const arcs = BUILD_ARCS.arcs.filter((a) => a.theme === theme.id);
         if (arcs.length === 0) return null;
+        const foundations = arcs.filter((a) => a.foundation);
+        const built = arcs.filter((a) => !a.foundation);
         return (
           <section key={theme.id} className="mt-16">
             <div className="border-b border-border pb-4">
@@ -53,40 +55,27 @@ export default function BuildArcsPage() {
               <p className="mt-1.5 text-sm text-muted">{theme.blurb}</p>
             </div>
 
-            <div className="mt-10 space-y-14">
-              {arcs.map((arc) => {
-                arcIndex += 1;
-                return (
-                  <article key={arc.id} className="scroll-mt-24" id={arc.id}>
-                    <div className="font-mono text-[11px] uppercase tracking-widest text-accent">
-                      Arc {String(arcIndex).padStart(2, "0")} · {arc.tagline}
-                    </div>
-                    <h3
-                      className={
-                        ed
-                          ? "mt-2 font-display text-xl tracking-tight sm:text-2xl"
-                          : "mt-2 text-lg font-semibold tracking-tight"
-                      }
-                    >
-                      {arc.name}
-                    </h3>
+            {/* foundation anchor(s) */}
+            {foundations.map((arc) => (
+              <Arc key={arc.id} arc={arc} ed={ed} kicker="◆ Foundation" />
+            ))}
 
-                    <dl className="mt-5 space-y-4 border-l border-border pl-6">
-                      {FACETS.map((f) => (
-                        <div key={f.key}>
-                          <dt className="font-mono text-[11px] uppercase tracking-widest text-muted">
-                            {f.label}
-                          </dt>
-                          <dd className="mt-1.5 text-sm leading-relaxed text-fg/90">
-                            {arc[f.key]}
-                          </dd>
-                        </div>
-                      ))}
-                    </dl>
-                  </article>
-                );
-              })}
-            </div>
+            {/* arcs built on the foundation */}
+            {built.length > 0 && (
+              <div className={foundations.length > 0 ? "mt-12 border-l border-border/60 pl-5" : "mt-2"}>
+                {foundations.length > 0 && (
+                  <p className="mb-2 font-mono text-[11px] uppercase tracking-widest text-muted">
+                    Built on it
+                  </p>
+                )}
+                {built.map((arc) => {
+                  childIndex += 1;
+                  return (
+                    <Arc key={arc.id} arc={arc} ed={ed} kicker={`Arc ${String(childIndex).padStart(2, "0")}`} />
+                  );
+                })}
+              </div>
+            )}
           </section>
         );
       })}
@@ -98,5 +87,39 @@ export default function BuildArcsPage() {
         <p className="mt-3 text-base leading-relaxed text-fg/90">{BUILD_ARCS.throughLine}</p>
       </div>
     </div>
+  );
+}
+
+function Arc({ arc, ed, kicker }: { arc: BuildArc; ed: boolean; kicker: string }) {
+  const isFoundation = kicker.startsWith("◆");
+  return (
+    <article className="mt-12 scroll-mt-24 first:mt-10" id={arc.id}>
+      <div
+        className={
+          "font-mono text-[11px] uppercase tracking-widest " +
+          (isFoundation ? "font-semibold text-accent" : "text-accent")
+        }
+      >
+        {kicker} · {arc.tagline}
+      </div>
+      <h3
+        className={
+          ed
+            ? "mt-2 font-display tracking-tight " + (isFoundation ? "text-2xl sm:text-[1.7rem]" : "text-xl sm:text-2xl")
+            : "mt-2 font-semibold tracking-tight " + (isFoundation ? "text-xl" : "text-lg")
+        }
+      >
+        {arc.name}
+      </h3>
+
+      <dl className="mt-5 space-y-4 border-l border-border pl-6">
+        {FACETS.map((f) => (
+          <div key={f.key}>
+            <dt className="font-mono text-[11px] uppercase tracking-widest text-muted">{f.label}</dt>
+            <dd className="mt-1.5 text-sm leading-relaxed text-fg/90">{arc[f.key]}</dd>
+          </div>
+        ))}
+      </dl>
+    </article>
   );
 }
