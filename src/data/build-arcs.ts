@@ -1,13 +1,16 @@
-// The major build arcs behind the system — the "sprints." Each is a genuine thesis:
-// what it is, why it exists, the value, what V1 doesn't do yet, where it goes, the
-// best practices it's informed by, and how it ties back to enterprise production building.
-// Grouped into themes so the set reads as a map of the work, not a flat list.
+// Typed loader over the CANONICAL arc data (build-arcs.json). That JSON is the single source of
+// truth — this hub page and the shareable Artifact both derive from it, so they can't drift.
+// To change an arc, edit build-arcs.json; then regenerate the Artifact (see the pipeline repo's
+// gen_build_arcs_artifact.py). Do not hand-edit arc copy in two places again.
+
+import data from "./build-arcs.json";
 
 export type ArcTheme = "intelligence" | "rigor" | "surface" | "distribution" | "craft";
 
 export type BuildArc = {
   id: string;
   theme: ArcTheme;
+  foundation?: boolean; // the theme's foundation anchor; children build on it
   name: string;
   tagline: string;
   what: string;
@@ -19,213 +22,10 @@ export type BuildArc = {
   enterprise: string;
 };
 
-export const THEMES: { id: ArcTheme; label: string; blurb: string }[] = [
-  {
-    id: "intelligence",
-    label: "Intelligence",
-    blurb: "Sensing the field and turning it into a queryable, evolving viewpoint.",
-  },
-  {
-    id: "rigor",
-    label: "Rigor & Measurement",
-    blurb: "Putting a floor under “done” and instrumenting the build itself.",
-  },
-  {
-    id: "surface",
-    label: "Surface",
-    blurb: "Where the work becomes visible — cockpit and portfolio in one.",
-  },
-  {
-    id: "distribution",
-    label: "Distribution",
-    blurb: "Making the discipline inheritable across every project.",
-  },
-  {
-    id: "craft",
-    label: "Craft",
-    blurb: "The content and voice the whole pipeline exists to produce.",
-  },
-];
+export const THEMES = data.themes as { id: ArcTheme; label: string; blurb: string }[];
 
-export const BUILD_ARCS = {
-  intro:
-    "Thirteen build arcs — the sprints behind the system, grouped into five themes. Each is a thesis, not just a feature: the what, the why, what V1 deliberately doesn't do yet, and how it maps to the data, eval, and governance stack that enterprises spend millions standing up.",
-  arcs: [
-    // ─────────────────────────────── INTELLIGENCE ───────────────────────────────
-    {
-      id: "market-intelligence-engine",
-      theme: "intelligence",
-      name: "The Market-Intelligence Engine",
-      tagline: "The intelligence substrate.",
-      what: "A Postgres graph where companies, people, topics, and events are first-class objects, and a signal is literally an event with a kind, a cited source, and a confidence. Producers write signals in; the dashboard and a relevance recompute read them out.",
-      why: "New York's AI scene throws off more signal in a week than one person can hold, and it's ephemeral. A queryable substrate turns fleeting encounters into a durable, cross-referenceable memory — lens-agnostic, so the same graph serves content and the job search.",
-      value: "“What's rising × relevant × uncovered” becomes computable, not vibes. Every signal carries provenance, so nothing is unsourced — and the graph tells a one-day spike apart from a sustained trend.",
-      bestPractices: "Event-sourcing / activity-stream modeling (event-as-hyperedge). Meadows' stock-and-flow: the signal stock accumulates; the viewpoint is a derived flow, decay-weighted, never wiped. Recency-decay + cross-source corroboration from information retrieval.",
-      v1Limits: "Single primary producer; relevance is recency × engagement × confidence with hand-set weights, no learned model; the event-proximity boost stays dormant until attended events populate; manual trigger only.",
-      future: "More producers (voice / role scanners), a learned relevance model, embedding-based semantic dedup, and — deliberately last — unattended scheduling (the one piece that would cost metered API tokens).",
-      enterprise: "A system-of-record plus lightweight feature-store pattern — the exact shape enterprises build for “signals → decisions,” scoped to one operator. The veracity layer (provenance, honest confidence, pipeline health) mirrors how production ML earns trust.",
-    },
-    {
-      id: "knowledge-graph-hygiene",
-      theme: "intelligence",
-      name: "Knowledge-Graph Data Foundation & Hygiene",
-      tagline: "Clean, connected data at scale.",
-      what: "Backfilling the graph from Notion (172 companies, 153 topics, 240 people → 232 persons), a reusable dedup / normalization toolkit (fuzzy-match, safe-merge, flag-and-import backfill), and a full Notion ↔ graph reconciliation.",
-      why: "A graph is only as useful as it is clean. A single scan fragmented it into near-duplicate topics; the people import carried duplicate pages and unresolved names. Left alone, that noise poisons every downstream ranking — the same failure that kills real production graphs.",
-      value: "One node per real entity; provenance preserved on merge (signals move, they're never lost); human-in-the-loop for the judgment calls — the operator sets the taxonomy, the tooling executes it safely.",
-      bestPractices: "Entity resolution / master-data-management (match-before-create, survivorship rules). Idempotent backfills (search-before-insert, safe re-runs). Dry-run-before-write on every destructive op.",
-      v1Limits: "Dedup is string-similarity + human-in-the-loop, not embeddings; name-only person dedup can theoretically false-merge two distinct people who share a name; a few entities still lack a company; one name flagged unresolved for later.",
-      future: "Embedding-based semantic merge (also unblocks automation), a formal survivorship policy for conflicting fields, and full event → person/company edge backfill.",
-      enterprise: "MDM plus data-quality governance in miniature — the unglamorous foundation every production data/AI system lives or dies on, and the layer most often skipped until it causes an outage.",
-    },
-    {
-      id: "progressive-trend-engine",
-      theme: "intelligence",
-      name: "The Progressive Trend Engine",
-      tagline: "The evolving viewpoint.",
-      what: "A daily, manual-trigger delta scan (/morning-refresh) that pulls what's new since the last run — newsletters, HackerNews, web news, events that happened — matches it against the existing graph, auto-logs the new signals, then recomputes a relevance score across every topic and hands back a Farmed / Added / Changed / Cooled report.",
-      why: "A one-shot scan is a snapshot; intelligence is a trend. The real question isn't “what's hot today” but “what's still rising after two weeks, and what cooled.” That demands accumulating signal over time and re-deriving the ranking each day — a snapshot can't tell a blip from a trend.",
-      value: "The viewpoint evolves on its own cadence without ever wiping history. A topic re-engaged today outranks one last touched two weeks ago (14-day half-life), weighted by the strength (summed confidence) of its signals rather than a raw count — so one strong signal outranks a pile of weak ones.",
-      bestPractices: "Meadows' two-stock model — the signal stock is append-only (never cleared); the viewpoint is a derived flow, recomputed by decay-weighting instead of deletion. Recency half-life + confidence-mass weighting from information retrieval. The recompute is pure math (no LLM), so the daily reweight costs zero tokens.",
-      v1Limits: "Manual trigger — no scheduler yet, deliberately, since unattended runs are the only piece that would burn metered API tokens; the half-life and weights are hand-set, not learned; the event-proximity boost stays dormant until attended events populate the graph.",
-      future: "Learned decay/weights tuned against which signals actually became posts; scheduled unattended runs once the token-cost tradeoff is justified; a “coverage penalty” that down-ranks topics already posted about.",
-      enterprise: "This is the difference between a dashboard and a system — a surface that recomputes its own state on a cadence over an append-only event log. It's the pattern behind every “what's trending / what needs attention” view in production analytics, and the honest-decay math is what keeps such a surface from being gamed by volume.",
-    },
-    {
-      id: "signal-scanners",
-      theme: "intelligence",
-      name: "The Signal Scanners",
-      tagline: "Sensing what the locked-down web won't give you.",
-      what: "Three public-source scanners — trend-radar (trends → content topics), voice-radar (voices → outreach), role-radar (roles → job hunt) — that sense AI/tech momentum from HackerNews, HuggingFace, and curated newsletters, normalize it into a shared taxonomy, score it, and feed the graph.",
-      why: "LinkedIn, where the audience is, has no legitimate trend API and scraping is ruled out. But the same trends surface first on HN / HuggingFace / newsletters anyway. The scanners sense from legitimate public sources instead of fighting a locked-down platform — an honest proxy, not a workaround for parity.",
-      value: "Momentum Alex can't otherwise get, ethically sourced, normalized so “AI agents” and “agentic systems” count as one topic, and decayed so last month's hype doesn't outrank this week's signal. Cross-source corroboration — a topic featured across HN + HF + newsletters — is the trust signal.",
-      bestPractices: "The whole game is taxonomy (normalization so corroboration is countable) and decay (recency half-life), both borrowed from dedicated skills rather than reinvented per scanner. Source-weighting (papers for substance, newsletters for editorial vote, HN for velocity). Public APIs / RSS / official endpoints only — a hard ethical line, and no fabricated numbers ever.",
-      v1Limits: "Three sources, manual trigger; the LinkedIn-native gap is real and unclosable — stated honestly, not papered over; topic over/under-merging still needs a human eye.",
-      future: "More sources (Reddit, GitHub Trending, Product Hunt); decay tuned against measured outcomes; the voice and role scanners maturing alongside trend-radar into full producers.",
-      enterprise: "“Social listening” tools are mechanically simple — poll, normalize, score, rank — and the hard part is always normalization + decay, not the fetch. Building the honest version (legitimate sources, stated gaps, measured-not-invented numbers) is exactly the discipline that separates a trustworthy market-intel product from a scraper that lies.",
-    },
-    {
-      id: "topic-intelligence-layer",
-      theme: "intelligence",
-      name: "The Topic-Intelligence Modeling Layer",
-      tagline: "From a list of topics to a map of the field.",
-      what: "A modeling layer over the topic graph — cluster taxonomy, per-topic trend series, and pairwise bridges between topics — materialized on a schedule (pg_cron) with a heartbeat, and read by the Hub.",
-      why: "A flat list of topics tells you what exists, not how the field is structured — which themes are converging, which topics bridge two clusters (the interesting intersection that makes a good post or project), which are rising versus fading. That's a modeling layer, not a query.",
-      value: "The graph starts to answer field-level questions: where the bridges are, what shape the conversation has, which intersections are underexplored. This is the substrate for both content angles and the project-ideation intersection gate.",
-      bestPractices: "Materialized views + scheduled refresh (pg_cron) with a heartbeat so staleness is observable, not silent. Precompute-the-expensive-join so read time stays cheap. Strict separation of raw signal (producers write) from derived metrics (this layer owns).",
-      v1Limits: "In progress; clustering is taxonomy-driven, not embedding-learned; bridges are computed on current edges only; the Hub render is partial.",
-      future: "Embedding-based clustering; bridge-strength trends over time; wiring the /system spine node so the Hub visualizes the field map live.",
-      enterprise: "This is the semantic/metric layer of a data platform — the models that sit between raw events and the dashboard. Getting the raw/derived separation and the scheduled-refresh-with-heartbeat right is precisely what makes a production analytics layer trustworthy and debuggable.",
-    },
-    {
-      id: "interview-prep-dossier",
-      theme: "intelligence",
-      name: "The Interview-Prep Dossier",
-      tagline: "The first lens on the graph.",
-      what: "/interview-prep — the Market-Intelligence Engine's first product milestone. Takes a company, role/JD, interview stage, and interviewer; fans out the same four research specialists the event pipeline uses; and synthesizes a structured dossier through a judge gate before Alex reviews.",
-      why: "Proves the engine is lens-agnostic — the same graph and the same research machinery that power content also power the job search, just pointed at a different question. One substrate, many lenses was the founding bet; this is the first lens that isn't content.",
-      value: "A researched, judge-checked dossier on the room before an interview — company, role, stage, interviewer, live tensions — from specialists (company / person / topic / signal) already built and battle-tested for events. Reuse, not rebuild.",
-      bestPractices: "Parent-thread fan-out + synthesis-only subagent (the SDK constraint that subagents can't spawn subagents, resolved into an orchestration pattern). Judge-gate before human review. Schema-first dossier so the output is consistent and consumable.",
-      v1Limits: "Milestone 1 — dossier generation only, not the full job-search core; writing interview outcomes back to the graph is a fast-follow; one lens proven, others still to come.",
-      future: "The full Job-Search core (roles ingested via role-radar → graph → dossier → outcome capture); outcome feedback so the engine learns which prep mapped to which result.",
-      enterprise: "The lens-agnostic pattern — one intelligence substrate serving multiple downstream products — is how mature data orgs avoid rebuilding the same graph five times. Demonstrating it with two genuinely different lenses (content + hiring) on shared machinery is the strongest possible proof the architecture generalizes.",
-    },
-    // ─────────────────────────────── RIGOR ───────────────────────────────
-    {
-      id: "build-rigor-measurement",
-      theme: "rigor",
-      name: "Build-Rigor & Measurement Layer",
-      tagline: "Instrumented building.",
-      what: "A Definition-of-Done gate that writes real telemetry, a cross-provider LLM-as-judge (two model families in a quorum), build-session telemetry piped to a dashboard, and branch-first git discipline enforced by a hook.",
-      why: "Diagnosed via systems analysis as a Shifting-the-Burden archetype: rigor lived in optional docs, never the execution path, so a memory-less agent shipped on green checks with no durable trace — and the consequences surfaced weeks later. This puts a floor under “done” inside the execution path.",
-      value: "Every non-trivial build leaves an artifact (spec, issue, adversarial pass) and a telemetry row. The judge resists self-preference by drawing its second opinion from a different provider, not the same model family.",
-      bestPractices: "LLM-as-judge with a cross-provider quorum (self-preference mitigation). DORA / delivery-observability thinking — measure the delivery system, not just the product. “Own the contract, rent the platform”: a stable log schema with a swappable backend.",
-      v1Limits: "The judge is provisional-trusted — advisory, never hard-blocking; the DoD is self-attested; telemetry is a single dedicated project.",
-      future: "The judge earning “trusted” status via prospective calibration, and a value-action registry so every metric carries a threshold → action → surface — no orphan metrics.",
-      enterprise: "AI evals + delivery observability + governance — precisely the “how do we trust and measure our AI systems” question every enterprise AI team is now grappling with. A full-stack-GTM wedge: demonstrated, not stated.",
-    },
-    {
-      id: "cross-provider-judge",
-      theme: "rigor",
-      name: "The Cross-Provider Judge",
-      tagline: "A second opinion from a different mind.",
-      what: "The build-quality judge upgraded from a single model to a cross-provider quorum — a Sonnet judge and a Gemini judge scoring the same build against a versioned rubric (build-quality@3), with agree → auto-pass and disagree → human tiebreak. Plus mechanized checks (dangling-reference, command-skeleton) and a composite confidence-honesty cap.",
-      why: "An LLM grading work from its own family is prone to self-preference — it rates outputs that look like its own more kindly. Drawing the second opinion from a different provider is the cheapest robust mitigation. Calibration (≥20 runs at ≥80% agreement with Alex) is what earned the judge “provisional-trusted” status.",
-      value: "Build quality gets an independent, adversarial check that resists the most common failure mode of LLM-as-judge. Agreement auto-passes; disagreement escalates to a human rather than silently picking a side (a fail-safe FLAG in autonomous mode).",
-      bestPractices: "LLM-as-judge with a cross-provider quorum (self-preference mitigation from the eval literature). A versioned rubric (build-quality@2 → @3) with mechanized, non-negotiable sub-checks so scores can't drift on vibes. Prospective calibration against a human anchor before trusting the judge.",
-      v1Limits: "Provisional-trusted — it gates new/independent builds but is advisory on self-produced work; it never hard-blocks; the human tiebreak is a real dependency when the two providers disagree.",
-      future: "Earning full “trusted” status via continued prospective calibration; more rubric dimensions; the judge eventually scoring against outcome data, not just artifact quality.",
-      enterprise: "“How do we trust and measure our AI systems” is the question every enterprise AI team is now grappling with. A calibrated, cross-provider, versioned-rubric judge with an honest trust ladder is a defensible answer — and building one at operator scale directly demonstrates the eval discipline production AI requires.",
-    },
-    {
-      id: "build-telemetry",
-      theme: "rigor",
-      name: "Build-Session Telemetry & Observability",
-      tagline: "You can't improve what you don't measure.",
-      what: "A contract-first Stop hook that emits a structured build_session row at the end of every session — tool counts, tokens, context peak, DoD flags, correction rounds — projected to a dedicated PostHog project and read by the Hub's rigor dashboard.",
-      why: "Rigor that isn't measured decays silently. The diagnosed root cause of the whole measurement program was that rigor lived in optional docs, never the execution path — so the fix had to put a durable telemetry row in the execution path itself, not a dashboard nobody updates.",
-      value: "Every build leaves a machine-readable trace. Once the DoD writer was wired, the semantic fields (met / waived / correction-rounds) went from null in 100% of rows to actually populated — closing the loop's missing link.",
-      bestPractices: "Contract-first schema (a stable log contract with a swappable backend — “own the contract, rent the platform”). DORA / delivery-observability thinking — measure the delivery system, not just the product. A dedicated telemetry project so build-rigor signal isn't mixed with product analytics.",
-      v1Limits: "Self-attested DoD flags; a single dedicated project; the telemetry describes effort and discipline, not yet outcome value.",
-      future: "Joining telemetry to outcome data (which builds actually produced acted-on value); richer context-health signals; anomaly alerts on the delivery system itself.",
-      enterprise: "This is developer-productivity / delivery observability — the DORA-metrics layer — built for a team of one. The contract-first, swappable-backend design is how you instrument a real engineering org without locking into a vendor, and “put the trace in the execution path, not an optional doc” is a lesson most orgs learn the hard way.",
-    },
-    {
-      id: "branch-first-governance",
-      theme: "rigor",
-      name: "Branch-First Governed Change",
-      tagline: "Change with a paper trail.",
-      what: "Branch-first git discipline enforced in code — a pre-commit hook that blocks build-surface changes on main, so non-trivial work goes branch → PR → merge while trivial churn (telemetry, content) can still land on main. Plus the governed-batch pattern: a Linear issue before any change to universal/canonical config.",
-      why: "A memory-less agent auto-committing straight to main leaves no review surface and no trail. The diagnosis — an “auto-committer” that turned out to be a human-driven desktop client, not a daemon — led to a durable fix: make the right path the enforced default, in a hook, not a habit to remember.",
-      value: "Every non-trivial build is reviewable before it lands; universal-scope changes require an issue first; telemetry churn doesn't drown the history. The discipline is enforced by the tool, so it survives a forgetful operator.",
-      bestPractices: "Protected-branch / trunk-with-guardrails change management. Governance-as-code (a pre-commit hook) over governance-as-documentation. Scope-tiered rules (trivial vs. non-trivial) so the guardrail doesn't tax small work — the same “don't let the brake become the drag” lesson from the execution-focus retro.",
-      v1Limits: "A local hook, not server-side branch protection; the trivial/non-trivial line is a convention the operator still applies; PR review is self-review at solo scale.",
-      future: "Server-side branch protection + required CI checks; the judge as a required PR gate; auto-generated PR descriptions from the build journal.",
-      enterprise: "This is change management and separation-of-duties in miniature — the exact controls (protected branches, mandatory review for high-blast-radius changes, an issue trail for config) that every regulated or scaled engineering org runs on. Enforcing them as code at operator scale is the paved-road pattern.",
-    },
-    // ─────────────────────────────── SURFACE ───────────────────────────────
-    {
-      id: "empire-state-hub",
-      theme: "surface",
-      name: "The Empire State Hub",
-      tagline: "Build in public, honestly.",
-      what: "A Next.js hub that is both a live ops cockpit (rigor telemetry, market-intel, entities, events, ideas — read from PostHog + Supabase behind a password gate) and a public build-in-public portfolio (the pipeline, the architecture, the changelog, these build arcs), with an editorial/technical lens toggle over shared content.",
-      why: "The work is the credential. A job search targeting AI-native companies is best served by showing an instrumented, honest, running system rather than describing it — and by letting the same content read two ways: a narrative for a hiring manager, the technical detail for an engineer.",
-      value: "One surface that is simultaneously Alex's operating cockpit and his portfolio, with a PII-safety layer so the public side never leaks contacts, and a generated (not hand-maintained) toolbox catalog so the “what I've built” surface can't go stale.",
-      bestPractices: "One lens system over one content source (write once, read two ways) instead of two parallel sites. Design tokens + a component system for consistency. A hard PII boundary between the private cockpit and the public portfolio. Generated-not-authored catalogs so the surface can't drift from reality.",
-      v1Limits: "Password-gated ops (HTTP Basic, password-only, checked in a proxy); some panels read snapshots, not live; session-replay and public analytics are still backlog.",
-      future: "A self-instrumenting build journal auto-logging narrative to the Work tab; live spine wiring; session replay + on-demand revalidation.",
-      enterprise: "An internal ops cockpit and an external portfolio sharing one codebase, one content source, and a hard privacy boundary is a real architectural pattern — the “one system, two audiences” problem every company with a status page and an internal dashboard faces. Solving it with a lens abstraction instead of duplication is the maintainable answer.",
-    },
-    // ─────────────────────────────── DISTRIBUTION ───────────────────────────────
-    {
-      id: "three-layer-program",
-      theme: "distribution",
-      name: "The Three-Layer Architecture Program",
-      tagline: "Build the discipline once; inherit it everywhere.",
-      what: "A three-layer program to make “build better, not faster” the default for every project — Distribution (skills/agents/commands ship to all projects via a personal plugin), Discipline (cross-project invariants like Linear-as-source-of-truth and branch-first), and Workspace (project overlays inheriting canonical defaults). Proven primitives are promoted from Empire State to the user-scope plugin via governed PRs.",
-      why: "Discipline that lives in one project's config is discipline you have to remember to re-apply. The leverage is to promote proven patterns to a user-scope plugin so that starting any new project means inheriting all the accumulated discipline automatically — no per-project setup.",
-      value: "What's validated in Empire State (the toolbox skill, the PostHog/Vercel and hook-schema references, branch-first) becomes universal — proven in one project, then promoted, never auto-merged. Every future project starts further ahead than the last.",
-      bestPractices: "Project-scope-first-then-promote (validate locally, promote deliberately). Plugin architecture for distribution. Promotion via PR with a Linear issue for canonical changes — never auto-merge to the universal layer. The measurement layer is deliberately not yet promoted, held as the operator's judgment call — which is the discipline working.",
-      v1Limits: "Promotion is manual and deliberate (by design); the measurement layer stays project-scoped pending a call; inheritance happens at project-open, not live-synced.",
-      future: "More primitives promoted as they prove out; a new-project starter kit; eventually the measurement layer promoted once it's shown it changes behavior without becoming drag.",
-      enterprise: "This is a platform / paved-road strategy — the internal-developer-platform pattern where best practice is codified once and every product team inherits it. Running it as a disciplined promote-from-proven pipeline (not a big-bang framework) is exactly how mature platform orgs avoid shipping abstractions nobody validated.",
-    },
-    // ─────────────────────────────── CRAFT ───────────────────────────────
-    {
-      id: "content-voice-engine",
-      theme: "craft",
-      name: "The Content & Voice Engine",
-      tagline: "The output the whole pipeline exists to produce.",
-      what: "The content side — a multi-agent event-research pipeline (company / person / topic / signal specialists → synthesizer → Notion) feeding pre-event and post-event content, all governed by a living voice-and-style system: a steering interview before generation, inline-comment feedback after, and a skill that mines that feedback back into the style guides.",
-      why: "Distribution is the north star (full-stack GTM = demonstrated, not stated) and content is the vehicle. But voice can't be a static prompt — it has to learn from what Alex actually approves, or every post re-litigates the same corrections.",
-      value: "Researched, on-voice content with a closed quality loop: steer (capture per-event context) → generate → comment (inline in Notion) → mine (feed learnings back to every style file at once). Rules earned this way — stance is earned by space, visuals must add information, name people, define jargon inline — propagate everywhere from one edit.",
-      bestPractices: "A living-system voice (feedback mined into durable references) over a frozen style prompt. A front→back quality loop (steer before, comment after, mine continuously). Human-in-the-loop review positioned after generation so it improves output instead of blocking it. Source-check discipline on any public firm/person claim.",
-      v1Limits: "Post-event transcript intake is manual (the recording integration is nonoperational and deliberately disabled); voice-mining is a manual skill run; the multi-agent registry is session-frozen, so agent edits need a fresh conversation to test.",
-      future: "Automatic transcript capture when the recording tool works on-device; tighter goal-tagging → outcome-capture so content is measured by acted-on value; the two-thesis synthesis and pattern posts maturing as the documentarian format.",
-      enterprise: "A voice/style system that learns from reviewer feedback and propagates from a single source is the content-ops pattern behind any brand that scales writing without losing its voice — and “review after generation, mine the corrections” is human-in-the-loop RLHF-in-miniature that keeps a generative system on-brand over time.",
-    },
-  ] satisfies BuildArc[],
-  throughLine:
-    "All thirteen share one thesis: build better, not faster. Architecture before automation; human-in-the-loop until evidence justifies removing it; inspect real data before proposing fixes; every non-trivial build leaves a durable trace. The value isn't any single component — it's an operator running a small, honest, instrumented version of the exact stack enterprises are spending millions to stand up.",
-} as const;
+export const BUILD_ARCS = data as unknown as {
+  intro: string;
+  arcs: BuildArc[];
+  throughLine: string;
+};
