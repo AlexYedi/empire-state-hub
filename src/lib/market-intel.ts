@@ -6,9 +6,11 @@ import { graphGet, graphCount } from "./supabase/client";
 // Data access for the Market-Intelligence graph (read-only). Mirrors the Notion lib pattern
 // (server-only + Zod + unstable_cache). Powers /ops/market-intel.
 //
-// Veracity note: the graph's `relevance_score` is a COMPUTED output owned by a deferred recompute
-// producer, so it is 0 for every row today. We deliberately do NOT sort by it — the watchlist sorts by
-// `engagement_count` (an honest raw count of how many signals touched an entity) and is labeled as such.
+// Veracity note: the graph's `relevance_score` is a COMPUTED output, now produced by the relevance
+// recompute (YED-121: recency-decay × confidence-weighted engagement + event-proximity). The watchlist
+// still sorts by `engagement_count` (an honest raw count, labeled as such); the "evolving viewpoint"
+// panel sorts by `relevance_score` and shows only currently-active topics (score > 0). A dormant topic
+// (no recent signal) decays to 0 and correctly drops off that panel — that is the ranking working.
 
 // ---------- Schemas ----------
 export const GraphCountsSchema = z.object({
@@ -39,6 +41,15 @@ export const WatchlistEntitySchema = z.object({
   lastEngagedAt: z.string().nullable(),
 });
 export type WatchlistEntity = z.infer<typeof WatchlistEntitySchema>;
+
+export const RelevanceTopicSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  relevanceScore: z.coerce.number(),
+  engagementCount: z.coerce.number(),
+  lastEngagedAt: z.string().nullable(),
+});
+export type RelevanceTopic = z.infer<typeof RelevanceTopicSchema>;
 
 export const ProducerHealthSchema = z.object({
   source: z.string(),
@@ -131,6 +142,29 @@ async function fetchWatchlist(): Promise<{ companies: WatchlistEntity[]; topics:
   return { companies: map(companies, "company"), topics: map(topics, "topic") };
 }
 export const getWatchlist = unstable_cache(fetchWatchlist, ["mi-watchlist"], {
+  revalidate: 60,
+  tags: ["market-intel"],
+});
+
+// The evolving viewpoint — topics ranked by the recomputed relevance_score (rising × relevant), the
+// engine's answer to "what should I post about now?". Only currently-active topics (score > 0); dormant
+// topics decay off. Powered by the relevance recompute (YED-121), refreshed by /morning-refresh.
+type RelevanceRow = EntityRow & { relevance_score: number | string | null };
+async function fetchTopByRelevance(): Promise<RelevanceTopic[]> {
+  const rows = await graphGet<RelevanceRow>(
+    "/topic?select=id,name,relevance_score,engagement_count,last_engaged_at&relevance_score=gt.0&order=relevance_score.desc&limit=12",
+  );
+  return rows.map((r) =>
+    RelevanceTopicSchema.parse({
+      id: r.id,
+      name: r.name,
+      relevanceScore: r.relevance_score ?? 0,
+      engagementCount: r.engagement_count ?? 0,
+      lastEngagedAt: r.last_engaged_at,
+    }),
+  );
+}
+export const getTopByRelevance = unstable_cache(fetchTopByRelevance, ["mi-top-relevance"], {
   revalidate: 60,
   tags: ["market-intel"],
 });
