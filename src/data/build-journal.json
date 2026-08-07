@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-07T04:15:13Z",
+  "generated_at": "2026-08-07T04:37:39Z",
   "since": "2026-07-01",
   "entries": [
     {
@@ -10,9 +10,33 @@
       "shipped": [
         {
           "repo": "pipeline",
+          "num": 28,
+          "title": "value-action-registry: rows for the relevance ranking (YED-106 subtask 5)",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/28"
+        },
+        {
+          "repo": "pipeline",
+          "num": 27,
+          "title": "YED-119 V2: auto-refresh the build journal via a Stop hook",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/27"
+        },
+        {
+          "repo": "pipeline",
           "num": 26,
           "title": "Add build-arcs Artifact generator (single-source, anti-drift)",
           "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/26"
+        },
+        {
+          "repo": "hub",
+          "num": 10,
+          "title": "MI dashboard: surface the evolving viewpoint (relevance ranking)",
+          "url": "https://github.com/AlexYedi/empire-state-hub/pull/10"
+        },
+        {
+          "repo": "hub",
+          "num": 9,
+          "title": "Journal data: refresh to 9 entries (through 2026-08-07)",
+          "url": "https://github.com/AlexYedi/empire-state-hub/pull/9"
         },
         {
           "repo": "hub",
@@ -21,10 +45,13 @@
           "url": "https://github.com/AlexYedi/empire-state-hub/pull/8"
         }
       ],
-      "linear": [],
+      "linear": [
+        "YED-106",
+        "YED-119"
+      ],
       "metrics": {
-        "prs": 2,
-        "commits": 3,
+        "prs": 6,
+        "commits": 7,
         "sessions": 1,
         "dod_met": false,
         "dod_waived": false,
@@ -148,7 +175,7 @@
       "metrics": {
         "prs": 2,
         "commits": 4,
-        "sessions": 55,
+        "sessions": 56,
         "dod_met": true,
         "dod_waived": true,
         "correction_rounds": 1
