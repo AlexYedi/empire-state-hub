@@ -34,6 +34,22 @@ export async function graphGet<T>(path: string): Promise<T[]> {
   return (await res.json()) as T[];
 }
 
+/**
+ * GET rows from a non-`public` schema by sending PostgREST's `Accept-Profile` header.
+ * Used to read the `signal_read` anon-safe topic-intelligence views (counts-only, k>=5
+ * suppressed in-view). e.g. graphGetFrom("signal_read", "/v_topic_movement?...").
+ */
+export async function graphGetFrom<T>(schema: string, path: string): Promise<T[]> {
+  const res = await fetch(`${base()}${path}`, {
+    headers: headers({ "Accept-Profile": schema }),
+    cache: "no-store",
+  });
+  if (!res.ok) {
+    throw new Error(`Market-intel graph query failed (${res.status}) for ${schema}:${path}`);
+  }
+  return (await res.json()) as T[];
+}
+
 /** Exact row count for a table via the Content-Range header (cheap: limit 1). */
 export async function graphCount(table: string): Promise<number> {
   const res = await fetch(`${base()}/${table}?select=id&limit=1`, {
