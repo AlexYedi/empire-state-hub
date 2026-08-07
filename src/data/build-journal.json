@@ -1,0 +1,212 @@
+{
+  "generated_at": "2026-08-07T02:40:32Z",
+  "since": "2026-07-01",
+  "entries": [
+    {
+      "date": "2026-08-06",
+      "headline": "The build-arcs surface + the first live intelligence run",
+      "summary": "Shipped the public Build Arcs page (3 → 13 arcs, themed) and a shareable artifact, so a month of work is legible to a hiring manager at a glance. Ran the progressive market-intelligence engine live for the first time — seven cited signals, a new topic, a recomputed viewpoint — entirely on subscription, zero API tokens. The portfolio now shows an instrumented system that documents and re-ranks itself, not just claims it does.",
+      "curated": true,
+      "shipped": [
+        {
+          "repo": "pipeline",
+          "num": 24,
+          "title": "Topic dedup toolkit + fix today's fragmentation (YED-115)",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/24"
+        },
+        {
+          "repo": "pipeline",
+          "num": 23,
+          "title": "Add relevance recompute — recency × engagement + event-proximity (YED-121)",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/23"
+        },
+        {
+          "repo": "pipeline",
+          "num": 22,
+          "title": "Add /morning-refresh — daily progressive MI delta scan (YED-115 increment 1)",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/22"
+        },
+        {
+          "repo": "pipeline",
+          "num": 21,
+          "title": "Rigor loop close and drift cleanup",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/21"
+        },
+        {
+          "repo": "hub",
+          "num": 6,
+          "title": "Expand Build Arcs to 13, grouped into five themes",
+          "url": "https://github.com/AlexYedi/empire-state-hub/pull/6"
+        },
+        {
+          "repo": "hub",
+          "num": 5,
+          "title": "Add Build Arcs page — the three sprint narratives",
+          "url": "https://github.com/AlexYedi/empire-state-hub/pull/5"
+        }
+      ],
+      "linear": [
+        "YED-115",
+        "YED-119",
+        "YED-121"
+      ],
+      "metrics": {
+        "prs": 6,
+        "commits": 15,
+        "sessions": 0,
+        "dod_met": false,
+        "dod_waived": false,
+        "correction_rounds": 0
+      }
+    },
+    {
+      "date": "2026-08-05",
+      "headline": "Branch-first discipline, promoted to canonical",
+      "summary": "Landed the governed batch: branch-first git discipline and a hook-schema reference, promoted into the cross-project canonical config, plus the hub's build-in-public content (changelog + candid README). Enforced in a hook rather than left to habit, so the right change-management path is the default in every project, not a thing to remember. Makes disciplined, reviewable change the paved road.",
+      "curated": true,
+      "shipped": [
+        {
+          "repo": "hub",
+          "num": 4,
+          "title": "Hub Phase 3 (YED-112): changelog milestones + build-in-public README",
+          "url": "https://github.com/AlexYedi/empire-state-hub/pull/4"
+        }
+      ],
+      "linear": [
+        "YED-112"
+      ],
+      "metrics": {
+        "prs": 1,
+        "commits": 2,
+        "sessions": 0,
+        "dod_met": false,
+        "dod_waived": false,
+        "correction_rounds": 0
+      }
+    },
+    {
+      "date": "2026-07-31",
+      "headline": "Promoting the proven primitives",
+      "summary": "Swept the strongest Empire State primitives — the toolbox skill, the PostHog/Vercel and hook-schema references — into the personal plugin via governed PRs, and added a toolbox/counts generator so the build-in-public surface can't drift from reality. Validate locally, promote deliberately. Every future project now inherits accumulated discipline automatically.",
+      "curated": true,
+      "shipped": [
+        {
+          "repo": "hub",
+          "num": 3,
+          "title": "ops gate: fall back to OPS_PASSWORD_PREVIEW for preview deploys",
+          "url": "https://github.com/AlexYedi/empire-state-hub/pull/3"
+        },
+        {
+          "repo": "hub",
+          "num": 2,
+          "title": "Phase 3: toolbox/counts generator — de-drift the build-in-public surface",
+          "url": "https://github.com/AlexYedi/empire-state-hub/pull/2"
+        }
+      ],
+      "linear": [],
+      "metrics": {
+        "prs": 2,
+        "commits": 4,
+        "sessions": 52,
+        "dod_met": true,
+        "dod_waived": true,
+        "correction_rounds": 0
+      }
+    },
+    {
+      "date": "2026-07-30",
+      "headline": "A dedicated telemetry project",
+      "summary": "Repointed build-rigor telemetry to its own PostHog project so build signal isn't mixed with product analytics, with read and write keys split by scope. Observability for the delivery system deserves the same rigor as the product. Clean, trustworthy build telemetry the hub can read honestly.",
+      "curated": true,
+      "shipped": [
+        {
+          "repo": "pipeline",
+          "num": 20,
+          "title": "PostHog: telemetry hooks -> POSTHOG_PROJECT_TOKEN + dedicated project 524367",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/20"
+        },
+        {
+          "repo": "hub",
+          "num": 1,
+          "title": "PostHog: rename read key to canonical POSTHOG_PERSONAL_API_KEY + new project",
+          "url": "https://github.com/AlexYedi/empire-state-hub/pull/1"
+        }
+      ],
+      "linear": [],
+      "metrics": {
+        "prs": 2,
+        "commits": 7,
+        "sessions": 2,
+        "dod_met": false,
+        "dod_waived": false,
+        "correction_rounds": 0
+      }
+    },
+    {
+      "date": "2026-07-21",
+      "headline": "The cross-provider judge",
+      "summary": "Wired a second, cross-provider judge (Gemini alongside Sonnet) into the build-quality gate and mechanized the dangling-reference check. An LLM grading its own model family self-prefers; a different provider is the cheapest robust mitigation. Build quality now gets an independent, adversarial second opinion instead of a rubber stamp.",
+      "curated": true,
+      "shipped": [],
+      "linear": [
+        "YED-109"
+      ],
+      "metrics": {
+        "prs": 0,
+        "commits": 1,
+        "sessions": 0,
+        "dod_met": false,
+        "dod_waived": false,
+        "correction_rounds": 0
+      }
+    },
+    {
+      "date": "2026-07-17",
+      "headline": "Closing the rigor loop + judge calibration",
+      "summary": "Calibrated the judge against a human anchor — crossing the trust gate to provisional-trusted — and wired the missing writer so DoD telemetry fields stop coming back null. Rigor that isn't written to the execution path decays silently. Rigor became measurable where the work actually happens, not in an optional doc.",
+      "curated": true,
+      "shipped": [],
+      "linear": [],
+      "metrics": {
+        "prs": 0,
+        "commits": 6,
+        "sessions": 27,
+        "dod_met": true,
+        "dod_waived": true,
+        "correction_rounds": 3
+      }
+    },
+    {
+      "date": "2026-07-15",
+      "headline": "The command-orchestration convention",
+      "summary": "Authored the required command skeleton (intake → dispatch → collect → synthesize → named output) after a thin, declarative command failed the quality bar, and ran live LLM-as-judge execution. A command that only lists agents without dispatch/output logic isn't done. Commands now meet a completeness standard the judge can enforce.",
+      "curated": true,
+      "shipped": [],
+      "linear": [],
+      "metrics": {
+        "prs": 0,
+        "commits": 2,
+        "sessions": 0,
+        "dod_met": false,
+        "dod_waived": false,
+        "correction_rounds": 0
+      }
+    },
+    {
+      "date": "2026-07-11",
+      "headline": "Rigor loop close + drift cleanup",
+      "summary": "Closed the first pass of the rigor loop and fixed confirmed documentation drift across the project config. Source-of-truth docs that lie are worse than none. The running system and its documentation agree again.",
+      "curated": true,
+      "shipped": [],
+      "linear": [],
+      "metrics": {
+        "prs": 0,
+        "commits": 4,
+        "sessions": 82,
+        "dod_met": true,
+        "dod_waived": true,
+        "correction_rounds": 7
+      }
+    }
+  ]
+}
