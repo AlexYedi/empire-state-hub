@@ -100,7 +100,10 @@ export const getGraphCounts = unstable_cache(fetchGraphCounts, ["mi-graph-counts
 
 async function fetchSignalFeed(): Promise<SignalEvent[]> {
   const rows = await graphGet<EventRow>(
-    "/event?select=id,title,kind,event_date,source,confidence,url,metadata&order=event_date.desc.nullslast&limit=25",
+    // kind=eq.market: the signal feed is the trend-radar lens. After MI consolidation (YED-130 2b)
+    // public.event also holds kind='attended' IRL events (they feed the topic-intelligence views,
+    // not this feed), so scope to market signals here.
+    "/event?kind=eq.market&select=id,title,kind,event_date,source,confidence,url,metadata&order=event_date.desc.nullslast&limit=25",
   );
   return rows.map((r) =>
     SignalEventSchema.parse({
@@ -173,7 +176,9 @@ export const getTopByRelevance = unstable_cache(fetchTopByRelevance, ["mi-top-re
 // table in V1). Powers the "trust strip" — is the pipeline alive and honest right now?
 async function fetchTrustStrip(): Promise<TrustStrip> {
   const rows = await graphGet<Pick<EventRow, "source" | "event_date" | "url">>(
-    "/event?select=source,event_date,url&order=event_date.desc.nullslast&limit=200",
+    // kind=eq.market: producer health is about the trend-radar producers. Exclude kind='attended'
+    // IRL events (source='increment_2b_gtm') so the one-time 2b migration isn't read as a live producer.
+    "/event?kind=eq.market&select=source,event_date,url&order=event_date.desc.nullslast&limit=200",
   );
   const byProducer = new Map<string, { lastRun: string | null; count: number }>();
   let cited = 0;
