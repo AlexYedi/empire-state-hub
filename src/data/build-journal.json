@@ -1,13 +1,19 @@
 {
-  "generated_at": "2026-08-12T18:10:51Z",
+  "generated_at": "2026-08-12T19:52:00Z",
   "since": "2026-07-01",
   "entries": [
     {
       "date": "2026-08-12",
-      "headline": "feat(pipeline): v1.2 — corrections reach the canonical brief (C) + provenance gate in content (B)",
+      "headline": "docs(visual-briefs): make headless-Chrome auto-render the default carousel export",
       "summary": "",
       "curated": false,
       "shipped": [
+        {
+          "repo": "pipeline",
+          "num": 45,
+          "title": "docs(visual-briefs): make headless-Chrome auto-render the default carousel export",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/45"
+        },
         {
           "repo": "pipeline",
           "num": 44,
@@ -23,13 +29,13 @@
       ],
       "linear": [],
       "metrics": {
-        "prs": 2,
-        "commits": 3,
-        "sessions": 1,
-        "tools": 8,
-        "dod_met": false,
-        "dod_waived": false,
-        "correction_rounds": 0
+        "prs": 3,
+        "commits": 6,
+        "sessions": 9,
+        "tools": 279,
+        "dod_met": true,
+        "dod_waived": true,
+        "correction_rounds": 1
       }
     },
     {
@@ -87,8 +93,8 @@
       "metrics": {
         "prs": 2,
         "commits": 3,
-        "sessions": 25,
-        "tools": 2516,
+        "sessions": 27,
+        "tools": 2821,
         "dod_met": true,
         "dod_waived": true,
         "correction_rounds": 0
