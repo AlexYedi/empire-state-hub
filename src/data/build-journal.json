@@ -1,13 +1,111 @@
 {
-  "generated_at": "2026-08-07T09:59:12Z",
+  "generated_at": "2026-08-12T18:10:51Z",
   "since": "2026-07-01",
   "entries": [
+    {
+      "date": "2026-08-12",
+      "headline": "feat(pipeline): v1.2 — corrections reach the canonical brief (C) + provenance gate in content (B)",
+      "summary": "",
+      "curated": false,
+      "shipped": [
+        {
+          "repo": "pipeline",
+          "num": 44,
+          "title": "feat(pipeline): v1.2 — corrections reach the canonical brief (C) + provenance gate in content (B)",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/44"
+        },
+        {
+          "repo": "pipeline",
+          "num": 43,
+          "title": "docs: promote MI consolidation ADRs into the repo + migration playbook",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/43"
+        }
+      ],
+      "linear": [],
+      "metrics": {
+        "prs": 2,
+        "commits": 3,
+        "sessions": 1,
+        "tools": 8,
+        "dod_met": false,
+        "dod_waived": false,
+        "correction_rounds": 0
+      }
+    },
+    {
+      "date": "2026-08-11",
+      "headline": "feat(deep-research): v1.1 — enforce Step 1.7 cost guard + best-effort graph read",
+      "summary": "",
+      "curated": false,
+      "shipped": [
+        {
+          "repo": "pipeline",
+          "num": 42,
+          "title": "feat(deep-research): v1.1 — enforce Step 1.7 cost guard + best-effort graph read",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/42"
+        },
+        {
+          "repo": "pipeline",
+          "num": 41,
+          "title": "feat(deep-research): prior-knowledge retrieval + conditioning stage (Step 1.7)",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/41"
+        }
+      ],
+      "linear": [],
+      "metrics": {
+        "prs": 2,
+        "commits": 2,
+        "sessions": 11,
+        "tools": 460,
+        "dod_met": false,
+        "dod_waived": false,
+        "correction_rounds": 0
+      }
+    },
+    {
+      "date": "2026-08-10",
+      "headline": "MI consolidation Increment 2b: recompute on Empire's graph + retire-ready spine (YED-130)",
+      "summary": "",
+      "curated": false,
+      "shipped": [
+        {
+          "repo": "pipeline",
+          "num": 39,
+          "title": "MI consolidation Increment 2b: recompute on Empire's graph + retire-ready spine (YED-130)",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/39"
+        },
+        {
+          "repo": "hub",
+          "num": 12,
+          "title": "market-intel: scope signal feed + trust strip to kind='market'",
+          "url": "https://github.com/AlexYedi/empire-state-hub/pull/12"
+        }
+      ],
+      "linear": [
+        "YED-130"
+      ],
+      "metrics": {
+        "prs": 2,
+        "commits": 3,
+        "sessions": 25,
+        "tools": 2516,
+        "dod_met": true,
+        "dod_waived": true,
+        "correction_rounds": 0
+      }
+    },
     {
       "date": "2026-08-07",
       "headline": "The portfolio starts maintaining itself",
       "summary": "Shipped the self-instrumenting build journal — a generator that assembles each build day's facts from git and telemetry, a human-owned prose sidecar, a /journal page on the hub, and a Stop hook that regenerates it automatically. Also restructured the build arcs into foundation-anchored themes and made one canonical JSON the single source for both the hub page and the shareable artifact. The portfolio now documents itself, and two surfaces can no longer drift apart.",
       "curated": true,
       "shipped": [
+        {
+          "repo": "pipeline",
+          "num": 38,
+          "title": "MI consolidation Increment 1 — topic_intelligence + signal_read (YED-130)",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/38"
+        },
         {
           "repo": "pipeline",
           "num": 37,
@@ -82,6 +180,12 @@
         },
         {
           "repo": "hub",
+          "num": 11,
+          "title": "feat(market-intel): topic-intelligence panel from signal_read (YED-130)",
+          "url": "https://github.com/AlexYedi/empire-state-hub/pull/11"
+        },
+        {
+          "repo": "hub",
           "num": 10,
           "title": "MI dashboard: surface the evolving viewpoint (relevance ranking)",
           "url": "https://github.com/AlexYedi/empire-state-hub/pull/10"
@@ -102,11 +206,12 @@
       "linear": [
         "YED-106",
         "YED-119",
-        "YED-124"
+        "YED-124",
+        "YED-130"
       ],
       "metrics": {
-        "prs": 15,
-        "commits": 24,
+        "prs": 17,
+        "commits": 28,
         "sessions": 15,
         "tools": 742,
         "dod_met": false,
@@ -233,8 +338,8 @@
       "metrics": {
         "prs": 2,
         "commits": 4,
-        "sessions": 67,
-        "tools": 14138,
+        "sessions": 68,
+        "tools": 14639,
         "dod_met": true,
         "dod_waived": true,
         "correction_rounds": 3
