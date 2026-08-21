@@ -1,23 +1,25 @@
 {
-  "generated_at": "2026-08-21T20:09:46Z",
+  "generated_at": "2026-08-21T23:33:34Z",
   "since": "2026-07-01",
   "entries": [
     {
       "date": "2026-08-21",
-      "headline": "Event briefs learn to read like a briefing, not a spec sheet",
-      "summary": "Wired the research brief v2: one artifact with a phone-glanceable Scan head in the room, and a deep, cited, novice-friendly prose “commute read” rendered afterward and appended without ever blocking the pipeline. The old output had regressed to a machine-readable bullet lattice; this restores flowing analysis and adds a historical spine, inline-defined jargon, and end-to-end source citations. The value is a briefing worth reading on the train that walks Alex into a room genuinely conversant — and a richer substrate every downstream post draws from.",
+      "headline": "A better brief and a truer voice",
+      "summary": "Wired the research brief v2: one artifact with a phone-glanceable Scan head in the room, and a deep, cited, novice-friendly prose “commute read” rendered afterward and appended without ever blocking the pipeline. The old output had regressed to a machine-readable bullet lattice; this restores flowing analysis and adds a historical spine, inline-defined jargon, and end-to-end source citations. The value is a briefing worth reading on the train that walks Alex into a room genuinely conversant — and a richer substrate every downstream post draws from.  — Second ship of the day: the audience-first ethos went from charter to production (YED-103). The north-star document existed but no content skill actually read it, so posts kept drifting back to self-as-protagonist; this wired it into the six content surfaces and codified the “ordering, not erasure” counterweight (so “decenter yourself” stops collapsing into self-erasure that reads junior to a buyer), the three floors, a softened voice rule, and a mandatory 3–5 “learn more” citation set on every post. The value: the pipeline now generates audience-first content by construction, not just on paper — shipped, judged pass cross-provider, DoD closed.  — Third ship: the brief-v2 wiring finally got its live end-to-end acceptance test, which last session's frozen agent registry made impossible. Ran the whole pipeline on a real event (Elastic NYC × Plural) — four specialists, synthesizer, five Notion writes, then the Deep Read rendered section-by-section on Opus and appended decoupled. The render cleared the Daytona spike bar and closed its one open gap: endnotes now carry real source URLs end to end (specialist ledger → synthesizer evidence set → renderer), quorum-judged PASS (Sonnet 0.896 / Gemini 1.0). It also caught a genuine renderer bug — confabulated speaker first names in the sections where the speakers were only passing references — corrected in-run and then hardened out of the spec so the standing pipeline reproduces names verbatim. Decoupling held: the Scan head and every entity record committed independently of the render. The value: brief-v2 is proven in production rather than merely wired, with the one real defect found and fixed before merge (#47).",
       "curated": true,
       "shipped": [],
       "linear": [
+        "YED-103",
+        "YED-119",
         "YED-136"
       ],
       "metrics": {
         "prs": 0,
-        "commits": 6,
-        "sessions": 18,
-        "tools": 790,
+        "commits": 11,
+        "sessions": 6,
+        "tools": 266,
         "dod_met": true,
-        "dod_waived": true,
+        "dod_waived": false,
         "correction_rounds": 1
       }
     },
