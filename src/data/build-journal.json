@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-21T23:42:53Z",
+  "generated_at": "2026-08-24T12:12:47Z",
   "since": "2026-07-01",
   "entries": [
     {
@@ -15,9 +15,9 @@
       ],
       "metrics": {
         "prs": 0,
-        "commits": 15,
-        "sessions": 6,
-        "tools": 266,
+        "commits": 16,
+        "sessions": 8,
+        "tools": 398,
         "dod_met": true,
         "dod_waived": false,
         "correction_rounds": 1
