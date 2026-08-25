@@ -1,7 +1,28 @@
 {
-  "generated_at": "2026-08-24T12:12:47Z",
+  "generated_at": "2026-08-25T20:31:08Z",
   "since": "2026-07-01",
   "entries": [
+    {
+      "date": "2026-08-25",
+      "headline": "The gate that can't close green on a thin brief",
+      "summary": "Turned the Deep Read from a step you could silently skip into one the run fails without. A local ledger marks each event pending at commit and rendered only on success; a fail-closed Stop hook plus an in-conversation marker re-check then fail any run that closes with an unrendered Deep Read — and, most importantly, write it to a durable failure log so a thin brief can't stay invisible the way 38 of them did on Aug 24. The prior fix (YED-138) was prose discipline an agent can skip; this is mechanical. Adversarially reviewed (four real false-green/invisibility holes found and fixed), quorum-judged PASS, DoD closed, with the residual-hardening edges logged as a follow-up rather than overclaimed.  — Second ship: a pronoun-fidelity rule in the brief renderer — never infer a person's pronouns from their name, default they/them until a source confirms — after it silently misgendered a real speaker from their name. Small rule, but it stops a real person being mislabeled in content Alex may tag them in; the parallel name-fidelity fix also got its long-pending validation cleared in the same render.",
+      "curated": true,
+      "shipped": [],
+      "linear": [
+        "YED-138",
+        "YED-139",
+        "YED-140"
+      ],
+      "metrics": {
+        "prs": 0,
+        "commits": 7,
+        "sessions": 14,
+        "tools": 945,
+        "dod_met": true,
+        "dod_waived": true,
+        "correction_rounds": 3
+      }
+    },
     {
       "date": "2026-08-21",
       "headline": "A better brief and a truer voice",
@@ -16,8 +37,8 @@
       "metrics": {
         "prs": 0,
         "commits": 16,
-        "sessions": 8,
-        "tools": 398,
+        "sessions": 9,
+        "tools": 467,
         "dod_met": true,
         "dod_waived": false,
         "correction_rounds": 1
