@@ -17,7 +17,13 @@ export default function BuildArcsPage() {
   const { lens } = useLens();
   const ed = lens === "editorial";
 
-  let childIndex = 0; // continuous numbering across the arcs built on the foundations
+  // Continuous numbering across the arcs built on the foundations — precomputed (no mutation
+  // during render) so the numbers stay stable. Order matches the render order (theme order,
+  // then BUILD_ARCS.arcs order, non-foundation only).
+  const builtOrder = THEMES.flatMap((theme) =>
+    BUILD_ARCS.arcs.filter((a) => a.theme === theme.id && !a.foundation).map((a) => a.id),
+  );
+  const builtNumber = new Map(builtOrder.map((id, i) => [id, i + 1]));
 
   return (
     <div className="mx-auto w-full max-w-3xl px-6 py-20">
@@ -68,12 +74,9 @@ export default function BuildArcsPage() {
                     Built on it
                   </p>
                 )}
-                {built.map((arc) => {
-                  childIndex += 1;
-                  return (
-                    <Arc key={arc.id} arc={arc} ed={ed} kicker={`Arc ${String(childIndex).padStart(2, "0")}`} />
-                  );
-                })}
+                {built.map((arc) => (
+                  <Arc key={arc.id} arc={arc} ed={ed} kicker={`Arc ${String(builtNumber.get(arc.id) ?? 0).padStart(2, "0")}`} />
+                ))}
               </div>
             )}
           </section>

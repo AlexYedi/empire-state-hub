@@ -32,7 +32,7 @@ export function SiteHeader() {
             <>
               <span className="font-mono text-sm tracking-tight">empire-state</span>
               <span className="font-mono text-[10px] uppercase tracking-widest text-muted">
-                //hub
+                {"//hub"}
               </span>
             </>
           )}
