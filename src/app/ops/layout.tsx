@@ -12,6 +12,7 @@ const NAV = [
   { href: "/ops/backlog", label: "Backlog" },
   { href: "/ops/entities", label: "Entities" },
   { href: "/ops/market-intel", label: "Market Intel" },
+  { href: "/ops/content-performance", label: "Content Perf" },
   { href: "/ops/toolbox", label: "Toolbox" },
 ];
 
@@ -21,7 +22,7 @@ export default function OpsLayout({ children }: { children: React.ReactNode }) {
       <header className="border-b border-border">
         <div className="mx-auto flex max-w-6xl items-center gap-6 px-6 py-3 text-sm">
           <Link href="/ops" className="shrink-0 font-semibold tracking-tight">
-            empire-state <span className="text-muted">//ops</span>
+            empire-state <span className="text-muted">{"//ops"}</span>
           </Link>
           <nav className="flex flex-wrap gap-1 text-muted">
             {NAV.map((item) => (

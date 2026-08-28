@@ -26,6 +26,9 @@ export default async function MarketIntelPage() {
     getTopByRelevance(),
     getTopicIntelligence(),
   ]);
+  // Request-time: this is a force-dynamic server component, re-evaluated per request (not a
+  // client re-render), so Date.now() is the correct "as of now" for staleness math.
+  // eslint-disable-next-line react-hooks/purity
   const now = Date.now();
   const lastRefresh = new Date(now);
 
