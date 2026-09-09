@@ -1,13 +1,150 @@
 {
-  "generated_at": "2026-08-27T17:06:21Z",
+  "generated_at": "2026-09-09T19:03:45Z",
   "since": "2026-07-01",
   "entries": [
+    {
+      "date": "2026-09-09",
+      "headline": "A voice rule earned from a real correction",
+      "summary": "Codified the TABLE-SET rule into the content voice system (style guide v0.9): every event post must plainly say what this is / that it was a webinar-panel-briefing / who presented BEFORE the why and the value — context → why → value — with a matching anti-pattern row. It came from a live correction on the shipped GLM-5.3 post: the Variant C draft dove straight into the insight and lost the table-setting, so the fix hardens the lesson into the standing pipeline rather than re-catching it by hand each time. Shipped the GLM-5.3 frontier-crossing carousel (HTML → rendered 4:5 PDF) as the visual companion, and marked the YED-130 graph consolidation done in the roadmap. The value: the recurring \"diving straight in\" failure is now a rule the generator enforces, not a note Alex has to remember to give (#57).",
+      "curated": true,
+      "shipped": [
+        {
+          "repo": "pipeline",
+          "num": 57,
+          "title": "table set rule and glm carousel",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/57"
+        }
+      ],
+      "linear": [
+        "YED-130"
+      ],
+      "metrics": {
+        "prs": 1,
+        "commits": 2,
+        "sessions": 4,
+        "tools": 164,
+        "dod_met": false,
+        "dod_waived": false,
+        "correction_rounds": 0
+      }
+    },
+    {
+      "date": "2026-09-08",
+      "headline": "The job search becomes a system",
+      "summary": "Shipped Job-Search Engine v1 (Phase A+B, YED-146–152): repositioned role-radar from a generic scanner into a Target-Role ICP filter anchored on the me-model — the candidate source-of-truth authored days earlier — then ran it live end-to-end, 158 roles scored into the Notion Roles DB. Hardened the rubric from that real run: exemptions so good roles don't drop on a technicality (hybrid new+existing, PLG-primary, an intangibles lever), an IC-vs-people-management gate (does the role carry a personal book?), and a wider title keep-list that closes real misses (Sierra, Snorkel) — every exemption reasoned in Notes so it's auditable. Cross-provider quorum judged PASS (Sonnet 0.81 / Gemini 1.0), with 7 leadership roles JD-verified and demoted A→C in the same run. The value: the parallel job search stops being ad-hoc browsing and becomes an instrumented, ICP-scored pipeline that sharpens itself from its own output (#56).",
+      "curated": true,
+      "shipped": [
+        {
+          "repo": "pipeline",
+          "num": 56,
+          "title": "job search",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/56"
+        }
+      ],
+      "linear": [],
+      "metrics": {
+        "prs": 1,
+        "commits": 3,
+        "sessions": 56,
+        "tools": 4004,
+        "dod_met": true,
+        "dod_waived": true,
+        "correction_rounds": 1
+      }
+    },
+    {
+      "date": "2026-08-31",
+      "headline": "Reps on the host's own stack, as the demo",
+      "summary": "Scaffolded Signal Stream — a real-time GTM signal agent built on Confluent's own stack (Kafka + Flink ML_PREDICT + managed MCP + RAG) — as warm-up for Confluent AI Day NYC, so the prep doubles as reps on the event's stack and a working opener for the Confluent-for-Startups lead. Built in three independently-demoable layers: query a live topic in natural language → classify each stream event against the ICP into Notion → a stretch multi-agent situation room; stdlib-only, with the producer and sink tested against live data. Deliberately scaffold-only, with the fast-moving Flink AI SQL flagged in-file as needs-verifying rather than claimed working — honest about what compiles versus what's proven. The value: it turns event attendance into a demo on the room's own terms — the documentarian edge applied to a hackathon (#55). The Confluent AI Day carousel shipped alongside.",
+      "curated": true,
+      "shipped": [
+        {
+          "repo": "pipeline",
+          "num": 55,
+          "title": "signal stream scaffold",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/55"
+        }
+      ],
+      "linear": [],
+      "metrics": {
+        "prs": 1,
+        "commits": 3,
+        "sessions": 6,
+        "tools": 199,
+        "dod_met": false,
+        "dod_waived": false,
+        "correction_rounds": 0
+      }
+    },
+    {
+      "date": "2026-08-28",
+      "headline": "Co-creation gets a real gate, and the content finally gets a mirror",
+      "summary": "Split the pre-research steering interview into two touches (YED-143): a light, skippable Aim before the research fan-out, and a Sharpen gate after the brief that puts ≤3 genuine forks — derived from what the prep actually surfaced — to Alex before drafting. The insight: real co-creation comes from informed forks that only exist after the research (\"the transcript leaned on X but your angle says Y — which post?\"), not generic up-front prompts, so the fix was to split the intake, not move it; wired to auto-fire across five content flows.  — Second ship (hub): the Content Performance dashboard, a point-in-time read of 50 LinkedIn posts answering the question under the whole post-performance thread — who does the content actually reach? It surfaced the topic→audience finding (GTM posts reach founders+GTM 54%, technical posts reach engineers 65%), visuals out-engaging text ~2.4×, and a reach≠resonance gap — and cleared the repo's pre-existing lint so the hub build goes green again. The value: the pipeline now co-creates by construction, and Alex can finally see whether the audience he's reaching is the one he's targeting (#54, hub #13).",
+      "curated": true,
+      "shipped": [
+        {
+          "repo": "pipeline",
+          "num": 54,
+          "title": "steering v2 collaborative",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/54"
+        },
+        {
+          "repo": "hub",
+          "num": 13,
+          "title": "content performance dashboard",
+          "url": "https://github.com/AlexYedi/empire-state-hub/pull/13"
+        }
+      ],
+      "linear": [
+        "YED-143"
+      ],
+      "metrics": {
+        "prs": 2,
+        "commits": 5,
+        "sessions": 25,
+        "tools": 1135,
+        "dod_met": false,
+        "dod_waived": false,
+        "correction_rounds": 0
+      }
+    },
     {
       "date": "2026-08-25",
       "headline": "The gate that can't close green on a thin brief",
       "summary": "Turned the Deep Read from a step you could silently skip into one the run fails without. A local ledger marks each event pending at commit and rendered only on success; a fail-closed Stop hook plus an in-conversation marker re-check then fail any run that closes with an unrendered Deep Read — and, most importantly, write it to a durable failure log so a thin brief can't stay invisible the way 38 of them did on Aug 24. The prior fix (YED-138) was prose discipline an agent can skip; this is mechanical. Adversarially reviewed (four real false-green/invisibility holes found and fixed), quorum-judged PASS, DoD closed, with the residual-hardening edges logged as a follow-up rather than overclaimed.  — Second ship: a pronoun-fidelity rule in the brief renderer — never infer a person's pronouns from their name, default they/them until a source confirms — after it silently misgendered a real speaker from their name. Small rule, but it stops a real person being mislabeled in content Alex may tag them in; the parallel name-fidelity fix also got its long-pending validation cleared in the same render.",
       "curated": true,
-      "shipped": [],
+      "shipped": [
+        {
+          "repo": "pipeline",
+          "num": 53,
+          "title": "yed 142 post event hubspot step",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/53"
+        },
+        {
+          "repo": "pipeline",
+          "num": 52,
+          "title": "founder showcase pattern",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/52"
+        },
+        {
+          "repo": "pipeline",
+          "num": 51,
+          "title": "yed 139 deep read gate",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/51"
+        },
+        {
+          "repo": "pipeline",
+          "num": 50,
+          "title": "yed 140 pronoun fidelity",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/50"
+        },
+        {
+          "repo": "pipeline",
+          "num": 49,
+          "title": "deep read batch wiring",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/49"
+        }
+      ],
       "linear": [
         "YED-138",
         "YED-139",
@@ -15,7 +152,7 @@
         "YED-142"
       ],
       "metrics": {
-        "prs": 0,
+        "prs": 5,
         "commits": 17,
         "sessions": 17,
         "tools": 1227,
@@ -29,14 +166,21 @@
       "headline": "A better brief and a truer voice",
       "summary": "Wired the research brief v2: one artifact with a phone-glanceable Scan head in the room, and a deep, cited, novice-friendly prose “commute read” rendered afterward and appended without ever blocking the pipeline. The old output had regressed to a machine-readable bullet lattice; this restores flowing analysis and adds a historical spine, inline-defined jargon, and end-to-end source citations. The value is a briefing worth reading on the train that walks Alex into a room genuinely conversant — and a richer substrate every downstream post draws from.  — Second ship of the day: the audience-first ethos went from charter to production (YED-103). The north-star document existed but no content skill actually read it, so posts kept drifting back to self-as-protagonist; this wired it into the six content surfaces and codified the “ordering, not erasure” counterweight (so “decenter yourself” stops collapsing into self-erasure that reads junior to a buyer), the three floors, a softened voice rule, and a mandatory 3–5 “learn more” citation set on every post. The value: the pipeline now generates audience-first content by construction, not just on paper — shipped, judged pass cross-provider, DoD closed.  — Third ship: the brief-v2 wiring finally got its live end-to-end acceptance test, which last session's frozen agent registry made impossible. Ran the whole pipeline on a real event (Elastic NYC × Plural) — four specialists, synthesizer, five Notion writes, then the Deep Read rendered section-by-section on Opus and appended decoupled. The render cleared the Daytona spike bar and closed its one open gap: endnotes now carry real source URLs end to end (specialist ledger → synthesizer evidence set → renderer), quorum-judged PASS (Sonnet 0.896 / Gemini 1.0). It also caught a genuine renderer bug — confabulated speaker first names in the sections where the speakers were only passing references — corrected in-run and then hardened out of the spec so the standing pipeline reproduces names verbatim. Decoupling held: the Scan head and every entity record committed independently of the render. The value: brief-v2 is proven in production rather than merely wired, with the one real defect found and fixed before merge (#47).",
       "curated": true,
-      "shipped": [],
+      "shipped": [
+        {
+          "repo": "pipeline",
+          "num": 47,
+          "title": "yed 136 brief v2 wiring",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/47"
+        }
+      ],
       "linear": [
         "YED-103",
         "YED-119",
         "YED-136"
       ],
       "metrics": {
-        "prs": 0,
+        "prs": 1,
         "commits": 16,
         "sessions": 9,
         "tools": 467,
@@ -452,6 +596,30 @@
       }
     },
     {
+      "date": "2026-07-22",
+      "headline": "yed 109 dual judge",
+      "summary": "",
+      "curated": false,
+      "shipped": [
+        {
+          "repo": "pipeline",
+          "num": 18,
+          "title": "yed 109 dual judge",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/18"
+        }
+      ],
+      "linear": [],
+      "metrics": {
+        "prs": 1,
+        "commits": 0,
+        "sessions": 0,
+        "tools": 0,
+        "dod_met": false,
+        "dod_waived": false,
+        "correction_rounds": 0
+      }
+    },
+    {
       "date": "2026-07-21",
       "headline": "The cross-provider judge",
       "summary": "Wired a second, cross-provider judge (Gemini alongside Sonnet) into the build-quality gate and mechanized the dangling-reference check. An LLM grading its own model family self-prefers; a different provider is the cheapest robust mitigation. Build quality now gets an independent, adversarial second opinion instead of a rubber stamp.",
@@ -509,10 +677,17 @@
       "headline": "Rigor loop close + drift cleanup",
       "summary": "Closed the first pass of the rigor loop and fixed confirmed documentation drift across the project config. Source-of-truth docs that lie are worse than none. The running system and its documentation agree again.",
       "curated": true,
-      "shipped": [],
+      "shipped": [
+        {
+          "repo": "pipeline",
+          "num": 17,
+          "title": "rigor loop close and drift cleanup",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/17"
+        }
+      ],
       "linear": [],
       "metrics": {
-        "prs": 0,
+        "prs": 1,
         "commits": 4,
         "sessions": 82,
         "tools": 7044,
