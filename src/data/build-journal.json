@@ -1,7 +1,82 @@
 {
-  "generated_at": "2026-09-09T19:03:45Z",
+  "generated_at": "2026-09-12T17:09:52Z",
   "since": "2026-07-01",
   "entries": [
+    {
+      "date": "2026-09-12",
+      "headline": "Back to one source of truth — and the rules so it stays that way",
+      "summary": "Four parallel worktrees converged to main in a single day (#60–#64): the document knowledge base shipped Phase A plus A.5 retrieval hardening and the first two Phase-B stories (YED-118/156/157), the Inbox Intelligence Miner landed as a first-class market-intelligence signal source with its own ADR (YED-153), the OBS capture lane replaced the dead Granola path (YED-154), and the job-search content rulings plus a roadmap reconcile cleared a five-item decision backlog. Convergence worked on its own; what didn't was everything around it.  — Second ship: the build-quality judge caught ADR-8 Increment 1 claiming a scope it had not held — a quorum split, Gemini 1.0 against Sonnet 0.55 — and the flagging seat was right. The system graph was persisting edge types nothing read, a direct violation of the ADR's own rule, and one git subprocess per artifact had put the rebuild at ~5s against a stated <2s. Fixed by deletion (0.2s, roughly 25× faster), the false \"scope held\" claim struck in place rather than quietly rewritten, and a --selftest added so the extractor cannot regress silently (#65). A decision record that shows its own wrong claim is worth more than one that hides it.  — Third ship: the reconciliation itself. The chaos was never branches — code had self-merged unprompted — it was sessions: three Claude sessions shared the main checkout while it sat on a feature branch, each believing another one owned it, and Linear carried six shipped issues still marked Backlog. Converged from a scratch worktree with server-side PRs (the charter's quiesce-first rule could not be met, so the method routed around it), corrected Linear to git truth, retired a four-month-stale priorities block, wrote the git conventions into CLAUDE.md and the reconciliation charter into the repo, rescued five machine-local plan files that two ADRs still cited, and sharded the telemetry ledger per session so the one file every worktree appended to can never conflict again (#67, #68; YED-159). Still open: the denylist review that gates the whole-inbox scan, and ADR-7's acceptance sits in review (#69). The value: a repo where \"what's open\" and \"what shipped\" finally agree, and the failure mode written down before it recurs.",
+      "curated": true,
+      "shipped": [
+        {
+          "repo": "pipeline",
+          "num": 68,
+          "title": "telemetry shard per session",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/68"
+        },
+        {
+          "repo": "pipeline",
+          "num": 67,
+          "title": "reconcile sot 2026 09 12",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/67"
+        },
+        {
+          "repo": "pipeline",
+          "num": 66,
+          "title": "job search",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/66"
+        },
+        {
+          "repo": "pipeline",
+          "num": 65,
+          "title": "yed 158 d7 fix",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/65"
+        },
+        {
+          "repo": "pipeline",
+          "num": 64,
+          "title": "job search",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/64"
+        },
+        {
+          "repo": "pipeline",
+          "num": 63,
+          "title": "obs capture",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/63"
+        },
+        {
+          "repo": "pipeline",
+          "num": 62,
+          "title": "job search",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/62"
+        },
+        {
+          "repo": "pipeline",
+          "num": 61,
+          "title": "worktree feat+inbox miner",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/61"
+        },
+        {
+          "repo": "pipeline",
+          "num": 60,
+          "title": "yed 118 doc kb rag",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/60"
+        }
+      ],
+      "linear": [
+        "YED-158",
+        "YED-159"
+      ],
+      "metrics": {
+        "prs": 9,
+        "commits": 17,
+        "sessions": 3,
+        "tools": 320,
+        "dod_met": false,
+        "dod_waived": false,
+        "correction_rounds": 0
+      }
+    },
     {
       "date": "2026-09-09",
       "headline": "A voice rule earned from a real correction",
@@ -10,22 +85,40 @@
       "shipped": [
         {
           "repo": "pipeline",
+          "num": 59,
+          "title": "journal: backfill Aug 26–Sep 9 gap + in-the-moment capture ritual",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/59"
+        },
+        {
+          "repo": "pipeline",
+          "num": 58,
+          "title": "chore: remove Clarify CRM cutover artifacts — staying on HubSpot",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/58"
+        },
+        {
+          "repo": "pipeline",
           "num": 57,
           "title": "table set rule and glm carousel",
           "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/57"
+        },
+        {
+          "repo": "hub",
+          "num": 14,
+          "title": "journal backfill aug26 sep9",
+          "url": "https://github.com/AlexYedi/empire-state-hub/pull/14"
         }
       ],
       "linear": [
         "YED-130"
       ],
       "metrics": {
-        "prs": 1,
-        "commits": 2,
-        "sessions": 4,
-        "tools": 164,
-        "dod_met": false,
-        "dod_waived": false,
-        "correction_rounds": 0
+        "prs": 4,
+        "commits": 8,
+        "sessions": 10,
+        "tools": 448,
+        "dod_met": true,
+        "dod_waived": true,
+        "correction_rounds": 1
       }
     },
     {
@@ -44,12 +137,12 @@
       "linear": [],
       "metrics": {
         "prs": 1,
-        "commits": 3,
-        "sessions": 56,
-        "tools": 4004,
+        "commits": 5,
+        "sessions": 140,
+        "tools": 13916,
         "dod_met": true,
         "dod_waived": true,
-        "correction_rounds": 1
+        "correction_rounds": 8
       }
     },
     {
