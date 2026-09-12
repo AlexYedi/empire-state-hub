@@ -2,10 +2,11 @@
 // history), plus the raw commit cadence. More readable than raw commit messages.
 
 export const CHANGELOG = {
-  commits: 405,
+  commits: 414,
   span: "Apr 9 – Sep 12, 2026",
   entries: [
     { date: "2026-09-12", title: "Reconciliation as a role", body: "A reconciliation-terminal charter and the git conventions now live in the repo: one live session per worktree, the main checkout never on a feature branch, shared namespaces single-writer, and a stop point to open the PR the same hour. It answers sessions colliding on one checkout, not branches failing to merge." },
+    { date: "2026-09-12", title: "Sessions, not branches", body: "Three Claude sessions sharing one working checkout, caught from the inside: a reconciliation pass stashed a sibling session's uncommitted work, watched a branch tip move three times between two commands, and found the main checkout sitting on another session's feature branch. The failure was never branches refusing to merge — it was sessions colliding on one checkout, and that diagnosis is what made the reconciliation rules necessary." },
     { date: "2026-09-12", title: "Telemetry that cannot conflict", body: "The build-session Stop hook writes one shard per session instead of appending every worktree to a single tracked ledger — the one file guaranteed to conflict, and fourteen churn commits a month. The legacy ledger is frozen history; readers read both." },
     { date: "2026-09-12", title: "ADR correction + extractor self-test", body: "The build-quality judge caught ADR-8 Increment 1 claiming a scope it had never held. The fix struck the false claim in place rather than rewriting the record, dropped the unconsumed graph edges, and added a self-test so the extractor cannot regress silently — rebuild fell from about five seconds to a fifth of one." },
     { date: "2026-07-31", title: "Toolbox generator", body: "A drift-proof generator scans the live skill, agent, and command set — the counts on this site regenerate from source instead of being hand-typed." },
