@@ -1,0 +1,10 @@
+Write build-diary entries for the Empire State Hub from THIS session's context.
+
+Use what is already in your context. Do not re-read the repo, re-run tools, or re-derive what we did — you were there.
+
+1. Identify the durable shifts this session landed: what the system can now do that it could not before. Skip routine chores, abandoned attempts, and anything already present in empire-state-hub/src/data/changelog.ts.
+2. Write 1-3 candidate entries to empire-state-hub/docs/build-diary/inbox/YYYY-MM-DD-XXXXXXXX.md where YYYY-MM-DD is today and XXXXXXXX is the first 8 characters of your session id. Follow the format and register in that inbox's README.md.
+3. Do NOT edit src/data/changelog.ts. The inbox exists so parallel sessions never collide on one file.
+4. Print the entries you wrote, then stop.
+
+If this session landed nothing diary-worthy, write no file and say so in one line.

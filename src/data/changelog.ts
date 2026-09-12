@@ -2,9 +2,12 @@
 // history), plus the raw commit cadence. More readable than raw commit messages.
 
 export const CHANGELOG = {
-  commits: 239,
-  span: "Apr 9 – Jul 31, 2026",
+  commits: 405,
+  span: "Apr 9 – Sep 12, 2026",
   entries: [
+    { date: "2026-09-12", title: "Reconciliation as a role", body: "A reconciliation-terminal charter and the git conventions now live in the repo: one live session per worktree, the main checkout never on a feature branch, shared namespaces single-writer, and a stop point to open the PR the same hour. It answers sessions colliding on one checkout, not branches failing to merge." },
+    { date: "2026-09-12", title: "Telemetry that cannot conflict", body: "The build-session Stop hook writes one shard per session instead of appending every worktree to a single tracked ledger — the one file guaranteed to conflict, and fourteen churn commits a month. The legacy ledger is frozen history; readers read both." },
+    { date: "2026-09-12", title: "ADR correction + extractor self-test", body: "The build-quality judge caught ADR-8 Increment 1 claiming a scope it had never held. The fix struck the false claim in place rather than rewriting the record, dropped the unconsumed graph edges, and added a self-test so the extractor cannot regress silently — rebuild fell from about five seconds to a fifth of one." },
     { date: "2026-07-31", title: "Toolbox generator", body: "A drift-proof generator scans the live skill, agent, and command set — the counts on this site regenerate from source instead of being hand-typed." },
     { date: "2026-07-30", title: "Live operator dashboards", body: "A dedicated telemetry project now backs the /ops surfaces: build-rigor on /ops/rigor and the market-intelligence feed on /ops/market-intel." },
     { date: "2026-07-17", title: "Cross-provider judge", body: "The build-quality judge became a two-provider quorum — a Claude seat plus an independent Gemini seat — so it can't just prefer its own family's work." },
