@@ -2,6 +2,8 @@
 
 import { useLens } from "@/components/lens-provider";
 import { SYSTEM } from "@/data/architecture";
+import { pageFigure } from "@/data/diagrams";
+import { Figure } from "@/components/diagram/figure";
 
 export default function ArchitecturePage() {
   const { lens } = useLens();
@@ -31,6 +33,7 @@ function EditorialArchitecture() {
           are — plus the content and the connection notes to actually show up prepared. After the
           event, the transcript becomes a durable record and the posts that share what happened.
         </p>
+        <FigureAt scope="arch-editorial" figure="workflow-chain" />
         <p>
           None of it is one big prompt. It&apos;s {SYSTEM.counts.agents} small specialists, each
           good at one thing, coordinated by a parent that knows the order things have to happen in.
@@ -78,6 +81,7 @@ function TechnicalArchitecture() {
         <h2 className="text-sm font-semibold text-accent">{constraint.title}</h2>
         <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted">{constraint.body}</p>
       </section>
+      <FigureAt scope="arch-technical" figure="fanout-constraint" />
 
       <section className="mt-12">
         <h2 className="text-xs uppercase tracking-widest text-muted">Agents ({counts.agents})</h2>
@@ -96,6 +100,7 @@ function TechnicalArchitecture() {
 
       <section className="mt-12">
         <h2 className="text-xs uppercase tracking-widest text-muted">Workflows</h2>
+        <FigureAt scope="arch-technical" figure="workflow-chain" />
         <div className="mt-3 overflow-hidden rounded-lg border border-border">
           {workflows.map((wf, i) => (
             <div
@@ -124,4 +129,9 @@ function TechnicalArchitecture() {
       </section>
     </div>
   );
+}
+
+function FigureAt({ scope, figure }: { scope: string; figure: Parameters<typeof pageFigure>[1] }) {
+  const placed = pageFigure(scope, figure);
+  return <Figure id={placed.id} spec={placed.spec} />;
 }
