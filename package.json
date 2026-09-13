@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "gen:toolbox": "node scripts/gen-toolbox.mjs"
+    "gen:toolbox": "node scripts/gen-toolbox.mjs",
+    "check": "node scripts/verify-public-safe.mjs",
+    "verify:public-safe": "node scripts/verify-public-safe.mjs"
   },
   "dependencies": {
     "@linear/sdk": "^86.0.0",
