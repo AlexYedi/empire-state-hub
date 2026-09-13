@@ -2,6 +2,8 @@
 
 import { useLens } from "@/components/lens-provider";
 import { CHANGELOG } from "@/data/changelog";
+import { changelogFigure } from "@/data/diagrams";
+import { Figure } from "@/components/diagram/figure";
 
 export default function ChangelogPage() {
   const { lens } = useLens();
@@ -26,8 +28,10 @@ export default function ChangelogPage() {
       </p>
 
       <ol className="mt-12 space-y-8 border-l border-border pl-6">
-        {CHANGELOG.entries.map((entry) => (
-          <li key={entry.date} className="relative">
+        {CHANGELOG.entries.map((entry) => {
+          const figure = changelogFigure(entry.date, entry.title);
+          return (
+          <li key={`${entry.date}-${entry.title}`} className="relative">
             <span className="absolute -left-[27px] top-1.5 h-2 w-2 rounded-full bg-accent" />
             <div className="font-mono text-[11px] uppercase tracking-widest text-muted">
               {entry.date}
@@ -40,8 +44,10 @@ export default function ChangelogPage() {
               {entry.title}
             </h2>
             <p className="mt-1.5 text-sm leading-relaxed text-muted">{entry.body}</p>
+            {figure && <Figure id={figure.id} spec={figure.spec} />}
           </li>
-        ))}
+          );
+        })}
       </ol>
     </div>
   );

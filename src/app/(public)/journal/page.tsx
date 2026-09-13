@@ -2,6 +2,8 @@
 
 import { useLens } from "@/components/lens-provider";
 import JOURNAL from "@/data/build-journal.json";
+import { journalFigures } from "@/data/diagrams";
+import { Figure } from "@/components/diagram/figure";
 
 type Shipped = { repo: string; num: number; title: string; url: string };
 type Metrics = {
@@ -86,6 +88,10 @@ export default function JournalPage() {
                 Summary not yet written — facts below.
               </p>
             )}
+
+            {journalFigures(e.date).map((f) => (
+              <Figure key={f.id} id={f.id} spec={f.spec} />
+            ))}
 
             {e.shipped.length > 0 && (
               <ul className="mt-4 space-y-1.5">

@@ -2,6 +2,8 @@
 
 import { useLens } from "@/components/lens-provider";
 import { BUILD_ARCS, THEMES, type BuildArc } from "@/data/build-arcs";
+import { arcFigure } from "@/data/diagrams";
+import { Figure } from "@/components/diagram/figure";
 
 const FACETS = [
   { key: "what", label: "What it is" },
@@ -95,6 +97,7 @@ export default function BuildArcsPage() {
 
 function Arc({ arc, ed, kicker }: { arc: BuildArc; ed: boolean; kicker: string }) {
   const isFoundation = kicker.startsWith("◆");
+  const figure = arcFigure(arc.id);
   return (
     <article className="mt-12 scroll-mt-24 first:mt-10" id={arc.id}>
       <div
@@ -114,6 +117,8 @@ function Arc({ arc, ed, kicker }: { arc: BuildArc; ed: boolean; kicker: string }
       >
         {arc.name}
       </h3>
+
+      {figure && <Figure id={figure.id} spec={figure.spec} />}
 
       <dl className="mt-5 space-y-4 border-l border-border pl-6">
         {FACETS.map((f) => (

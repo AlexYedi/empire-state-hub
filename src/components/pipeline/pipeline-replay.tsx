@@ -5,6 +5,8 @@ import Link from "next/link";
 import { useLens } from "@/components/lens-provider";
 import { REPLAY } from "@/data/replay";
 import { SYSTEM } from "@/data/architecture";
+import { pageFigure } from "@/data/diagrams";
+import { Figure } from "@/components/diagram/figure";
 
 function Reveal({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
   return (
@@ -176,12 +178,8 @@ function FanOutStage({ editorial }: { editorial: boolean }) {
         </p>
       </Reveal>
 
-      {/* parent node */}
       <Reveal delay={0.1}>
-        <div className="mx-auto w-fit rounded-full border border-border bg-surface px-4 py-1.5 text-center font-mono text-xs text-muted">
-          parent thread
-        </div>
-        <div className="mx-auto my-2 h-5 w-px bg-border" />
+        <Figure {...pageFigure("replay", "replay-fanout")} />
       </Reveal>
 
       {/* 4 agents, near-simultaneous */}
@@ -204,13 +202,6 @@ function FanOutStage({ editorial }: { editorial: boolean }) {
         ))}
       </div>
 
-      {/* converge → synthesizer */}
-      <Reveal delay={0.65}>
-        <div className="mx-auto my-2 h-5 w-px bg-border" />
-        <div className="mx-auto w-fit rounded-full border border-accent/40 bg-surface px-4 py-1.5 text-center font-mono text-xs text-accent">
-          event-research-synthesizer → one brief
-        </div>
-      </Reveal>
 
       {/* The credibility beat */}
       <Reveal delay={0.1}>
@@ -257,7 +248,7 @@ function SynthesisStage({ editorial }: { editorial: boolean }) {
 }
 
 function OutputStage({ editorial }: { editorial: boolean }) {
-  const { writes, output } = REPLAY;
+  const { output } = REPLAY;
   return (
     <div className="space-y-6">
       {/* write DAG */}
@@ -265,17 +256,7 @@ function OutputStage({ editorial }: { editorial: boolean }) {
         <p className="mb-3 font-mono text-[10px] uppercase tracking-widest text-muted">
           {editorial ? "Filed, in order" : "dependency-ordered writes → Notion"}
         </p>
-        <div className="flex flex-wrap items-center gap-2 text-xs">
-          {writes.map((w, i) => (
-            <span key={w.db} className="flex items-center gap-2">
-              <span className="rounded-lg border border-border bg-surface px-3 py-1.5">
-                <span className="font-mono text-fg">{w.db}</span>
-                <span className="ml-1.5 text-muted">×{w.count}</span>
-              </span>
-              {i < writes.length - 1 && <span className="text-muted/50">→</span>}
-            </span>
-          ))}
-        </div>
+        <Figure {...pageFigure("replay", "replay-writes")} />
       </Reveal>
 
       {/* the published post */}
