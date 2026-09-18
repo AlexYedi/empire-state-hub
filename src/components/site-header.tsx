@@ -9,6 +9,7 @@ const NAV = [
   { href: "/architecture", label: "The System" },
   { href: "/build-arcs", label: "Build Arcs" },
   { href: "/journal", label: "Journal" },
+  { href: "/changelog", label: "Changelog" },
   { href: "/work", label: "Work" },
   { href: "/about", label: "About" },
 ];
