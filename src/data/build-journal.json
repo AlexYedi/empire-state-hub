@@ -1,7 +1,161 @@
 {
-  "generated_at": "2026-09-13T09:38:40Z",
+  "generated_at": "2026-09-19T21:39:07Z",
   "since": "2026-07-01",
   "entries": [
+    {
+      "date": "2026-09-19",
+      "headline": "The review loop, reviewed",
+      "summary": "Ran the weekly rigor review for the first time in 9 weeks and redeemed three quality checks that had been promised \"next session\" and never run. The judge flagged all three live skills: a removed tool still wired into a mandatory content step, a loophole in the job-search scoring rubric, and inbox rules that were decided but never applied. It also showed that the second, cross-provider judge scores almost everything a perfect 1.0. A 15-minute Monday slot now keeps the loop from going dark again.  — Second ship: turned the review's findings into guardrails and cleared the backlog it exposed. A skipped quality check now has to name where its make-up run lives, and a new automated check catches files that still call tools I removed months ago (71 stale lines, now 0). Audited both public repos before leaning into building in public: no leaked secrets, but I redacted two things speakers had asked the room to keep private.",
+      "curated": true,
+      "shipped": [
+        {
+          "repo": "pipeline",
+          "num": 87,
+          "title": "yed 200 202 203 judge fixes",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/87"
+        },
+        {
+          "repo": "pipeline",
+          "num": 86,
+          "title": "yed 204 substrate redact",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/86"
+        },
+        {
+          "repo": "pipeline",
+          "num": 84,
+          "title": "yed 201 rigor fixes",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/84"
+        },
+        {
+          "repo": "pipeline",
+          "num": 83,
+          "title": "build in public safety",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/83"
+        },
+        {
+          "repo": "pipeline",
+          "num": 82,
+          "title": "yed 189 190 rigor",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/82"
+        },
+        {
+          "repo": "pipeline",
+          "num": 81,
+          "title": "yed 160 knowledge substrate",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/81"
+        }
+      ],
+      "linear": [
+        "YED-189",
+        "YED-190",
+        "YED-200",
+        "YED-201",
+        "YED-202",
+        "YED-203",
+        "YED-204"
+      ],
+      "metrics": {
+        "prs": 6,
+        "commits": 9,
+        "sessions": 0,
+        "tools": 0,
+        "dod_met": false,
+        "dod_waived": false,
+        "correction_rounds": 0
+      }
+    },
+    {
+      "date": "2026-09-18",
+      "headline": "backlog reconciliation",
+      "summary": "",
+      "curated": false,
+      "shipped": [
+        {
+          "repo": "pipeline",
+          "num": 79,
+          "title": "backlog reconciliation",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/79"
+        },
+        {
+          "repo": "pipeline",
+          "num": 78,
+          "title": "yed 167 postgres knowledge",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/78"
+        },
+        {
+          "repo": "pipeline",
+          "num": 77,
+          "title": "slide recording alignment",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/77"
+        },
+        {
+          "repo": "hub",
+          "num": 17,
+          "title": "backlog reconciliation hub",
+          "url": "https://github.com/AlexYedi/empire-state-hub/pull/17"
+        }
+      ],
+      "linear": [
+        "YED-128",
+        "YED-129",
+        "YED-135",
+        "YED-149",
+        "YED-160",
+        "YED-168",
+        "YED-170",
+        "YED-171",
+        "YED-173",
+        "YED-174",
+        "YED-175",
+        "YED-176",
+        "YED-34"
+      ],
+      "metrics": {
+        "prs": 4,
+        "commits": 23,
+        "sessions": 0,
+        "tools": 0,
+        "dod_met": false,
+        "dod_waived": false,
+        "correction_rounds": 0
+      }
+    },
+    {
+      "date": "2026-09-15",
+      "headline": "inbox denylist v1 review",
+      "summary": "",
+      "curated": false,
+      "shipped": [
+        {
+          "repo": "pipeline",
+          "num": 75,
+          "title": "inbox denylist v1 review",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/75"
+        },
+        {
+          "repo": "pipeline",
+          "num": 74,
+          "title": "yed 161 enforce the inbox denylist in scan inbox code v1 review",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/74"
+        },
+        {
+          "repo": "pipeline",
+          "num": 72,
+          "title": "yed 164 roadmap gtmu unpark",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/72"
+        }
+      ],
+      "linear": [],
+      "metrics": {
+        "prs": 3,
+        "commits": 6,
+        "sessions": 8,
+        "tools": 808,
+        "dod_met": false,
+        "dod_waived": false,
+        "correction_rounds": 0
+      }
+    },
     {
       "date": "2026-09-13",
       "headline": "The write path that can't be skipped — and the judge that caught the switch",
@@ -28,13 +182,15 @@
         }
       ],
       "linear": [
+        "YED-161",
+        "YED-164",
         "YED-81"
       ],
       "metrics": {
         "prs": 3,
-        "commits": 6,
-        "sessions": 2,
-        "tools": 22,
+        "commits": 11,
+        "sessions": 7,
+        "tools": 105,
         "dod_met": false,
         "dod_waived": false,
         "correction_rounds": 0
@@ -131,8 +287,8 @@
       "metrics": {
         "prs": 12,
         "commits": 37,
-        "sessions": 12,
-        "tools": 1556,
+        "sessions": 13,
+        "tools": 1967,
         "dod_met": false,
         "dod_waived": false,
         "correction_rounds": 0
