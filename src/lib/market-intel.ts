@@ -188,7 +188,11 @@ async function fetchTrustStrip(): Promise<TrustStrip> {
     cur.count += 1;
     if (r.event_date && (!cur.lastRun || r.event_date > cur.lastRun)) cur.lastRun = r.event_date;
     byProducer.set(producer, cur);
-    if (r.source || r.url) cited += 1;
+    // A CITATION is a link to the primary source. `source` is the mandatory producer key — the same field
+    // used two lines up to identify the producer — so counting it made pctCited ~100% by construction and the
+    // registry's "<80% -> tighten producer sourcing" threshold could never fire (YED-212). Count only a real
+    // URL. Do-nothing baseline for this metric is now 0%, not 100%.
+    if (r.url) cited += 1;
   }
   const producers = [...byProducer.entries()]
     .map(([source, v]) => ({ source, lastRun: v.lastRun, count: v.count }))
