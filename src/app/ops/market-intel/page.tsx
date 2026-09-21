@@ -253,7 +253,7 @@ function TrustStrip({
       </span>
       <span className="text-muted/40">·</span>
       <span>
-        <span className="text-fg tabular-nums">{trust.pctCited}%</span> of signals cited/sourced
+        <span className="text-fg tabular-nums">{trust.pctCited}%</span> of signals carry a source URL
       </span>
       <span className="text-muted/40">·</span>
       {trust.producers.length === 0 ? (
