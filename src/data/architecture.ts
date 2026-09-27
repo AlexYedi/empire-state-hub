@@ -37,8 +37,6 @@ export const SYSTEM = {
     { id: "A", name: "event-deep-research", status: "wired", desc: "Parse invite → entity triage → 4 specialists in parallel → synthesizer → Notion + HubSpot." },
     { id: "A·0", name: "check-new-events", status: "wired", desc: "Detect PIPELINE-block events on the calendar; run research + pre-event content per event." },
     { id: "B", name: "post-event-content", status: "wired", desc: "Manual transcript → conditioning → a canonical post-event brief → drafted content + outreach." },
-    { id: "C", name: "weekly-recap", status: "scaffold", desc: "Sunday synthesis: the upcoming-week roundup + cross-event pattern post." },
-    { id: "D", name: "voice-pass", status: "scaffold", desc: "Polish needs_review drafts against the voice guide before they ship." },
   ],
 
   constraint: {

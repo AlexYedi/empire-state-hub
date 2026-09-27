@@ -1,33 +1,10 @@
-// Figures for the system-level page: /architecture.
-// Ground truth: pipeline repo .claude/commands/{check-new-events,event-deep-research,post-event-content,
-// weekly-recap,voice-pass}.md and the "Why fan-out runs in the parent thread" note.
+// System-level figures (the fan-out constraint, cited from the changelog).
+// Ground truth: the "Why fan-out runs in the parent thread" note in the pipeline repo.
 import type { DiagramSpec } from "@/components/diagram/types";
 import { n } from "./helpers";
 
 
 export const SYSTEM_FIGURES = {
-  "workflow-chain": {
-    type: "flow",
-    vertical: true,
-    steps: [
-      n("invite", "Calendar invite", { kind: "pill", sub: "PIPELINE block" }),
-      n("a0", "/check-new-events", { sub: "A·0 · next 14 days" }),
-      n("a", "/event-deep-research", { accent: true, sub: "A · research brief" }),
-      n("pre", "pre-event-content", { sub: "posts · questions · DMs" }),
-      n("room", "The event", { kind: "pill" }),
-      n("b", "/post-event-content", { accent: true, sub: "B · post-event brief" }),
-      [n("c", "/weekly-recap", { kind: "ghost", sub: "C · scaffold" }), n("d", "/voice-pass", { kind: "ghost", sub: "D · scaffold" })],
-    ],
-    edgeLabels: {
-      "invite>a0": "detected",
-      "a0>a": "one event at a time",
-      "a>pre": "brief in Notion",
-      "room>b": "recording → transcript",
-    },
-    caption:
-      "Two wired workflows carry an event end to end: A researches it beforehand, B turns the recording into a brief and posts afterward. The weekly recap and voice pass are scaffolded but not yet wired (dashed).",
-  },
-
   "fanout-constraint": {
     type: "compare",
     left: {
