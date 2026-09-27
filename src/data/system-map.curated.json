@@ -358,8 +358,8 @@
       "kind": "command",
       "reviewed_at": "2026-09-27",
       "status": {
-        "value": "scaffolded",
-        "reason": "Ingest (B1) and ask (B2) exist but are inert until /doc-digest and consumer wiring land — roadmap P1, YED-157 B3–B5."
+        "value": "live",
+        "reason": "/ingest-doc and /ask-library work as manual commands. Claim extraction into the graph is parked (YED-235) until a revisit trigger fires; YED-157's digest was closed 2026-09-27, superseded by ADR-10."
       },
       "summary": "/ingest-doc and /ask-library — long documents (books, papers) archived to R2 and made queryable.",
       "why": {
@@ -368,7 +368,7 @@
       },
       "build": {
         "refs": [
-          "YED-157",
+          "YED-235",
           "YED-107"
         ]
       },
@@ -1408,13 +1408,6 @@
         "why": "Wire the nightly recompute so the intelligence layer cannot silently freeze again."
       },
       {
-        "issue": "YED-157",
-        "extends": [
-          "doc-knowledge-base"
-        ],
-        "why": "/doc-digest + consumer wiring — where the document KB earns its keep."
-      },
-      {
         "issue": "YED-149",
         "extends": [
           "signal-scanners",
@@ -1469,13 +1462,6 @@
           "topic-intelligence"
         ],
         "why": "Topic-intelligence panels on the hub — the map needs a face."
-      },
-      {
-        "issue": "YED-104",
-        "extends": [
-          "pre-event-content"
-        ],
-        "why": "Audience / conversation intelligence at draft time — content becomes the graph's first reader."
       },
       {
         "issue": "YED-226",
