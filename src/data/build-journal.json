@@ -1,13 +1,287 @@
 {
-  "generated_at": "2026-09-19T21:39:07Z",
+  "generated_at": "2026-09-27T04:43:46Z",
   "since": "2026-07-01",
   "entries": [
+    {
+      "date": "2026-09-25",
+      "headline": "795 questions the graph can now remember",
+      "summary": "Shipped the question half of the merge: questions are now a first-class claim, each linked to the exact topic it belongs to, and 220 Notion question banks were backfilled into the graph. Splitting the banks turned out to be the real work — four different formats, and until I looked at real rows 81 of 100 topics parsed as a single question. Proof it landed: re-running the A/B seed now surfaces the exact question the old system had won on. Zero data lost, re-runs create nothing.",
+      "curated": true,
+      "shipped": [
+        {
+          "repo": "pipeline",
+          "num": 119,
+          "title": "next",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/119"
+        },
+        {
+          "repo": "pipeline",
+          "num": 118,
+          "title": "yed 217 conditioner aims at speakers",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/118"
+        },
+        {
+          "repo": "pipeline",
+          "num": 117,
+          "title": "notion gotcha page id uuid",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/117"
+        },
+        {
+          "repo": "pipeline",
+          "num": 116,
+          "title": "yed 218 question claims",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/116"
+        },
+        {
+          "repo": "pipeline",
+          "num": 115,
+          "title": "role radar scope nontechnical",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/115"
+        }
+      ],
+      "linear": [
+        "YED-217",
+        "YED-218",
+        "YED-221",
+        "YED-222"
+      ],
+      "metrics": {
+        "prs": 5,
+        "commits": 11,
+        "sessions": 8,
+        "tools": 251,
+        "dod_met": false,
+        "dod_waived": false,
+        "correction_rounds": 0
+      }
+    },
+    {
+      "date": "2026-09-24",
+      "headline": "A/B verdict: the substrate does not replace the old pull — yet",
+      "summary": "Two clean events, two blind raters: the substrate won on material (my call: \"topic cards are far stronger\"), the old pull won on packaging — speaker-named questions drawn from a question bank Notion had been accumulating for months. By the pre-registered rule the substrate lost, and I said so plainly rather than softening it. The real finding was that the arms are good at different things, so the work became merging them: teach the pack to aim material at named speakers, and give the graph a memory for questions. Freeze lifted; two blocked builds unblocked.  — Second ship: an event's Notion namespace is single-writer, enforced. Two sessions ran the same event on 09-20 and disagreed on two facts; now whoever starts a pipeline claims the event machine-wide, a second session goes read-only, and claims expire after four hours so a crashed run cannot lock one.",
+      "curated": true,
+      "shipped": [
+        {
+          "repo": "pipeline",
+          "num": 114,
+          "title": "yed 172 ab record",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/114"
+        },
+        {
+          "repo": "pipeline",
+          "num": 113,
+          "title": "yed 213 event claims",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/113"
+        }
+      ],
+      "linear": [
+        "YED-172",
+        "YED-213",
+        "YED-218"
+      ],
+      "metrics": {
+        "prs": 2,
+        "commits": 7,
+        "sessions": 16,
+        "tools": 1231,
+        "dod_met": true,
+        "dod_waived": false,
+        "correction_rounds": 0
+      }
+    },
+    {
+      "date": "2026-09-23",
+      "headline": "Research becomes a standing scan",
+      "summary": "The New York AI Mafia research stopped being a one-off list: six of those companies (Runway, Modal, Profound, Taktile, Reflection AI, Hugging Face) now get picked up by every role scan, and the scanner learned a fourth job-board API to do it. Small ship, but it is the pattern: research that lives only in a doc decays, research wired into a scan compounds. Also recorded a trap for the next builder: some job boards return a clean 200 with an empty list on a wrong company slug, so \"zero roles\" needs a verification step before it is believed.  — Second ship: The graph-write freeze protecting the A/B turned out to be a sentence in a note — nothing refused a write. Moved it to a committed marker enforced at the one place every writer passes through, after an adversarial pass found six scripts could write around the producer. The judge then caught that my first version broke the substrate's own read path, which would have handed the A/B to the old system on a bug. Fixed, verified live, and the two review passes were worth more than the build.",
+      "curated": true,
+      "shipped": [
+        {
+          "repo": "pipeline",
+          "num": 107,
+          "title": "ai mafia target companies",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/107"
+        },
+        {
+          "repo": "pipeline",
+          "num": 105,
+          "title": "yed 213 freeze enforcement",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/105"
+        }
+      ],
+      "linear": [],
+      "metrics": {
+        "prs": 2,
+        "commits": 0,
+        "sessions": 0,
+        "tools": 0,
+        "dod_met": false,
+        "dod_waived": false,
+        "correction_rounds": 0
+      }
+    },
+    {
+      "date": "2026-09-21",
+      "headline": "A metric the do-nothing policy beats is not a standard",
+      "summary": "First Monday rigor review on the new cadence caught the fourth \"harness bug blamed on a model\" in two days: a flag only one adapter understood was killing every Gemini control run, and the canary was booking it as the seat failing. Fixed, plus a 33-case contract test so every runner accepts the same flags, and an adapter error no longer counts as a judgement. Also codified the null-baseline rule: the \"83% agreement\" I had trusted for 63 days was exactly what a seat that says pass to everything would score, so every registry metric now records its do-nothing baseline and the threshold has to sit above it. The hub's citation stat was the first one repaired.",
+      "curated": true,
+      "shipped": [
+        {
+          "repo": "pipeline",
+          "num": 108,
+          "title": "rigor review 2026 09 21",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/108"
+        },
+        {
+          "repo": "pipeline",
+          "num": 106,
+          "title": "yed 212 null baseline",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/106"
+        },
+        {
+          "repo": "hub",
+          "num": 20,
+          "title": "yed 212 pctcited",
+          "url": "https://github.com/AlexYedi/empire-state-hub/pull/20"
+        }
+      ],
+      "linear": [
+        "YED-212",
+        "YED-214"
+      ],
+      "metrics": {
+        "prs": 3,
+        "commits": 8,
+        "sessions": 21,
+        "tools": 2896,
+        "dod_met": true,
+        "dod_waived": true,
+        "correction_rounds": 3
+      }
+    },
+    {
+      "date": "2026-09-20",
+      "headline": "The judge learned to check itself",
+      "summary": "Added a third, OpenAI-based seat to the build-quality judge and rewrote the quorum so any number of seats can sit: a seat's pass only lowers scrutiny once it has earned voting status against my own labels, any seat's doubt raises it, and a split is never auto-resolved. A pre-registered bake-off across three OpenAI models on 16 real labelled states came back with identical accuracy at a 4× price spread, so the rule written before the runs picked the cheapest. A canary runner now re-tests every seat on a schedule and demotes one that fails twice, silently swaps model, or goes stale.  — Second ship: Ran the first blind comparison of the new knowledge substrate against the old Notion pull on a real event: two packs, coin-flipped labels, scored by me and an independent model seat. Also found and closed a repo problem — one finished build's telemetry existed only on this laptop, 19 merged branches were never deleted, and four sessions were writing to the same Notion pages at once. Rescued the orphan, deleted the branches, and filed the single-writer rule for shared systems so it can't recur silently.",
+      "curated": true,
+      "shipped": [
+        {
+          "repo": "pipeline",
+          "num": 104,
+          "title": "yed 209 canary runner",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/104"
+        },
+        {
+          "repo": "pipeline",
+          "num": 103,
+          "title": "ab reminder hook",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/103"
+        },
+        {
+          "repo": "pipeline",
+          "num": 102,
+          "title": "yed 47 identity prep",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/102"
+        },
+        {
+          "repo": "pipeline",
+          "num": 101,
+          "title": "yed 160 knowledge substrate",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/101"
+        },
+        {
+          "repo": "pipeline",
+          "num": 100,
+          "title": "yed 209 bakeoff ruling",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/100"
+        },
+        {
+          "repo": "pipeline",
+          "num": 99,
+          "title": "yed 209 canaries bakeoff",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/99"
+        },
+        {
+          "repo": "pipeline",
+          "num": 98,
+          "title": "yed 211 role radar date and title fixes",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/98"
+        },
+        {
+          "repo": "pipeline",
+          "num": 97,
+          "title": "yed 209 third seat",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/97"
+        },
+        {
+          "repo": "pipeline",
+          "num": 96,
+          "title": "ab reminder hook",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/96"
+        }
+      ],
+      "linear": [
+        "YED-172",
+        "YED-209",
+        "YED-211"
+      ],
+      "metrics": {
+        "prs": 9,
+        "commits": 20,
+        "sessions": 44,
+        "tools": 9104,
+        "dod_met": true,
+        "dod_waived": true,
+        "correction_rounds": 1
+      }
+    },
     {
       "date": "2026-09-19",
       "headline": "The review loop, reviewed",
       "summary": "Ran the weekly rigor review for the first time in 9 weeks and redeemed three quality checks that had been promised \"next session\" and never run. The judge flagged all three live skills: a removed tool still wired into a mandatory content step, a loophole in the job-search scoring rubric, and inbox rules that were decided but never applied. It also showed that the second, cross-provider judge scores almost everything a perfect 1.0. A 15-minute Monday slot now keeps the loop from going dark again.  — Second ship: turned the review's findings into guardrails and cleared the backlog it exposed. A skipped quality check now has to name where its make-up run lives, and a new automated check catches files that still call tools I removed months ago (71 stale lines, now 0). Audited both public repos before leaning into building in public: no leaked secrets, but I redacted two things speakers had asked the room to keep private.",
       "curated": true,
       "shipped": [
+        {
+          "repo": "pipeline",
+          "num": 94,
+          "title": "yed 171 roster backfill",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/94"
+        },
+        {
+          "repo": "pipeline",
+          "num": 93,
+          "title": "yed 171 roster backfill",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/93"
+        },
+        {
+          "repo": "pipeline",
+          "num": 92,
+          "title": "yed 171 roster backfill",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/92"
+        },
+        {
+          "repo": "pipeline",
+          "num": 91,
+          "title": "quorum ack yed206",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/91"
+        },
+        {
+          "repo": "pipeline",
+          "num": 90,
+          "title": "yed 209 third seat spec",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/90"
+        },
+        {
+          "repo": "pipeline",
+          "num": 89,
+          "title": "roundup three variants",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/89"
+        },
+        {
+          "repo": "pipeline",
+          "num": 88,
+          "title": "yed 172 ab protocol",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/88"
+        },
         {
           "repo": "pipeline",
           "num": 87,
@@ -19,6 +293,12 @@
           "num": 86,
           "title": "yed 204 substrate redact",
           "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/86"
+        },
+        {
+          "repo": "pipeline",
+          "num": 85,
+          "title": "yed 206 gemini judge fixes",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/85"
         },
         {
           "repo": "pipeline",
@@ -43,22 +323,39 @@
           "num": 81,
           "title": "yed 160 knowledge substrate",
           "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/81"
+        },
+        {
+          "repo": "hub",
+          "num": 19,
+          "title": "journal 2026 09 19",
+          "url": "https://github.com/AlexYedi/empire-state-hub/pull/19"
+        },
+        {
+          "repo": "hub",
+          "num": 18,
+          "title": "build in public redact",
+          "url": "https://github.com/AlexYedi/empire-state-hub/pull/18"
         }
       ],
       "linear": [
+        "YED-171",
+        "YED-172",
         "YED-189",
         "YED-190",
         "YED-200",
         "YED-201",
         "YED-202",
         "YED-203",
-        "YED-204"
+        "YED-204",
+        "YED-206",
+        "YED-209",
+        "YED-47"
       ],
       "metrics": {
-        "prs": 6,
-        "commits": 9,
-        "sessions": 0,
-        "tools": 0,
+        "prs": 16,
+        "commits": 32,
+        "sessions": 1,
+        "tools": 5,
         "dod_met": false,
         "dod_waived": false,
         "correction_rounds": 0
@@ -112,12 +409,12 @@
       ],
       "metrics": {
         "prs": 4,
-        "commits": 23,
-        "sessions": 0,
-        "tools": 0,
-        "dod_met": false,
-        "dod_waived": false,
-        "correction_rounds": 0
+        "commits": 24,
+        "sessions": 50,
+        "tools": 14636,
+        "dod_met": true,
+        "dod_waived": true,
+        "correction_rounds": 1
       }
     },
     {
@@ -189,11 +486,11 @@
       "metrics": {
         "prs": 3,
         "commits": 11,
-        "sessions": 7,
-        "tools": 105,
-        "dod_met": false,
-        "dod_waived": false,
-        "correction_rounds": 0
+        "sessions": 19,
+        "tools": 1950,
+        "dod_met": true,
+        "dod_waived": true,
+        "correction_rounds": 1
       }
     },
     {
