@@ -1445,7 +1445,7 @@
         "extends": [
           "doc-knowledge-base"
         ],
-        "why": "/doc-digest + consumer wiring — where the document KB earns its keep (roadmap P1)."
+        "why": "/doc-digest + consumer wiring — where the document KB earns its keep."
       },
       {
         "issue": "YED-149",
@@ -1453,14 +1453,14 @@
           "signal-scanners",
           "supabase-graph"
         ],
-        "why": "Roles → spine producer; the job-search lens becomes graph-native (P1)."
+        "why": "Roles → spine producer; the job-search lens becomes graph-native."
       },
       {
         "issue": "YED-131",
         "extends": [
           "topic-intelligence"
         ],
-        "why": "Nightly topic recompute on pg_cron, no LLM tokens (P1)."
+        "why": "Nightly topic recompute on pg_cron, no LLM tokens."
       },
       {
         "issue": "YED-207",
@@ -1493,7 +1493,7 @@
           "supabase-graph",
           "hub"
         ],
-        "why": "The architecture lens: an Applied-AI reference architecture as taxonomy v2 + hub surface (P2). A different map from this one — it maps the industry."
+        "why": "The architecture lens: an Applied-AI reference architecture as taxonomy v2 + hub surface. A different map from this one — it maps the industry."
       },
       {
         "issue": "YED-114",
@@ -1501,14 +1501,14 @@
           "hub",
           "topic-intelligence"
         ],
-        "why": "Topic-intelligence panels on the hub — the map needs a face (P2)."
+        "why": "Topic-intelligence panels on the hub — the map needs a face."
       },
       {
         "issue": "YED-104",
         "extends": [
           "pre-event-content"
         ],
-        "why": "Audience / conversation intelligence at draft time — content becomes the graph's first reader (P2)."
+        "why": "Audience / conversation intelligence at draft time — content becomes the graph's first reader."
       },
       {
         "issue": "YED-226",
@@ -1523,7 +1523,7 @@
           "judge",
           "event-deep-research"
         ],
-        "why": "Eval harness for event research: 10 golden briefs + judge (P3)."
+        "why": "Eval harness for event research: 10 golden briefs + judge."
       },
       {
         "issue": "YED-162",
@@ -1531,21 +1531,21 @@
           "rigor-review",
           "judge"
         ],
-        "why": "The behavioral-exhaust loop: correction recurrence → proposed fix as a PR → judge-gated → Alex merges (P3)."
+        "why": "The behavioral-exhaust loop: correction recurrence → proposed fix as a PR → judge-gated → Alex merges."
       },
       {
         "issue": "YED-163",
         "extends": [
           "system-graph"
         ],
-        "why": "ADR-8 Increment 2: skills ↔ agents ↔ commands ↔ outcomes on the system graph (P3)."
+        "why": "ADR-8 Increment 2: skills ↔ agents ↔ commands ↔ outcomes on the system graph."
       },
       {
         "issue": "YED-82",
         "extends": [
           "hub"
         ],
-        "why": "Hub craft, honesty and launch — polished after the quarter's proof exists (P3)."
+        "why": "Hub craft, honesty and launch — polished after the quarter's proof exists."
       }
     ]
   }

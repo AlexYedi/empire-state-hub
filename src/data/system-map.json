@@ -2331,7 +2331,7 @@
         "extends": [
           "doc-knowledge-base"
         ],
-        "why": "/doc-digest + consumer wiring — where the document KB earns its keep (roadmap P1).",
+        "why": "/doc-digest + consumer wiring — where the document KB earns its keep.",
         "phase": "P1",
         "url": "https://linear.app/yedibalian/issue/YED-157"
       },
@@ -2341,7 +2341,7 @@
           "signal-scanners",
           "supabase-graph"
         ],
-        "why": "Roles → spine producer; the job-search lens becomes graph-native (P1).",
+        "why": "Roles → spine producer; the job-search lens becomes graph-native.",
         "phase": "P1",
         "url": "https://linear.app/yedibalian/issue/YED-149"
       },
@@ -2350,7 +2350,7 @@
         "extends": [
           "topic-intelligence"
         ],
-        "why": "Nightly topic recompute on pg_cron, no LLM tokens (P1).",
+        "why": "Nightly topic recompute on pg_cron, no LLM tokens.",
         "phase": "P1",
         "url": "https://linear.app/yedibalian/issue/YED-131"
       },
@@ -2391,7 +2391,7 @@
           "supabase-graph",
           "hub"
         ],
-        "why": "The architecture lens: an Applied-AI reference architecture as taxonomy v2 + hub surface (P2). A different map from this one — it maps the industry.",
+        "why": "The architecture lens: an Applied-AI reference architecture as taxonomy v2 + hub surface. A different map from this one — it maps the industry.",
         "phase": "P2",
         "url": "https://linear.app/yedibalian/issue/YED-126"
       },
@@ -2401,7 +2401,7 @@
           "hub",
           "topic-intelligence"
         ],
-        "why": "Topic-intelligence panels on the hub — the map needs a face (P2).",
+        "why": "Topic-intelligence panels on the hub — the map needs a face.",
         "phase": "P2",
         "url": "https://linear.app/yedibalian/issue/YED-114"
       },
@@ -2410,7 +2410,7 @@
         "extends": [
           "pre-event-content"
         ],
-        "why": "Audience / conversation intelligence at draft time — content becomes the graph's first reader (P2).",
+        "why": "Audience / conversation intelligence at draft time — content becomes the graph's first reader.",
         "phase": "P2",
         "url": "https://linear.app/yedibalian/issue/YED-104"
       },
@@ -2429,7 +2429,7 @@
           "judge",
           "event-deep-research"
         ],
-        "why": "Eval harness for event research: 10 golden briefs + judge (P3).",
+        "why": "Eval harness for event research: 10 golden briefs + judge.",
         "phase": "P3",
         "url": "https://linear.app/yedibalian/issue/YED-48"
       },
@@ -2439,7 +2439,7 @@
           "rigor-review",
           "judge"
         ],
-        "why": "The behavioral-exhaust loop: correction recurrence → proposed fix as a PR → judge-gated → Alex merges (P3).",
+        "why": "The behavioral-exhaust loop: correction recurrence → proposed fix as a PR → judge-gated → Alex merges.",
         "phase": "P3",
         "url": "https://linear.app/yedibalian/issue/YED-162"
       },
@@ -2448,7 +2448,7 @@
         "extends": [
           "system-graph"
         ],
-        "why": "ADR-8 Increment 2: skills ↔ agents ↔ commands ↔ outcomes on the system graph (P3).",
+        "why": "ADR-8 Increment 2: skills ↔ agents ↔ commands ↔ outcomes on the system graph.",
         "phase": "P3",
         "url": "https://linear.app/yedibalian/issue/YED-163"
       },
@@ -2457,7 +2457,7 @@
         "extends": [
           "hub"
         ],
-        "why": "Hub craft, honesty and launch — polished after the quarter's proof exists (P3).",
+        "why": "Hub craft, honesty and launch — polished after the quarter's proof exists.",
         "phase": "P3",
         "url": "https://linear.app/yedibalian/issue/YED-82"
       }
