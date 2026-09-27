@@ -208,6 +208,21 @@ function matcher(pattern) {
   return (id) => id === pattern;
 }
 
+// YED-236: which of these repo paths are gitignored in the pipeline repo? Exits the generator on any git
+// failure — a privacy check that can't run must not publish (fail closed).
+function gitIgnored(paths) {
+  const repoPaths = [...new Set(paths.filter((p) => p && !p.startsWith("~") && !p.startsWith("/")))];
+  if (!repoPaths.length) return new Set();
+  try {
+    const out = execFileSync("git", ["-C", PIPELINE_DIR, "check-ignore", "--stdin"], { input: repoPaths.join("\n"), encoding: "utf8" });
+    return new Set(out.split("\n").map((s) => s.trim()).filter(Boolean));
+  } catch (e) {
+    if (e.status === 1) return new Set(); // git check-ignore exits 1 when nothing matched
+    console.error(`✗ privacy guard: git check-ignore failed in ${PIPELINE_DIR} — refusing to publish (YED-236)`);
+    process.exit(1);
+  }
+}
+
 function main() {
   if (!existsSync(join(GRAPH_DIR, "nodes.jsonl"))) {
     console.error(
@@ -218,8 +233,14 @@ function main() {
   const curated = JSON.parse(readFileSync(CURATED, "utf8"));
   let prev = { components: [], buildPath: { items: [] } };
   try { prev = JSON.parse(readFileSync(OUT, "utf8")); } catch { /* first run */ }
-  const nodes = readJsonl(join(GRAPH_DIR, "nodes.jsonl")).filter((n) => n.exists !== false);
-  const edges = readJsonl(join(GRAPH_DIR, "edges.jsonl")).filter((e) => e.exists !== false);
+  const rawNodes = readJsonl(join(GRAPH_DIR, "nodes.jsonl")).filter((n) => n.exists !== false);
+  const rawEdges = readJsonl(join(GRAPH_DIR, "edges.jsonl")).filter((e) => e.exists !== false);
+  // YED-236 privacy guard (fail-closed): nothing gitignored in the pipeline repo may reach the public map,
+  // even if the graph was built from a working checkout that holds private, untracked files.
+  const ignored = gitIgnored([...rawNodes.map((n) => n.id), ...rawEdges.flatMap((e) => [e.src, e.dst])]);
+  const nodes = rawNodes.filter((n) => !ignored.has(n.id));
+  const edges = rawEdges.filter((e) => !ignored.has(e.src) && !ignored.has(e.dst));
+  if (ignored.size) console.log(`  ! privacy guard: dropped ${ignored.size} gitignored path(s) from the public map`);
   const meta = existsSync(join(GRAPH_DIR, "meta.json")) ? JSON.parse(readFileSync(join(GRAPH_DIR, "meta.json"), "utf8")) : {};
   const nodeIds = nodes.map((n) => n.id);
   const { first, last, sha } = gitDates();
