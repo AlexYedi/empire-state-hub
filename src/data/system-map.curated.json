@@ -415,7 +415,7 @@
       "id": "gtm-suite",
       "zone": "pipelines",
       "name": "GTM research & copy suite",
-      "kind": "command",
+      "kind": "skill",
       "reviewed_at": "2026-09-27",
       "summary": "Imported market-research and copywriting commands plus the sales-methodology agents (reframe, mobilizer mapping, commercial insight).",
       "why": {
@@ -1515,7 +1515,7 @@
         "extends": [
           "substrate"
         ],
-        "why": "Identity tier-1 in DDL — the parked half of entity dedup (P2)."
+        "why": "Identity tier-1 in DDL — the parked half of entity dedup."
       },
       {
         "issue": "YED-48",

@@ -3,7 +3,7 @@
   "generated_at": "2026-09-27",
   "source": {
     "pipeline_sha": "07a862f",
-    "graph_built_at": "2026-09-27T14:43:20Z",
+    "graph_built_at": "2026-09-27T21:53:34Z",
     "graph_nodes": 325,
     "graph_edges": 859,
     "unmapped_files": 0
@@ -653,7 +653,7 @@
       "id": "gtm-suite",
       "zone": "pipelines",
       "name": "GTM research & copy suite",
-      "kind": "command",
+      "kind": "skill",
       "status": "live",
       "statusReason": null,
       "description": "Imported market-research and copywriting commands plus the sales-methodology agents (reframe, mobilizer mapping, commercial insight).",
@@ -2419,7 +2419,7 @@
         "extends": [
           "substrate"
         ],
-        "why": "Identity tier-1 in DDL — the parked half of entity dedup (P2).",
+        "why": "Identity tier-1 in DDL — the parked half of entity dedup.",
         "phase": "now",
         "url": "https://linear.app/yedibalian/issue/YED-226"
       },

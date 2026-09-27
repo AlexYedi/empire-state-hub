@@ -216,6 +216,8 @@ function main() {
     process.exit(1);
   }
   const curated = JSON.parse(readFileSync(CURATED, "utf8"));
+  let prev = { components: [], buildPath: { items: [] } };
+  try { prev = JSON.parse(readFileSync(OUT, "utf8")); } catch { /* first run */ }
   const nodes = readJsonl(join(GRAPH_DIR, "nodes.jsonl")).filter((n) => n.exists !== false);
   const edges = readJsonl(join(GRAPH_DIR, "edges.jsonl")).filter((e) => e.exists !== false);
   const meta = existsSync(join(GRAPH_DIR, "meta.json")) ? JSON.parse(readFileSync(join(GRAPH_DIR, "meta.json"), "utf8")) : {};
@@ -325,12 +327,19 @@ function main() {
   writeFileSync(OUT, JSON.stringify(out, null, 2) + "\n");
   writeFileSync(OUT_FILES, JSON.stringify(filesOut) + "\n");
 
-  // ---- report ----
+  // ---- report (added / removed vs the previous generation — AC7) ----
+  const prevIds = new Set(prev.components.map((c) => c.id));
+  const prevPlanned = new Set((prev.buildPath?.items ?? []).map((i) => i.issue));
+  const added = [...components.filter((c) => !prevIds.has(c.id)).map((c) => c.id), ...items.filter((i) => !prevPlanned.has(i.issue)).map((i) => `plan:${i.issue}`)];
+  const removed = [...prev.components.filter((c) => !ids.has(c.id)).map((c) => c.id), ...(prev.buildPath?.items ?? []).filter((i) => !items.some((x) => x.issue === i.issue)).map((i) => `plan:${i.issue}`)];
   console.log(`✓ wrote src/data/system-map.json (${components.length} components · ${edgesOut.length} edges · ${items.length} planned) + system-map.files.json (${nodes.length} files · ${edges.length} references)`);
   console.log(`  pipeline ${sha} · graph built ${meta.built_at ?? "?"} · phases ${rm.phases.map((p) => p.id).join(",")} · anchors ${rm.anchors.map((a) => `${a.id}=${a.date}`).join(" ")}`);
   const byZone = {};
   for (const c of components) byZone[c.zone] = (byZone[c.zone] ?? 0) + 1;
   console.log(`  per zone: ${JSON.stringify(byZone)}`);
+  if (added.length) console.log(`  + ADDED: ${added.join(", ")}`);
+  if (removed.length) console.log(`  - REMOVED: ${removed.join(", ")}`);
+  if (!added.length && !removed.length) console.log("  no add/remove — facts refreshed in place");
   if (emptyPatterns.length) console.log(`  ! ${emptyPatterns.length} pattern(s) match no graph node:\n    ${emptyPatterns.join("\n    ")}`);
   if (unmapped.length) console.log(`  ! ${unmapped.length} graph file(s) mapped to no component (shown in the 'unmapped' bucket): e.g. ${unmapped.slice(0, 6).join(", ")}${unmapped.length > 6 ? ", …" : ""}`);
   if (overlayStale.length) console.log(`  ! overlay STALE — files changed after reviewed_at (re-read the entry, then bump the date):\n    ${overlayStale.join("\n    ")}`);

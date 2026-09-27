@@ -27,6 +27,9 @@ for (const c of curated.components) if (!ids.has(c.id)) problems.push(`${c.id}: 
 for (const e of map.edges) if (!ids.has(e.source) || !ids.has(e.target)) problems.push(`edge ${e.id}: unknown endpoint`);
 for (const it of map.buildPath.items) for (const x of it.extends) if (!ids.has(x)) problems.push(`${it.issue}: extends unknown component ${x}`);
 if (!map.buildPath.anchors.length) problems.push("no anchors parsed from roadmap.md § 6");
+// Phase is computed from roadmap.md by the generator; a phase written into prose is duplicated,
+// unreconciled state (the YED-226 defect the judge caught on 2026-09-27) — refuse it.
+for (const it of curated.buildPath.items) if (/\bP[0-3]\b|\(P[0-3]\)|Phase [0-3]/.test(it.why)) problems.push(`${it.issue}: phase tag written in prose ("${it.why.match(/\(?P[0-3]\)?|Phase [0-3]/)[0]}") — the generator derives phase from roadmap.md; remove it`);
 
 const stale = map.components.filter((c) => c.overlayStale).map((c) => c.id);
 
