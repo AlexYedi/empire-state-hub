@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-27T04:43:46Z",
+  "generated_at": "2026-09-27T04:46:39Z",
   "since": "2026-07-01",
   "entries": [
     {
@@ -48,8 +48,8 @@
       "metrics": {
         "prs": 5,
         "commits": 11,
-        "sessions": 8,
-        "tools": 251,
+        "sessions": 9,
+        "tools": 286,
         "dod_met": false,
         "dod_waived": false,
         "correction_rounds": 0
@@ -160,7 +160,7 @@
     },
     {
       "date": "2026-09-20",
-      "headline": "The judge learned to check itself",
+      "headline": "First blind A/B of the memory layer, and a hygiene sweep",
       "summary": "Added a third, OpenAI-based seat to the build-quality judge and rewrote the quorum so any number of seats can sit: a seat's pass only lowers scrutiny once it has earned voting status against my own labels, any seat's doubt raises it, and a split is never auto-resolved. A pre-registered bake-off across three OpenAI models on 16 real labelled states came back with identical accuracy at a 4× price spread, so the rule written before the runs picked the cheapest. A canary runner now re-tests every seat on a schedule and demotes one that fails twice, silently swaps model, or goes stale.  — Second ship: Ran the first blind comparison of the new knowledge substrate against the old Notion pull on a real event: two packs, coin-flipped labels, scored by me and an independent model seat. Also found and closed a repo problem — one finished build's telemetry existed only on this laptop, 19 merged branches were never deleted, and four sessions were writing to the same Notion pages at once. Rescued the orphan, deleted the branches, and filed the single-writer rule for shared systems so it can't recur silently.",
       "curated": true,
       "shipped": [
