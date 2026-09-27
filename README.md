@@ -51,6 +51,8 @@ When a skill, agent, or command is added or removed, regenerate the live catalog
 
 ```bash
 pnpm gen:toolbox        # rescans .claude/{skills,agents,commands}, updates src/data/toolbox.json
+pnpm gen:system-map     # rebuilds src/data/system-map{,.files}.json for /architecture from the pipeline's frontmatter,
+                        # ADR-8 graph, roadmap and git dates; curated reasoning lives in src/data/system-map.curated.json
 ```
 
 New tools land in group **"Other"** with no tier — categorize them by editing the item's `group`/`tier`; the generator preserves your edits on the next run.
