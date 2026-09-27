@@ -16,7 +16,7 @@ export function WorkShowcase({ items }: { items: ContentDraft[] }) {
   return (
     <div className="mx-auto w-full max-w-5xl px-6 py-20">
       <p className="font-mono text-xs uppercase tracking-widest text-muted">
-        {ed ? "Selected work" : "output"}
+        {ed ? "Published content" : "output"}
       </p>
       <h1
         className={

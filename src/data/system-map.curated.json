@@ -198,8 +198,7 @@
       "build": {
         "refs": [
           "YED-160",
-          "YED-166",
-          "YED-198"
+          "YED-166"
         ],
         "note": "Granola auto-fetch built then disabled 2026-05-27; recording ingest + slide alignment added 2026-09."
       },
@@ -225,33 +224,7 @@
         ".claude/evals/post-event-brief-template-evidence.md",
         ".claude/tools/obs_ingest.py",
         ".claude/references/obs-capture-setup.md",
-        ".claude/proposals/post-event-hubspot-step.md"
-      ]
-    },
-    {
-      "id": "scaffolded-workflows",
-      "zone": "pipelines",
-      "name": "Workflows B / C / D (scaffolded)",
-      "kind": "command",
-      "reviewed_at": "2026-09-27",
-      "status": {
-        "value": "scaffolded",
-        "reason": "Command files exist with documented triggers and flow; never wired end-to-end. /post-event-content is the live B path; the fuller chain is parked as YED-198 (.claude/WORKFLOWS.md)."
-      },
-      "summary": "/post-event-synthesis, /weekly-recap and /voice-pass — documented shapes for the fuller post-event chain, the Sunday recap and a voice polish pass.",
-      "why": {
-        "text": "They were scaffolded in the 2026-05 rebuild as the intended systemization (transcript analysis → objection mining → insight generation → content → pattern synthesis). The day-to-day need was met by the lighter /post-event-content, and the execution-focus steering bias says: build a component when a named publishing friction motivates it, not before. None has, so they stay honest scaffolds.",
-        "source": ".claude/WORKFLOWS.md § Workflow B/C/D; CLAUDE.md § Execution-focus window (2026-06-11)"
-      },
-      "build": {
-        "refs": [
-          "YED-198"
-        ]
-      },
-      "files": [
-        ".claude/commands/post-event-synthesis.md",
-        ".claude/commands/weekly-recap.md",
-        ".claude/commands/voice-pass.md",
+        ".claude/proposals/post-event-hubspot-step.md",
         ".claude/skills/pattern-synthesis/**",
         ".claude/proposals/content-pipeline-v2-stage2.md"
       ]
@@ -1201,12 +1174,6 @@
       "target": "linkedin",
       "kind": "produces",
       "summary": "The recap that cashes the pre-event setup against what was said."
-    },
-    {
-      "source": "scaffolded-workflows",
-      "target": "voice-system",
-      "kind": "depends-on",
-      "summary": "The voice pass would run voice-editor over needs_review drafts against the guide."
     },
     {
       "source": "gtm-suite",

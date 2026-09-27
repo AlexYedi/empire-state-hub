@@ -5,12 +5,11 @@ import { LensToggle } from "./lens-toggle";
 import { useLens } from "./lens-provider";
 
 const NAV = [
-  { href: "/pipeline", label: "Pipeline" },
   { href: "/architecture", label: "The System" },
   { href: "/build-arcs", label: "Build Arcs" },
   { href: "/journal", label: "Journal" },
   { href: "/changelog", label: "Changelog" },
-  { href: "/work", label: "Work" },
+  { href: "/work", label: "Published Content" },
   { href: "/about", label: "About" },
 ];
 
