@@ -1,7 +1,170 @@
 {
-  "generated_at": "2026-09-27T04:46:39Z",
+  "generated_at": "2026-09-27T22:56:10Z",
   "since": "2026-07-01",
   "entries": [
+    {
+      "date": "2026-09-27",
+      "headline": "Drew the whole system, then started deleting",
+      "summary": "Shipped the System Map — an interactive two-layer map of everything the pipeline is — and the first thing it did was make the clutter obvious. So the same day became a deletion day: the Pipeline page (a frozen May replay nobody had updated) came off the site, three workflow scaffolds that had sat unwired since May were retired because their jobs already ran elsewhere, and an audience-intelligence ticket the knowledge graph had quietly absorbed was closed. The lesson: a map earns its keep as a deletion tool — less surface means fewer things for a reader, or me, to misread.  — Second ship: researched six NYC events in one batch (brief, long-form deep read and sourced graph claims for each) and rendered seven carousels. Checking the numbers against primary sources caught two stats that had drifted through secondary write-ups (47% → 44%, 78.4% → 56%); both were fixed everywhere before anything posted.",
+      "curated": true,
+      "shipped": [
+        {
+          "repo": "pipeline",
+          "num": 144,
+          "title": "retire scaffold workflows",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/144"
+        },
+        {
+          "repo": "pipeline",
+          "num": 143,
+          "title": "healthcheck issue dedup",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/143"
+        },
+        {
+          "repo": "pipeline",
+          "num": 141,
+          "title": "next 5",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/141"
+        },
+        {
+          "repo": "pipeline",
+          "num": 139,
+          "title": "yed 228 followups",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/139"
+        },
+        {
+          "repo": "pipeline",
+          "num": 138,
+          "title": "yed 205 req retry",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/138"
+        },
+        {
+          "repo": "pipeline",
+          "num": 137,
+          "title": "yed 223 judge harness",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/137"
+        },
+        {
+          "repo": "pipeline",
+          "num": 136,
+          "title": "yed 227 check refs runtime ledgers",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/136"
+        },
+        {
+          "repo": "pipeline",
+          "num": 135,
+          "title": "yed 205 quorum ack",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/135"
+        },
+        {
+          "repo": "pipeline",
+          "num": 134,
+          "title": "yed 205 pre event write path",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/134"
+        },
+        {
+          "repo": "pipeline",
+          "num": 133,
+          "title": "judge lift lifetime cap",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/133"
+        },
+        {
+          "repo": "pipeline",
+          "num": 132,
+          "title": "judge monthly cap 20",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/132"
+        },
+        {
+          "repo": "pipeline",
+          "num": 131,
+          "title": "yed 47 quorum ack",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/131"
+        },
+        {
+          "repo": "pipeline",
+          "num": 130,
+          "title": "yed 47 identity s1b lite",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/130"
+        },
+        {
+          "repo": "pipeline",
+          "num": 129,
+          "title": "next",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/129"
+        },
+        {
+          "repo": "pipeline",
+          "num": 128,
+          "title": "yed 210 stacking higher",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/128"
+        },
+        {
+          "repo": "pipeline",
+          "num": 127,
+          "title": "yed 199 close adr 10 accepted",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/127"
+        },
+        {
+          "repo": "pipeline",
+          "num": 126,
+          "title": "role radar remove dice rss",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/126"
+        },
+        {
+          "repo": "pipeline",
+          "num": 125,
+          "title": "yed 210 salary only top of range",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/125"
+        },
+        {
+          "repo": "pipeline",
+          "num": 124,
+          "title": "yed 224 role radar dedup closeout",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/124"
+        },
+        {
+          "repo": "pipeline",
+          "num": 123,
+          "title": "yed 210 comp range midpoint",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/123"
+        },
+        {
+          "repo": "pipeline",
+          "num": 121,
+          "title": "yed 218 judge fixes",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/121"
+        },
+        {
+          "repo": "hub",
+          "num": 21,
+          "title": "yed 232 system map",
+          "url": "https://github.com/AlexYedi/empire-state-hub/pull/21"
+        }
+      ],
+      "linear": [
+        "YED-198",
+        "YED-199",
+        "YED-205",
+        "YED-210",
+        "YED-217",
+        "YED-218",
+        "YED-223",
+        "YED-224",
+        "YED-227",
+        "YED-228",
+        "YED-232",
+        "YED-47"
+      ],
+      "metrics": {
+        "prs": 22,
+        "commits": 53,
+        "sessions": 123,
+        "tools": 27757,
+        "dod_met": true,
+        "dod_waived": true,
+        "correction_rounds": 3
+      }
+    },
     {
       "date": "2026-09-25",
       "headline": "795 questions the graph can now remember",
@@ -47,9 +210,9 @@
       ],
       "metrics": {
         "prs": 5,
-        "commits": 11,
-        "sessions": 9,
-        "tools": 286,
+        "commits": 12,
+        "sessions": 39,
+        "tools": 7435,
         "dod_met": false,
         "dod_waived": false,
         "correction_rounds": 0
@@ -82,8 +245,8 @@
       "metrics": {
         "prs": 2,
         "commits": 7,
-        "sessions": 16,
-        "tools": 1231,
+        "sessions": 17,
+        "tools": 1322,
         "dod_met": true,
         "dod_waived": false,
         "correction_rounds": 0
