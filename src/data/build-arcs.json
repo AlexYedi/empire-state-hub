@@ -1,17 +1,12 @@
 {
-  "intro": "Thirteen build arcs — the sprints behind the system, grouped into five themes. Each theme opens with the foundation it rests on, then the arcs built on top. Each arc is a thesis, not just a feature: the what, the why, what V1 deliberately doesn't do yet, and how it maps to the data, eval, and governance stack that enterprises spend millions standing up.",
+  "intro": "Ten build arcs — the sprints behind the system, grouped into four themes. Each theme opens with the foundation it rests on, then the arcs built on top. Each arc is a thesis, not just a feature: the what, the why, what V1 deliberately doesn't do yet, and how it maps to the data, eval, and governance stack that enterprises spend millions standing up.",
   "asOf": "2026-09-18",
-  "sinceNote": "Written before the 2026-09-28 complexity reset, which retired some pieces described below: the trend and voice scanners (role-radar remains), /morning-refresh, the Gemini judge seat (the judge is now one on-demand Sonnet reviewer), and the /ops rigor and market-intel dashboards. The System page shows what is live today.",
+  "sinceNote": "Written before the 2026-09-28 complexity reset. The reset retired the Rigor & Measurement theme outright — the definition-of-done gate, the judge's seats and quorum (it is now one on-demand Sonnet reviewer), build-session telemetry and the weekly rigor review — so those arcs are gone from this page and branch-first change now sits under Distribution. It also retired the trend and voice scanners (role-radar remains), /morning-refresh, and the /ops rigor and market-intel dashboards. The System page shows what is live today.",
   "themes": [
     {
       "id": "intelligence",
       "label": "Intelligence",
       "blurb": "Sensing the field and turning it into a queryable, evolving viewpoint."
-    },
-    {
-      "id": "rigor",
-      "label": "Rigor & Measurement",
-      "blurb": "Putting a floor under “done” and instrumenting the build itself."
     },
     {
       "id": "surface",
@@ -110,56 +105,16 @@
       "enterprise": "The lens-agnostic pattern — one intelligence substrate serving multiple downstream products — is how mature data orgs avoid rebuilding the same graph five times. Demonstrating it with two genuinely different lenses (content + hiring) on shared machinery is the strongest possible proof the architecture generalizes."
     },
     {
-      "id": "build-rigor-measurement",
-      "theme": "rigor",
-      "foundation": true,
-      "name": "Build-Rigor & Measurement Layer",
-      "tagline": "Instrumented building.",
-      "what": "A Definition-of-Done gate that writes real telemetry, a cross-provider LLM-as-judge (two model families in a quorum), build-session telemetry piped to a dashboard, and branch-first git discipline enforced by a hook.",
-      "why": "Diagnosed via systems analysis as a Shifting-the-Burden archetype: rigor lived in optional docs, never the execution path, so a memory-less agent shipped on green checks with no durable trace — and the consequences surfaced weeks later. This puts a floor under “done” inside the execution path.",
-      "value": "Every non-trivial build leaves an artifact (spec, issue, adversarial pass) and a telemetry row. The judge resists self-preference by drawing its second opinion from a different provider, not the same model family.",
-      "bestPractices": "LLM-as-judge with a cross-provider quorum (self-preference mitigation). DORA / delivery-observability thinking — measure the delivery system, not just the product. “Own the contract, rent the platform”: a stable log schema with a swappable backend.",
-      "v1Limits": "The judge is provisional-trusted — advisory, never hard-blocking; the DoD is self-attested; telemetry is a single dedicated project.",
-      "future": "Next: YED-189 rigor-review restart · YED-187 judge hardening · judge de-provisional accrues passively.",
-      "enterprise": "AI evals + delivery observability + governance — precisely the “how do we trust and measure our AI systems” question every enterprise AI team is now grappling with. A full-stack-GTM wedge: demonstrated, not stated."
-    },
-    {
-      "id": "cross-provider-judge",
-      "theme": "rigor",
-      "name": "The Cross-Provider Judge",
-      "tagline": "A second opinion from a different mind.",
-      "what": "The build-quality judge upgraded from a single model to a cross-provider quorum — a Sonnet judge and a Gemini judge scoring the same build against a versioned rubric (build-quality@3), with agree → auto-pass and disagree → human tiebreak. Plus mechanized checks (dangling-reference, command-skeleton) and a composite confidence-honesty cap.",
-      "why": "An LLM grading work from its own family is prone to self-preference — it rates outputs that look like its own more kindly. Drawing the second opinion from a different provider is the cheapest robust mitigation. Calibration (≥20 runs at ≥80% agreement with Alex) is what earned the judge “provisional-trusted” status.",
-      "value": "Build quality gets an independent, adversarial check that resists the most common failure mode of LLM-as-judge. Agreement auto-passes; disagreement escalates to a human rather than silently picking a side (a fail-safe FLAG in autonomous mode).",
-      "bestPractices": "LLM-as-judge with a cross-provider quorum (self-preference mitigation from the eval literature). A versioned rubric (build-quality@2 → @3) with mechanized, non-negotiable sub-checks so scores can't drift on vibes. Prospective calibration against a human anchor before trusting the judge.",
-      "v1Limits": "Provisional-trusted — it gates new/independent builds but is advisory on self-produced work; it never hard-blocks; the human tiebreak is a real dependency when the two providers disagree.",
-      "future": "Next: YED-187 (wire dual-dispatch, mechanize dangling-ref, build-quality@4) · YED-185 ADR-8 Increment 2 (evidence parity by construction).",
-      "enterprise": "“How do we trust and measure our AI systems” is the question every enterprise AI team is now grappling with. A calibrated, cross-provider, versioned-rubric judge with an honest trust ladder is a defensible answer — and building one at operator scale directly demonstrates the eval discipline production AI requires."
-    },
-    {
-      "id": "build-telemetry",
-      "theme": "rigor",
-      "name": "Build-Session Telemetry & Observability",
-      "tagline": "You can't improve what you don't measure.",
-      "what": "A contract-first Stop hook that emits a structured build_session row at the end of every session — tool counts, tokens, context peak, DoD flags, correction rounds — projected to a dedicated PostHog project and read by the Hub's rigor dashboard.",
-      "why": "Rigor that isn't measured decays silently. The diagnosed root cause of the whole measurement program was that rigor lived in optional docs, never the execution path — so the fix had to put a durable telemetry row in the execution path itself, not a dashboard nobody updates.",
-      "value": "Every build leaves a machine-readable trace. Once the DoD writer was wired, the semantic fields (met / waived / correction-rounds) went from null in 100% of rows to actually populated — closing the loop's missing link.",
-      "bestPractices": "Contract-first schema (a stable log contract with a swappable backend — “own the contract, rent the platform”). DORA / delivery-observability thinking — measure the delivery system, not just the product. A dedicated telemetry project so build-rigor signal isn't mixed with product analytics.",
-      "v1Limits": "Self-attested DoD flags; a single dedicated project; the telemetry describes effort and discipline, not yet outcome value.",
-      "future": "Next: YED-163 ADR-8 Increment 4 (invocation + outcome edges) · outcome joins after that.",
-      "enterprise": "This is developer-productivity / delivery observability — the DORA-metrics layer — built for a team of one. The contract-first, swappable-backend design is how you instrument a real engineering org without locking into a vendor, and “put the trace in the execution path, not an optional doc” is a lesson most orgs learn the hard way."
-    },
-    {
       "id": "branch-first-governance",
-      "theme": "rigor",
+      "theme": "distribution",
       "name": "Branch-First Governed Change",
       "tagline": "Change with a paper trail.",
-      "what": "Branch-first git discipline enforced in code — a pre-commit hook that blocks build-surface changes on main, so non-trivial work goes branch → PR → merge while trivial churn (telemetry, content) can still land on main. Plus the governed-batch pattern: a Linear issue before any change to universal/canonical config.",
+      "what": "Branch-first git discipline enforced in code — a pre-commit hook that blocks build-surface changes on main, so non-trivial work goes branch → PR → merge while trivial churn (content outputs, typos) can still land on main. Plus the governed-batch pattern: a Linear issue before any change to universal/canonical config.",
       "why": "A memory-less agent auto-committing straight to main leaves no review surface and no trail. The diagnosis — an “auto-committer” that turned out to be a human-driven desktop client, not a daemon — led to a durable fix: make the right path the enforced default, in a hook, not a habit to remember.",
-      "value": "Every non-trivial build is reviewable before it lands; universal-scope changes require an issue first; telemetry churn doesn't drown the history. The discipline is enforced by the tool, so it survives a forgetful operator.",
+      "value": "Every non-trivial build is reviewable before it lands; universal-scope changes require an issue first; content churn doesn't drown the history. The discipline is enforced by the tool, so it survives a forgetful operator.",
       "bestPractices": "Protected-branch / trunk-with-guardrails change management. Governance-as-code (a pre-commit hook) over governance-as-documentation. Scope-tiered rules (trivial vs. non-trivial) so the guardrail doesn't tax small work — the same “don't let the brake become the drag” lesson from the execution-focus retro.",
       "v1Limits": "A local hook, not server-side branch protection; the trivial/non-trivial line is a convention the operator still applies; PR review is self-review at solo scale.",
-      "future": "Next: server-side protection + judge as PR gate only after YED-162 produces its first merged fix.",
+      "future": "Next: server-side branch protection.",
       "enterprise": "This is change management and separation-of-duties in miniature — the exact controls (protected branches, mandatory review for high-blast-radius changes, an issue trail for config) that every regulated or scaled engineering org runs on. Enforcing them as code at operator scale is the paved-road pattern."
     },
     {
@@ -202,5 +157,5 @@
       "enterprise": "A voice/style system that learns from reviewer feedback and propagates from a single source is the content-ops pattern behind any brand that scales writing without losing its voice — and “review after generation, mine the corrections” is human-in-the-loop RLHF-in-miniature that keeps a generative system on-brand over time."
     }
   ],
-  "throughLine": "All thirteen share one thesis: build better, not faster. Architecture before automation; human-in-the-loop until evidence justifies removing it; inspect real data before proposing fixes; every non-trivial build leaves a durable trace. The value isn't any single component — it's an operator running a small, honest, instrumented version of the exact stack enterprises are spending millions to stand up."
+  "throughLine": "All ten share one thesis: build better, not faster. Architecture before automation; human-in-the-loop until evidence justifies removing it; inspect real data before proposing fixes; every non-trivial build leaves a durable trace. The value isn't any single component — it's an operator running a small, honest, instrumented version of the exact stack enterprises are spending millions to stand up."
 }

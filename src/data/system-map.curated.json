@@ -23,8 +23,8 @@
     },
     {
       "id": "rigor",
-      "name": "Rigor layer",
-      "blurb": "What keeps a solo build honest: gates that hold a run open, a judge, telemetry, a weekly review."
+      "name": "Operating layer",
+      "blurb": "What keeps a solo build honest now: the operating rules, an on-demand judge, and a derived graph of the repo's own artifacts."
     },
     {
       "id": "surfaces",
@@ -190,8 +190,8 @@
       "kind": "command",
       "reviewed_at": "2026-09-28",
       "why": {
-        "text": "The second half of the arc: what was actually said, cashed against the pre-event setup. A manual transcript (Granola's MCP sees zero notes on the free plan; OBS + ElevenLabs Scribe is the owned capture lane) is conditioned into a quote bank, synthesized into a post_event_brief — the canonical store every downstream draft references — then drafted by the content-correspondent skill. Since ADR-10 it also creates the attended event row in the graph and attaches the pre-event claims to it.",
-        "source": ".claude/commands/post-event-content.md; CLAUDE.md § Phase 2 (2026-05-21 / 05-28); memory 2026-09-09 CRM + capture decision; docs/adr/ADR-10-knowledge-substrate.md D9"
+        "text": "The second half of the arc: what was actually said, cashed against the pre-event setup. A transcript (a Supercut recording preferred; an audio file through ElevenLabs Scribe or a manual paste as fallbacks) is conditioned into a quote bank, synthesized into a post_event_brief — the canonical store every downstream draft references — then drafted by the content-correspondent skill. Since ADR-10 it also creates the attended event row in the graph and attaches the pre-event claims to it.",
+        "source": ".claude/commands/post-event-content.md; .claude/references/supercut.md; CLAUDE.md § Phase 2 (2026-05-21 / 05-28); docs/adr/ADR-10-knowledge-substrate.md D9"
       },
       "build": {
         "refs": [
@@ -204,7 +204,7 @@
         "Notion MCP",
         "HubSpot MCP",
         "ElevenLabs Scribe",
-        "OBS Studio"
+        "Supercut MCP"
       ],
       "files": [
         ".claude/commands/post-event-content.md",
@@ -219,11 +219,10 @@
         ".claude/evals/ingest-elevenlabs-scorecard.md",
         ".claude/evals/transcription-quality-scorecard.md",
         ".claude/evals/post-event-brief-template-evidence.md",
-        ".claude/tools/obs_ingest.py",
-        ".claude/references/obs-capture-setup.md",
         ".claude/proposals/post-event-hubspot-step.md",
         ".claude/skills/pattern-synthesis/**",
-        ".claude/proposals/content-pipeline-v2-stage2.md"
+        ".claude/proposals/content-pipeline-v2-stage2.md",
+        ".claude/references/supercut.md"
       ],
       "toolsExclude": [
         "Granola MCP"
@@ -235,7 +234,7 @@
       "name": "Voice & visual system",
       "kind": "reference",
       "reviewed_at": "2026-09-28",
-      "summary": "The style guide, anti-patterns, audience north star, shared content patterns and the visual-brief spec every content skill imports.",
+      "summary": "The style guide, anti-patterns, audience north star, shared content patterns (including goal tagging, graded later by the tag-outcome skill) and the visual-brief spec every content skill imports.",
       "why": {
         "text": "Voice is a living system, not a prompt: Alex reviews drafts as inline Notion comments, and the update-voice-and-style skill mines those comments back into the guides so every skill inherits the correction once. Visuals must add information (architecture, comparison, progression) and never re-print the post; they are authored by Claude as self-contained HTML/SVG and exported to a 4:5 PDF — Gamma was removed on 2026-08-07 because it re-interpreted content and broke labels.",
         "source": ".claude/references/content-style-guide.md; .claude/references/content-anti-patterns.md; .claude/skills/content-patterns/visual-briefs.md; CLAUDE.md Rule 13 (2026-08-07)"
@@ -260,7 +259,8 @@
         ".claude/skills/update-anti-patterns.md",
         ".claude/skills/brand-storytelling/**",
         ".claude/skills/copywriting/**",
-        ".claude/notes/eric-coldoutboundskills-harvest-2026-09-24.md"
+        ".claude/notes/eric-coldoutboundskills-harvest-2026-09-24.md",
+        ".claude/skills/tag-outcome/**"
       ]
     },
     {
@@ -540,7 +540,7 @@
       },
       "summary": "Relevance scoring and topic movement over the graph — what is moving, for whom.",
       "why": {
-        "text": "The graph is only useful if something ranks it: relevance per lens and movement per topic are what the Hub's market-intel panels and the P2 architecture lens read. It is listed stale on purpose — this is the exact failure the map exists to make visible.",
+        "text": "The graph is only useful if something ranks it: relevance per lens and movement per topic are what the Hub's planned topic-intelligence panels (YED-114) and the P2 architecture lens read. It is listed stale on purpose — this is the exact failure the map exists to make visible.",
         "source": "memory 2026-09-27 systems-gaps decision; Linear YED-230; .claude/scripts/recompute_relevance.py"
       },
       "build": {
@@ -650,97 +650,6 @@
       ]
     },
     {
-      "id": "posthog",
-      "zone": "records",
-      "name": "PostHog",
-      "kind": "external",
-      "reviewed_at": "2026-09-28",
-      "summary": "Project 524367 — the projection target of the build-session Stop hook. Kept for future Hub web analytics; no dashboard reads the telemetry any more.",
-      "why": {
-        "text": "The measurement layer needed a queryable projection without adding a database; PostHog captures each build session and judge run as an event, and the Hub reads them with a project-scoped key. Chosen over Langfuse and a Supabase measurement store, both tombstoned so the rigor layer stays lean.",
-        "source": "CLAUDE.md § measurement layer (PostHog projection LIVE 2026-07-11); .claude/notes/measurement-layer-learnings.md"
-      },
-      "build": {
-        "refs": [
-          "YED-88",
-          "YED-91"
-        ]
-      },
-      "tools": [
-        "PostHog capture API"
-      ],
-      "files": [
-        ".claude/notes/measurement-layer-learnings.md"
-      ],
-      "status": {
-        "value": "stale",
-        "reason": "The build-session Stop hook still projects each session here when a token is set, but delivery has not been verified since 2026-09-12, the judge no longer emits to it, and nothing on the Hub reads it since /ops/rigor was removed on 2026-09-28."
-      }
-    },
-    {
-      "id": "dod-gate",
-      "zone": "rigor",
-      "name": "Definition of Done",
-      "kind": "policy",
-      "reviewed_at": "2026-09-28",
-      "summary": "Three items a non-trivial build must meet or explicitly waive (a spec before code, a Linear issue, an adversarial pass), recorded by /dod-close. The judge is no longer a DoD item.",
-      "why": {
-        "text": "A systems analysis diagnosed the root cause of quiet failures as Shifting the Burden: rigor lived in optional docs, never in the execution path, so a memory-less agent shipped on green checks and the consequence surfaced weeks later. The gate puts a floor under 'done' without blocking flow; waivers are logged as data so the pattern stays visible. It is deliberately capped at three items — growth is the rule-beating signal.",
-        "source": "CLAUDE.md § Definition of Done (pilot 2026-06-25; writer wired 2026-07-11); .claude/references/prd-template.md"
-      },
-      "build": {
-        "refs": [
-          "YED-87",
-          "YED-129",
-          "YED-201"
-        ],
-        "note": "The semantic writer (/dod-close) was missing for two weeks — telemetry carried nulls in 100% of rows until it shipped."
-      },
-      "files": [
-        ".claude/commands/dod-close.md",
-        ".claude/hooks/dod-close.sh",
-        ".claude/references/prd-template.md",
-        ".claude/references/linear-convention.md",
-        ".claude/skills/writing-prds/**"
-      ],
-      "toolsExclude": [
-        "ChatPRD MCP"
-      ]
-    },
-    {
-      "id": "run-gates",
-      "zone": "rigor",
-      "name": "Run-close gates",
-      "kind": "hook",
-      "reviewed_at": "2026-09-28",
-      "summary": "Stop hooks that used to hold a research run open until its Deep Read was rendered and its claims staged to the graph. The ledgers are still written; the hooks that enforced them are unregistered.",
-      "why": {
-        "text": "A silently skipped Deep Read or graph write must never close green. Each run registers a pending row; the hook refuses to close while one is pending. On 2026-09-27 the gates were found firing on every turn (Claude Code's Stop event is per turn, not per session), blocking, re-invoking the model and logging false failures — so they now treat 'pending' as in-progress while the session holds a live event claim, and fail only at the first turn after the claim is released.",
-        "source": ".claude/notes/stop-gate-per-turn-2026-09-27.md; .claude/proposals/deep-read-marker-gate.md"
-      },
-      "build": {
-        "refs": [
-          "YED-139",
-          "YED-205",
-          "YED-228"
-        ]
-      },
-      "files": [
-        ".claude/hooks/deep-read-gate.sh",
-        ".claude/hooks/deep-read-ledger.sh",
-        ".claude/hooks/substrate-gate.sh",
-        ".claude/hooks/_run_in_progress.sh",
-        ".claude/hooks/gate-sweep-sessionstart.sh",
-        ".claude/evals/test_gate_in_progress.sh",
-        ".claude/proposals/deep-read-marker-gate.md",
-        ".claude/notes/stop-gate-per-turn-2026-09-27.md"
-      ],
-      "status": {
-        "value": "parked",
-        "reason": "The gate hooks are no longer registered: after the 2026-09-28 reset the only wired project hook is the build-session Stop hook. The commands still write the pending/staged ledger rows, but nothing holds a run open on them."
-      }
-    },
-    {
       "id": "judge",
       "zone": "rigor",
       "name": "Build-quality judge",
@@ -791,67 +700,6 @@
       ]
     },
     {
-      "id": "telemetry",
-      "zone": "rigor",
-      "name": "Build-session telemetry",
-      "kind": "hook",
-      "reviewed_at": "2026-09-28",
-      "summary": "The one wired project hook: a Stop hook that records each build session (files touched, DoD fields, correction rounds) to a gitignored per-session shard and projects it to PostHog when a token is set.",
-      "why": {
-        "text": "The north-star is acted-on value, trended; that needs every build to leave a trace without anyone remembering to write one. Shards are per session so two sessions never conflict on one file, and since YED-229 (2026-09-28) they live outside git, because appending to a tracked file every turn forced a churn commit on every branch switch. Two known data defects remain: output tokens over-count, and the DoD fields folded into only a few sessions.",
-        "source": ".claude/hooks/build-session-emit.sh; .claude/references/build-session-contract.md; hub-system-audit 2026-09-28 §4"
-      },
-      "build": {
-        "refs": [
-          "YED-88",
-          "YED-229"
-        ]
-      },
-      "tools": [
-        "PostHog capture"
-      ],
-      "files": [
-        ".claude/hooks/build-session-emit.sh",
-        ".claude/references/build-session-contract.md",
-        ".claude/hooks/runtime_ledgers.py",
-        ".claude/hooks/v2-cmd-detect.sh",
-        ".claude/hooks/v2-trigger-detect.sh",
-        ".claude/hooks/v2-trigger-log.sh"
-      ]
-    },
-    {
-      "id": "rigor-review",
-      "zone": "rigor",
-      "name": "/rigor-review + outcome capture",
-      "kind": "command",
-      "reviewed_at": "2026-09-28",
-      "summary": "The weekly ≤10-minute learning loop over build sessions, judge logs and waivers, plus the tag-outcome skill, which records what each artifact actually did against its goal.",
-      "why": {
-        "text": "Measurement without an action is an orphan metric, so every metric in the value-action registry has a threshold, an action and a surface. The weekly review recounts what the in-session gates cannot verify (for example whether a promised make-up judge run happened) and proposes codified fixes; outcome tagging closes the loop from a draft's goal to its realized value, which is the only number that matters.",
-        "source": ".claude/references/value-action-registry.md; .claude/evals/correction-recurrence.md; .claude/skills/content-patterns/goal-tagging.md"
-      },
-      "build": {
-        "refs": [
-          "YED-93",
-          "YED-94",
-          "YED-162",
-          "YED-212"
-        ]
-      },
-      "tools": [
-        "Notion MCP"
-      ],
-      "files": [
-        ".claude/commands/rigor-review.md",
-        ".claude/skills/rigor-review/**",
-        ".claude/skills/tag-outcome/**",
-        ".claude/references/value-action-registry.md",
-        ".claude/evals/correction-recurrence.md",
-        ".claude/skills/content-patterns/goal-tagging.md",
-        ".claude/notes/rigor-loop-session-resume-2026-07-16.md"
-      ]
-    },
-    {
       "id": "system-graph",
       "zone": "rigor",
       "name": "System graph (ADR-8)",
@@ -876,51 +724,12 @@
       ]
     },
     {
-      "id": "systems-thinking",
-      "zone": "rigor",
-      "name": "Systems-thinking harness",
-      "kind": "skill",
-      "reviewed_at": "2026-09-28",
-      "summary": "An eight-phase Meadows-style diagnostic (stocks, flows, loops, archetypes, leverage points), kept here as a project copy of the skill; the delegated analyst agent now lives only in the shared alex plugin.",
-      "why": {
-        "text": "Chronic problems in a solo build are usually loops, not bugs: the execution-focus rule that first raised publishing and then drained it, the rigor that lived in optional docs. The harness makes 'why does this keep happening' a repeatable analysis with a rule-out discipline (name the archetypes rejected, not just the one matched), and it produced the diagnosis behind the Definition of Done.",
-        "source": "CLAUDE.md § Systems-thinking harness (2026-05-04); .claude/skills/systems-thinking/SKILL.md"
-      },
-      "build": {
-        "refs": [
-          "YED-23",
-          "YED-24",
-          "YED-25"
-        ]
-      },
-      "files": [
-        ".claude/skills/systems-thinking/**",
-        ".claude/references/systems-thinking-workflow.md",
-        ".claude/skills/risk-playbooks/**",
-        ".claude/skills/head-of-product-engineering/**",
-        ".claude/skills/ai-product-strategy/**",
-        ".claude/skills/defining-product-vision/**",
-        ".claude/skills/launch-tiering/**",
-        ".claude/skills/prioritizing-roadmap/**",
-        ".claude/skills/shipping-products/**",
-        ".claude/skills/writing-north-star-metrics/**"
-      ],
-      "status": {
-        "value": "stale",
-        "reason": "The project copy of the skill had no reads in the last 30 days; the analyses that actually run use the alex plugin's copy and its analyst agent. It stays on the map for the diagnosis that produced the Definition of Done."
-      },
-      "toolsExclude": [
-        "ChatPRD MCP",
-        "claude_ai_Linear MCP"
-      ]
-    },
-    {
       "id": "operating-rules",
       "zone": "rigor",
       "name": "Operating rules",
       "kind": "policy",
       "reviewed_at": "2026-09-28",
-      "summary": "The project instructions, the workflow manual, the platform-constraints registry, the git conventions and the build-in-public policy.",
+      "summary": "The project instructions, the workflow manual, the platform-constraints registry, the git and PR conventions (spec before code, a linked Linear issue, one adversarial pass) and the build-in-public policy.",
       "why": {
         "text": "A memory-less agent needs its invariants where it will read them: which MCP account is which, what a subagent cannot do, why two sessions must never share a checkout, what may be public. Constraints have one home (platform-constraints.md) with memory files carrying pointers, and the reconciliation of branches is a role one session plays, not a habit everyone half-keeps.",
         "source": "CLAUDE.md; .claude/references/platform-constraints.md; .claude/references/reconciliation-terminal-charter.md; policy build-in-public"
@@ -950,7 +759,10 @@
         ".claude/notes/backlog-triage-2026-09-18.md",
         ".claude/references/second-fix-stop-rule.md",
         ".claude/hooks/second-fix-nudge.sh",
-        "docs/history.md"
+        "docs/history.md",
+        ".claude/references/prd-template.md",
+        ".claude/references/systems-thinking-workflow.md",
+        ".claude/references/systems-thinking-pipeline-diagnostic.md"
       ],
       "toolsExclude": [
         "Google Calendar MCP"
@@ -990,7 +802,7 @@
       "name": "Build journal & arcs",
       "kind": "script",
       "reviewed_at": "2026-09-28",
-      "summary": "A generator that turns git history and build sessions into the Hub's /journal, with a hand-written prose sidecar at break points. Run by hand or via /journal-entry; the Stop-hook refresh is no longer registered.",
+      "summary": "A generator that turns git history and the per-session shards of the one wired project hook (a build-session Stop hook, gitignored) into the Hub's /journal, with a hand-written prose sidecar at break points. Run by hand or via /journal-entry.",
       "why": {
         "text": "The facts of the build should instrument themselves (YED-119) so the journal never depends on remembering to write; the prose — what a shipped PR meant — is a deliberate human-authored layer added at each break point, and its lapses are tracked as data.",
         "source": "memory: public build journal at break points; .claude/scripts/build_journal.py"
@@ -1004,7 +816,9 @@
         ".claude/scripts/build_journal.py",
         ".claude/hooks/build-journal-refresh.sh",
         ".claude/commands/journal-entry.md",
-        ".claude/references/journal-entry-prompt.md"
+        ".claude/references/journal-entry-prompt.md",
+        ".claude/hooks/build-session-emit.sh",
+        ".claude/references/build-session-contract.md"
       ]
     },
     {
@@ -1056,20 +870,6 @@
       "target": "post-event-content",
       "kind": "gates",
       "summary": "Same claim discipline for the post-event run."
-    },
-    {
-      "source": "run-gates",
-      "target": "event-deep-research",
-      "kind": "gates",
-      "summary": "Unregistered since the 2026-09-28 reset: the command still writes the Deep Read and research ledger rows, but no Stop hook holds the run open on them.",
-      "status": "parked"
-    },
-    {
-      "source": "run-gates",
-      "target": "post-event-content",
-      "kind": "gates",
-      "summary": "Unregistered since the 2026-09-28 reset: the substrate ledger row is still written, but no Stop hook holds the run open on it.",
-      "status": "parked"
     },
     {
       "source": "event-deep-research",
@@ -1274,71 +1074,10 @@
       "summary": "build-journal.json and build-arcs.json are generated into the hub's data folder."
     },
     {
-      "source": "build-journal",
-      "target": "telemetry",
-      "kind": "reads",
-      "summary": "Reads build-session shards alongside git history to reconstruct each day."
-    },
-    {
-      "source": "telemetry",
-      "target": "posthog",
-      "kind": "writes",
-      "summary": "Each build_session row is sent to PostHog when a token is set; delivery unverified since 2026-09-12 and nothing reads it now.",
-      "status": "stale"
-    },
-    {
-      "source": "dod-gate",
-      "target": "telemetry",
-      "kind": "writes",
-      "summary": "/dod-close records dod_met / dod_waived / correction_rounds, which the build-session Stop hook folds into the session row."
-    },
-    {
-      "source": "dod-gate",
-      "target": "linear",
-      "kind": "depends-on",
-      "summary": "Item 2: a Linear issue opened or updated for the workstream."
-    },
-    {
-      "source": "systems-thinking",
-      "target": "dod-gate",
-      "kind": "produces",
-      "summary": "The DoD gate came out of a systems-analyst diagnosis (Shifting the Burden)."
-    },
-    {
-      "source": "rigor-review",
-      "target": "telemetry",
-      "kind": "reads",
-      "summary": "Build sessions, waivers and gate-failure ledgers, weekly."
-    },
-    {
-      "source": "rigor-review",
-      "target": "judge",
-      "kind": "reads",
-      "summary": "Judge run logs and flags, plus the monthly blind spot-check of five passed artifacts."
-    },
-    {
-      "source": "rigor-review",
-      "target": "notion",
-      "kind": "writes",
-      "summary": "/tag-outcome writes Outcome / Outcome Value / Outcome Date on Content Drafts."
-    },
-    {
       "source": "system-graph",
       "target": "operating-rules",
       "kind": "reads",
       "summary": "Walks the repo's own artifacts and references and counts dangling ones — now run by hand; the session-start report is no longer wired."
-    },
-    {
-      "source": "dod-gate",
-      "target": "operating-rules",
-      "kind": "depends-on",
-      "summary": "The gate's scope test and waiver rules live in the project instructions."
-    },
-    {
-      "source": "rigor-review",
-      "target": "hubspot",
-      "kind": "reads",
-      "summary": "The tag-outcome skill pulls realized connection and meeting signals from HubSpot to grade a draft against its goal."
     },
     {
       "source": "check-new-events",
@@ -1437,10 +1176,9 @@
       {
         "issue": "YED-162",
         "extends": [
-          "rigor-review",
           "judge"
         ],
-        "why": "The behavioral-exhaust loop: correction recurrence → proposed fix as a PR → judge-gated → Alex merges."
+        "why": "The behavioral-exhaust loop (a recurring correction → proposed fix as a PR → judged → Alex merges); its correction-recurrence input was retired on 2026-09-28, so it needs re-scoping first."
       },
       {
         "issue": "YED-163",

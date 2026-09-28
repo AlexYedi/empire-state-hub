@@ -55,7 +55,6 @@ function TechnicalAbout() {
     "Notion + HubSpot (MCP)",
     "Linear",
     "Vercel",
-    "PostHog",
     "n8n",
     "Supabase",
   ];

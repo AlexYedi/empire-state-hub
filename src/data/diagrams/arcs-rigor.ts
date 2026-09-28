@@ -1,6 +1,7 @@
-// Build-arc figures, Rigor · Surface · Distribution · Craft themes. Keyed by arc id.
-// Ground truth: .claude/references/cross-provider-judge.md, /dod-close, hooks/build-session-emit.sh,
-// the branch-first arc, the hub's own src/lib read clients, and the voice-mining loop.
+// Build-arc figures, Surface · Distribution · Craft themes, plus the figures of the retired Rigor theme
+// that dated changelog and journal entries still show. Keyed by id. Ground truth: .claude/references/
+// cross-provider-judge.md, /dod-close (both retired 2026-09-28), the branch-first arc, the hub's own
+// src/lib read clients, and the voice-mining loop.
 import type { DiagramSpec } from "@/components/diagram/types";
 import { n } from "./helpers";
 
@@ -55,24 +56,6 @@ export const RIGOR_ARC_FIGURES = {
     groups: [{ label: "same rubric", from: 2, to: 2 }],
     caption:
       "Two model families score every build against one versioned rubric. Agreement passes; a split escalates to Alex, or becomes a non-destructive FLAG when he isn't present — a disputing model never gets to break its own tie.",
-  },
-
-  "build-telemetry": {
-    type: "flow",
-    steps: [
-      [
-        n("transcript", "session transcript", { sub: "counts only" }),
-        n("meta", "build_meta", { kind: "store", sub: "from /dod-close" }),
-      ],
-      n("stop", "Stop hook", { kind: "pill" }),
-      n("record", "build_session record", { kind: "store", accent: true, sub: "repo-owned" }),
-      n("posthog", "PostHog", { kind: "store", sub: "swappable" }),
-      n("dash", "Hub /ops/rigor"),
-    ],
-    edgeLabels: { "record>posthog": "if key set" },
-    dashed: ["record>posthog"],
-    caption:
-      "The contract is the record the repo owns, written first on every stop; PostHog is a projection of it that can be swapped out. Only counts leave the transcript — never prompt, tool input, or output text.",
   },
 
   "branch-first-governance": {
