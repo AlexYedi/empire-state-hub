@@ -6,7 +6,7 @@ import assert from "node:assert/strict";
 import { readFileSync, writeFileSync, existsSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
-import { buildRooms, validateOverlay, cleanFirstComment, publishedVariant, safetyScan } from "../../gen-rooms.mjs";
+import { buildRooms, validateOverlay, cleanFirstComment, publishedVariant, safetyScan, extractTakeaways, hasQuotedSpeech, cleanTitle, publicName } from "../../gen-rooms.mjs";
 import { source, COMMITTED, OVERLAY } from "./fixture.mjs";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
@@ -96,7 +96,8 @@ test("overlay: notion_page_id resolves a legacy page; publish:false holds; unres
   const { data, report } = await run();
   const legacy = data.rooms.find((r) => r.slug === "2026-06-24-nyc-ai-demos-10");
   assert.equal(legacy.name, "NYC AI Demos #10");
-  assert.equal(legacy.recapPending, true);
+  assert.equal(legacy.takeaways, null, "no takeaways without the overlay opt-in");
+  assert.equal(legacy.recapPending, false, "a published recap post means the recap is not pending");
   assert.deepEqual(legacy.carousel, { pdf: "/rooms/other-dir/carousel.pdf", preview: null });
   assert.equal(legacy.posts.length, 1);
   assert.ok(!data.rooms.some((r) => r.slug === "2026-09-20-held-room"));
@@ -120,4 +121,36 @@ test("helpers: variant detection and fail-closed first comment", () => {
   assert.equal(cleanFirstComment(["off the record: https://example.com/x"], null, rep), null);
   assert.equal(rep.phraseDrops, 1);
   assert.equal(cleanFirstComment([], null, rep), null);
+});
+
+test("takeaways: working-note lines, quoted speech and no-record rooms fail closed", async () => {
+  const b = (type, text) => ({ id: text, type, has_children: false, [type]: { rich_text: [{ plain_text: text }] } });
+  const src = { getBlocks: async () => [] };
+  const brief = (extra) => [
+    b("heading_2", "Quick Take"),
+    b("paragraph", "Evals moved into production."),
+    b("paragraph", "HIGH Speaker (~12:34): a confidence-tagged transcript line"),
+    b("paragraph", "Working thesis (Alex's synthesis, not a quote)"),
+    b("paragraph", "They spent $128K a week on tokens."),
+    b("paragraph", 'He said "nobody on my team is technical" twice.'),
+    b("paragraph", 'The "2X" story, measured.'),
+    ...extra,
+  ];
+  const report = { phraseDrops: 0 };
+  const out = await extractTakeaways(brief([]), src, report);
+  assert.deepEqual(out.quickTake, ["Evals moved into production.", 'The "2X" story, measured.']);
+  assert.equal(await extractTakeaways(brief([b("heading_2", "Notes"), b("paragraph", "Room norm: nothing is recorded.")]), src, report), null);
+  assert.equal(await extractTakeaways(brief([b("paragraph", "An off-the-record evening.")]), src, report), null);
+  assert.equal(hasQuotedSpeech("the 'stand behind every sentence' policy"), true);
+  assert.equal(hasQuotedSpeech("Clay's own 'AI slop' term, don't worry"), false);
+});
+
+test("speaker fields: research notes stripped from titles, placeholder names dropped", () => {
+  assert.equal(cleanTitle("Sr. TPM, AWS (confirmed by Alex from LinkedIn 2026-09-14)"), "Sr. TPM, AWS");
+  assert.equal(cleanTitle("Principal Architect, Oracle — TITLE UNVERIFIED"), "Principal Architect, Oracle");
+  assert.equal(cleanTitle("Director of Product (AI), Apollo.io"), "Director of Product (AI), Apollo.io");
+  assert.equal(cleanTitle("Lead @ X (per public records — 'Y' is personal brand title)"), null);
+  assert.equal(publicName("Michael (Datadog) — last name TBC"), null);
+  assert.equal(publicName("Jack (Insight Partners)"), null);
+  assert.equal(publicName("Miaolai (Mila) Zhou"), "Miaolai (Mila) Zhou");
 });

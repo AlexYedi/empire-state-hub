@@ -99,7 +99,7 @@
       "status": "content_drafted",
       "series": null,
       "what": null,
-      "recapPending": true,
+      "recapPending": false,
       "speakers": [],
       "topics": [],
       "companies": [],

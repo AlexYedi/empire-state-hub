@@ -51,7 +51,7 @@ for (const f of walk(join(ROOT, "src/data"), [".ts", ".json"])) {
 // (2b) off-the-record phrases in shipped data (build-in-public.md; Rooms SPEC §4.2). The allowlist in
 // gen-rooms is the real protection; this catches a phrase that rode in on an allowed field.
 // "[REDACTED …]" markers pass — they are the redaction, not the leak.
-const OFF_RECORD = /off the record|stays in the room|don['’]t post|not public|confidential/i;
+const OFF_RECORD = /off[- ]the[- ]record|stays in the room|don['’]t post|not public|confidential/i;
 for (const f of walk(join(ROOT, "src/data"), [".ts", ".json"])) {
   const src = readFileSync(f, "utf8");
   src.split("\n").forEach((l, i) => {

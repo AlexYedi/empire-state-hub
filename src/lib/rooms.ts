@@ -18,6 +18,8 @@ import ROOMS_JSON from "@/data/rooms.json";
  *                   must be committed in the pipeline repo or it is ignored
  *   extra_post_ids  optional · Content Drafts page ids to attach when a published post has no Event relation
  *                   (still must be `published` with a Published URL)
+ *   takeaways       optional · `true` exports this room's post_event_brief takeaways. Off by default: briefs are
+ *                   private working notes, so a human reads the room's lines before opting it in
  *   publish         optional · `false` holds the room out of rooms.json entirely
  */
 export const RoomOverlaySchema = z.object({
@@ -28,6 +30,7 @@ export const RoomOverlaySchema = z.object({
   what: z.string().optional(),
   carousel: z.string().optional(),
   extra_post_ids: z.array(z.string()).optional(),
+  takeaways: z.boolean().optional(),
   publish: z.boolean().optional(),
 });
 export type RoomOverlay = z.infer<typeof RoomOverlaySchema>;

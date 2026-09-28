@@ -12,7 +12,7 @@
 //   room      name · date · location · status (Events row). NEVER Event Description / Calendar ID.
 //   speakers  People on the event with Role Context ∩ {speaker, host, organizer}: name · title ·
 //             company · LinkedIn URL. Empty Role Context = dropped + reported (fail closed).
-//   takeaways post_event_brief sections Quick Take · The Thesis · first 5 Insights · Tools Mentioned.
+//   takeaways OPT-IN per room (overlay `takeaways: true`). post_event_brief sections Quick Take · The Thesis · first 5 Insights · Tools Mentioned.
 //             Quote Bank / Hot Takes / Anecdotes / Speaker Map / People & Outreach / Open Loops are
 //             never read into the output. Quote blocks and quote-led lines are dropped.
 //   posts     Content Drafts of type linkedin_post_{post,pre,synthesis} with Content Status =
@@ -34,7 +34,23 @@ export const POST_KINDS = {
   linkedin_post_post: "recap",
   linkedin_post_synthesis: "synthesis",
 };
-export const OFF_RECORD = /off the record|stays in the room|don['’]t post|not public|confidential/i;
+export const OFF_RECORD = /off[- ]the[- ]record|stays in the room|don['’]t post|not public|confidential/i;
+// A brief that states a no-record room norm anywhere (even outside the exported sections) exports
+// NO takeaways for that room — the posts Alex chose to publish still show (fail closed, room level).
+export const ROOM_NORM = /off[- ]the[- ]record|nothing is recorded|chatham house/i;
+// Takeaway lines are internal brief prose: drop any line that reads as a working note rather than a
+// public summary — confidence tags, timestamps, the author's own name/voice, recording references,
+// money figures, brief cross-references.
+const INTERNAL_LINE =
+  /^\s*(?:HIGH|MED|LOW)\b|\(\s*(?:HIGH|MED|LOW)\b|~?\b\d{1,3}:\d{2}\b|\bAlex\b|\byour (?:exact|own)\b|\b(?:pre|post)-event brief\b|\bshipped as\b|\bpinned\b|\bsynthesis candidate\b|\bdocumentarian\b|\brecord(?:ed|ing)\b|\btranscri(?:pt|bed)\b|\bdon['’]t publish\b|\bunsourced\b|\$\s?\d/i;
+/** Quoted speech: a double- or single-quoted span of 3+ words. Short scare-quoted terms pass. */
+export function hasQuotedSpeech(s) {
+  const spans = [
+    ...s.matchAll(/["“]([^"“”]+)["”]/g),
+    ...s.matchAll(/(?:^|[\s(—–-])['‘]([^'’]+?)['’](?=[\s.,;:)!?—–-]|$)/g),
+  ];
+  return spans.some((m) => m[1].trim().split(/\s+/).length >= 3);
+}
 const EMAIL = /[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)*\.[A-Za-z]{2,}/;
 // Hosts that are workspace-private or internal tooling — never a "source" for a public reader.
 const PRIVATE_HOST =
@@ -105,6 +121,10 @@ const LIST_TYPES = new Set(["bulleted_list_item", "numbered_list_item"]);
 function cleanTakeaway(s, report) {
   const t = collapse(stripEditorNotes(s));
   if (!t || isQuoteLed(t)) return null;
+  if (INTERNAL_LINE.test(t) || hasQuotedSpeech(t)) {
+    report.noteDrops = (report.noteDrops ?? 0) + 1;
+    return null;
+  }
   if (OFF_RECORD.test(t) || EMAIL.test(t)) {
     report.phraseDrops++;
     return null;
@@ -114,6 +134,11 @@ function cleanTakeaway(s, report) {
 
 export async function extractTakeaways(blocks, source, report) {
   const secs = await sections(blocks, source);
+  const allText = [...blocks, ...secs.flatMap((s) => s.blocks)].map((b) => blockText(b)).join("\n");
+  if (ROOM_NORM.test(allText)) {
+    report.normHeld = (report.normHeld ?? 0) + 1;
+    return null;
+  }
   const out = { quickTake: [], thesis: [], insights: [], tools: [] };
   for (const { key, match, max } of TAKEAWAY_SECTIONS) {
     const sec = secs.find((s) => match.test(s.heading));
@@ -130,6 +155,30 @@ export async function extractTakeaways(blocks, source, report) {
   }
   const any = Object.values(out).some((v) => v.length);
   return any ? out : null;
+}
+
+// ---------- speaker fields (People rows carry research notes inline) ----------
+const TITLE_NOTE =
+  /\b(?:confirm(?:ed)?|unconfirmed|unverified|verify|inferred|TBC|TBD|event page|invite listed|sources inconsistent|reported as|Alex)\b/i;
+const TITLE_JUDGMENT = /per public records|personal brand/i;
+/** Strip parenthetical / em-dash research notes from a title; null when a note is a judgment about the
+ *  person or anything note-like survives the strip (fail closed). */
+export function cleanTitle(raw) {
+  if (!raw || TITLE_JUDGMENT.test(raw)) return null;
+  let t = raw.replace(/\s*\(([^()]*)\)/g, (m, inner) => (TITLE_NOTE.test(inner) ? "" : m));
+  t = t
+    .split(/\s+—\s+/)
+    .filter((seg, i) => i === 0 || !TITLE_NOTE.test(seg))
+    .join(" — ");
+  t = collapse(t);
+  return !t || TITLE_NOTE.test(t) ? null : t;
+}
+/** A public speaker needs a full name: placeholders ("Michael (Datadog) — last name TBC", a first name
+ *  plus a company in parentheses) are dropped. */
+export function publicName(raw) {
+  if (!raw || /\b(?:TBC|TBD|unknown)\b|—/i.test(raw)) return null;
+  const bare = collapse(raw.replace(/\([^()]*\)/g, ""));
+  return bare.split(" ").length >= 2 ? raw : null;
 }
 
 // ---------- first comment ----------
@@ -170,6 +219,7 @@ export function cleanFirstComment(rawLines, variant, report) {
   const out = [];
   for (let line of joined) {
     if (/^\(/.test(line)) continue; // "(Add: …)" — a parenthetical note to the editor, not copy
+    if (/\bAlex['’]s\b|\boptional\b|\bswap\b|\bonce posted\b/i.test(line)) continue; // editor notes in third person
     const vm = line.match(VARIANT_ONLY);
     if (vm) {
       const v = (vm[1] || vm[2]).toUpperCase();
@@ -317,11 +367,16 @@ export async function buildRooms({ overlay, source, committed, now }) {
       }
       const pubRoles = PUBLIC_ROLES.filter((x) => roles.includes(x));
       if (!pubRoles.length) continue;
+      const name = publicName(titleOf(p));
+      if (!name) {
+        report.nameDrops = (report.nameDrops ?? 0) + 1;
+        continue;
+      }
       const companyId = relationIds(prop(p, "Company"))[0];
       const li = urlValue(prop(p, "LinkedIn URL"));
       speakers.push({
-        name: titleOf(p),
-        title: richText(prop(p, "Current Title")) || null,
+        name,
+        title: cleanTitle(richText(prop(p, "Current Title"))),
         company: companyId ? titleOf(await page(companyId)) || null : null,
         linkedin: li && /^https:\/\/([a-z]+\.)?linkedin\.com\//i.test(li) ? li : null,
         roles: pubRoles,
@@ -346,10 +401,14 @@ export async function buildRooms({ overlay, source, committed, now }) {
     const brief = drafts
       .filter((d) => selectName(prop(d, "Content Type")) === "post_event_brief" && onEvent(d))
       .sort((a, b) => (b.last_edited_time ?? "").localeCompare(a.last_edited_time ?? ""))[0];
+    // Briefs are private working documents (analyst notes, content strategy, job-search leads), so
+    // takeaways are OPT-IN per room: `takeaways: true` in the overlay, set only after a human has read
+    // that room's exported lines. Default = none leave Notion (fail closed).
     let takeaways = null;
     if (brief) {
       r.brief = true;
-      takeaways = await extractTakeaways(await source.getBlocks(brief.id), source, report);
+      if (entry.takeaways === true) takeaways = await extractTakeaways(await source.getBlocks(brief.id), source, report);
+      else report.takeawaysOff = (report.takeawaysOff ?? 0) + 1;
     }
 
     // posts — published + URL, on the event or named in the overlay
@@ -404,7 +463,7 @@ export async function buildRooms({ overlay, source, committed, now }) {
       status: selectName(prop(ev, "Event Status")),
       series: entry.series ?? null,
       what: entry.what ?? null,
-      recapPending: !takeaways,
+      recapPending: !takeaways && !posts.some((p) => p.kind === "recap" && !p.roundup),
       speakers,
       topics,
       companies,
@@ -533,7 +592,7 @@ async function main() {
     `totals: speakers ${t("speakers")} · posts ${t("posts")} · first comments ${t("firstComments")} · carousels ${t("carousels")} · briefs ${report.rooms.filter((r) => r.brief).length} · assets ${assets.size}`,
   );
   console.log(`Role Context gaps: ${gaps.length} room(s), ${t("noRole")} linked people with no Role Context (dropped, fail closed)`);
-  console.log(`phrase/contact lines dropped: ${report.phraseDrops}`);
+  console.log(`phrase/contact lines dropped: ${report.phraseDrops} · working-note/quote takeaway lines dropped: ${report.noteDrops ?? 0} · rooms with takeaways held by a no-record room norm: ${report.normHeld ?? 0} · briefs not opted in (takeaways: true): ${report.takeawaysOff ?? 0} · placeholder-name speakers dropped: ${report.nameDrops ?? 0}`);
   const scan = safetyScan(data);
   console.log(`output scan: ${scan.phrases} off-the-record phrase hit(s) · ${scan.emails} email literal(s)`);
 

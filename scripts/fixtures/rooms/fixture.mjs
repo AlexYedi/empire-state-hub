@@ -259,7 +259,7 @@ export const COMMITTED = new Set([
 ]);
 
 export const OVERLAY = [
-  { slug: "2026-09-16-agents-in-production-nyc", series: "Test Series", what: "A room about agents in production." },
+  { slug: "2026-09-16-agents-in-production-nyc", series: "Test Series", what: "A room about agents in production.", takeaways: true },
   {
     slug: "2026-06-24-nyc-ai-demos-10",
     notion_page_id: "389d3699-c2db-81e0-9fd4-feced66c7501",
