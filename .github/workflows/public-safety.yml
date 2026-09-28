@@ -1,0 +1,30 @@
+# Public-safety gate (YED-236): the hub is public, and src/data/system-map*.json is generated from the pipeline
+# repo's file graph. This runs `pnpm check`'s two verifiers on every PR and push to main — with the pipeline
+# repo checked out, so verify-system-map's privacy check (no gitignored pipeline path in the public map)
+# actually runs instead of skipping. Node builtins only; no install step needed.
+name: public-safety
+on:
+  pull_request:
+  push:
+    branches: [main]
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: AlexYedi/Empire_State_Events_Pipeline_Take_3
+          path: _pipeline
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: verify-public-safe
+        run: node scripts/verify-public-safe.mjs
+      - name: verify-system-map (incl. YED-236 privacy check)
+        env:
+          PIPELINE_DIR: ${{ github.workspace }}/_pipeline
+        run: |
+          node scripts/verify-system-map.mjs | tee /tmp/vsm.txt
+          grep -q "privacy ✓" /tmp/vsm.txt || { echo "::error::privacy check did not run"; exit 1; }
