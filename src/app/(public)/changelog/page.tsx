@@ -21,10 +21,10 @@ export default function ChangelogPage() {
             : "mt-4 font-mono text-3xl font-semibold tracking-tight sm:text-4xl"
         }
       >
-        {ed ? "Two months, one reset." : "Build log."}
+        {ed ? "Five months, one reset." : "Build log."}
       </h1>
       <p className="mt-3 font-mono text-sm text-muted">
-        {CHANGELOG.commits} commits · {CHANGELOG.span}
+        {CHANGELOG.commits} commits · {CHANGELOG.span} · milestones curated through {CHANGELOG.curatedThrough}
       </p>
 
       <ol className="mt-12 space-y-8 border-l border-border pl-6">

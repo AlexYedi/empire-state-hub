@@ -1,5 +1,7 @@
 {
   "intro": "Thirteen build arcs — the sprints behind the system, grouped into five themes. Each theme opens with the foundation it rests on, then the arcs built on top. Each arc is a thesis, not just a feature: the what, the why, what V1 deliberately doesn't do yet, and how it maps to the data, eval, and governance stack that enterprises spend millions standing up.",
+  "asOf": "2026-09-18",
+  "sinceNote": "Written before the 2026-09-28 complexity reset, which retired some pieces described below: the trend and voice scanners (role-radar remains), /morning-refresh, the Gemini judge seat (the judge is now one on-demand Sonnet reviewer), and the /ops rigor and market-intel dashboards. The System page shows what is live today.",
   "themes": [
     {
       "id": "intelligence",

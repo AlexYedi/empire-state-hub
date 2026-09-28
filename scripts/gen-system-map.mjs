@@ -2,7 +2,7 @@
 // gen-system-map.mjs — build src/data/system-map.json (+ system-map.files.json) for the public
 // /architecture map. Facts come from the pipeline repo (frontmatter, the ADR-8 system graph, git
 // dates, roadmap.md); judgement comes from src/data/system-map.curated.json and is preserved as-is
-// (merge-don't-clobber, same rule as gen-toolbox). PRD: docs/system-map.prd.md (YED-232).
+// (merge-don't-clobber). PRD: docs/system-map.prd.md (YED-232).
 //
 // Run: pnpm gen:system-map            (PIPELINE_DIR=/path/to/pipeline to override the sibling default)
 // Prints: components + files resolved · patterns matching nothing · unmapped files · overlay entries
@@ -32,7 +32,7 @@ function frontmatter(text) {
   const m = text.match(/^---\n([\s\S]*?)\n---/);
   return m ? m[1] : "";
 }
-// Same scanner gen-toolbox uses (folded / block / wrapped scalars).
+// Frontmatter scanner (folded / block / wrapped scalars).
 function field(block, key) {
   const lines = block.split("\n");
   for (let i = 0; i < lines.length; i++) {
@@ -267,6 +267,9 @@ function main() {
 
     const tools = new Set(c.tools ?? []);
     for (const f of files) for (const t of toolsOf(f)) tools.add(t);
+    // The whole-file mcp__ scan also hits tools a file only mentions to forbid or disable ("NEVER use the
+    // Supabase MCP", a DISABLED Granola banner). The overlay names those in `toolsExclude`, with the reason in why.
+    for (const t of c.toolsExclude ?? []) tools.delete(t);
 
     const firsts = files.map((f) => first.get(f)).filter(Boolean).sort();
     const lasts = files.map((f) => last.get(f)).filter(Boolean).sort();
@@ -339,6 +342,14 @@ function main() {
       "judgement (why, status reasons, edges, build path) is preserved from system-map.curated.json — edit THAT file, then run `pnpm gen:system-map`.",
     generated_at: process.env.GEN_DATE || new Date().toISOString().slice(0, 10),
     source: { pipeline_sha: sha, graph_built_at: meta.built_at ?? null, graph_nodes: nodes.length, graph_edges: edges.length, unmapped_files: unmapped.length },
+    // Pipeline inventory by file type, counted from the same graph — the home page reads these, so the site
+    // has one source of truth for "how big is the system" (replaces the retired toolbox.json / architecture.ts).
+    counts: {
+      skills: nodes.filter((n) => n.subtype === "skill").length,
+      agents: nodes.filter((n) => n.subtype === "agent").length,
+      commands: nodes.filter((n) => n.subtype === "command").length,
+      components: components.length,
+    },
     zones: curated.zones,
     components,
     edges: edgesOut,

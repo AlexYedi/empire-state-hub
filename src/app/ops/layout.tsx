@@ -5,15 +5,9 @@ import Link from "next/link";
 const NAV = [
   { href: "/ops", label: "Overview" },
   { href: "/ops/content", label: "Content" },
-  { href: "/ops/rigor", label: "Rigor" },
   { href: "/ops/events", label: "Events" },
-  { href: "/ops/ideas", label: "Ideas" },
-  { href: "/ops/learning-path", label: "Learning Path" },
-  { href: "/ops/backlog", label: "Backlog" },
   { href: "/ops/entities", label: "Entities" },
-  { href: "/ops/market-intel", label: "Market Intel" },
   { href: "/ops/content-performance", label: "Content Perf" },
-  { href: "/ops/toolbox", label: "Toolbox" },
 ];
 
 export default function OpsLayout({ children }: { children: React.ReactNode }) {

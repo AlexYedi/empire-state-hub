@@ -10,6 +10,7 @@ export function ArchitectureIntro({ map, linear }: { map: SystemMap; linear: Lin
   const { lens } = useLens();
   const stale = map.components.filter((c) => c.status === "stale").length;
   const scaffolded = map.components.filter((c) => c.status === "scaffolded").length;
+  const parked = map.components.filter((c) => c.status === "parked").length;
   const nextAnchor = map.buildPath.anchors.find((a) => a.date >= map.generated_at) ?? map.buildPath.anchors.at(-1);
 
   if (lens === "editorial") {
@@ -24,8 +25,9 @@ export function ArchitectureIntro({ map, linear }: { map: SystemMap; linear: Lin
             being built on top of it next. Pick an arrow and you get what flows along it.
           </p>
           <p>
-            It is deliberately unflattering. Status is derived from the code, not from how I&apos;d like it to look: right now{" "}
-            {stale === 1 ? "one part is" : `${stale} parts are`} <span className="text-amber-500">stale</span> and {scaffolded} are honest scaffolds.
+            It is deliberately unflattering. Status is checked against the code and how often it actually runs, not against how I&apos;d like it to look: right now{" "}
+            {stale === 1 ? "one part is" : `${stale} parts are`} <span className="text-amber-500">stale</span>, {scaffolded}{" "}
+            {scaffolded === 1 ? "is an honest scaffold" : "are honest scaffolds"} and {parked} {parked === 1 ? "is" : "are"} parked.
             The dashed items are the build path — {planned} pieces of planned work, read live from Linear
             {linearLive ? "" : " (offline at the moment, so their state is unknown)"}, the next anchor being{" "}
             <span className="text-fg">{nextAnchor?.label}</span> on {nextAnchor?.date}.

@@ -1,9 +1,13 @@
 // Curated build milestones — the system's real evolution (dated from the project
 // history), plus the raw commit cadence. More readable than raw commit messages.
+// `commits` + `span` = `git rev-list --count <sha>` on the pipeline repo at `countedAt`.
+// Milestones are hand-curated only through `curatedThrough`; the page says so.
 
 export const CHANGELOG = {
-  commits: 414,
-  span: "Apr 9 – Sep 12, 2026",
+  commits: 720,
+  span: "Apr 9 – Sep 28, 2026",
+  countedAt: "d68b480",
+  curatedThrough: "2026-09-12",
   entries: [
     { date: "2026-09-12", title: "Reconciliation as a role", body: "A reconciliation-terminal charter and the git conventions now live in the repo: one live session per worktree, the main checkout never on a feature branch, shared namespaces single-writer, and a stop point to open the PR the same hour. It answers sessions colliding on one checkout, not branches failing to merge." },
     { date: "2026-09-12", title: "Sessions, not branches", body: "Three Claude sessions sharing one working checkout, caught from the inside: a reconciliation pass stashed a sibling session's uncommitted work, watched a branch tip move three times between two commands, and found the main checkout sitting on another session's feature branch. The failure was never branches refusing to merge — it was sessions colliding on one checkout, and that diagnosis is what made the reconciliation rules necessary." },
@@ -13,9 +17,9 @@ export const CHANGELOG = {
     { date: "2026-09-12", title: "Reference check stops misfiring", body: "The dangling-reference check that caps the judge's completeness score no longer mistakes path templates for missing files, and no longer hides real broken references sharing a line with a template. A self-test now asserts the judge's checker and the graph's extractor agree, where that rule had been held only by a comment." },
     { date: "2026-09-12", title: "The inbox as a signal source", body: "Gmail became a first-class market-intelligence source: an allowlisted scan extracts company and product signals from newsletters into the graph, deduplicated on the redirect-resolved article URL so one story cited by four newsletters lands once. Resolving those links also caught two factual errors before they could reach content." },
     { date: "2026-09-11", title: "Event posts become one arc", body: "The pre-event and post-event posts became a single two-part arc: the pre-event post sets the table on the topic, the presenter's perspective, and the broader implications without resolving them, and the post-event post resolves that setup against what was actually said and argued. The research brief also became canonical as one discrete Content Draft rather than being duplicated into the Event page." },
-    { date: "2026-07-31", title: "Toolbox generator", body: "A drift-proof generator scans the live skill, agent, and command set — the counts on this site regenerate from source instead of being hand-typed." },
-    { date: "2026-07-30", title: "Live operator dashboards", body: "A dedicated telemetry project now backs the /ops surfaces: build-rigor on /ops/rigor and the market-intelligence feed on /ops/market-intel." },
-    { date: "2026-07-17", title: "Cross-provider judge", body: "The build-quality judge became a two-provider quorum — a Claude seat plus an independent Gemini seat — so it can't just prefer its own family's work." },
+    { date: "2026-07-31", title: "Toolbox generator", body: "A drift-proof generator scans the live skill, agent, and command set — the counts on this site regenerate from source instead of being hand-typed. (Retired in the 2026-09-28 reset; the counts now come from the system-map generator.)" },
+    { date: "2026-07-30", title: "Live operator dashboards", body: "A dedicated telemetry project now backs the /ops surfaces: build-rigor on /ops/rigor and the market-intelligence feed on /ops/market-intel. (Both dashboards were retired in the 2026-09-28 reset.)" },
+    { date: "2026-07-17", title: "Cross-provider judge", body: "The build-quality judge became a two-provider quorum — a Claude seat plus an independent Gemini seat — so it can't just prefer its own family's work. (Pared back to one on-demand Sonnet reviewer in the 2026-09-28 reset.)" },
     { date: "2026-06-25", title: "Build-rigor + measurement layer", body: "A definition-of-done gate and build-session telemetry: every non-trivial build leaves a durable trace instead of shipping on green checks." },
     { date: "2026-06-12", title: "Empire State Hub", body: "This site — a dual-lens portfolio and live operator cockpit, built on the pipeline's own data." },
     { date: "2026-06-11", title: "Execution-focus window closed", body: "Retired the no-build rule once it inverted, and replaced it with a steering bias: build only what removes real publishing friction." },

@@ -22,6 +22,29 @@ export const META: Meta = {
   medianEngRatePct: 1.0,
 };
 
+// Posts published AFTER the snapshot, from the pipeline's 2026-09-14 per-post pull
+// (.claude/artifacts/post-performance/post-performance-2026-09-14.csv). Totals only: that pull
+// has no viewer demographics, so these posts are NOT folded into the audience breakdown below.
+// Refreshing the whole page needs Alex's LinkedIn SinglePostAnalytics exports (with the
+// demographics tabs) for every post after 2026-08-25 — LinkedIn has no API for them.
+export type SinceSnapshot = {
+  nPosts: number;
+  dateRange: string;
+  pulled: string;
+  impressions: number;
+  engagements: number;
+  medianEngRatePct: number;
+};
+
+export const SINCE_SNAPSHOT: SinceSnapshot = {
+  nPosts: 8,
+  dateRange: "Aug 27 – Sep 10, 2026",
+  pulled: "2026-09-14",
+  impressions: 2145,
+  engagements: 37,
+  medianEngRatePct: 1.2,
+};
+
 export type Stat = { label: string; value: string; sub: string };
 
 export const HEADLINE_STATS: Stat[] = [

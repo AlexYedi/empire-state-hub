@@ -6,7 +6,7 @@ The pipeline turns NYC AI/tech event attendance into research, networking prep, 
 
 ## Why it exists
 
-Most "portfolio sites" are brochures — hand-written claims that drift the moment the underlying work moves on. This one is wired to the source. The tool counts, the changelog, and the operator dashboards all read from the live system, so the site can't quietly lie about what's shipped. That constraint is the point.
+Most "portfolio sites" are brochures — hand-written claims that drift the moment the underlying work moves on. This one is wired to the source. The tool counts and the system map regenerate from the pipeline repo, the operator pages read Notion live, and anything hand-curated (the changelog, the content-performance snapshot) carries its as-of date — so the site can't quietly lie about what's shipped. That constraint is the point.
 
 ## What's behind it
 
@@ -23,14 +23,12 @@ Kept honest on purpose:
 
 **Live**
 - Event research + content pipeline (`/event-deep-research`, `/post-event-content`, pre/post-event content)
-- This hub — public portfolio + `/ops` cockpit
-- `/ops/rigor` — build-rigor telemetry (build sessions + judge runs) over a dedicated PostHog project
-- `/ops/market-intel` — market-intelligence feed over the live graph
-- The toolbox generator — drift-proof, regenerated from source
+- This hub — public portfolio + a small `/ops` cockpit (events, entities, content, content performance)
+- `/architecture` — the system map, generated from the pipeline repo plus a hand-curated overlay
 
 **In progress**
 - Market-Intelligence Engine (Supabase spine — job-search + content lenses)
-- The measurement layer maturing: the cross-provider build-quality judge is *provisional-trusted*, still accruing calibration evidence before it's load-bearing everywhere
+- The build-quality judge — one on-demand Sonnet reviewer, advisory, run when a build warrants it
 
 ## Stack
 
@@ -43,16 +41,15 @@ pnpm install
 pnpm dev          # http://localhost:3000
 ```
 
-Environment variables (PostHog keys, Notion DB ids, Supabase, `OPS_PASSWORD` for the `/ops` gate) live in `.env.local` — see the deployment notes. The `/ops/*` cockpit is password-gated; the public portfolio pages are open.
+Environment variables (Notion token + DB ids, Linear key, `OPS_PASSWORD` for the `/ops` gate) live in `.env.local` — `.env.example` lists every key the app reads, and nothing else. The `/ops/*` cockpit is password-gated; the public portfolio pages are open.
 
 ### After adding a tool
 
 When a skill, agent, or command is added or removed, regenerate the live catalog so the site's numbers stay honest:
 
 ```bash
-pnpm gen:toolbox        # rescans .claude/{skills,agents,commands}, updates src/data/toolbox.json
 pnpm gen:system-map     # rebuilds src/data/system-map{,.files}.json for /architecture from the pipeline's frontmatter,
                         # ADR-8 graph, roadmap and git dates; curated reasoning lives in src/data/system-map.curated.json
 ```
 
-New tools land in group **"Other"** with no tier — categorize them by editing the item's `group`/`tier`; the generator preserves your edits on the next run.
+The home page's skill / agent / command counts are read from `system-map.json` (`counts`), so this one command keeps every number on the site honest. New files that match no curated component show up in the run's "unmapped" report — add them to a component's `files` in the curated overlay.

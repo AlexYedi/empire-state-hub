@@ -7,7 +7,6 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "gen:toolbox": "node scripts/gen-toolbox.mjs",
     "check": "node scripts/verify-public-safe.mjs && node scripts/verify-system-map.mjs",
     "verify:public-safe": "node scripts/verify-public-safe.mjs",
     "gen:system-map": "node scripts/gen-system-map.mjs",
