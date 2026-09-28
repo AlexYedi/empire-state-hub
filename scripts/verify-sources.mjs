@@ -16,7 +16,6 @@ const NOTION_DBS = {
   Companies: process.env.NOTION_DB_COMPANIES,
   Topics: process.env.NOTION_DB_TOPICS,
   "Content Drafts": process.env.NOTION_DB_CONTENT_DRAFTS,
-  "Project Ideas": process.env.NOTION_DB_PROJECT_IDEAS,
 };
 
 console.log("== Notion ==");

@@ -13,5 +13,4 @@ export const DB = {
   companies: required("NOTION_DB_COMPANIES"),
   topics: required("NOTION_DB_TOPICS"),
   contentDrafts: required("NOTION_DB_CONTENT_DRAFTS"),
-  projectIdeas: required("NOTION_DB_PROJECT_IDEAS"),
 } as const;
