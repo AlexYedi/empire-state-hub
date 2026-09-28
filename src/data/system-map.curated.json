@@ -83,7 +83,7 @@
       "summary": "A machine-global lock on an event's Notion namespace for the duration of a run.",
       "why": {
         "text": "Git worktrees isolate checkouts but not Notion. On 2026-09-20 two sessions ran the same event and disagreed on two facts; duplicate effort is cheap, contradictory records that later runs read as fact are not. So a run claims the event first (exit 3 = someone else holds it → go read-only), claims expire after 4h so a crashed run can't lock an event, and the run-close gates now key on the same claim to know a run is still in progress.",
-        "source": "CLAUDE.md § Git conventions (YED-213, 2026-09-24); .claude/notes/stop-gate-per-turn-2026-09-27.md"
+        "source": "CLAUDE.md § Git conventions (YED-213, 2026-09-24); docs/archive/notes/stop-gate-per-turn-2026-09-27.md"
       },
       "build": {
         "refs": [
@@ -94,7 +94,7 @@
       "files": [
         ".claude/hooks/event-claim.py",
         ".claude/evals/test_event_claim.py",
-        ".claude/hooks/_run_in_progress.sh"
+        "docs/archive/notes/stop-gate-per-turn-2026-09-27.md"
       ]
     },
     {
@@ -105,7 +105,7 @@
       "reviewed_at": "2026-09-28",
       "why": {
         "text": "The core of the system: an invite goes in, a researched brief on the room comes out. It is one artifact with two layers (ADR-5): a scannable head for the room and a ~45-minute prose Deep Read for the commute. The fan-out — four specialists in parallel, then a synthesizer — runs from the parent thread because the Agent SDK does not let a subagent spawn subagents; designing around that constraint instead of fighting it is what made the pipeline reliable. Since YED-205 the research also writes its Evidence Ledger into the knowledge graph, so the next run compounds instead of restarting.",
-        "source": "docs/adr/ADR-5-event-field-guide.md; .claude/references/sdk-runtime-constraints.md; .claude/notes/yed-205-spec-2026-09-27.md"
+        "source": "docs/adr/ADR-5-event-field-guide.md; .claude/references/platform-constraints.md; docs/archive/notes/yed-205-spec-2026-09-27.md"
       },
       "build": {
         "refs": [
@@ -134,21 +134,17 @@
         ".claude/agents/research/event-research-synthesizer.md",
         ".claude/agents/research/knowledge-conditioning.md",
         ".claude/agents/content/field-guide-renderer.md",
-        ".claude/agents/ops/notion-writer.md",
-        ".claude/references/sdk-runtime-constraints.md",
         "docs/adr/ADR-5-event-field-guide.md",
         "docs/adr/ADR-6-research-brief-placement.md",
-        ".claude/notes/yed-205-spec-2026-09-27.md",
-        ".claude/skills/research-methodology/**",
+        "docs/archive/notes/yed-205-spec-2026-09-27.md",
         ".claude/evals/score_entities.py",
         ".claude/evals/score_events.py",
         ".claude/evals/pronoun-fidelity-render-2026-09-18.md",
-        ".claude/proposals/event-field-guide.md",
-        ".claude/proposals/field-guide-spike-daytona.md",
-        ".claude/notes/deep-read-batch-wiring-fix.md",
-        ".claude/references/research-analyst-prompt.md",
-        ".claude/notes/ai-mafia-roster-2026-09-21.md",
-        ".claude/notes/gtm-world-tour-intake-2026-09-23.md"
+        "docs/archive/proposals/event-field-guide.md",
+        "docs/archive/proposals/field-guide-spike-daytona.md",
+        "docs/archive/notes/deep-read-batch-wiring-fix.md",
+        "docs/archive/notes/ai-mafia-roster-2026-09-21.md",
+        "docs/archive/notes/gtm-world-tour-intake-2026-09-23.md"
       ]
     },
     {
@@ -175,12 +171,12 @@
         ".claude/skills/pre-event-content/**",
         ".claude/skills/steering-interview/**",
         ".claude/references/outreach-templates.md",
-        ".claude/skills/marketing-autoresearch/**",
-        ".claude/skills/project-ideation/**",
-        ".claude/proposals/steering-interview-v2-collaborative.md",
-        ".claude/notes/steering-v2-smoke-test-2026-08-29.md",
+        "docs/archive/skills/marketing-autoresearch/**",
+        "docs/archive/skills/project-ideation/**",
+        "docs/archive/proposals/steering-interview-v2-collaborative.md",
+        "docs/archive/notes/steering-v2-smoke-test-2026-08-29.md",
         ".claude/scripts/check_aimed_questions.py",
-        ".claude/references/portfolio-tracker.md"
+        "docs/archive/skills/project-ideation/portfolio-tracker.md"
       ]
     },
     {
@@ -219,9 +215,9 @@
         ".claude/evals/ingest-elevenlabs-scorecard.md",
         ".claude/evals/transcription-quality-scorecard.md",
         ".claude/evals/post-event-brief-template-evidence.md",
-        ".claude/proposals/post-event-hubspot-step.md",
+        "docs/archive/proposals/post-event-hubspot-step.md",
         ".claude/skills/pattern-synthesis/**",
-        ".claude/proposals/content-pipeline-v2-stage2.md",
+        "docs/archive/proposals/content-pipeline-v2-stage2.md",
         ".claude/references/supercut.md"
       ],
       "toolsExclude": [
@@ -257,9 +253,7 @@
         ".claude/skills/content-patterns/**",
         ".claude/skills/update-voice-and-style.md",
         ".claude/skills/update-anti-patterns.md",
-        ".claude/skills/brand-storytelling/**",
-        ".claude/skills/copywriting/**",
-        ".claude/notes/eric-coldoutboundskills-harvest-2026-09-24.md",
+        "docs/archive/notes/eric-coldoutboundskills-harvest-2026-09-24.md",
         ".claude/skills/tag-outcome/**"
       ]
     },
@@ -307,7 +301,7 @@
       "summary": "/scan-roles — pulls roles from public ATS boards (Greenhouse, Lever, Ashby, Workable), dedupes on the ATS job id, scores them against Alex's target-role profile, lands them in a Notion Roles DB and mirrors each approved role into the graph as a role-posted event.",
       "why": {
         "text": "The job-search radar, and since YED-149 (2026-09-27) the graph's busiest producer: role postings are most of the graph's event rows. Every approved role lands as a role-posted event keyed only by its Notion page, so a rescan writes nothing new, and it waited until the Notion side had proved its dedup across five scans before touching the shared graph. The trend and voice scanners that used to share this box were retired in the 2026-09-28 reset.",
-        "source": ".claude/skills/role-radar/SKILL.md (Step 5.5); .claude/notes/yed-149-spec-2026-09-27.md; hub-system-audit 2026-09-28 §2 (graph GET: 174 of 295 event rows)"
+        "source": ".claude/skills/role-radar/SKILL.md (Step 5.5); docs/archive/notes/yed-149-spec-2026-09-27.md; hub-system-audit 2026-09-28 §2 (graph GET: 174 of 295 event rows)"
       },
       "build": {
         "refs": [
@@ -321,7 +315,7 @@
       "files": [
         ".claude/commands/scan-roles.md",
         ".claude/skills/role-radar/**",
-        ".claude/notes/yed-149-spec-2026-09-27.md"
+        "docs/archive/notes/yed-149-spec-2026-09-27.md"
       ],
       "toolsExclude": [
         "claude_ai_Apollo_io MCP"
@@ -354,7 +348,7 @@
         ".claude/scripts/inbox_boundary.py",
         "docs/adr/ADR-7-inbox-signal-source.md",
         ".claude/evals/inbox-miner-cohort-v1.md",
-        ".claude/proposals/yed-161-inbox-boundary-mechanism.md"
+        "docs/archive/proposals/yed-161-inbox-boundary-mechanism.md"
       ],
       "status": {
         "value": "stale",
@@ -430,7 +424,6 @@
         "docs/migration-playbook.md",
         ".claude/references/market-intel-schema.sql",
         ".claude/references/market-intel-backfill.md",
-        ".claude/references/postgres-glossary.md",
         ".claude/references/signal-taxonomy.md",
         "docs/adr/README.md",
         "docs/adr/evidence/**"
@@ -447,7 +440,7 @@
       "reviewed_at": "2026-09-28",
       "why": {
         "text": "Every write to the graph goes through one Python client that hard-fails on contact PII (ADR-9: email and phone never enter the spine — HubSpot holds contact detail). A single chokepoint is cheaper to audit than a Postgres constraint today and can become one later. It also carries the bounded retry that a live run exposed on 2026-09-27, when an intermittent network stall looked like a broken pipeline. The same run exposed the cause: about one in ten fresh network connections from the build machine stalls, so the client now reuses one connection for calls that are safe to repeat and retries anything that failed before it was sent — a 200-role run went from 24 minutes to under one.",
-        "source": "docs/adr/ADR-9-pii-boundary.md; .claude/scripts/spine_client.py (selftest + --check-writers); .claude/notes/yed-149-spec-2026-09-27.md (network bottleneck)"
+        "source": "docs/adr/ADR-9-pii-boundary.md; .claude/scripts/spine_client.py (selftest + --check-writers); docs/archive/notes/yed-149-spec-2026-09-27.md (network bottleneck)"
       },
       "build": {
         "refs": [
@@ -463,7 +456,7 @@
         ".claude/scripts/spine_write.py",
         "docs/adr/ADR-9-pii-boundary.md",
         ".claude/scripts/backfill_people.py",
-        ".claude/proposals/yed-81-sec-pii-guardrails.md"
+        "docs/archive/proposals/yed-81-sec-pii-guardrails.md"
       ]
     },
     {
@@ -493,16 +486,14 @@
         ".claude/scripts/substrate.py",
         ".claude/scripts/identity_probe.py",
         "docs/adr/ADR-10-knowledge-substrate.md",
-        ".claude/notes/knowledge-substrate-review-2026-09-18.md",
-        ".claude/notes/ab-protocol-yed172-2026-09-19.md",
-        ".claude/hooks/ab-reminder.sh",
-        ".claude/hooks/test_ab_reminder.py",
-        ".claude/notes/knowledge-substrate-architecture-2026-09-18.md",
-        ".claude/notes/substrate-handoff-to-home.md",
-        ".claude/notes/substrate-vs-reconciliation-sequencing-2026-09-18.md",
-        ".claude/notes/yed-160-scope-2026-09-17.md",
-        ".claude/notes/yed-217-conditioner-aiming-2026-09-25.md",
-        ".claude/notes/yed-47-premortem-2026-09-27.md",
+        "docs/archive/notes/knowledge-substrate-review-2026-09-18.md",
+        "docs/archive/notes/ab-protocol-yed172-2026-09-19.md",
+        "docs/archive/notes/knowledge-substrate-architecture-2026-09-18.md",
+        "docs/archive/notes/substrate-handoff-to-home.md",
+        "docs/archive/notes/substrate-vs-reconciliation-sequencing-2026-09-18.md",
+        "docs/archive/notes/yed-160-scope-2026-09-17.md",
+        "docs/archive/notes/yed-217-conditioner-aiming-2026-09-25.md",
+        "docs/archive/notes/yed-47-premortem-2026-09-27.md",
         ".claude/references/graph-freeze.md"
       ]
     },
@@ -515,7 +506,7 @@
       "summary": "The one retrieval interface: a lens (event · interview · content) plus seed entities in, a budgeted Context Pack of prior occasions, returning faces and scored claims out.",
       "why": {
         "text": "Consumers should never query tables directly; a lens names what a consumer needs and the interface enforces a token budget and a loud failure (exit 5) when the graph holds claims for these entities but the pack kept none — silent emptiness is how prior knowledge quietly stops compounding. The event lens is live; interview and content lenses are the open consumer work. The job lens is kept out of it on purpose: role postings never appear among an event's prior occasions (hundreds of them would crowd out the handful that matter); a seed company gets one hiring count line instead, and applications and interviews appear nowhere.",
-        "source": ".claude/scripts/retrieve.py; docs/adr/ADR-10-knowledge-substrate.md; .claude/commands/event-deep-research.md Step 1.7a-S; supabase/migrations/0011_job_lens_isolation.sql; .claude/notes/yed-149-spec-2026-09-27.md decision 5"
+        "source": ".claude/scripts/retrieve.py; docs/adr/ADR-10-knowledge-substrate.md; .claude/commands/event-deep-research.md Step 1.7a-S; supabase/migrations/0011_job_lens_isolation.sql; docs/archive/notes/yed-149-spec-2026-09-27.md decision 5"
       },
       "build": {
         "refs": [
@@ -686,7 +677,7 @@
         ".claude/hooks/check-refs.sh",
         ".claude/hooks/check-tombstones.py",
         ".claude/hooks/density-check.sh",
-        ".claude/proposals/third-judge-seat-openai.md",
+        "docs/archive/proposals/third-judge-seat-openai.md",
         ".claude/evals/README.md",
         ".claude/evals/emit-judge-runs.sh",
         ".claude/evals/test_judge_lib.py",
@@ -696,7 +687,7 @@
         ".claude/evals/controls.py",
         ".claude/evals/controls/**",
         ".claude/references/cross-provider-judge.md",
-        ".claude/notes/gemini-judge-triage-2026-09-19.md"
+        "docs/archive/notes/gemini-judge-triage-2026-09-19.md"
       ]
     },
     {
@@ -718,8 +709,7 @@
       },
       "files": [
         ".claude/scripts/build_graph.py",
-        ".claude/hooks/graph-sessionstart.sh",
-        ".claude/hooks/graph-stop.sh",
+        ".claude/hooks/runtime_ledgers.py",
         "docs/adr/ADR-8-system-graph-drift-router.md"
       ]
     },
@@ -749,23 +739,45 @@
         ".claude/references/roadmap.md",
         ".claude/references/build-in-public.md",
         ".claude/references/hook-schema-reference.md",
-        ".claude/references/pipeline-operations-guide.md",
-        ".claude/references/stack-readme.md",
-        ".claude/proposals/empire-state-agentic-architecture-2026-05-15.md",
-        ".claude/proposals/yed-30-step-5-empire-state-backport.md",
-        ".claude/notes/execution-week-frictions.md",
-        ".claude/notes/state-reconciliation-2026-09-12.md",
-        ".claude/notes/open-items-inventory-2026-09-13.md",
-        ".claude/notes/backlog-triage-2026-09-18.md",
+        "docs/archive/proposals/empire-state-agentic-architecture-2026-05-15.md",
+        "docs/archive/proposals/yed-30-step-5-empire-state-backport.md",
+        "docs/archive/notes/execution-week-frictions.md",
+        "docs/archive/notes/state-reconciliation-2026-09-12.md",
+        "docs/archive/notes/open-items-inventory-2026-09-13.md",
+        "docs/archive/notes/backlog-triage-2026-09-18.md",
         ".claude/references/second-fix-stop-rule.md",
         ".claude/hooks/second-fix-nudge.sh",
         "docs/history.md",
         ".claude/references/prd-template.md",
-        ".claude/references/systems-thinking-workflow.md",
         ".claude/references/systems-thinking-pipeline-diagnostic.md"
       ],
       "toolsExclude": [
         "Google Calendar MCP"
+      ]
+    },
+    {
+      "id": "telemetry",
+      "zone": "rigor",
+      "name": "Build-session telemetry",
+      "kind": "hook",
+      "reviewed_at": "2026-09-28",
+      "summary": "The one wired project hook: a Stop hook that appends a metadata-only build_session record (counts, never content) to a gitignored per-session shard, and projects it to PostHog only when a token is set.",
+      "why": {
+        "text": "Every build should leave a trace without anyone remembering to write one; the build journal reads these shards alongside git history. Shards are per session so two sessions never conflict on one file, and since YED-229 (2026-09-28) they live outside git, because appending to a tracked file every turn forced a churn commit on every branch switch. The DoD field fold was retired in the 2026-09-28 reset (contract v2).",
+        "source": ".claude/hooks/build-session-emit.sh; .claude/references/build-session-contract.md; .claude/settings.json (Stop hook)"
+      },
+      "build": {
+        "refs": [
+          "YED-88",
+          "YED-229"
+        ]
+      },
+      "tools": [
+        "PostHog capture"
+      ],
+      "files": [
+        ".claude/hooks/build-session-emit.sh",
+        ".claude/references/build-session-contract.md"
       ]
     },
     {
@@ -802,7 +814,7 @@
       "name": "Build journal & arcs",
       "kind": "script",
       "reviewed_at": "2026-09-28",
-      "summary": "A generator that turns git history and the per-session shards of the one wired project hook (a build-session Stop hook, gitignored) into the Hub's /journal, with a hand-written prose sidecar at break points. Run by hand or via /journal-entry.",
+      "summary": "A generator that turns git history and the build-session telemetry shards into the Hub's /journal, with a hand-written prose sidecar at break points. Run by hand or via /journal-entry.",
       "why": {
         "text": "The facts of the build should instrument themselves (YED-119) so the journal never depends on remembering to write; the prose — what a shipped PR meant — is a deliberate human-authored layer added at each break point, and its lapses are tracked as data.",
         "source": "memory: public build journal at break points; .claude/scripts/build_journal.py"
@@ -814,11 +826,8 @@
       },
       "files": [
         ".claude/scripts/build_journal.py",
-        ".claude/hooks/build-journal-refresh.sh",
         ".claude/commands/journal-entry.md",
-        ".claude/references/journal-entry-prompt.md",
-        ".claude/hooks/build-session-emit.sh",
-        ".claude/references/build-session-contract.md"
+        ".claude/references/journal-entry-prompt.md"
       ]
     },
     {
@@ -1098,6 +1107,12 @@
       "kind": "writes",
       "summary": "Step 5A upserts company, interviewers, topics and a role-posted event with raw PostgREST calls — outside the spine_client guard that every other producer uses (flagged by spine_client --check-writers).",
       "status": "scaffolded"
+    },
+    {
+      "source": "build-journal",
+      "target": "telemetry",
+      "kind": "reads",
+      "summary": "Reads build-session shards alongside git history to reconstruct each day."
     }
   ],
   "buildPath": {
