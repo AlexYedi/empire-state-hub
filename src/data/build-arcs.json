@@ -122,7 +122,7 @@
       "theme": "surface",
       "name": "The Empire State Hub",
       "tagline": "Build in public, honestly.",
-      "what": "A Next.js hub that is both a live ops cockpit (rigor telemetry, market-intel, entities, events, ideas — read from PostHog + Supabase behind a password gate) and a public build-in-public portfolio (the pipeline, the architecture, the changelog, these build arcs), with an editorial/technical lens toggle over shared content.",
+      "what": "A Next.js hub that is both a small ops cockpit (events, entities, content, content performance — read from Notion + Supabase behind a password gate) and a public build-in-public portfolio (the pipeline, the architecture, the changelog, these build arcs), with an editorial/technical lens toggle over shared content.",
       "why": "The work is the credential. A job search targeting AI-native companies is best served by showing an instrumented, honest, running system rather than describing it — and by letting the same content read two ways: a narrative for a hiring manager, the technical detail for an engineer.",
       "value": "One surface that is simultaneously Alex's operating cockpit and his portfolio, with a PII-safety layer so the public side never leaks contacts, and a generated (not hand-maintained) toolbox catalog so the “what I've built” surface can't go stale.",
       "bestPractices": "One lens system over one content source (write once, read two ways) instead of two parallel sites. Design tokens + a component system for consistency. A hard PII boundary between the private cockpit and the public portfolio. Generated-not-authored catalogs so the surface can't drift from reality.",
