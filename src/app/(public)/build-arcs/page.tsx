@@ -42,6 +42,10 @@ export default function BuildArcsPage() {
         {ed ? "The work, in arcs." : "Build arcs."}
       </h1>
       <p className="mt-5 text-lg leading-relaxed text-muted">{BUILD_ARCS.intro}</p>
+      <p className="mt-4 rounded-md border border-border px-4 py-3 text-sm leading-relaxed text-muted">
+        <span className="font-mono text-[11px] uppercase tracking-widest">as of {BUILD_ARCS.asOf}</span>
+        {BUILD_ARCS.sinceNote ? <> · {BUILD_ARCS.sinceNote}</> : null}
+      </p>
 
       {THEMES.map((theme) => {
         const arcs = BUILD_ARCS.arcs.filter((a) => a.theme === theme.id);

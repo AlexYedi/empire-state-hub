@@ -1,7 +1,7 @@
 // Typed loader over the CANONICAL arc data (build-arcs.json). That JSON is the single source of
-// truth — this hub page and the shareable Artifact both derive from it, so they can't drift.
-// To change an arc, edit build-arcs.json; then regenerate the Artifact (see the pipeline repo's
-// gen_build_arcs_artifact.py). Do not hand-edit arc copy in two places again.
+// truth for this page. Arc copy is hand-curated, so it carries an `asOf` date and a `sinceNote`
+// naming what changed after it was written — the page shows both instead of quietly going stale.
+// (The pipeline's gen_build_arcs_artifact.py was retired in the 2026-09-28 reset.)
 
 import data from "./build-arcs.json";
 
@@ -26,6 +26,8 @@ export const THEMES = data.themes as { id: ArcTheme; label: string; blurb: strin
 
 export const BUILD_ARCS = data as unknown as {
   intro: string;
+  asOf: string;
+  sinceNote?: string;
   arcs: BuildArc[];
   throughLine: string;
 };

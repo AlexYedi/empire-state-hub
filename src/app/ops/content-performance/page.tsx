@@ -1,5 +1,6 @@
 import {
   META,
+  SINCE_SNAPSHOT,
   HEADLINE_STATS,
   ROLE_FAMILIES,
   SENIORITY,
@@ -210,6 +211,14 @@ export default function ContentPerformancePage() {
         <p className="mt-1 text-sm text-muted">
           Who the work actually reaches · {META.nPosts} LinkedIn posts · {META.dateRange} ·{" "}
           <span className="text-[11px]">as of {META.asOf}</span>
+        </p>
+        <p className="mt-2 rounded-md border border-border px-3 py-2 text-[12px] leading-relaxed text-muted">
+          Point-in-time snapshot, not live. Since it was taken: {SINCE_SNAPSHOT.nPosts} more posts
+          ({SINCE_SNAPSHOT.dateRange}, pulled {SINCE_SNAPSHOT.pulled}) ·{" "}
+          {SINCE_SNAPSHOT.impressions.toLocaleString("en-US")} impressions · {SINCE_SNAPSHOT.engagements}{" "}
+          engagements · median {SINCE_SNAPSHOT.medianEngRatePct}% eng rate — not included below (no
+          demographics in that pull). Refresh needs LinkedIn post-analytics exports for every post after{" "}
+          Aug 25.
         </p>
       </div>
 

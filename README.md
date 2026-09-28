@@ -6,7 +6,7 @@ The pipeline turns NYC AI/tech event attendance into research, networking prep, 
 
 ## Why it exists
 
-Most "portfolio sites" are brochures — hand-written claims that drift the moment the underlying work moves on. This one is wired to the source. The tool counts, the changelog, and the operator dashboards all read from the live system, so the site can't quietly lie about what's shipped. That constraint is the point.
+Most "portfolio sites" are brochures — hand-written claims that drift the moment the underlying work moves on. This one is wired to the source. The tool counts and the system map regenerate from the pipeline repo, the operator pages read Notion live, and anything hand-curated (the changelog, the content-performance snapshot) carries its as-of date — so the site can't quietly lie about what's shipped. That constraint is the point.
 
 ## What's behind it
 
@@ -41,7 +41,7 @@ pnpm install
 pnpm dev          # http://localhost:3000
 ```
 
-Environment variables (PostHog keys, Notion DB ids, Supabase, `OPS_PASSWORD` for the `/ops` gate) live in `.env.local` — see the deployment notes. The `/ops/*` cockpit is password-gated; the public portfolio pages are open.
+Environment variables (Notion token + DB ids, Linear key, `OPS_PASSWORD` for the `/ops` gate) live in `.env.local` — `.env.example` lists every key the app reads, and nothing else. The `/ops/*` cockpit is password-gated; the public portfolio pages are open.
 
 ### After adding a tool
 
