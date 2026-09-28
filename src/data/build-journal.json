@@ -1,13 +1,37 @@
 {
-  "generated_at": "2026-09-27T23:00:34Z",
+  "generated_at": "2026-09-28T01:22:23Z",
   "since": "2026-07-01",
   "entries": [
     {
       "date": "2026-09-27",
       "headline": "Drew the whole system, then started deleting",
-      "summary": "Shipped the System Map — an interactive two-layer map of everything the pipeline is — and the first thing it did was make the clutter obvious. So the same day became a deletion day: the Pipeline page (a frozen May replay nobody had updated) came off the site, three workflow scaffolds that had sat unwired since May were retired because their jobs already ran elsewhere, and an audience-intelligence ticket the knowledge graph had quietly absorbed was closed. The lesson: a map earns its keep as a deletion tool — less surface means fewer things for a reader, or me, to misread.  — Second ship: researched six NYC events in one batch (brief, long-form deep read and sourced graph claims for each) and rendered seven carousels. Checking the numbers against primary sources caught two stats that had drifted through secondary write-ups (47% → 44%, 78.4% → 56%); both were fixed everywhere before anything posted.",
+      "summary": "Shipped the System Map — an interactive two-layer map of everything the pipeline is — and the first thing it did was make the clutter obvious. So the same day became a deletion day: the Pipeline page (a frozen May replay nobody had updated) came off the site, three workflow scaffolds that had sat unwired since May were retired because their jobs already ran elsewhere, and an audience-intelligence ticket the knowledge graph had quietly absorbed was closed. The lesson: a map earns its keep as a deletion tool — less surface means fewer things for a reader, or me, to misread.  — Second ship: researched six NYC events in one batch (brief, long-form deep read and sourced graph claims for each) and rendered seven carousels. Checking the numbers against primary sources caught two stats that had drifted through secondary write-ups (47% → 44%, 78.4% → 56%); both were fixed everywhere before anything posted.  — Third ship: while regenerating the map I caught it about to publish the names of my private, gitignored files. Nothing leaked; fixed at the source and at the public boundary, with CI now enforcing the check. Then the judge passed my fix and I disagreed: a flaw in the first layer of a privacy control should fail regardless of the backstop. That label dropped the voting seat below its trust bar, so the rule became arithmetic — a new rubric version where a broken privacy layer can't pass, proven by re-judging the original change from pass to flag.",
       "curated": true,
       "shipped": [
+        {
+          "repo": "pipeline",
+          "num": 149,
+          "title": "yed 231 privacy layer cap",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/149"
+        },
+        {
+          "repo": "pipeline",
+          "num": 147,
+          "title": "yed 236 judge fixes",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/147"
+        },
+        {
+          "repo": "pipeline",
+          "num": 146,
+          "title": "yed 236 tracked only",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/146"
+        },
+        {
+          "repo": "pipeline",
+          "num": 145,
+          "title": "yed 157 close docs",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/145"
+        },
         {
           "repo": "pipeline",
           "num": 144,
@@ -136,6 +160,24 @@
         },
         {
           "repo": "hub",
+          "num": 25,
+          "title": "yed 236 ci check",
+          "url": "https://github.com/AlexYedi/empire-state-hub/pull/25"
+        },
+        {
+          "repo": "hub",
+          "num": 24,
+          "title": "yed 236 private guard",
+          "url": "https://github.com/AlexYedi/empire-state-hub/pull/24"
+        },
+        {
+          "repo": "hub",
+          "num": 23,
+          "title": "yed 157 104 map",
+          "url": "https://github.com/AlexYedi/empire-state-hub/pull/23"
+        },
+        {
+          "repo": "hub",
           "num": 22,
           "title": "remove pipeline",
           "url": "https://github.com/AlexYedi/empire-state-hub/pull/22"
@@ -148,6 +190,8 @@
         }
       ],
       "linear": [
+        "YED-104",
+        "YED-157",
         "YED-198",
         "YED-199",
         "YED-205",
@@ -158,17 +202,20 @@
         "YED-224",
         "YED-227",
         "YED-228",
+        "YED-231",
         "YED-232",
+        "YED-235",
+        "YED-236",
         "YED-47"
       ],
       "metrics": {
-        "prs": 23,
-        "commits": 57,
-        "sessions": 124,
-        "tools": 28229,
+        "prs": 30,
+        "commits": 68,
+        "sessions": 163,
+        "tools": 41553,
         "dod_met": true,
         "dod_waived": true,
-        "correction_rounds": 3
+        "correction_rounds": 5
       }
     },
     {
