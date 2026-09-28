@@ -298,10 +298,10 @@
       "name": "Signal scanners",
       "kind": "command",
       "reviewed_at": "2026-09-27",
-      "summary": "/scan-trends, /scan-roles, /scan-voices — three radars over legitimate public sources, human-in-the-loop, writing Notion notes and (trends) graph signals.",
+      "summary": "/scan-trends, /scan-roles, /scan-voices — three radars over legitimate public sources, human-in-the-loop, writing Notion notes and graph events (trends as market signals, roles as role postings).",
       "why": {
-        "text": "Part of the measurement layer's answer to 'what is moving': periodic scans that feed Topics' current-events notes and the trend producer on the graph. Roles is the job-search radar; voices tracks who is saying what. All three present a digest and stop at a human gate before writing.",
-        "source": ".claude/skills/trend-radar/SKILL.md; .claude/skills/role-radar/SKILL.md; .claude/skills/voice-radar/SKILL.md; CLAUDE.md § measurement layer"
+        "text": "Part of the measurement layer's answer to 'what is moving': periodic scans that feed Topics' current-events notes and the graph. Roles is the job-search radar: since YED-149 every approved role also lands in the graph as a role-posted event, keyed only by its Notion page so a rescan writes nothing, and it waited until the Notion side had proved its dedup across five scans before touching the shared graph. Voices tracks who is saying what. All three present a digest and stop at a human gate before writing.",
+        "source": ".claude/skills/trend-radar/SKILL.md; .claude/skills/role-radar/SKILL.md (Step 5.5); .claude/notes/yed-149-spec-2026-09-27.md; .claude/skills/voice-radar/SKILL.md; CLAUDE.md § measurement layer"
       },
       "build": {
         "refs": [
@@ -318,7 +318,8 @@
         ".claude/commands/scan-voices.md",
         ".claude/skills/trend-radar/**",
         ".claude/skills/role-radar/**",
-        ".claude/skills/voice-radar/**"
+        ".claude/skills/voice-radar/**",
+        ".claude/notes/yed-149-spec-2026-09-27.md"
       ]
     },
     {
@@ -467,8 +468,8 @@
       "kind": "script",
       "reviewed_at": "2026-09-27",
       "why": {
-        "text": "Every write to the graph goes through one Python client that hard-fails on contact PII (ADR-9: email and phone never enter the spine — HubSpot holds contact detail). A single chokepoint is cheaper to audit than a Postgres constraint today and can become one later. It also carries the bounded retry that a live run exposed on 2026-09-27, when an intermittent network stall looked like a broken pipeline.",
-        "source": "docs/adr/ADR-9-pii-boundary.md; .claude/scripts/spine_client.py (selftest + --check-writers)"
+        "text": "Every write to the graph goes through one Python client that hard-fails on contact PII (ADR-9: email and phone never enter the spine — HubSpot holds contact detail). A single chokepoint is cheaper to audit than a Postgres constraint today and can become one later. It also carries the bounded retry that a live run exposed on 2026-09-27, when an intermittent network stall looked like a broken pipeline. The same run exposed the cause: about one in ten fresh network connections from the build machine stalls, so the client now reuses one connection for calls that are safe to repeat and retries anything that failed before it was sent — a 200-role run went from 24 minutes to under one.",
+        "source": "docs/adr/ADR-9-pii-boundary.md; .claude/scripts/spine_client.py (selftest + --check-writers); .claude/notes/yed-149-spec-2026-09-27.md (network bottleneck)"
       },
       "build": {
         "refs": [
@@ -535,8 +536,8 @@
       "reviewed_at": "2026-09-27",
       "summary": "The one retrieval interface: a lens (event · interview · content) plus seed entities in, a budgeted Context Pack of prior occasions, returning faces and scored claims out.",
       "why": {
-        "text": "Consumers should never query tables directly; a lens names what a consumer needs and the interface enforces a token budget and a loud failure (exit 5) when the graph holds claims for these entities but the pack kept none — silent emptiness is how prior knowledge quietly stops compounding. The event lens is live; interview and content lenses are the open consumer work.",
-        "source": ".claude/scripts/retrieve.py; docs/adr/ADR-10-knowledge-substrate.md; .claude/commands/event-deep-research.md Step 1.7a-S"
+        "text": "Consumers should never query tables directly; a lens names what a consumer needs and the interface enforces a token budget and a loud failure (exit 5) when the graph holds claims for these entities but the pack kept none — silent emptiness is how prior knowledge quietly stops compounding. The event lens is live; interview and content lenses are the open consumer work. The job lens is kept out of it on purpose: role postings never appear among an event's prior occasions (hundreds of them would crowd out the handful that matter); a seed company gets one hiring count line instead, and applications and interviews appear nowhere.",
+        "source": ".claude/scripts/retrieve.py; docs/adr/ADR-10-knowledge-substrate.md; .claude/commands/event-deep-research.md Step 1.7a-S; supabase/migrations/0011_job_lens_isolation.sql; .claude/notes/yed-149-spec-2026-09-27.md decision 5"
       },
       "build": {
         "refs": [
@@ -1210,7 +1211,13 @@
       "source": "signal-scanners",
       "target": "spine-client",
       "kind": "writes",
-      "summary": "The trend producer writes market signals to the graph (roles producer is P1, YED-149)."
+      "summary": "The trend producer writes market signals through the guarded client."
+    },
+    {
+      "source": "signal-scanners",
+      "target": "substrate",
+      "kind": "writes",
+      "summary": "Role-radar Step 5.5: each approved role becomes one role-posted event with its company, via substrate.py ensure-roles (YED-149)."
     },
     {
       "source": "inbox-miner",
@@ -1253,7 +1260,7 @@
       "source": "retrieve",
       "target": "supabase-graph",
       "kind": "reads",
-      "summary": "Events, roster, claims and signals for the seed entities, under a token budget."
+      "summary": "Events, roster, claims and signals for the seed entities under a token budget; role postings only as a per-company hiring count."
     },
     {
       "source": "topic-intelligence",
