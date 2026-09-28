@@ -15,7 +15,7 @@ The pipeline is built on a few deliberate bets, learned the hard way across two 
 - **Skill-first, not middleware.** The research engine is a set of Claude skills with direct MCP writes to Notion and HubSpot — no n8n, no glue layer that fails in the seams. The predecessor died at the integration layer; this one separates "do great research" from "put it in the right places."
 - **Multi-agent research fan-out.** `/event-deep-research` dispatches parallel specialists (company, person, topic, competitive-signal) from the parent thread, then a synthesis-only agent assembles the brief — shaped around the real SDK constraint that subagents can't spawn subagents.
 - **Systems-thinking as a standing discipline.** A Meadows-grounded diagnostic harness (stocks/flows/loops/leverage points) is used to reason about *why* things stall, not just patch symptoms.
-- **Build better, not faster.** A definition-of-done gate and build-session telemetry put a floor under "done" — non-trivial builds leave a durable trace (spec, issue, adversarial pass) instead of shipping on green checks.
+- **Build better, not faster — without governing the build to death.** Every non-trivial change goes branch → PR with a spec, a linked Linear issue and one adversarial pass, held by the PR template rather than hooks and gates. A heavier rigor layer (a definition-of-done gate, judge seats, run-close gates, a weekly review) was built, measured, and cut back on 2026-09-28 when it had become more of the work than the product.
 
 ## Live vs. in progress
 
@@ -32,7 +32,7 @@ Kept honest on purpose:
 
 ## Stack
 
-Next.js (App Router) · TypeScript · Tailwind · PostHog · Notion + HubSpot (MCP) · Supabase · Linear · Vercel. Discipline, skills, and agents ship via a shared Claude Code plugin that every project inherits.
+Next.js (App Router) · TypeScript · Tailwind · Notion + HubSpot (MCP) · Supabase · Linear · Vercel. Discipline, skills, and agents ship via a shared Claude Code plugin that every project inherits.
 
 ## Running locally
 

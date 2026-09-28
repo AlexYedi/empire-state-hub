@@ -5,7 +5,7 @@
 
 import data from "./build-arcs.json";
 
-export type ArcTheme = "intelligence" | "rigor" | "surface" | "distribution" | "craft";
+export type ArcTheme = "intelligence" | "surface" | "distribution" | "craft";
 
 export type BuildArc = {
   id: string;

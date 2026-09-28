@@ -94,7 +94,7 @@ export type RfEdge = Edge;
 
 // ---------- overview: a fixed zone grid, packed columns inside each zone ----------
 // The lanes read left→right in the order work flows (intake → pipelines → graph → records) with the
-// rigor layer and surfaces underneath. elk was tried here first and scattered the zones by edge
+// operating layer and surfaces underneath. elk was tried here first and scattered the zones by edge
 // count, which made the map illegible at fit-zoom; a fixed grid is the honest choice for six lanes.
 export type GridInput = {
   zones: { id: string; row: 0 | 1 }[];
