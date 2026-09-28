@@ -1,0 +1,143 @@
+[
+  {
+    "slug": "2026-04-27-shortlist-april-founder-showcase",
+    "series": "The Shortlist",
+    "what": "Monthly application-only founder showcase run by The Shortlist: six early-stage NYC founders present what they are building and the roles they are hiring for, followed by a mixer."
+  },
+  {
+    "slug": "2026-05-11-llm-knowledge-bases-ai-memory",
+    "what": "Evening meetup from the AI Alliance, sponsored by IBM and Speedsize, on LLM knowledge bases and memory for AI systems."
+  },
+  {
+    "slug": "2026-05-12-future-of-engineering-leadership",
+    "what": "Panel of senior engineering leaders, hosted by Revelo, on how AI is changing engineering team structures, hiring and delivery.",
+    "speaker_overrides": {
+      "Alec Turnbull": {
+        "title": null,
+        "company": null
+      }
+    }
+  },
+  {
+    "slug": "2026-05-13-fost-new-york",
+    "what": "Two-day API industry conference from Apidays on where APIs meet AI, covering API design for agents, MCP and API governance."
+  },
+  {
+    "slug": "2026-05-14-practical-agent-patterns",
+    "what": "Evening of technical talks and a fireside chat on structuring AI agents in production, with speakers from Headway and Every."
+  },
+  {
+    "slug": "2026-05-21-ai-demo-night-new-york",
+    "series": "AI Demo Night",
+    "what": "Recurring live-demo night organized by ClickHouse with Langfuse, LibreChat and Docker: builders give five-minute demos of working AI projects, no slides."
+  },
+  {
+    "slug": "2026-05-26-scaling-enterprise-ai-agents",
+    "what": "Evening panel hosted by Alumni Ventures and OpenHands on deploying AI agents in the enterprise: security, privacy, governance and reliability. Speakers from OpenHands, Vercel, NVIDIA and AMD."
+  },
+  {
+    "slug": "2026-05-27-agents-and-mcp-for-postgres",
+    "what": "NYC Postgres meetup talk at Google on how AI agents use the Model Context Protocol (MCP) to query and reason over Postgres data."
+  },
+  {
+    "slug": "2026-06-02-fin-x-clay-scaling-cx",
+    "what": "Evening session from Fin and Clay on bringing support, success and sales together around AI customer agents."
+  },
+  {
+    "slug": "2026-06-03-nyc-gtm-ai-masterclass-5",
+    "series": "NYC GTM+AI Masterclass",
+    "what": "NY Tech Week edition of the NYC GTM Community masterclass, held at Insight Partners, on moving from solo AI-assisted go-to-market work to team- and network-wide GTM systems."
+  },
+  {
+    "slug": "2026-06-04-2x-ai-tools",
+    "what": "Talk from Fin's product leadership on how company-wide AI tooling changed its product velocity and led to a rebuild of its helpdesk, with a guest speaker from Anthropic."
+  },
+  {
+    "slug": "2026-06-09-marketing-engineer-meetup",
+    "what": "Meetup hosted by WorkOS and Bond AI on the marketing engineer role, with speakers from Profound, Ramp, Clay, Cursor, WorkOS and Knock on using AI to build marketing systems."
+  },
+  {
+    "slug": "2026-06-23-daytona-ai-builders",
+    "series": "Daytona AI Builders",
+    "what": "Daytona's AI engineering meetup, co-hosted with Datadog, with talks from Daytona, Oracle, Blacksmith and Anchor Browser on agent infrastructure and testing."
+  },
+  {
+    "slug": "2026-06-24-nyc-ai-demos-10",
+    "notion_page_id": "389d3699c2db81e09fd4feced66c7501",
+    "series": "NYC AI Demos",
+    "what": "Tenth NYC AI Demos, at The Refinery at Domino in Brooklyn: startups selected by venture firms give five-minute live demos. Hosted by Pensar with Tech:NYC and Two Trees.",
+    "extra_post_ids": [
+      "389d3699c2db81d1a1f6dfb3d1eed792",
+      "38ad3699c2db81e690bfcb6b304c3462"
+    ]
+  },
+  {
+    "slug": "2026-06-25-agents-behaving-badly",
+    "what": "Panel at Datadog's New York office on evaluating AI agents in production: reliability, regressions and drift, with researchers from Meta and Arklex.AI."
+  },
+  {
+    "slug": "2026-06-26-voice-ai-agents-hackathon",
+    "what": "Two-day voice AI hackathon run by Agora and ScaleDown AI: a kickoff night of lightning talks and team formation, then a full build day with demos and judging.",
+    "location": "Amazon, New York"
+  },
+  {
+    "slug": "2026-06-30-gtm-eng-nyc-coding-agents",
+    "series": "GTM Eng NYC",
+    "what": "Lightning talks hosted by Deepline and Ramp: GTM practitioners from Ramp, Modal, Notion, OpenAI and Attention on using coding agents to build go-to-market systems."
+  },
+  {
+    "slug": "2026-07-28-mcp-release-party",
+    "what": "Release party from the Agentic AI Foundation (AAIF) for the 2026-07-28 MCP specification, with talks on the stateless spec, evaluating an MCP server and MCP authorization."
+  },
+  {
+    "slug": "2026-08-12-revgenius-irl-hype-to-revenue",
+    "series": "RevGenius",
+    "what": "In-person RevGenius panel and happy hour at Spara's office on moving AI in revenue teams from hype to results."
+  },
+  {
+    "slug": "2026-08-24-shortlist-august-founder-showcase",
+    "series": "The Shortlist",
+    "what": "Monthly application-only founder showcase run by The Shortlist: six seed-to-Series B founders present their companies and open roles, followed by a mixer."
+  },
+  {
+    "slug": "2026-08-27-nyc-gtm-leaders-vol-1",
+    "series": "NYC GTM Leaders",
+    "what": "Small evening for GTM leaders on standing out when every channel is full of AI-generated outreach: three short talks and a working session. Hosted by Vibranium Labs, MindStudio and Bond AI."
+  },
+  {
+    "slug": "2026-09-01-nyc-voice-ai-meetup",
+    "what": "Evening meetup from AssemblyAI and LiveKit, co-hosted by Boardy: a live demo of realtime speech-to-text, then a panel on shipping voice agents in production."
+  },
+  {
+    "slug": "2026-09-08-glm-5-3-exec-briefing",
+    "what": "Online briefing on the GLM-5.3 model with speakers from Baseten and Artificial Analysis."
+  },
+  {
+    "slug": "2026-09-09-daytona-ai-builders",
+    "series": "Daytona AI Builders",
+    "what": "Daytona's AI engineering meetup with WorkOS, You.com and Veris AI: short talks on reinforcement learning for code models, self-improving agents, simulated environments and sandboxes."
+  },
+  {
+    "slug": "2026-09-14-leaddev-new-york-meetup",
+    "series": "LeadDev New York",
+    "what": "LeadDev New York community meetup, an LDX3 eXpress evening sponsored by Datadog: two talks on engineering leadership and a panel on build versus buy in the age of AI coding."
+  },
+  {
+    "slug": "2026-09-16-postgres-tuning-in-the-age-of-ai",
+    "what": "Talk from pganalyze on giving AI the Postgres performance and configuration context it needs to tune queries safely, including pganalyze's MCP server."
+  },
+  {
+    "slug": "2026-09-17-signal-rich-action-poor",
+    "series": "RevGenius",
+    "what": "Online RevGenius panel with leaders from Airspeed, Clay, HubSpot and Apollo on how revenue teams turn signals into completed actions."
+  },
+  {
+    "slug": "2026-09-23-agentic-gtm-grok-bot-clay",
+    "what": "Clay livestream with Growth Engine X and Clay's growth team on using AI agents to run daily outbound operations."
+  },
+  {
+    "slug": "2026-09-23-gtm-world-tour-new-york",
+    "what": "New York stop of the GTM World Tour, a ten-city go-to-market event series from BetterContact and Scalantec, held at Clay's office.",
+    "location": "Clay HQ, New York"
+  }
+]

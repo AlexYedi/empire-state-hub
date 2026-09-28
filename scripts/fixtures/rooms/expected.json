@@ -1,0 +1,147 @@
+{
+  "generated_at": "2026-09-28T00:00:00.000Z",
+  "rooms": [
+    {
+      "slug": "2026-09-16-agents-in-production-nyc",
+      "name": "Agents in Production: NYC",
+      "date": "2026-09-16",
+      "location": "Some Venue, New York",
+      "status": "post_complete",
+      "series": "Test Series",
+      "what": "A room about agents in production.",
+      "recapPending": false,
+      "speakers": [
+        {
+          "name": "Sam Speaker",
+          "title": "Head of Platform",
+          "company": "Acme AI",
+          "linkedin": "https://www.linkedin.com/in/sam-speaker",
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Hana Host",
+          "title": null,
+          "company": null,
+          "linkedin": null,
+          "roles": [
+            "host"
+          ]
+        }
+      ],
+      "topics": [
+        "Agent Reliability"
+      ],
+      "companies": [
+        "Acme AI"
+      ],
+      "takeaways": {
+        "quickTake": [
+          "Reliability, not capability, was the through-line."
+        ],
+        "thesis": [
+          "Evals are the new unit tests."
+        ],
+        "insights": [
+          "Insight one",
+          "Insight two",
+          "Insight three",
+          "Insight four",
+          "Insight five"
+        ],
+        "tools": [
+          "LangGraph",
+          "Braintrust"
+        ]
+      },
+      "carousel": null,
+      "posts": [
+        {
+          "kind": "preview",
+          "url": "https://www.linkedin.com/posts/preview-456",
+          "roundup": false,
+          "firstComment": [
+            "Primer on agent evals (https://example.com/primer)",
+            "Further reading: http://clay.com/blog"
+          ],
+          "carousel": null
+        },
+        {
+          "kind": "preview",
+          "url": "https://www.linkedin.com/posts/roundup-789",
+          "roundup": true,
+          "firstComment": null,
+          "carousel": null
+        },
+        {
+          "kind": "recap",
+          "url": "https://www.linkedin.com/posts/recap-123",
+          "roundup": false,
+          "firstComment": [
+            "The talk slides: https://example.com/slides",
+            "The host's recap: https://www.linkedin.com/posts/host-recap-1",
+            "The paper: https://arxiv.org/abs/2501.00001",
+            "A-only link: https://example.com/variant-a",
+            "The event page: https://example.com/event"
+          ],
+          "carousel": {
+            "pdf": "/rooms/demo-dir/post-event-carousel.pdf",
+            "preview": null
+          }
+        }
+      ]
+    },
+    {
+      "slug": "2026-09-16-another-room-same-night",
+      "name": "Another Room Same Night",
+      "date": "2026-09-16",
+      "location": "Other Venue, New York",
+      "status": null,
+      "series": null,
+      "what": null,
+      "recapPending": true,
+      "speakers": [],
+      "topics": [],
+      "companies": [],
+      "takeaways": null,
+      "carousel": null,
+      "posts": [
+        {
+          "kind": "preview",
+          "url": "https://www.linkedin.com/posts/roundup-789",
+          "roundup": true,
+          "firstComment": null,
+          "carousel": null
+        }
+      ]
+    },
+    {
+      "slug": "2026-06-24-nyc-ai-demos-10",
+      "name": "NYC AI Demos #10",
+      "date": "2026-06-24",
+      "location": "Demo Hall",
+      "status": "content_drafted",
+      "series": null,
+      "what": null,
+      "recapPending": false,
+      "speakers": [],
+      "topics": [],
+      "companies": [],
+      "takeaways": null,
+      "carousel": {
+        "pdf": "/rooms/other-dir/carousel.pdf",
+        "preview": null
+      },
+      "posts": [
+        {
+          "kind": "recap",
+          "url": "https://www.linkedin.com/posts/demos-10",
+          "roundup": false,
+          "firstComment": null,
+          "carousel": null
+        }
+      ]
+    }
+  ]
+}

@@ -2,7 +2,8 @@
 // (People are counted, never modeled). This makes that a failing check instead of a comment.
 //
 // Scans (1) every Zod schema file under src/lib for contact-PII field names on any shape, and
-// (2) every committed data file under src/data for email / phone literals. Bot / no-reply addresses
+// (2) every committed data file under src/data for email / phone literals and off-the-record phrases
+// (the Rooms export, SPEC §4.2). Bot / no-reply addresses
 // (git trailers) are allowed. Prose copy in .tsx is deliberately NOT scanned — the word "email" on the
 // About page is not a leak; a modeled `email` field is.
 //
@@ -47,6 +48,18 @@ for (const f of walk(join(ROOT, "src/data"), [".ts", ".json"])) {
   });
 }
 
+// (2b) off-the-record phrases in shipped data (build-in-public.md; Rooms SPEC §4.2). The allowlist in
+// gen-rooms is the real protection; this catches a phrase that rode in on an allowed field.
+// "[REDACTED …]" markers pass — they are the redaction, not the leak.
+const OFF_RECORD = /off[- ]the[- ]record|stays in the room|don['’]t post|not public|confidential/i;
+for (const f of walk(join(ROOT, "src/data"), [".ts", ".json"])) {
+  const src = readFileSync(f, "utf8");
+  src.split("\n").forEach((l, i) => {
+    const m = l.replace(/\[REDACTED[^\]]*\]/gi, "").match(OFF_RECORD);
+    if (m) note(f, i + 1, `off-the-record phrase: "${m[0]}"`);
+  });
+}
+
 // (3) secrets never reach the client: no NEXT_PUBLIC_ var may carry a key/token/secret
 for (const f of walk(join(ROOT, "src"), [".ts", ".tsx"])) {
   const src = readFileSync(f, "utf8");
@@ -61,4 +74,4 @@ if (findings.length) {
   for (const x of findings) console.log("  " + x);
   process.exit(1);
 }
-console.log("✓ verify-public-safe: no contact-PII fields in schemas, no address/phone literals in data, no client-exposed secrets");
+console.log("✓ verify-public-safe: no contact-PII fields in schemas, no address/phone literals or off-the-record phrases in data, no client-exposed secrets");

@@ -14,7 +14,8 @@ import { fileURLToPath } from "node:url";
 
 const HUB = join(dirname(fileURLToPath(import.meta.url)), "..");
 const PIPELINE_DIR = process.env.PIPELINE_DIR || join(HUB, "..", "Empire_State_Events_Pipeline_Take_3");
-const GRAPH_DIR = join(PIPELINE_DIR, ".claude", ".state", "system-graph");
+// GRAPH_DIR lets the ADR-8 graph be built in a scratch clone (never write into the pipeline checkout).
+const GRAPH_DIR = process.env.GRAPH_DIR || join(PIPELINE_DIR, ".claude", ".state", "system-graph");
 const CURATED = join(HUB, "src", "data", "system-map.curated.json");
 const OUT = join(HUB, "src", "data", "system-map.json");
 const OUT_FILES = join(HUB, "src", "data", "system-map.files.json");
@@ -223,6 +224,18 @@ function gitIgnored(paths) {
   }
 }
 
+// YED-236 (second layer): the public map indexes TRACKED files only. `git ls-files` is the allowlist —
+// stricter than check-ignore, it also drops untracked-but-unignored files on disk. Fails closed.
+function gitTracked() {
+  try {
+    const out = execFileSync("git", ["-C", PIPELINE_DIR, "ls-files"], { encoding: "utf8", maxBuffer: 64 * 1024 * 1024 });
+    return new Set(out.split("\n").map((s) => s.trim()).filter(Boolean));
+  } catch (e) {
+    console.error(`✗ privacy guard: git ls-files failed in ${PIPELINE_DIR} — refusing to publish (YED-236)`);
+    process.exit(1);
+  }
+}
+
 function main() {
   if (!existsSync(join(GRAPH_DIR, "nodes.jsonl"))) {
     console.error(
@@ -238,9 +251,13 @@ function main() {
   // YED-236 privacy guard (fail-closed): nothing gitignored in the pipeline repo may reach the public map,
   // even if the graph was built from a working checkout that holds private, untracked files.
   const ignored = gitIgnored([...rawNodes.map((n) => n.id), ...rawEdges.flatMap((e) => [e.src, e.dst])]);
-  const nodes = rawNodes.filter((n) => !ignored.has(n.id));
-  const edges = rawEdges.filter((e) => !ignored.has(e.src) && !ignored.has(e.dst));
+  const tracked = gitTracked();
+  const ok = (p) => !ignored.has(p) && tracked.has(p);
+  const nodes = rawNodes.filter((n) => ok(n.id));
+  const edges = rawEdges.filter((e) => ok(e.src) && ok(e.dst));
   if (ignored.size) console.log(`  ! privacy guard: dropped ${ignored.size} gitignored path(s) from the public map`);
+  const untracked = rawNodes.filter((n) => !ignored.has(n.id) && !tracked.has(n.id)).length;
+  if (untracked) console.log(`  ! privacy guard: dropped ${untracked} untracked node(s) from the public map`);
   const meta = existsSync(join(GRAPH_DIR, "meta.json")) ? JSON.parse(readFileSync(join(GRAPH_DIR, "meta.json"), "utf8")) : {};
   const nodeIds = nodes.map((n) => n.id);
   const { first, last, sha } = gitDates();

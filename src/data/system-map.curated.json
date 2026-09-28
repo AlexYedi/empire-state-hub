@@ -23,8 +23,8 @@
     },
     {
       "id": "rigor",
-      "name": "Operating layer",
-      "blurb": "What keeps a solo build honest now: the operating rules, an on-demand judge, and a derived graph of the repo's own artifacts."
+      "name": "Rigor layer",
+      "blurb": "What keeps a solo build honest: gates that hold a run open, a judge, telemetry, a weekly review."
     },
     {
       "id": "surfaces",
@@ -82,7 +82,7 @@
       "reviewed_at": "2026-09-28",
       "summary": "A machine-global lock on an event's Notion namespace for the duration of a run.",
       "why": {
-        "text": "Git worktrees isolate checkouts but not Notion. On 2026-09-20 two sessions ran the same event and disagreed on two facts; duplicate effort is cheap, contradictory records that later runs read as fact are not. So a run claims the event first (exit 3 = someone else holds it → go read-only), claims expire after 4h so a crashed run can't lock an event, and the run-close gates now key on the same claim to know a run is still in progress.",
+        "text": "Git worktrees isolate checkouts but not Notion. On 2026-09-20 two sessions ran the same event and disagreed on two facts; duplicate effort is cheap, contradictory records that later runs read as fact are not. So a run claims the event first (exit 3 = someone else holds it → go read-only), and claims expire after 4h so a crashed run can't lock an event.",
         "source": "CLAUDE.md § Git conventions (YED-213, 2026-09-24); docs/archive/notes/stop-gate-per-turn-2026-09-27.md"
       },
       "build": {
@@ -93,8 +93,7 @@
       },
       "files": [
         ".claude/hooks/event-claim.py",
-        ".claude/evals/test_event_claim.py",
-        "docs/archive/notes/stop-gate-per-turn-2026-09-27.md"
+        ".claude/evals/test_event_claim.py"
       ]
     },
     {
@@ -137,14 +136,9 @@
         "docs/adr/ADR-5-event-field-guide.md",
         "docs/adr/ADR-6-research-brief-placement.md",
         "docs/archive/notes/yed-205-spec-2026-09-27.md",
-        ".claude/evals/score_entities.py",
-        ".claude/evals/score_events.py",
-        ".claude/evals/pronoun-fidelity-render-2026-09-18.md",
         "docs/archive/proposals/event-field-guide.md",
         "docs/archive/proposals/field-guide-spike-daytona.md",
-        "docs/archive/notes/deep-read-batch-wiring-fix.md",
-        "docs/archive/notes/ai-mafia-roster-2026-09-21.md",
-        "docs/archive/notes/gtm-world-tour-intake-2026-09-23.md"
+        "docs/archive/notes/deep-read-batch-wiring-fix.md"
       ]
     },
     {
@@ -171,12 +165,9 @@
         ".claude/skills/pre-event-content/**",
         ".claude/skills/steering-interview/**",
         ".claude/references/outreach-templates.md",
-        "docs/archive/skills/marketing-autoresearch/**",
-        "docs/archive/skills/project-ideation/**",
         "docs/archive/proposals/steering-interview-v2-collaborative.md",
         "docs/archive/notes/steering-v2-smoke-test-2026-08-29.md",
-        ".claude/scripts/check_aimed_questions.py",
-        "docs/archive/skills/project-ideation/portfolio-tracker.md"
+        ".claude/scripts/check_aimed_questions.py"
       ]
     },
     {
@@ -186,8 +177,8 @@
       "kind": "command",
       "reviewed_at": "2026-09-28",
       "why": {
-        "text": "The second half of the arc: what was actually said, cashed against the pre-event setup. A transcript (a Supercut recording preferred; an audio file through ElevenLabs Scribe or a manual paste as fallbacks) is conditioned into a quote bank, synthesized into a post_event_brief — the canonical store every downstream draft references — then drafted by the content-correspondent skill. Since ADR-10 it also creates the attended event row in the graph and attaches the pre-event claims to it.",
-        "source": ".claude/commands/post-event-content.md; .claude/references/supercut.md; CLAUDE.md § Phase 2 (2026-05-21 / 05-28); docs/adr/ADR-10-knowledge-substrate.md D9"
+        "text": "The second half of the arc: what was actually said, cashed against the pre-event setup. A manual transcript (Granola's MCP sees zero notes on the free plan; OBS + ElevenLabs Scribe is the owned capture lane) is conditioned into a quote bank, synthesized into a post_event_brief — the canonical store every downstream draft references — then drafted by the content-correspondent skill. Since ADR-10 it also creates the attended event row in the graph and attaches the pre-event claims to it.",
+        "source": ".claude/commands/post-event-content.md; CLAUDE.md § Phase 2 (2026-05-21 / 05-28); memory 2026-09-09 CRM + capture decision; docs/adr/ADR-10-knowledge-substrate.md D9"
       },
       "build": {
         "refs": [
@@ -200,7 +191,7 @@
         "Notion MCP",
         "HubSpot MCP",
         "ElevenLabs Scribe",
-        "Supercut MCP"
+        "OBS Studio"
       ],
       "files": [
         ".claude/commands/post-event-content.md",
@@ -210,10 +201,6 @@
         ".claude/scripts/ingest_recording.py",
         ".claude/scripts/align_slides.py",
         ".claude/skills/content-patterns/founder-showcase.md",
-        ".claude/evals/agents-behaving-badly/**",
-        ".claude/evals/run_scribe.py",
-        ".claude/evals/ingest-elevenlabs-scorecard.md",
-        ".claude/evals/transcription-quality-scorecard.md",
         ".claude/evals/post-event-brief-template-evidence.md",
         "docs/archive/proposals/post-event-hubspot-step.md",
         ".claude/skills/pattern-synthesis/**",
@@ -230,7 +217,7 @@
       "name": "Voice & visual system",
       "kind": "reference",
       "reviewed_at": "2026-09-28",
-      "summary": "The style guide, anti-patterns, audience north star, shared content patterns (including goal tagging, graded later by the tag-outcome skill) and the visual-brief spec every content skill imports.",
+      "summary": "The style guide, anti-patterns, audience north star, shared content patterns and the visual-brief spec every content skill imports.",
       "why": {
         "text": "Voice is a living system, not a prompt: Alex reviews drafts as inline Notion comments, and the update-voice-and-style skill mines those comments back into the guides so every skill inherits the correction once. Visuals must add information (architecture, comparison, progression) and never re-print the post; they are authored by Claude as self-contained HTML/SVG and exported to a 4:5 PDF — Gamma was removed on 2026-08-07 because it re-interpreted content and broke labels.",
         "source": ".claude/references/content-style-guide.md; .claude/references/content-anti-patterns.md; .claude/skills/content-patterns/visual-briefs.md; CLAUDE.md Rule 13 (2026-08-07)"
@@ -253,8 +240,7 @@
         ".claude/skills/content-patterns/**",
         ".claude/skills/update-voice-and-style.md",
         ".claude/skills/update-anti-patterns.md",
-        "docs/archive/notes/eric-coldoutboundskills-harvest-2026-09-24.md",
-        ".claude/skills/tag-outcome/**"
+        "docs/archive/notes/eric-coldoutboundskills-harvest-2026-09-24.md"
       ]
     },
     {
@@ -264,8 +250,8 @@
       "kind": "command",
       "reviewed_at": "2026-09-28",
       "why": {
-        "text": "Milestone 1 of the Market-Intelligence Engine and the first job-search consumer of the graph: a four-axis dossier (company, role, stage, interviewer) built by the same specialist fan-out and scored against a dossier rubric before it is written. It exists because the research engine is lens-agnostic, so the graph that preps an event can prep an interview. In use it has been thin: one run, and a write path that predates the one-write-path rule (ADR-9).",
-        "source": ".claude/commands/interview-prep.md (Steps 3–5); .claude/skills/interview-prep-dossier/SKILL.md; hub-system-audit 2026-09-28 §2"
+        "text": "Milestone 1 of the Market-Intelligence Engine and the first job-search consumer of the research engine: a four-axis dossier (company, role, stage, interviewer) built by the same specialist fan-out and synthesized in the parent thread against the Target-Role ICP. It exists because the research engine is lens-agnostic, so the fan-out that preps an event can prep an interview. The 2026-09-28 reset thinned it to that core: the dossier judge gate, the Postgres persist and a synthesizer agent that was never dispatched were retired.",
+        "source": ".claude/commands/interview-prep.md; .claude/skills/interview-prep-dossier/SKILL.md; hub-system-audit 2026-09-28 §2"
       },
       "build": {
         "refs": [
@@ -274,14 +260,12 @@
         ]
       },
       "tools": [
-        "Supabase REST",
         "Notion MCP",
         "WebSearch"
       ],
       "files": [
         ".claude/commands/interview-prep.md",
-        ".claude/skills/interview-prep-dossier/**",
-        ".claude/agents/research/dossier-synthesizer.md"
+        ".claude/skills/interview-prep-dossier/**"
       ],
       "toolsExclude": [
         "Supabase MCP",
@@ -289,7 +273,7 @@
       ],
       "status": {
         "value": "scaffolded",
-        "reason": "Built and run once in 30 days; the dossier-synthesizer agent has never been dispatched, and Step 5 writes the graph with raw PostgREST upserts instead of the guarded spine_client path. The interview lens (YED-207) and ICP wiring (YED-152) are open."
+        "reason": "Thinned on 2026-09-28 to intake, a four-specialist fan-out, parent-thread synthesis and a Notion write; run once to date, so the thinned shape is unexercised. The interview lens through retrieve (YED-207) is open."
       }
     },
     {
@@ -319,75 +303,6 @@
       ],
       "toolsExclude": [
         "claude_ai_Apollo_io MCP"
-      ]
-    },
-    {
-      "id": "inbox-miner",
-      "zone": "pipelines",
-      "name": "/scan-inbox",
-      "kind": "command",
-      "reviewed_at": "2026-09-28",
-      "why": {
-        "text": "Gmail is a first-class signal source (ADR-7): newsletters and event correspondence are the earliest, cheapest market signal Alex already receives. The miner reads an allowlist of senders, dedups on canonical URL, writes email signals to the graph through the one write path, and labels what it has processed. A denylist keeps private correspondence out by construction.",
-        "source": "docs/adr/ADR-7-inbox-signal-source.md; .claude/skills/inbox-miner/SKILL.md"
-      },
-      "build": {
-        "refs": [
-          "YED-153",
-          "YED-194"
-        ]
-      },
-      "tools": [
-        "Gmail MCP",
-        "Supabase REST"
-      ],
-      "files": [
-        ".claude/commands/scan-inbox.md",
-        ".claude/skills/inbox-miner/**",
-        ".claude/scripts/inbox_signal_write.py",
-        ".claude/scripts/inbox_boundary.py",
-        "docs/adr/ADR-7-inbox-signal-source.md",
-        ".claude/evals/inbox-miner-cohort-v1.md",
-        "docs/archive/proposals/yed-161-inbox-boundary-mechanism.md"
-      ],
-      "status": {
-        "value": "stale",
-        "reason": "Works, but dormant: one run to date and the last graph write was 2026-09-10. The Notion Companies mirror (YED-194) is still open."
-      }
-    },
-    {
-      "id": "doc-knowledge-base",
-      "zone": "pipelines",
-      "name": "Document knowledge base",
-      "kind": "command",
-      "reviewed_at": "2026-09-28",
-      "status": {
-        "value": "scaffolded",
-        "reason": "/ingest-doc and /ask-library work as manual commands, but the library holds 2 documents and 0 claims and neither command ran in the last 30 days (roadmap: 'value unproven'). Claim extraction into the ADR-10 claim table is not wired (YED-235)."
-      },
-      "summary": "/ingest-doc and /ask-library — long documents (books, papers) archived to R2, chunked, embedded locally and stored in Supabase pgvector so they can be queried.",
-      "why": {
-        "text": "Large documents live outside the repos (the Knowledge Library) with R2 as the archive of record; ingesting them lets research cite primary sources instead of search snippets. It earns its keep only when the library's claims reach the pipelines, which is the unbuilt half.",
-        "source": ".claude/skills/doc-knowledge-base/SKILL.md; memory 2026-09-11 Knowledge Library; roadmap.md § 5 Phase 1"
-      },
-      "build": {
-        "refs": [
-          "YED-235",
-          "YED-107"
-        ]
-      },
-      "tools": [
-        "Cloudflare R2",
-        "Supabase REST (pgvector)",
-        "bge-small (local embeddings)"
-      ],
-      "files": [
-        ".claude/commands/ingest-doc.md",
-        ".claude/commands/ask-library.md",
-        ".claude/skills/doc-knowledge-base/**",
-        ".claude/references/doc-kb-migration-a5.sql",
-        ".claude/references/doc-kb-migration-b1.sql",
-        ".claude/references/doc-kb-schema.sql"
       ]
     },
     {
@@ -424,9 +339,11 @@
         "docs/migration-playbook.md",
         ".claude/references/market-intel-schema.sql",
         ".claude/references/market-intel-backfill.md",
-        ".claude/references/signal-taxonomy.md",
         "docs/adr/README.md",
-        "docs/adr/evidence/**"
+        "docs/adr/evidence/**",
+        ".claude/references/doc-kb-migration-a5.sql",
+        ".claude/references/doc-kb-migration-b1.sql",
+        ".claude/references/doc-kb-schema.sql"
       ],
       "toolsExclude": [
         "Gmail MCP"
@@ -455,8 +372,8 @@
         ".claude/scripts/spine_client.py",
         ".claude/scripts/spine_write.py",
         "docs/adr/ADR-9-pii-boundary.md",
-        ".claude/scripts/backfill_people.py",
-        "docs/archive/proposals/yed-81-sec-pii-guardrails.md"
+        "docs/archive/proposals/yed-81-sec-pii-guardrails.md",
+        ".claude/scripts/inbox_boundary.py"
       ]
     },
     {
@@ -484,7 +401,6 @@
       ],
       "files": [
         ".claude/scripts/substrate.py",
-        ".claude/scripts/identity_probe.py",
         "docs/adr/ADR-10-knowledge-substrate.md",
         "docs/archive/notes/knowledge-substrate-review-2026-09-18.md",
         "docs/archive/notes/ab-protocol-yed172-2026-09-19.md",
@@ -494,7 +410,7 @@
         "docs/archive/notes/yed-160-scope-2026-09-17.md",
         "docs/archive/notes/yed-217-conditioner-aiming-2026-09-25.md",
         "docs/archive/notes/yed-47-premortem-2026-09-27.md",
-        ".claude/references/graph-freeze.md"
+        ".claude/skills/doc-knowledge-base/**"
       ]
     },
     {
@@ -531,7 +447,7 @@
       },
       "summary": "Relevance scoring and topic movement over the graph — what is moving, for whom.",
       "why": {
-        "text": "The graph is only useful if something ranks it: relevance per lens and movement per topic are what the Hub's planned topic-intelligence panels (YED-114) and the P2 architecture lens read. It is listed stale on purpose — this is the exact failure the map exists to make visible.",
+        "text": "The graph is only useful if something ranks it: relevance per lens and movement per topic are what the Hub's market-intel panels and the P2 architecture lens read. It is listed stale on purpose — this is the exact failure the map exists to make visible.",
         "source": "memory 2026-09-27 systems-gaps decision; Linear YED-230; .claude/scripts/recompute_relevance.py"
       },
       "build": {
@@ -546,8 +462,7 @@
         "GitHub Actions (health-check)"
       ],
       "files": [
-        ".claude/scripts/recompute_relevance.py",
-        ".claude/scripts/match_topic.py"
+        ".claude/scripts/recompute_relevance.py"
       ]
     },
     {
@@ -600,10 +515,10 @@
       "name": "Gmail",
       "kind": "external",
       "reviewed_at": "2026-09-28",
-      "summary": "Correspondence and newsletters — read as prior knowledge before research, mined as a signal source, labeled after processing.",
+      "summary": "Correspondence and newsletters, read as prior knowledge before research. The scheduled inbox-mining lane was retired on 2026-09-28 (ADR-11).",
       "why": {
-        "text": "The inbox already receives the market: newsletters, organizer emails, follow-ups. Reading it before research (Step 1.7) and mining it on a schedule (ADR-7) turns that into graph signals without a scraper. Write scope was granted narrowly (labels only) on 2026-09-10.",
-        "source": "docs/adr/ADR-7-inbox-signal-source.md; .claude/commands/event-deep-research.md Step 1.7a"
+        "text": "The inbox already receives the market: newsletters, organizer emails, follow-ups. Reading it before research (Step 1.7) and Gmail-first in the person and company specialists grounds a brief in what Alex already knows. ADR-7 also mined it into graph signals; after one run and no use in 30 days, ADR-11 retired that lane and its standing write scope, and kept the 13 inbox-sourced graph rows.",
+        "source": "docs/adr/ADR-11-retire-inbox-signal-lane.md; docs/adr/ADR-7-inbox-signal-source.md; .claude/commands/event-deep-research.md Step 1.7a"
       },
       "build": {
         "refs": [
@@ -613,7 +528,10 @@
       "tools": [
         "Gmail MCP"
       ],
-      "files": []
+      "files": [
+        "docs/adr/ADR-11-retire-inbox-signal-lane.md",
+        "docs/adr/ADR-7-inbox-signal-source.md"
+      ]
     },
     {
       "id": "linear",
@@ -638,6 +556,62 @@
       ],
       "files": [
         ".claude/references/linear-convention.md"
+      ]
+    },
+    {
+      "id": "posthog",
+      "zone": "records",
+      "name": "PostHog",
+      "kind": "external",
+      "reviewed_at": "2026-09-28",
+      "summary": "Project 524367 — the projection target of the build-session Stop hook. Kept for future Hub web analytics; no dashboard reads the telemetry any more.",
+      "why": {
+        "text": "The measurement layer needed a queryable projection without adding a database; PostHog captures each build session and judge run as an event, and the Hub reads them with a project-scoped key. Chosen over Langfuse and a Supabase measurement store, both tombstoned so the rigor layer stays lean.",
+        "source": "CLAUDE.md § measurement layer (PostHog projection LIVE 2026-07-11); docs/archive/notes/measurement-layer-learnings.md"
+      },
+      "build": {
+        "refs": [
+          "YED-88",
+          "YED-91"
+        ]
+      },
+      "tools": [
+        "PostHog capture API"
+      ],
+      "files": [
+        "docs/archive/notes/measurement-layer-learnings.md"
+      ],
+      "status": {
+        "value": "stale",
+        "reason": "The build-session Stop hook still projects each session here when a token is set, but delivery has not been verified since 2026-09-12, the judge no longer emits to it, and nothing on the Hub reads it since /ops/rigor was removed on 2026-09-28."
+      }
+    },
+    {
+      "id": "dod-gate",
+      "zone": "rigor",
+      "name": "Build discipline (PR template)",
+      "kind": "policy",
+      "reviewed_at": "2026-09-28",
+      "summary": "Three items every non-trivial build carries in its pull request: a spec before code, a linked Linear issue, one adversarial pass. Held by the PR template since the 2026-09-28 reset, with no waiver log and no close-out command.",
+      "why": {
+        "text": "A systems analysis diagnosed the root cause of quiet failures as Shifting the Burden: rigor lived in optional docs, never in the execution path, so a memory-less agent shipped on green checks and the consequence surfaced weeks later. The floor under 'done' now lives where every build already passes, the pull request, instead of a /dod-close ritual and waiver ledger, which the 2026-09-28 reset removed. It stays capped at three items; growth is the rule-beating signal.",
+        "source": "CLAUDE.md § 5 Working rules (Build discipline lives in the PR template); .claude/references/prd-template.md; .claude/references/systems-thinking-pipeline-diagnostic.md"
+      },
+      "build": {
+        "refs": [
+          "YED-87",
+          "YED-129",
+          "YED-201"
+        ],
+        "note": "/dod-close and its waiver ledger were retired in the 2026-09-28 reset. Earlier, the writer was missing for two weeks and telemetry carried nulls in 100% of rows until it shipped."
+      },
+      "files": [
+        ".claude/references/prd-template.md",
+        ".claude/references/linear-convention.md",
+        ".claude/references/systems-thinking-pipeline-diagnostic.md"
+      ],
+      "toolsExclude": [
+        "ChatPRD MCP"
       ]
     },
     {
@@ -679,15 +653,68 @@
         ".claude/hooks/density-check.sh",
         "docs/archive/proposals/third-judge-seat-openai.md",
         ".claude/evals/README.md",
-        ".claude/evals/emit-judge-runs.sh",
         ".claude/evals/test_judge_lib.py",
         ".claude/evals/test_judge_e2e.py",
         ".claude/evals/test_bundle_multifile.py",
         ".claude/evals/test_null_baseline.py",
         ".claude/evals/controls.py",
-        ".claude/evals/controls/**",
         ".claude/references/cross-provider-judge.md",
-        "docs/archive/notes/gemini-judge-triage-2026-09-19.md"
+        "docs/archive/notes/gemini-judge-triage-2026-09-19.md",
+        ".claude/evals/fixtures/**"
+      ]
+    },
+    {
+      "id": "telemetry",
+      "zone": "rigor",
+      "name": "Build-session telemetry",
+      "kind": "hook",
+      "reviewed_at": "2026-09-28",
+      "summary": "The one wired project hook: a Stop hook that records each build session to a gitignored per-session shard and projects it to PostHog when a token is set.",
+      "why": {
+        "text": "The north-star is acted-on value, trended; that needs every build to leave a trace without anyone remembering to write one. Shards are per session so two sessions never conflict on one file, and since YED-229 (2026-09-28) they live outside git, because appending to a tracked file every turn forced a churn commit on every branch switch. Two known data defects remain: output tokens over-count, and the DoD fields folded into only a few sessions.",
+        "source": ".claude/hooks/build-session-emit.sh; .claude/references/build-session-contract.md; hub-system-audit 2026-09-28 §4"
+      },
+      "build": {
+        "refs": [
+          "YED-88",
+          "YED-229"
+        ]
+      },
+      "tools": [
+        "PostHog capture"
+      ],
+      "files": [
+        ".claude/hooks/build-session-emit.sh",
+        ".claude/references/build-session-contract.md",
+        ".claude/hooks/runtime_ledgers.py"
+      ]
+    },
+    {
+      "id": "rigor-review",
+      "zone": "rigor",
+      "name": "/tag-outcome (outcome capture)",
+      "kind": "skill",
+      "reviewed_at": "2026-09-28",
+      "summary": "A manual, under-five-minute ritual: find published drafts with a Goal but no Outcome, pull the realized signal (HubSpot for connections and meetings, LinkedIn-native numbers for reach), and write Outcome, Outcome Value and Outcome Date back. The weekly /rigor-review loop around it was retired on 2026-09-28.",
+      "why": {
+        "text": "Measurement without an action is an orphan metric. Acted-on value is the pipeline's operational north-star, and outcome tagging is where it is measured: it closes the loop from the goal a draft was assigned at creation to what it actually did.",
+        "source": ".claude/skills/tag-outcome/SKILL.md; .claude/skills/content-patterns/goal-tagging.md; .claude/references/roadmap.md (Program)"
+      },
+      "build": {
+        "refs": [
+          "YED-93",
+          "YED-94",
+          "YED-162",
+          "YED-212"
+        ]
+      },
+      "tools": [
+        "Notion MCP"
+      ],
+      "files": [
+        ".claude/skills/tag-outcome/**",
+        ".claude/skills/content-patterns/goal-tagging.md",
+        "docs/archive/notes/rigor-loop-session-resume-2026-07-16.md"
       ]
     },
     {
@@ -696,22 +723,25 @@
       "name": "System graph (ADR-8)",
       "kind": "script",
       "reviewed_at": "2026-09-28",
-      "summary": "A derived graph over the repo's own build artifacts — every skill, command, agent, hook, ADR and note as a node, every load-bearing reference as an edge. Rebuilt by hand with build_graph.py (its session hooks are no longer registered); it is the source of this map's file layer.",
+      "summary": "A derived graph over the repo's own build artifacts: every skill, command, agent, hook, ADR and note as a node, every load-bearing reference as an edge. It is the source of this map's file layer.",
       "why": {
         "text": "Drift detection needs a substrate: when a reference points at a file that no longer exists, or a plan names a script that was never written, that should be mechanical fact surfaced at session start, not something a reviewer happens to notice. The graph is derived and gitignored — never hand-edited — so it cannot itself drift from the repo.",
-        "source": "docs/adr/ADR-8-system-graph-drift-router.md; .claude/scripts/build_graph.py"
+        "source": "docs/adr/ADR-8-system-graph-drift-router.md; docs/archive/scripts/build_graph.py"
       },
       "build": {
         "refs": [
           "YED-163"
         ],
-        "note": "Increment 1 live; the session-start/stop hooks were unregistered in the 2026-09-28 reset, so the graph is rebuilt by hand before regenerating this map."
+        "note": "Increment 1 retired on 2026-09-28 (session hooks deleted, build_graph.py archived). The graph is rebuilt by hand from the archived script, in a scratch clone of tracked files, before this map is regenerated."
       },
       "files": [
-        ".claude/scripts/build_graph.py",
-        ".claude/hooks/runtime_ledgers.py",
+        "docs/archive/scripts/build_graph.py",
         "docs/adr/ADR-8-system-graph-drift-router.md"
-      ]
+      ],
+      "status": {
+        "value": "parked",
+        "reason": "Retired in the pipeline on 2026-09-28: ADR-8 Increment 1 is marked retired and build_graph.py lives in docs/archive/scripts/. It still runs by hand to regenerate this map's file layer; nothing in the pipeline reads it."
+      }
     },
     {
       "id": "operating-rules",
@@ -719,7 +749,7 @@
       "name": "Operating rules",
       "kind": "policy",
       "reviewed_at": "2026-09-28",
-      "summary": "The project instructions, the workflow manual, the platform-constraints registry, the git and PR conventions (spec before code, a linked Linear issue, one adversarial pass) and the build-in-public policy.",
+      "summary": "The project instructions, the workflow manual, the platform-constraints registry, the git conventions and the build-in-public policy.",
       "why": {
         "text": "A memory-less agent needs its invariants where it will read them: which MCP account is which, what a subagent cannot do, why two sessions must never share a checkout, what may be public. Constraints have one home (platform-constraints.md) with memory files carrying pointers, and the reconciliation of branches is a role one session plays, not a habit everyone half-keeps.",
         "source": "CLAUDE.md; .claude/references/platform-constraints.md; .claude/references/reconciliation-terminal-charter.md; policy build-in-public"
@@ -738,7 +768,6 @@
         ".claude/references/command-orchestration-convention.md",
         ".claude/references/roadmap.md",
         ".claude/references/build-in-public.md",
-        ".claude/references/hook-schema-reference.md",
         "docs/archive/proposals/empire-state-agentic-architecture-2026-05-15.md",
         "docs/archive/proposals/yed-30-step-5-empire-state-backport.md",
         "docs/archive/notes/execution-week-frictions.md",
@@ -747,37 +776,10 @@
         "docs/archive/notes/backlog-triage-2026-09-18.md",
         ".claude/references/second-fix-stop-rule.md",
         ".claude/hooks/second-fix-nudge.sh",
-        "docs/history.md",
-        ".claude/references/prd-template.md",
-        ".claude/references/systems-thinking-pipeline-diagnostic.md"
+        "docs/history.md"
       ],
       "toolsExclude": [
         "Google Calendar MCP"
-      ]
-    },
-    {
-      "id": "telemetry",
-      "zone": "rigor",
-      "name": "Build-session telemetry",
-      "kind": "hook",
-      "reviewed_at": "2026-09-28",
-      "summary": "The one wired project hook: a Stop hook that appends a metadata-only build_session record (counts, never content) to a gitignored per-session shard, and projects it to PostHog only when a token is set.",
-      "why": {
-        "text": "Every build should leave a trace without anyone remembering to write one; the build journal reads these shards alongside git history. Shards are per session so two sessions never conflict on one file, and since YED-229 (2026-09-28) they live outside git, because appending to a tracked file every turn forced a churn commit on every branch switch. The DoD field fold was retired in the 2026-09-28 reset (contract v2).",
-        "source": ".claude/hooks/build-session-emit.sh; .claude/references/build-session-contract.md; .claude/settings.json (Stop hook)"
-      },
-      "build": {
-        "refs": [
-          "YED-88",
-          "YED-229"
-        ]
-      },
-      "tools": [
-        "PostHog capture"
-      ],
-      "files": [
-        ".claude/hooks/build-session-emit.sh",
-        ".claude/references/build-session-contract.md"
       ]
     },
     {
@@ -814,7 +816,7 @@
       "name": "Build journal & arcs",
       "kind": "script",
       "reviewed_at": "2026-09-28",
-      "summary": "A generator that turns git history and the build-session telemetry shards into the Hub's /journal, with a hand-written prose sidecar at break points. Run by hand or via /journal-entry.",
+      "summary": "A generator that turns git history and build sessions into the Hub's /journal, with a hand-written prose sidecar at break points. Run by hand or via /journal-entry; the Stop-hook refresh is no longer registered.",
       "why": {
         "text": "The facts of the build should instrument themselves (YED-119) so the journal never depends on remembering to write; the prose — what a shipped PR meant — is a deliberate human-authored layer added at each break point, and its lapses are tracked as data.",
         "source": "memory: public build journal at break points; .claude/scripts/build_journal.py"
@@ -979,12 +981,6 @@
       "status": "planned"
     },
     {
-      "source": "judge",
-      "target": "interview-prep",
-      "kind": "depends-on",
-      "summary": "Step 4 scores the dossier against the dossier-quality rubric in the parent thread. Advisory: a low score is surfaced, never blocks the write."
-    },
-    {
       "source": "role-radar",
       "target": "notion",
       "kind": "writes",
@@ -995,31 +991,6 @@
       "target": "substrate",
       "kind": "writes",
       "summary": "Step 5.5 (YED-149): each approved role becomes one role-posted event with its company, via substrate.py ensure-roles. The graph's largest producer since 2026-09-27."
-    },
-    {
-      "source": "inbox-miner",
-      "target": "gmail",
-      "kind": "reads",
-      "summary": "Allowlisted senders, newer than the last run; denylist enforced before anything is read as signal."
-    },
-    {
-      "source": "inbox-miner",
-      "target": "gmail",
-      "kind": "writes",
-      "summary": "Labels processed threads (the only Gmail write scope granted)."
-    },
-    {
-      "source": "inbox-miner",
-      "target": "spine-client",
-      "kind": "writes",
-      "summary": "Email signals, canonical-URL deduped, through the PII guard."
-    },
-    {
-      "source": "doc-knowledge-base",
-      "target": "supabase-graph",
-      "kind": "writes",
-      "summary": "/ingest-doc writes documents and embedded chunks (pgvector doc_chunks) over REST today. Claims into the graph are the unwired half (YED-235).",
-      "status": "live"
     },
     {
       "source": "substrate",
@@ -1083,10 +1054,48 @@
       "summary": "build-journal.json and build-arcs.json are generated into the hub's data folder."
     },
     {
+      "source": "build-journal",
+      "target": "telemetry",
+      "kind": "reads",
+      "summary": "Reads build-session shards alongside git history to reconstruct each day."
+    },
+    {
+      "source": "telemetry",
+      "target": "posthog",
+      "kind": "writes",
+      "summary": "Each build_session row is sent to PostHog when a token is set; delivery unverified since 2026-09-12 and nothing reads it now.",
+      "status": "stale"
+    },
+    {
+      "source": "dod-gate",
+      "target": "linear",
+      "kind": "depends-on",
+      "summary": "Item 2: a Linear issue opened or updated for the workstream."
+    },
+    {
+      "source": "rigor-review",
+      "target": "notion",
+      "kind": "writes",
+      "summary": "/tag-outcome writes Outcome / Outcome Value / Outcome Date on Content Drafts."
+    },
+    {
       "source": "system-graph",
       "target": "operating-rules",
       "kind": "reads",
-      "summary": "Walks the repo's own artifacts and references and counts dangling ones — now run by hand; the session-start report is no longer wired."
+      "summary": "Walks the repo's own tracked artifacts and references, run by hand from the archived script; no session report.",
+      "status": "parked"
+    },
+    {
+      "source": "dod-gate",
+      "target": "operating-rules",
+      "kind": "depends-on",
+      "summary": "CLAUDE.md § 5 names the PR template as the home of build discipline."
+    },
+    {
+      "source": "rigor-review",
+      "target": "hubspot",
+      "kind": "reads",
+      "summary": "The tag-outcome skill pulls realized connection and meeting signals from HubSpot to grade a draft against its goal."
     },
     {
       "source": "check-new-events",
@@ -1098,21 +1107,8 @@
       "source": "interview-prep",
       "target": "notion",
       "kind": "writes",
-      "summary": "Step 5B writes the dossier page for the comment-review loop, inline in the parent thread.",
+      "summary": "Step 4 writes the dossier to Content Drafts (needs_review) for the comment-review loop, inline in the parent thread.",
       "status": "scaffolded"
-    },
-    {
-      "source": "interview-prep",
-      "target": "supabase-graph",
-      "kind": "writes",
-      "summary": "Step 5A upserts company, interviewers, topics and a role-posted event with raw PostgREST calls — outside the spine_client guard that every other producer uses (flagged by spine_client --check-writers).",
-      "status": "scaffolded"
-    },
-    {
-      "source": "build-journal",
-      "target": "telemetry",
-      "kind": "reads",
-      "summary": "Reads build-session shards alongside git history to reconstruct each day."
     }
   ],
   "buildPath": {
@@ -1191,9 +1187,10 @@
       {
         "issue": "YED-162",
         "extends": [
+          "rigor-review",
           "judge"
         ],
-        "why": "The behavioral-exhaust loop (a recurring correction → proposed fix as a PR → judged → Alex merges); its correction-recurrence input was retired on 2026-09-28, so it needs re-scoping first."
+        "why": "The behavioral-exhaust loop: recurrence → proposed fix as a PR → judge-gated → Alex merges. Its correction-recurrence input was retired on 2026-09-28; re-scope first."
       },
       {
         "issue": "YED-163",

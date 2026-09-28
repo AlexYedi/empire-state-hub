@@ -1,0 +1,2654 @@
+{
+  "generated_at": "2026-09-28T13:43:04.682Z",
+  "rooms": [
+    {
+      "slug": "2026-09-23-agentic-gtm-grok-bot-clay",
+      "name": "Agentic GTM with Grok Bot & Clay",
+      "date": "2026-09-23",
+      "location": "Webinar",
+      "status": "attended",
+      "series": null,
+      "what": "Clay livestream with Growth Engine X and Clay's growth team on using AI agents to run daily outbound operations.",
+      "recapPending": true,
+      "speakers": [
+        {
+          "name": "Davide Grieco",
+          "title": "Head of Growth, Clay",
+          "company": "Clay",
+          "linkedin": null,
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Eric Nowoslawski",
+          "title": "Founder, Growth Engine X",
+          "company": "Growth Engine X",
+          "linkedin": "https://www.linkedin.com/in/outboundphd/",
+          "roles": [
+            "speaker"
+          ]
+        }
+      ],
+      "topics": [
+        "AI-Native GTM Stacks & Agentic GTM",
+        "GTM Engineering"
+      ],
+      "companies": [
+        "Clay",
+        "Growth Engine X"
+      ],
+      "takeaways": null,
+      "carousel": null,
+      "posts": [
+        {
+          "kind": "preview",
+          "url": "https://lnkd.in/p/eVATj",
+          "roundup": true,
+          "firstComment": [
+            "Tonight, Tue 6pm — GTM as Code, lightning talks from Deepline, Parallel and WorkOS: https://luma.com/8fxsv5y6",
+            "Wed 12pm — Agentic GTM with Grok Bot & Clay, free livestream: https://www.clay.com/livestreams/how-to-use-grokbot-and-clay-for-gtm",
+            "Wed 6pm — GTM World Tour, New York. Invite-only, you apply and they reply within 48 hours: https://luma.com/gtm-nyc",
+            "Thu 11am — Is My Graph Healthy? Apollo GraphQL, free: https://luma.com/mcp-54om",
+            "Sat 9am — AI × GTM Hackathon: Sales Agents, Block Convey: https://luma.com/aq51ak1d"
+          ],
+          "carousel": null
+        }
+      ]
+    },
+    {
+      "slug": "2026-09-23-gtm-world-tour-new-york",
+      "name": "GTM World Tour · New York",
+      "date": "2026-09-23",
+      "location": "Clay HQ, New York",
+      "status": "attended",
+      "series": null,
+      "what": "New York stop of the GTM World Tour, a ten-city go-to-market event series from BetterContact and Scalantec, held at Clay's office.",
+      "recapPending": true,
+      "speakers": [
+        {
+          "name": "Alex Lindahl",
+          "title": "Creator in Residence, GTM Engineering, Clay",
+          "company": "Clay",
+          "linkedin": "https://www.linkedin.com/in/alexlindahl/",
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Eric Nowoslawski",
+          "title": "Founder, Growth Engine X",
+          "company": "Growth Engine X",
+          "linkedin": "https://www.linkedin.com/in/outboundphd/",
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Nicolas Schell",
+          "title": null,
+          "company": "Scalantec",
+          "linkedin": null,
+          "roles": [
+            "speaker",
+            "host"
+          ]
+        },
+        {
+          "name": "Roman Hipp",
+          "title": null,
+          "company": "BetterContact",
+          "linkedin": null,
+          "roles": [
+            "host"
+          ]
+        }
+      ],
+      "topics": [
+        "GTM Engineering"
+      ],
+      "companies": [
+        "BetterContact",
+        "Clay",
+        "Growth Engine X",
+        "Scalantec"
+      ],
+      "takeaways": null,
+      "carousel": null,
+      "posts": [
+        {
+          "kind": "preview",
+          "url": "https://lnkd.in/p/eVATj",
+          "roundup": true,
+          "firstComment": [
+            "Tonight, Tue 6pm — GTM as Code, lightning talks from Deepline, Parallel and WorkOS: https://luma.com/8fxsv5y6",
+            "Wed 12pm — Agentic GTM with Grok Bot & Clay, free livestream: https://www.clay.com/livestreams/how-to-use-grokbot-and-clay-for-gtm",
+            "Wed 6pm — GTM World Tour, New York. Invite-only, you apply and they reply within 48 hours: https://luma.com/gtm-nyc",
+            "Thu 11am — Is My Graph Healthy? Apollo GraphQL, free: https://luma.com/mcp-54om",
+            "Sat 9am — AI × GTM Hackathon: Sales Agents, Block Convey: https://luma.com/aq51ak1d"
+          ],
+          "carousel": null
+        }
+      ]
+    },
+    {
+      "slug": "2026-09-17-signal-rich-action-poor",
+      "name": "Signal Rich, Action Poor: What AI-Native Revenue Teams Do After the Insight — Sept 17 2026",
+      "date": "2026-09-17",
+      "location": "Virtual",
+      "status": "attended",
+      "series": "RevGenius",
+      "what": "Online RevGenius panel with leaders from Airspeed, Clay, HubSpot and Apollo on how revenue teams turn signals into completed actions.",
+      "recapPending": false,
+      "speakers": [
+        {
+          "name": "Adam Liska",
+          "title": "Co-Founder & CEO, Airspeed",
+          "company": "Airspeed",
+          "linkedin": "https://www.linkedin.com/in/adliska",
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Alex Lindahl",
+          "title": "Creator in Residence, GTM Engineering, Clay",
+          "company": "Clay",
+          "linkedin": "https://www.linkedin.com/in/alexlindahl/",
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Mintis Sow",
+          "title": "Senior Director, Agentic Selling, HubSpot",
+          "company": "HubSpot",
+          "linkedin": "https://www.linkedin.com/in/mintissow/",
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Tyler Phillips",
+          "title": "Director of Product (AI), Apollo.io",
+          "company": "Apollo.io",
+          "linkedin": "https://www.linkedin.com/in/jtylerphillips/",
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Jared Robin",
+          "title": "Co-Founder & CEO, RevGenius",
+          "company": "RevGenius",
+          "linkedin": null,
+          "roles": [
+            "host"
+          ]
+        }
+      ],
+      "topics": [
+        "AI-Native Go-To-Market",
+        "CRM as System of Action",
+        "GTM Engineering"
+      ],
+      "companies": [
+        "Airspeed",
+        "Apollo.io",
+        "Clay",
+        "HubSpot",
+        "RevGenius"
+      ],
+      "takeaways": null,
+      "carousel": null,
+      "posts": [
+        {
+          "kind": "preview",
+          "url": "https://lnkd.in/p/emfpuSDg",
+          "roundup": true,
+          "firstComment": [
+            "Mon 9/14, 6pm · LeadDev New York Meetup (RSVP required, bring ID): https://www.meetup.com/leaddev-meetup-newyork/events/316035312/",
+            "Tue 9/15, 6pm · The New AI Computer: An Evening with Zo: https://luma.com/jo6qcual",
+            "Wed 9/16, 6pm · Postgres Tuning in the Age of AI: https://luma.com/3kevurew",
+            "Thu 9/17, 10am–8pm · Frontier Build NYC (hackathon): https://luma.com/frontierNYC",
+            "Tue 9/15, 10:30am · How Attio uses Attio: https://www.attio.community/c/workshops/how-attio-uses-attio-an-ae-s-playbook-for-views-and-reports",
+            "Tue 9/15, 11am · Beyond Integration Licensing Cost: https://www.miraclesoft.com/webinars/beyond-integration-licensing-cost-modernize-integration-ai-serverless.php",
+            "Wed 9/16, 12pm · Clay: Rebuilding the Marketing Tech Stack for the AI Era: https://www.clay.com/livestreams/rebuilding-the-marketing-tech-stack-for-the-ai-era",
+            "Wed 9/16, 1pm · Context is King (Notion): https://www.notion.com/webinars/context-is-king-how-to-build-a-system-of-context-for-ai",
+            "Thu 9/17, 12pm · Signal Rich, Action Poor (RevGenius): https://www.revgenius.com/events/signal-rich-action-poor"
+          ],
+          "carousel": {
+            "pdf": "/rooms/upcoming-week-2026-09-14/carousel.pdf",
+            "preview": null
+          }
+        },
+        {
+          "kind": "recap",
+          "url": "https://lnkd.in/p/eKVdbM3a",
+          "roundup": false,
+          "firstComment": [
+            "Watch the full session (RevGenius on-demand) — https://revgenius.ondemand.goldcast.io/on-demand/4e6fd47e-27f4-4223-865b-728cc745bbbd",
+            "Airspeed's Series A + the \"system of action\" framing (TNW) — https://thenextweb.com/news/airspeed-series-a-gtm-ai-agents",
+            "Apollo MCP (what \"headless\" looks like in practice) — https://www.apollo.io/product/mcp"
+          ],
+          "carousel": {
+            "pdf": "/rooms/signal-rich-action-poor-2026-09-17/post-event-carousel.pdf",
+            "preview": null
+          }
+        }
+      ]
+    },
+    {
+      "slug": "2026-09-16-postgres-tuning-in-the-age-of-ai",
+      "name": "Postgres Tuning in the Age of AI: Context Is Everything — Sept 16 2026",
+      "date": "2026-09-16",
+      "location": "New York",
+      "status": "attended",
+      "series": null,
+      "what": "Talk from pganalyze on giving AI the Postgres performance and configuration context it needs to tune queries safely, including pganalyze's MCP server.",
+      "recapPending": false,
+      "speakers": [
+        {
+          "name": "Ryan Booz",
+          "title": "Solutions Engineer, pganalyze",
+          "company": "pganalyze",
+          "linkedin": "https://www.linkedin.com/in/ryanbooz/",
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Miaolai (Mila) Zhou",
+          "title": null,
+          "company": null,
+          "linkedin": "https://www.linkedin.com/in/miaolaizhou",
+          "roles": [
+            "host",
+            "organizer"
+          ]
+        }
+      ],
+      "topics": [
+        "AI-Assisted Database Performance Tuning",
+        "MCP for Databases / Agentic Data Access (beyond RAG)",
+        "Postgres as the Agent Data Layer"
+      ],
+      "companies": [
+        "pganalyze"
+      ],
+      "takeaways": null,
+      "carousel": null,
+      "posts": [
+        {
+          "kind": "preview",
+          "url": "https://lnkd.in/p/eFXwGtQH",
+          "roundup": false,
+          "firstComment": [
+            "pganalyze, \"MCP Server public preview\" (Keiko Oda, Jens Nikolaus), Apr 30 2026 — source for the \"curated data beats a live connection\" position. https://pganalyze.com/blog/mcp-server-public-preview",
+            "Ryan Booz, \"Postgres in Production: pg_stat_statements deep dive, Part 6\" (links Parts 3–5), Aug 13 2026. https://pganalyze.com/blog/postgres-in-production-pg-stat-statements-deep-dive-part-6",
+            "Xata, \"Introducing the Xata MCP Server\" — read-only by default, two-flag writes. https://xata.io/blog/introducing-the-xata-mcp-server",
+            "Supabase, Database Advisors docs — \"A finding is not a fix.\" https://supabase.com/docs/guides/database/database-advisors",
+            "Microsoft Learn, Azure Database for PostgreSQL autonomous tuning (OFF/REPORT modes, parameter samples). https://learn.microsoft.com/en-us/azure/postgresql/monitor/concepts-autonomous-tuning",
+            "Carousel-only sources: https://github.com/xataio/agent · https://pganalyze.com/blog/new-query-advisor-insights"
+          ],
+          "carousel": {
+            "pdf": "/rooms/postgres-tuning-ai-2026-09-16/carousel.pdf",
+            "preview": null
+          }
+        },
+        {
+          "kind": "preview",
+          "url": "https://lnkd.in/p/emfpuSDg",
+          "roundup": true,
+          "firstComment": [
+            "Mon 9/14, 6pm · LeadDev New York Meetup (RSVP required, bring ID): https://www.meetup.com/leaddev-meetup-newyork/events/316035312/",
+            "Tue 9/15, 6pm · The New AI Computer: An Evening with Zo: https://luma.com/jo6qcual",
+            "Wed 9/16, 6pm · Postgres Tuning in the Age of AI: https://luma.com/3kevurew",
+            "Thu 9/17, 10am–8pm · Frontier Build NYC (hackathon): https://luma.com/frontierNYC",
+            "Tue 9/15, 10:30am · How Attio uses Attio: https://www.attio.community/c/workshops/how-attio-uses-attio-an-ae-s-playbook-for-views-and-reports",
+            "Tue 9/15, 11am · Beyond Integration Licensing Cost: https://www.miraclesoft.com/webinars/beyond-integration-licensing-cost-modernize-integration-ai-serverless.php",
+            "Wed 9/16, 12pm · Clay: Rebuilding the Marketing Tech Stack for the AI Era: https://www.clay.com/livestreams/rebuilding-the-marketing-tech-stack-for-the-ai-era",
+            "Wed 9/16, 1pm · Context is King (Notion): https://www.notion.com/webinars/context-is-king-how-to-build-a-system-of-context-for-ai",
+            "Thu 9/17, 12pm · Signal Rich, Action Poor (RevGenius): https://www.revgenius.com/events/signal-rich-action-poor"
+          ],
+          "carousel": {
+            "pdf": "/rooms/upcoming-week-2026-09-14/carousel.pdf",
+            "preview": null
+          }
+        },
+        {
+          "kind": "recap",
+          "url": "https://lnkd.in/p/ePYm4dYv",
+          "roundup": false,
+          "firstComment": [
+            "Ryan Booz, \"Postgres in Production: pg_stat_statements deep dive\" (pganalyze series, Parts 1–6): https://pganalyze.com/blog/postgres-in-production-pg-stat-statements-deep-dive-part-1",
+            "PostgreSQL docs, auto_explain: https://www.postgresql.org/docs/current/auto-explain.html",
+            "pganalyze Workbooks (baseline-vs-variant plan testing): https://pganalyze.com/docs/query-tuning",
+            "Datadog Security Labs, SQL injection in the (archived) reference PostgreSQL MCP server, on why a raw Postgres MCP connection needs guardrails: https://securitylabs.datadoghq.com/articles/mcp-vulnerability-case-study-SQL-injection-in-the-postgresql-mcp-server/",
+            "Postgres Summit US 2026 (NYC, Sept 30–Oct 2; Ryan Booz is speaking): https://2026.postgressummit.us/"
+          ],
+          "carousel": null
+        }
+      ]
+    },
+    {
+      "slug": "2026-09-14-leaddev-new-york-meetup",
+      "name": "LeadDev New York Meetup (LDX3 eXpress) — Sept 14 2026",
+      "date": "2026-09-14",
+      "location": "New York Times Building, New York",
+      "status": "post_complete",
+      "series": "LeadDev New York",
+      "what": "LeadDev New York community meetup, an LDX3 eXpress evening sponsored by Datadog: two talks on engineering leadership and a panel on build versus buy in the age of AI coding.",
+      "recapPending": false,
+      "speakers": [
+        {
+          "name": "Bradley Holt",
+          "title": "Manager, Technical Advocacy (Application Development & Performance), Datadog",
+          "company": "Datadog",
+          "linkedin": "https://www.linkedin.com/in/bradleyholt/",
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Brian Takashi Hooper",
+          "title": "Chief Technology Officer, M3 USA",
+          "company": "M3 USA / MDLinx",
+          "linkedin": "https://www.linkedin.com/in/btakashi/",
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Divya Ramanarayanan",
+          "title": "Principal Engineer (AI), Jobber",
+          "company": "Jobber",
+          "linkedin": null,
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Ivan Milanov",
+          "title": "Engineering Leader (ERP), PubliCare GmbH",
+          "company": "PubliCare GmbH",
+          "linkedin": null,
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Maylin Leal",
+          "title": "Head of Engineering, Bonial",
+          "company": "Bonial",
+          "linkedin": null,
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Pranay Prabhat",
+          "title": "Head of Engineering, Games, The New York Times",
+          "company": "The New York Times — Games",
+          "linkedin": "https://www.linkedin.com/in/pranay-prabhat-08/",
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Abhinav Singhal",
+          "title": "Enterprise AI / cloud architect, NYC",
+          "company": null,
+          "linkedin": "https://www.linkedin.com/in/abhinavsinghalnyc/",
+          "roles": [
+            "host"
+          ]
+        },
+        {
+          "name": "Plum Ertz",
+          "title": "Senior Director, Engineering — Ro",
+          "company": "Ro",
+          "linkedin": "https://www.linkedin.com/in/plumertzi/",
+          "roles": [
+            "host",
+            "organizer"
+          ]
+        }
+      ],
+      "topics": [
+        "AI Full-Stack App Builders / Vibe Coding (product agents vs coding agents vs prototyping)",
+        "Centaur vs. Reverse Centaur (who shapes the work in AI-assisted jobs)",
+        "Engineering Leadership in the AI Era",
+        "Replace-Your-SaaS-Stack (build-vs-buy in the AI-app-builder era)"
+      ],
+      "companies": [
+        "Bonial",
+        "Datadog",
+        "Jobber",
+        "M3 USA / MDLinx",
+        "PubliCare GmbH",
+        "Ro",
+        "The New York Times — Games"
+      ],
+      "takeaways": null,
+      "carousel": null,
+      "posts": [
+        {
+          "kind": "preview",
+          "url": "https://lnkd.in/p/emfpuSDg",
+          "roundup": true,
+          "firstComment": [
+            "Mon 9/14, 6pm · LeadDev New York Meetup (RSVP required, bring ID): https://www.meetup.com/leaddev-meetup-newyork/events/316035312/",
+            "Tue 9/15, 6pm · The New AI Computer: An Evening with Zo: https://luma.com/jo6qcual",
+            "Wed 9/16, 6pm · Postgres Tuning in the Age of AI: https://luma.com/3kevurew",
+            "Thu 9/17, 10am–8pm · Frontier Build NYC (hackathon): https://luma.com/frontierNYC",
+            "Tue 9/15, 10:30am · How Attio uses Attio: https://www.attio.community/c/workshops/how-attio-uses-attio-an-ae-s-playbook-for-views-and-reports",
+            "Tue 9/15, 11am · Beyond Integration Licensing Cost: https://www.miraclesoft.com/webinars/beyond-integration-licensing-cost-modernize-integration-ai-serverless.php",
+            "Wed 9/16, 12pm · Clay: Rebuilding the Marketing Tech Stack for the AI Era: https://www.clay.com/livestreams/rebuilding-the-marketing-tech-stack-for-the-ai-era",
+            "Wed 9/16, 1pm · Context is King (Notion): https://www.notion.com/webinars/context-is-king-how-to-build-a-system-of-context-for-ai",
+            "Thu 9/17, 12pm · Signal Rich, Action Poor (RevGenius): https://www.revgenius.com/events/signal-rich-action-poor"
+          ],
+          "carousel": {
+            "pdf": "/rooms/upcoming-week-2026-09-14/carousel.pdf",
+            "preview": null
+          }
+        },
+        {
+          "kind": "recap",
+          "url": "https://www.linkedin.com/posts/alexyedi_dont-be-a-reverse-centaur-ugcPost-7505669374666682369-gyCs/",
+          "roundup": false,
+          "firstComment": [
+            "Cory Doctorow, The Reverse Centaur's Guide to Life After AI (FSG, 2026). Background in his talk: https://pluralistic.net/2025/12/05/pop-that-bubble/",
+            "Lee et al., \"The Impact of Generative AI on Critical Thinking\" (Microsoft Research + Carnegie Mellon, CHI 2025): https://www.microsoft.com/en-us/research/wp-content/uploads/2025/01/lee_2025_ai_critical_thinking_survey.pdf",
+            "Lenny's Newsletter, \"How tech workers are feeling in 2026\": https://www.lennysnewsletter.com/p/how-tech-workers-are-feeling-in-2026",
+            "LeadDev, The Engineering Leadership Report 2026: https://leaddev.com/the-engineering-leadership-report-2026",
+            "HBR, \"AI-Generated 'Workslop' Is Destroying Productivity\" (the adjacent failure: slop you send vs. slop your agent hands you): https://hbr.org/2025/09/ai-generated-workslop-is-destroying-productivity"
+          ],
+          "carousel": null
+        },
+        {
+          "kind": "recap",
+          "url": "https://www.linkedin.com/posts/alexyedi_engineeringleadership-buildvsbuy-aicoding-share-7505721981649174528-CB3Q/",
+          "roundup": false,
+          "firstComment": [
+            "Andrej Karpathy's original \"vibe coding\" post (Feb 2, 2025): https://x.com/karpathy/status/1886192184808149383",
+            "Eric Evans, Domain-Driven Design Reference (core vs. generic subdomains, Maylin's rubric): https://www.domainlanguage.com/ddd/reference/",
+            "OpenSpec, spec-driven development for AI coding assistants: https://github.com/Fission-AI/OpenSpec",
+            "OpenAI, \"Harness engineering\" (what Hooper's \"build\" converges toward): https://openai.com/index/harness-engineering/",
+            "Retool, 2026 Build vs. Buy Report (35% of enterprises have already replaced a SaaS tool): https://www.businesswire.com/news/home/20260217548274/en/Retools-2026-Build-vs.-Buy-Report-Reveals-35-of-Enterprises-Have-Already-Replaced-SaaS-With-Custom-Software"
+          ],
+          "carousel": null
+        }
+      ]
+    },
+    {
+      "slug": "2026-09-09-daytona-ai-builders",
+      "name": "Daytona AI Builders NYC (Sept 2026)",
+      "date": "2026-09-09",
+      "location": "New York",
+      "status": "researched",
+      "series": "Daytona AI Builders",
+      "what": "Daytona's AI engineering meetup with WorkOS, You.com and Veris AI: short talks on reinforcement learning for code models, self-improving agents, simulated environments and sandboxes.",
+      "recapPending": true,
+      "speakers": [
+        {
+          "name": "Daniel Graviet",
+          "title": "Machine Learning Engineer, Daytona",
+          "company": "Daytona",
+          "linkedin": "https://www.linkedin.com/in/danielthigraviet",
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Daria Shifrina",
+          "title": "Member of Technical Staff, Obvious",
+          "company": "Obvious",
+          "linkedin": "https://www.linkedin.com/in/daria-shifrina/",
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Edward Irby",
+          "title": "Staff Software Engineer, You.com",
+          "company": "You.com",
+          "linkedin": null,
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Marina Trajkovska",
+          "title": "GTM Engineer, Vellum",
+          "company": "Vellum",
+          "linkedin": "https://www.linkedin.com/in/marinatrajk/",
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Ritiz Tambi",
+          "title": "Senior AI Engineer, Veris AI",
+          "company": "Veris AI",
+          "linkedin": "https://www.linkedin.com/in/ritiz-tambi/",
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Ryan Cooke",
+          "title": "Engineering Manager, WorkOS",
+          "company": "WorkOS",
+          "linkedin": null,
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Marijan Cipcic",
+          "title": "Principal Events Manager, Daytona",
+          "company": "Daytona",
+          "linkedin": null,
+          "roles": [
+            "host",
+            "organizer"
+          ]
+        }
+      ],
+      "topics": [
+        "Agent Evaluation & Reliability in Production",
+        "Agent Simulation Environments (world vs. mock)",
+        "Agentic Identity & Auth",
+        "AI Coding Agent Infrastructure",
+        "AI Coding Agents",
+        "Cloud Sandboxes for AI Agents",
+        "Reinforcement Learning for Code Models (GRPO)",
+        "Self-Improving Agents from Behavioral Exhaust",
+        "Software Factory / Autonomous Multi-Agent Build",
+        "Verification as the AI-Agent Bottleneck"
+      ],
+      "companies": [
+        "Daytona",
+        "Obvious",
+        "Vellum",
+        "Veris AI",
+        "WorkOS",
+        "You.com"
+      ],
+      "takeaways": null,
+      "carousel": null,
+      "posts": [
+        {
+          "kind": "preview",
+          "url": "https://www.linkedin.com/posts/alexyedi_the-best-ai-rooms-in-nyc-this-week-arent-share-7503146048241029121-1Yqa",
+          "roundup": true,
+          "firstComment": null,
+          "carousel": null
+        }
+      ]
+    },
+    {
+      "slug": "2026-09-08-glm-5-3-exec-briefing",
+      "name": "GLM-5.3 Exec Briefing (webinar)",
+      "date": "2026-09-08",
+      "location": "Webinar",
+      "status": "researched",
+      "series": null,
+      "what": "Online briefing on the GLM-5.3 model with speakers from Baseten and Artificial Analysis.",
+      "recapPending": false,
+      "speakers": [
+        {
+          "name": "Declan Jackson",
+          "title": "Member of Technical Staff / Data Engineer, Artificial Analysis",
+          "company": "Artificial Analysis",
+          "linkedin": null,
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Philip Kiely",
+          "title": "Head of AI Education, Baseten",
+          "company": "Baseten",
+          "linkedin": null,
+          "roles": [
+            "speaker"
+          ]
+        }
+      ],
+      "topics": [],
+      "companies": [
+        "Artificial Analysis",
+        "Baseten"
+      ],
+      "takeaways": null,
+      "carousel": null,
+      "posts": [
+        {
+          "kind": "preview",
+          "url": "https://www.linkedin.com/posts/alexyedi_the-best-ai-rooms-in-nyc-this-week-arent-share-7503146048241029121-1Yqa",
+          "roundup": true,
+          "firstComment": null,
+          "carousel": null
+        },
+        {
+          "kind": "recap",
+          "url": "https://www.linkedin.com/posts/alexyedi_glm-53-ugcPost-7503469074841239553-U9SX",
+          "roundup": false,
+          "firstComment": null,
+          "carousel": null
+        }
+      ]
+    },
+    {
+      "slug": "2026-09-01-nyc-voice-ai-meetup",
+      "name": "NYC Voice AI Meetup: Build Smarter Voice Agents (AssemblyAI × LiveKit × Boardy)",
+      "date": "2026-09-01",
+      "location": "New York",
+      "status": "content_drafted",
+      "series": null,
+      "what": "Evening meetup from AssemblyAI and LiveKit, co-hosted by Boardy: a live demo of realtime speech-to-text, then a panel on shipping voice agents in production.",
+      "recapPending": false,
+      "speakers": [
+        {
+          "name": "Dylan Wight",
+          "title": "Sr. Engineer, Flagler Health",
+          "company": "Flagler Health",
+          "linkedin": "https://www.linkedin.com/in/dgwight",
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Owen Gretzinger",
+          "title": "Head of Engineering, Boardy",
+          "company": "Boardy",
+          "linkedin": "https://www.linkedin.com/in/owengretzinger",
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Ryan Seams",
+          "title": "VP, Customer Solutions, AssemblyAI (moderator)",
+          "company": "AssemblyAI",
+          "linkedin": "https://www.linkedin.com/in/ryanseams",
+          "roles": [
+            "speaker",
+            "host"
+          ]
+        }
+      ],
+      "topics": [
+        "Latency-Optimized LLM Inference for Voice / Small Purpose-Built Voice Models",
+        "Production Voice Agent Architecture (Deployment, Scaling, Observability)",
+        "Real-Time Speech-to-Text (Streaming STT) & the Endpointing Battleground"
+      ],
+      "companies": [
+        "AssemblyAI",
+        "Boardy",
+        "Flagler Health"
+      ],
+      "takeaways": null,
+      "carousel": null,
+      "posts": [
+        {
+          "kind": "preview",
+          "url": "https://www.linkedin.com/posts/alexyedi_voice-agent-event-3-pdf-ugcPost-7500581974257025025-E8XO",
+          "roundup": false,
+          "firstComment": null,
+          "carousel": null
+        },
+        {
+          "kind": "preview",
+          "url": "https://www.linkedin.com/posts/alexyedi_a-voice-agent-panel-a-teardown-of-a-company-share-7500248629547417600-2RJc",
+          "roundup": true,
+          "firstComment": null,
+          "carousel": null
+        },
+        {
+          "kind": "recap",
+          "url": "https://www.linkedin.com/posts/alexyedi_voice-ai-3-post-post-ugcPost-7500973375435984896-KgGj",
+          "roundup": false,
+          "firstComment": null,
+          "carousel": null
+        }
+      ]
+    },
+    {
+      "slug": "2026-08-27-nyc-gtm-leaders-vol-1",
+      "name": "NYC GTM Leaders, Vol. 1: Breaking Through the AI Slop",
+      "date": "2026-08-27",
+      "location": "Midtown NYC",
+      "status": "post_complete",
+      "series": "NYC GTM Leaders",
+      "what": "Small evening for GTM leaders on standing out when every channel is full of AI-generated outreach: three short talks and a working session. Hosted by Vibranium Labs, MindStudio and Bond AI.",
+      "recapPending": false,
+      "speakers": [
+        {
+          "name": "Eric Fleshman",
+          "title": "GTM Engineer (founding GTME at an AI-native CRM)",
+          "company": "Flex",
+          "linkedin": "https://www.linkedin.com/in/eric-fleshman",
+          "roles": [
+            "speaker",
+            "host"
+          ]
+        },
+        {
+          "name": "Josh Kim",
+          "title": "Chief of Staff, GTM & Growth, Remy by MindStudio",
+          "company": "MindStudio (Remy)",
+          "linkedin": "https://www.linkedin.com/in/joshminsupkim",
+          "roles": [
+            "speaker",
+            "host"
+          ]
+        },
+        {
+          "name": "Tanny Kang",
+          "title": "Co-Founder & COO, Vibranium Labs",
+          "company": "Vibranium Labs",
+          "linkedin": "https://www.linkedin.com/in/tanny-kang",
+          "roles": [
+            "speaker",
+            "host"
+          ]
+        },
+        {
+          "name": "Joella Huynh",
+          "title": "GTM, Vibranium Labs",
+          "company": "Vibranium Labs",
+          "linkedin": "https://www.linkedin.com/in/joella-huynh",
+          "roles": [
+            "host"
+          ]
+        },
+        {
+          "name": "Sahar Mor",
+          "title": "Investor; Building at Bond AI (author, AI Tidbits)",
+          "company": "Bond AI",
+          "linkedin": "https://www.linkedin.com/in/sahar-mor",
+          "roles": [
+            "host"
+          ]
+        }
+      ],
+      "topics": [
+        "AI Slop & Outbound Saturation",
+        "AI-Native GTM Stacks & Agentic GTM",
+        "GTM Engineering (GTME) as a Discipline",
+        "Thought Leadership / Founder-Led as a Channel"
+      ],
+      "companies": [
+        "Bond AI",
+        "Flex",
+        "MindStudio (Remy)",
+        "Vibranium Labs"
+      ],
+      "takeaways": null,
+      "carousel": null,
+      "posts": [
+        {
+          "kind": "preview",
+          "url": "https://www.linkedin.com/posts/alexyedi_nycai-agenticnyc-share-7497657322035437568-_RXg",
+          "roundup": true,
+          "firstComment": null,
+          "carousel": null
+        },
+        {
+          "kind": "recap",
+          "url": "https://www.linkedin.com/posts/alexyedi_gtm-slop-carousel-activity-7499111045257674753-bQ5w",
+          "roundup": false,
+          "firstComment": [
+            "Clay's AI-writing policy (\"stand behind every sentence,\" Aug 19 2026) — the room's thesis, codified by the outbound incumbent: http://clay.com/blog/ai-writing-policy",
+            "Link to last weeks post with quotes from leaders at Clay, Attention, and Hubspot: https://www.linkedin.com/posts/alexyedi_revgenius-buyside-inversion-activity-7493691641170640896-umx3",
+            "Tanny Kang — http://incidents.world/ — newsletter-as-GTM for on-call/incident management (thought-leadership-as-channel, lived): http://incidents.world/",
+            "Josh Kim / MindStudio + Remy — community-led growth in practice (free agent bootcamps): http://mindstudio.ai/",
+            "Signal-based vs generic outbound (5–18% vs 1–3%, directional) — http://spuriq.ai/blog/signal-based-outbound-vs-cold-outbound"
+          ],
+          "carousel": null
+        },
+        {
+          "kind": "synthesis",
+          "url": "https://www.linkedin.com/posts/alexyedi_two-rooms-ugcPost-7498804571729854464-0Ub8",
+          "roundup": true,
+          "firstComment": [
+            "Clay — the AI-writing policy (\"stand behind every sentence\"): https://www.clay.com/blog/ai-writing-policy",
+            "\"Replacing Judges with Juries\" (PoLL — panel-of-judges beats a single judge): https://arxiv.org/abs/2404.18796",
+            "Zheng et al. — \"Judging LLM-as-a-Judge with MT-Bench\" (>80% agreement + judge bias): https://arxiv.org/abs/2306.05685",
+            "SpurIQ — signal-based vs. cold outbound (the 5–18% vs 1–3% reply gap): https://spuriq.ai/blog/signal-based-outbound-vs-cold-outbound/",
+            "Bloomberry — \"I analyzed 1,000 GTM engineering jobs\": https://bloomberry.com/blog/i-analyzed-1000-gtm-engineering-jobs-here-is-what-i-learned/"
+          ],
+          "carousel": null
+        }
+      ]
+    },
+    {
+      "slug": "2026-08-24-shortlist-august-founder-showcase",
+      "name": "The Shortlist: August Founder Showcase",
+      "date": "2026-08-24",
+      "location": "New York",
+      "status": "content_drafted",
+      "series": "The Shortlist",
+      "what": "Monthly application-only founder showcase run by The Shortlist: six seed-to-Series B founders present their companies and open roles, followed by a mixer.",
+      "recapPending": false,
+      "speakers": [
+        {
+          "name": "Dilip Rajan",
+          "title": "Co-Founder & CEO, Thunder",
+          "company": "Thunder",
+          "linkedin": "https://www.linkedin.com/in/dilipsrajan",
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Katon Luaces",
+          "title": "Co-Founder & CEO, PointOne",
+          "company": "PointOne",
+          "linkedin": "https://www.linkedin.com/in/katon-luaces",
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Michael Ioffe",
+          "title": "Co-Founder & CEO, Arist",
+          "company": "Arist",
+          "linkedin": "https://www.linkedin.com/in/michaelaioffe",
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Nicole Hedley",
+          "title": "Co-Founder & CEO, Headstart",
+          "company": "Headstart",
+          "linkedin": "https://www.linkedin.com/in/nicole-hedley-a7848a44",
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Shreyas Iyer",
+          "title": "Co-Founder & CTO, Antimetal",
+          "company": "Antimetal",
+          "linkedin": "https://www.linkedin.com/in/shreyasiyer30",
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Yassine Açoine",
+          "title": "Co-Founder & CTO, North.Cloud",
+          "company": "North.Cloud",
+          "linkedin": "https://www.linkedin.com/in/yassine-acoine",
+          "roles": [
+            "speaker"
+          ]
+        }
+      ],
+      "topics": [
+        "Agentic GTM & Growth-as-a-Service",
+        "AI-Native Startup Talent Market (NYC)",
+        "Cloud Cost Optimization & FinOps",
+        "Vertical AI Applications"
+      ],
+      "companies": [
+        "Antimetal",
+        "Arist",
+        "Headstart",
+        "North.Cloud",
+        "PointOne",
+        "Thunder"
+      ],
+      "takeaways": null,
+      "carousel": null,
+      "posts": [
+        {
+          "kind": "preview",
+          "url": "https://www.linkedin.com/posts/alexyedi_nycai-agenticnyc-share-7497657322035437568-_RXg",
+          "roundup": true,
+          "firstComment": null,
+          "carousel": null
+        },
+        {
+          "kind": "recap",
+          "url": "https://www.linkedin.com/posts/alexyedi_shortlist-carousel-ugcPost-7498080620431007747-OjUv",
+          "roundup": false,
+          "firstComment": [
+            "North (cloud + AI FinOps) — https://www.north.cloud/careers",
+            "Antimetal (autonomous infra ops) — https://antimetal.com/careers",
+            "Headstart (agentic systems) — https://www.headstart.nyc/careers/",
+            "Arist (consulting automation) — https://wellfound.com/company/arist/jobs",
+            "PointOne (legal AI) — https://pointone.com/careers",
+            "Thunder (growth-marketing agents) — https://wellfound.com/jobs/4446277-founding-growth-lead"
+          ],
+          "carousel": null
+        }
+      ]
+    },
+    {
+      "slug": "2026-08-12-revgenius-irl-hype-to-revenue",
+      "name": "RevGenius IRL: From Hype to Revenue (Panel + Happy Hour)",
+      "date": "2026-08-12",
+      "location": "Spara HQ, New York",
+      "status": "researched",
+      "series": "RevGenius",
+      "what": "In-person RevGenius panel and happy hour at Spara's office on moving AI in revenue teams from hype to results.",
+      "recapPending": false,
+      "speakers": [
+        {
+          "name": "Anis Bennaceur",
+          "title": "Co-founder & CEO, Attention",
+          "company": "Attention",
+          "linkedin": "https://www.linkedin.com/in/anis-bennaceur/",
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Ari Echt-Wilson",
+          "title": "Director, Global Prospect Email, HubSpot",
+          "company": "HubSpot",
+          "linkedin": "https://www.linkedin.com/in/ariechtwilson/",
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "David Walker",
+          "title": "Co-Founder & CEO, Spara",
+          "company": "Spara",
+          "linkedin": null,
+          "roles": [
+            "speaker",
+            "host"
+          ]
+        },
+        {
+          "name": "Everett Berry",
+          "title": "Head of GTM Engineering, Clay",
+          "company": "Clay",
+          "linkedin": null,
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Jared Robin",
+          "title": "Co-Founder & CEO, RevGenius",
+          "company": "RevGenius",
+          "linkedin": null,
+          "roles": [
+            "host"
+          ]
+        },
+        {
+          "name": "Lauren Thompson",
+          "title": "Head of Marketing, Spara",
+          "company": "Spara",
+          "linkedin": null,
+          "roles": [
+            "host"
+          ]
+        },
+        {
+          "name": "Upamanyu Ghosh",
+          "title": "Growth, RevGenius",
+          "company": "RevGenius",
+          "linkedin": null,
+          "roles": [
+            "host"
+          ]
+        }
+      ],
+      "topics": [
+        "AI-Native Go-To-Market",
+        "Go-to-Market Strategy for AI (and AI for GTM)",
+        "GTM Engineering"
+      ],
+      "companies": [
+        "Attention",
+        "Clay",
+        "HubSpot",
+        "RevGenius",
+        "Spara"
+      ],
+      "takeaways": null,
+      "carousel": null,
+      "posts": [
+        {
+          "kind": "preview",
+          "url": "https://www.linkedin.com/posts/alexyedi_gtm-2024-2026-where-the-value-moved-ugcPost-7493375381773688832-sy12",
+          "roundup": false,
+          "firstComment": null,
+          "carousel": null
+        },
+        {
+          "kind": "preview",
+          "url": "https://www.linkedin.com/posts/alexyedi_even-in-new-york-things-get-a-little-slower-share-7492654279648858112-odCq",
+          "roundup": true,
+          "firstComment": null,
+          "carousel": null
+        },
+        {
+          "kind": "recap",
+          "url": "https://www.linkedin.com/posts/alexyedi_revgenius-buyside-inversion-ugcPost-7493691637777379328-tCrh",
+          "roundup": false,
+          "firstComment": null,
+          "carousel": null
+        }
+      ]
+    },
+    {
+      "slug": "2026-07-28-mcp-release-party",
+      "name": "MCP Release Party",
+      "date": "2026-07-28",
+      "location": "New York Times Building, New York",
+      "status": "post_complete",
+      "series": null,
+      "what": "Release party from the Agentic AI Foundation (AAIF) for the 2026-07-28 MCP specification, with talks on the stateless spec, evaluating an MCP server and MCP authorization.",
+      "recapPending": false,
+      "speakers": [
+        {
+          "name": "Alex Hancock",
+          "title": "Software Engineer, Block; MCP Rust SDK maintainer; core maintainer, Goose",
+          "company": "Block",
+          "linkedin": null,
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Michael Levan",
+          "title": "AI Architect / Principal Solutions Engineer, Solo.io",
+          "company": "Solo.io",
+          "linkedin": "https://linkedin.com/in/michaellevan",
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Scott Yak",
+          "title": "Senior Software Engineer, Datadog — Applied AI (MCP services)",
+          "company": "Datadog",
+          "linkedin": "https://linkedin.com/in/scottyak",
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Angie Jones",
+          "title": "VP, Developer Experience — Agentic AI Foundation (AAIF)",
+          "company": "Agentic AI Foundation (AAIF)",
+          "linkedin": "https://linkedin.com/in/angiejones",
+          "roles": [
+            "host"
+          ]
+        }
+      ],
+      "topics": [
+        "Agentic Infrastructure & MCP",
+        "Enterprise AI Agent Security & Governance",
+        "MCP at Enterprise Scale",
+        "Scaling AI Agents to Production / Reliability"
+      ],
+      "companies": [
+        "Agentic AI Foundation (AAIF)",
+        "Block",
+        "Datadog",
+        "Solo.io"
+      ],
+      "takeaways": null,
+      "carousel": null,
+      "posts": [
+        {
+          "kind": "preview",
+          "url": "https://www.linkedin.com/posts/alexyedi_aiengineering-agenticai-ainativegtm-share-7487911465602088960-WDN_",
+          "roundup": true,
+          "firstComment": null,
+          "carousel": null
+        },
+        {
+          "kind": "recap",
+          "url": "https://www.linkedin.com/posts/alexyedi_mcp-aiagents-platformengineering-share-7488312311338930176-rY7H",
+          "roundup": false,
+          "firstComment": [
+            "Datadog MCP Server: http://datadoghq.com/product/ai/mcp-server",
+            "MCP 2026-07-28 release candidate: http://blog.modelcontextprotocol.io/posts/2026-07-28-release-candidate/",
+            "What MCP is: http://modelcontextprotocol.io/",
+            "AAIF events: http://aaif.io/events"
+          ],
+          "carousel": null
+        },
+        {
+          "kind": "recap",
+          "url": "https://www.linkedin.com/posts/alexyedi_mcp-release-ugcPost-7488264312982183937-OImy",
+          "roundup": false,
+          "firstComment": [
+            "MCP 2026-07-28 release candidate (largest spec revision since launch): http://blog.modelcontextprotocol.io/posts/2026-07-28-release-candidate/",
+            "What MCP is: http://modelcontextprotocol.io/",
+            "New extensions referenced: MCP Apps (SEP-1865), Tasks (SEP-2663), Extensions framework (SEP-2133) — http://github.com/modelcontextprotocol",
+            "Goose (Block's open-source agent, one of the first MCP clients): http://block.github.io/goose",
+            "Datadog MCP Server: http://datadoghq.com/product/ai/mcp-server",
+            "http://solo.io/ agentgateway (where Levan argues security belongs): http://solo.io/",
+            "AAIF events + the six-city party series: http://aaif.io/events"
+          ],
+          "carousel": null
+        }
+      ]
+    },
+    {
+      "slug": "2026-06-30-gtm-eng-nyc-coding-agents",
+      "name": "GTM Eng NYC: Coding Agents + GTM Lightning Talks",
+      "date": "2026-06-30",
+      "location": "Ramp HQ, New York",
+      "status": "post_complete",
+      "series": "GTM Eng NYC",
+      "what": "Lightning talks hosted by Deepline and Ramp: GTM practitioners from Ramp, Modal, Notion, OpenAI and Attention on using coding agents to build go-to-market systems.",
+      "recapPending": false,
+      "speakers": [
+        {
+          "name": "Anis Bennaceur",
+          "title": "Co-founder & CEO, Attention",
+          "company": "Attention",
+          "linkedin": "https://www.linkedin.com/in/anis-bennaceur/",
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Bryant McCombs",
+          "title": "GTM Account Director, OpenAI",
+          "company": null,
+          "linkedin": "https://www.linkedin.com/in/bryantjm/",
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Chris Prinz",
+          "title": "GTM Engineer (\"Member of GTM Staff\"), Modal",
+          "company": null,
+          "linkedin": "https://www.linkedin.com/in/chris-prinz/",
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Jacob Fleischer",
+          "title": "Head of Sales @ Attention",
+          "company": "Attention",
+          "linkedin": null,
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Julia Biedry Gonzalez",
+          "title": "Head of GTM Innovation, Notion",
+          "company": null,
+          "linkedin": "https://www.linkedin.com/in/juliabiedry/",
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Keyan Sarrafzadeh",
+          "title": "Growth Product, Ramp",
+          "company": null,
+          "linkedin": "https://www.linkedin.com/in/keyans/",
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Jai Toor",
+          "title": "Co-founder, Deepline",
+          "company": null,
+          "linkedin": "https://www.linkedin.com/in/jai-toor/",
+          "roles": [
+            "host",
+            "organizer"
+          ]
+        },
+        {
+          "name": "Seth Hanes",
+          "title": "Growth Marketing Consultant (prev. Vanta, Spring Health)",
+          "company": null,
+          "linkedin": "https://www.linkedin.com/in/seth-hanes/",
+          "roles": [
+            "host"
+          ]
+        }
+      ],
+      "topics": [
+        "Coding Agents for GTM",
+        "GTM Engineering",
+        "Reliable GTM Systems with Code"
+      ],
+      "companies": [
+        "Attention"
+      ],
+      "takeaways": null,
+      "carousel": null,
+      "posts": [
+        {
+          "kind": "preview",
+          "url": "https://www.linkedin.com/posts/alexyedi_the-upcoming-week-in-nyc-ai-short-holiday-share-7477387849085095936-9Cl9",
+          "roundup": true,
+          "firstComment": null,
+          "carousel": null
+        },
+        {
+          "kind": "recap",
+          "url": "https://www.linkedin.com/posts/alexyedi_gtm-eng-nyc-6-30-26-ugcPost-7478104089612972033-ef1A",
+          "roundup": false,
+          "firstComment": null,
+          "carousel": null
+        }
+      ]
+    },
+    {
+      "slug": "2026-06-26-voice-ai-agents-hackathon",
+      "name": "Build, Listen, Deploy: Voice AI Agents Hackathon | Agora x ScaleDown AI",
+      "date": "2026-06-26",
+      "location": "Amazon, New York",
+      "status": "content_drafted",
+      "series": null,
+      "what": "Two-day voice AI hackathon run by Agora and ScaleDown AI: a kickoff night of lightning talks and team formation, then a full build day with demos and judging.",
+      "recapPending": true,
+      "speakers": [
+        {
+          "name": "Hermes Frangoudis",
+          "title": "Director of DevRel & Partner Engineering, Agora",
+          "company": "Agora",
+          "linkedin": "https://www.linkedin.com/in/hermesfrangoudis/",
+          "roles": [
+            "host"
+          ]
+        },
+        {
+          "name": "Neal Patel",
+          "title": "Founder, ScaleDown AI",
+          "company": "ScaleDown AI",
+          "linkedin": "https://www.linkedin.com/in/neal-k-patel/",
+          "roles": [
+            "host"
+          ]
+        }
+      ],
+      "topics": [
+        "Contextual SLMs & Prompt/Context Compression",
+        "Latency-Optimized LLM Inference for Voice / Small Purpose-Built Voice Models",
+        "Model Routing & AI Gateways",
+        "Real-Time Voice Agent Orchestration",
+        "Task-Specific / Distilled Models",
+        "Voice AI Infrastructure & Ultra-Low-Latency RTC"
+      ],
+      "companies": [
+        "Agora",
+        "ScaleDown AI"
+      ],
+      "takeaways": null,
+      "carousel": null,
+      "posts": [
+        {
+          "kind": "preview",
+          "url": "https://www.linkedin.com/posts/alexyedi_aiagents-nyctech-llmops-share-7474822841088118785-COmH",
+          "roundup": true,
+          "firstComment": null,
+          "carousel": null
+        }
+      ]
+    },
+    {
+      "slug": "2026-06-25-agents-behaving-badly",
+      "name": "Agents Behaving Badly: The Perils of Pushing AI Agents into Production",
+      "date": "2026-06-25",
+      "location": "Datadog @ NYT Building, New York",
+      "status": "content_drafted",
+      "series": null,
+      "what": "Panel at Datadog's New York office on evaluating AI agents in production: reliability, regressions and drift, with researchers from Meta and Arklex.AI.",
+      "recapPending": true,
+      "speakers": [
+        {
+          "name": "Kilian Lieret",
+          "title": "AI Research Scientist, Meta Superintelligence Labs",
+          "company": "Meta Superintelligence Labs",
+          "linkedin": "https://www.linkedin.com/in/klieret/",
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Zhou Yu",
+          "title": "Co-founder/CEO, Arklex.AI; Associate Professor, Columbia CS",
+          "company": "Arklex.AI",
+          "linkedin": "https://www.linkedin.com/in/zhou-jo-yu-95327378/",
+          "roles": [
+            "speaker",
+            "host"
+          ]
+        },
+        {
+          "name": "Angela Sharma",
+          "title": "Chief of Staff, Arklex AI",
+          "company": null,
+          "linkedin": "https://www.linkedin.com/in/angela-ankita-sharma/",
+          "roles": [
+            "host",
+            "organizer"
+          ]
+        },
+        {
+          "name": "Arielle Mella",
+          "title": "Manager, Technical Community, Datadog",
+          "company": "Datadog",
+          "linkedin": "https://www.linkedin.com/in/ariellevm/",
+          "roles": [
+            "host"
+          ]
+        },
+        {
+          "name": "John Mark W.",
+          "title": "Founder, AccelGentic - Open Source + AI Product & Technology Leader",
+          "company": "AccelGentic",
+          "linkedin": null,
+          "roles": [
+            "host",
+            "organizer"
+          ]
+        },
+        {
+          "name": "Yi Ju",
+          "title": "Founding Solutions Architect & Developer Ecosystem, Arklex AI",
+          "company": "Arklex.AI",
+          "linkedin": "https://www.linkedin.com/in/yijuu/",
+          "roles": [
+            "host"
+          ]
+        }
+      ],
+      "topics": [
+        "Agent Evaluation & Reliability in Production",
+        "Agent Observability & Monitoring",
+        "Why Agents Fail in Production / Agentic Guardrails"
+      ],
+      "companies": [
+        "AccelGentic",
+        "Arklex.AI",
+        "Datadog",
+        "Meta Superintelligence Labs"
+      ],
+      "takeaways": null,
+      "carousel": null,
+      "posts": [
+        {
+          "kind": "preview",
+          "url": "https://www.linkedin.com/posts/alexyedi_aiagents-nyctech-llmops-share-7474822841088118785-COmH",
+          "roundup": true,
+          "firstComment": null,
+          "carousel": null
+        }
+      ]
+    },
+    {
+      "slug": "2026-06-24-nyc-ai-demos-10",
+      "name": "NYC AI Demos #10: Venture Spotlight — Brooklyn, June 2026",
+      "date": "2026-06-24",
+      "location": "The Refinery at Domino, Brooklyn",
+      "status": "content_drafted",
+      "series": "NYC AI Demos",
+      "what": "Tenth NYC AI Demos, at The Refinery at Domino in Brooklyn: startups selected by venture firms give five-minute live demos. Hosted by Pensar with Tech:NYC and Two Trees.",
+      "recapPending": false,
+      "speakers": [],
+      "topics": [],
+      "companies": [],
+      "takeaways": null,
+      "carousel": null,
+      "posts": [
+        {
+          "kind": "preview",
+          "url": "https://www.linkedin.com/posts/alexyedi_ai-venturecapital-gtm-share-7475650116415205377-cuqO",
+          "roundup": false,
+          "firstComment": [
+            "Hosts: Kyle Bhiro (Pensar) + Tech:NYC + Two Trees. Event: http://luma.com/nyc10"
+          ],
+          "carousel": null
+        },
+        {
+          "kind": "recap",
+          "url": "https://www.linkedin.com/posts/alexyedi_ai-nyctech-aiagents-share-7476617215631360001-Lp6c",
+          "roundup": false,
+          "firstComment": [
+            "Spring Health (Able Partners) — ~$466M raised. AI/ML platform + AI-safety product: http://springhealth.com/open-roles",
+            "Pace (Thrive + Sequoia) — $46M Series B, May 2026. ML + forward-deployed engineers, agent PM (NYC): http://withpace.com/",
+            "Uncovr (Index) — $7M seed. Full-stack + ML + forward-deployed engineers (NY & Paris): http://uncovr.ai/careers",
+            "Spara (Radical + Inspired) — $15M seed. AI/full-stack/forward-deployed engineers + a founding AE (NYC): http://spara.com/careers"
+          ],
+          "carousel": null
+        }
+      ]
+    },
+    {
+      "slug": "2026-06-23-daytona-ai-builders",
+      "name": "Daytona AI Builders w/ Oracle & Datadog — NYC, June 2026",
+      "date": "2026-06-23",
+      "location": "NYT Building, New York",
+      "status": "content_drafted",
+      "series": "Daytona AI Builders",
+      "what": "Daytona's AI engineering meetup, co-hosted with Datadog, with talks from Daytona, Oracle, Blacksmith and Anchor Browser on agent infrastructure and testing.",
+      "recapPending": false,
+      "speakers": [
+        {
+          "name": "Aayush Shah",
+          "title": "Co-Founder & Co-CTO, Blacksmith",
+          "company": "Blacksmith",
+          "linkedin": null,
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Anu Srivastava",
+          "title": "Solution Engineering Manager, Oracle",
+          "company": "Oracle",
+          "linkedin": null,
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Jennifer Mickel",
+          "title": "Software Engineer, Agent Observability — Datadog",
+          "company": "Datadog",
+          "linkedin": null,
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Jeremy Mendez",
+          "title": "Oracle, Principal Cloud Architect (AI Cloud Services)",
+          "company": "Oracle",
+          "linkedin": null,
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Muhammad Annas Hashmi",
+          "title": "DevRel, Daytona",
+          "company": "Daytona",
+          "linkedin": null,
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Nadav Magnezi",
+          "title": "Founding GTM, Anchor Browser",
+          "company": "Anchor Browser",
+          "linkedin": null,
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Marijan Cipcic",
+          "title": "Principal Events Manager, Daytona",
+          "company": "Daytona",
+          "linkedin": null,
+          "roles": [
+            "host",
+            "organizer"
+          ]
+        }
+      ],
+      "topics": [
+        "Agentic CI / Independent Proof-of-Behavior",
+        "AI's Impact on CI Infra / Build Speed",
+        "Cloud Sandboxes for AI Agents",
+        "Computer-Use / Production Browser Agents",
+        "OCI for AI Workloads"
+      ],
+      "companies": [
+        "Anchor Browser",
+        "Blacksmith",
+        "Datadog",
+        "Daytona",
+        "Oracle"
+      ],
+      "takeaways": null,
+      "carousel": null,
+      "posts": [
+        {
+          "kind": "preview",
+          "url": "https://www.linkedin.com/posts/alexyedi_aiagents-nyctech-llmops-share-7474822841088118785-COmH",
+          "roundup": true,
+          "firstComment": null,
+          "carousel": null
+        },
+        {
+          "kind": "recap",
+          "url": "https://www.linkedin.com/posts/alexyedi_aiagents-devtools-aiinfra-share-7475523172855918592-fxoz",
+          "roundup": false,
+          "firstComment": null,
+          "carousel": null
+        }
+      ]
+    },
+    {
+      "slug": "2026-06-09-marketing-engineer-meetup",
+      "name": "Marketing Engineer Meetup",
+      "date": "2026-06-09",
+      "location": "WorkOS, New York",
+      "status": "post_complete",
+      "series": null,
+      "what": "Meetup hosted by WorkOS and Bond AI on the marketing engineer role, with speakers from Profound, Ramp, Clay, Cursor, WorkOS and Knock on using AI to build marketing systems.",
+      "recapPending": false,
+      "speakers": [
+        {
+          "name": "Cindy Zhang",
+          "title": "PM, AI for Growth & Marketing, Ramp",
+          "company": "Ramp",
+          "linkedin": "https://www.linkedin.com/in/cindyzhang7/",
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Jack Perales",
+          "title": "GTM Engineer, WorkOS",
+          "company": "WorkOS",
+          "linkedin": "https://www.linkedin.com/in/jack-perales-63ab35120/",
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Joe Reitz",
+          "title": "Sr. Marketing Operations Manager (Systems), Vercel",
+          "company": "Vercel",
+          "linkedin": "https://www.linkedin.com/in/joereitz",
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Mike Carbone",
+          "title": "Product Engineer, Knock",
+          "company": "Knock",
+          "linkedin": "https://www.linkedin.com/in/carbone-mike/",
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Nick Lafferty",
+          "title": "Head of Growth & Founding Marketing Engineer, Profound",
+          "company": "Profound",
+          "linkedin": "https://www.linkedin.com/in/nicklafferty",
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Rani Kubersky",
+          "title": "Revenue Marketing, Cursor",
+          "company": "Cursor (Anysphere)",
+          "linkedin": "https://www.linkedin.com/in/ranikubersky",
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Sam Seely",
+          "title": "Co-founder & CEO, Knock",
+          "company": "Knock",
+          "linkedin": "https://www.linkedin.com/in/sam-seely-669128a",
+          "roles": [
+            "speaker",
+            "host"
+          ]
+        },
+        {
+          "name": "Michael Grinich",
+          "title": "Founder & CEO, WorkOS",
+          "company": "WorkOS",
+          "linkedin": "https://www.linkedin.com/in/grinich",
+          "roles": [
+            "host"
+          ]
+        },
+        {
+          "name": "Sahar Mor",
+          "title": "Building at Bond AI; author, AI Tidbits",
+          "company": null,
+          "linkedin": "https://www.linkedin.com/in/sahar-mor",
+          "roles": [
+            "host",
+            "organizer"
+          ]
+        },
+        {
+          "name": "Scott Strand",
+          "title": "Growth Lead, Knock",
+          "company": "Knock",
+          "linkedin": "https://www.linkedin.com/in/scottjstrand",
+          "roles": [
+            "host",
+            "organizer"
+          ]
+        }
+      ],
+      "topics": [
+        "Agent Skills & Specialization",
+        "Agentic Marketing Workflows",
+        "AI Adoption Maturity Models",
+        "AI Content Engineering / Editorial Pipelines",
+        "AI Content Pipelines & Guardrails",
+        "AI Search Optimization (AEO / GEO)",
+        "AI-Powered GTM (incl. embedded / MCP GTM)",
+        "Background / Cloud Agents",
+        "Domain-Expertise-as-Moat",
+        "GTM Engineering (the emerging role)",
+        "Human-in-the-Loop Agent Governance",
+        "Marketing Engineering (the role)",
+        "MCP for Marketing"
+      ],
+      "companies": [
+        "Cursor (Anysphere)",
+        "Knock",
+        "Profound",
+        "Ramp",
+        "Vercel",
+        "WorkOS"
+      ],
+      "takeaways": null,
+      "carousel": null,
+      "posts": [
+        {
+          "kind": "preview",
+          "url": "https://www.linkedin.com/posts/alexyedi_nytechweek-aiagents-gtm-share-7467420524797706242-G123",
+          "roundup": true,
+          "firstComment": null,
+          "carousel": null
+        },
+        {
+          "kind": "recap",
+          "url": "https://www.linkedin.com/posts/alexyedi_marketing-engineer-post-event-recap-ugcPost-7470545411389415425-P7s6",
+          "roundup": false,
+          "firstComment": null,
+          "carousel": null
+        }
+      ]
+    },
+    {
+      "slug": "2026-06-04-2x-ai-tools",
+      "name": "2x AI: We gave everyone the tools, and it worked",
+      "date": "2026-06-04",
+      "location": "New York",
+      "status": "intake",
+      "series": null,
+      "what": "Talk from Fin's product leadership on how company-wide AI tooling changed its product velocity and led to a rebuild of its helpdesk, with a guest speaker from Anthropic.",
+      "recapPending": false,
+      "speakers": [
+        {
+          "name": "Brian Donohue",
+          "title": "VP of Product, Fin/Intercom",
+          "company": "Intercom",
+          "linkedin": "https://www.linkedin.com/in/briandonohue",
+          "roles": [
+            "speaker",
+            "host"
+          ]
+        },
+        {
+          "name": "Prithvi Rajasekaran",
+          "title": "Member of Technical Staff, Labs (Applied AI), Anthropic",
+          "company": "Anthropic",
+          "linkedin": "https://www.linkedin.com/in/prithvi72",
+          "roles": [
+            "speaker"
+          ]
+        }
+      ],
+      "topics": [
+        "Engineering Leadership in the AI Era"
+      ],
+      "companies": [
+        "Anthropic",
+        "Intercom"
+      ],
+      "takeaways": null,
+      "carousel": null,
+      "posts": [
+        {
+          "kind": "preview",
+          "url": "https://www.linkedin.com/posts/alexyedi_nytechweek-aiagents-gtm-share-7467420524797706242-G123",
+          "roundup": true,
+          "firstComment": null,
+          "carousel": null
+        },
+        {
+          "kind": "recap",
+          "url": "https://www.linkedin.com/posts/alexyedi_2x-productivity-by-the-numbers-ugcPost-7469816373167427584-F_X5",
+          "roundup": false,
+          "firstComment": null,
+          "carousel": null
+        }
+      ]
+    },
+    {
+      "slug": "2026-06-03-nyc-gtm-ai-masterclass-5",
+      "name": "NYC GTM+AI Masterclass #5 — NY Tech Week Special",
+      "date": "2026-06-03",
+      "location": "Insight Partners, New York",
+      "status": "researched",
+      "series": "NYC GTM+AI Masterclass",
+      "what": "NY Tech Week edition of the NYC GTM Community masterclass, held at Insight Partners, on moving from solo AI-assisted go-to-market work to team- and network-wide GTM systems.",
+      "recapPending": false,
+      "speakers": [
+        {
+          "name": "Eric Nowoslawski",
+          "title": "Founder, Growth Engine X",
+          "company": "Growth Engine X",
+          "linkedin": "https://www.linkedin.com/in/outboundphd/",
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Kenneth Tsai",
+          "title": "Head of Marketing / 'GTM Engineer', CoverForce",
+          "company": "CoverForce",
+          "linkedin": null,
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Nikita Bokil",
+          "title": "Product Manager, Opal (Optimizely)",
+          "company": "Optimizely",
+          "linkedin": null,
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Nimo Shkedy",
+          "title": "Founder, Impact 11; Organizer, NYC GTM Community",
+          "company": "Impact 11",
+          "linkedin": "https://www.linkedin.com/in/nimshkedy/",
+          "roles": [
+            "speaker",
+            "host",
+            "organizer"
+          ]
+        },
+        {
+          "name": "Sangram Vajre",
+          "title": "Founder & CEO, GTM Partners",
+          "company": "GTM Partners",
+          "linkedin": "https://www.linkedin.com/in/sangramvajre/",
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Jennifer Schwarz",
+          "title": "Executive Director, EcoMotion Community",
+          "company": "EcoMotion Community",
+          "linkedin": null,
+          "roles": [
+            "host",
+            "organizer"
+          ]
+        }
+      ],
+      "topics": [
+        "AI-Native Go-To-Market",
+        "Single-Player to Multiplayer GTM"
+      ],
+      "companies": [
+        "CoverForce",
+        "EcoMotion Community",
+        "Growth Engine X",
+        "GTM Partners",
+        "Impact 11",
+        "Optimizely"
+      ],
+      "takeaways": null,
+      "carousel": null,
+      "posts": [
+        {
+          "kind": "preview",
+          "url": "https://www.linkedin.com/posts/alexyedi_single-player-vs-swarm-ugcPost-7467427464311447553-igHJ",
+          "roundup": false,
+          "firstComment": null,
+          "carousel": null
+        },
+        {
+          "kind": "preview",
+          "url": "https://www.linkedin.com/posts/alexyedi_nytechweek-aiagents-gtm-share-7467420524797706242-G123",
+          "roundup": true,
+          "firstComment": null,
+          "carousel": null
+        },
+        {
+          "kind": "recap",
+          "url": "https://www.linkedin.com/posts/alexyedi_five-operators-three-maturity-tiers-one-share-7468736447160975360-f2qp",
+          "roundup": false,
+          "firstComment": null,
+          "carousel": null
+        }
+      ]
+    },
+    {
+      "slug": "2026-06-02-fin-x-clay-scaling-cx",
+      "name": "Fin x Clay: Scaling CX in the AI Era",
+      "date": "2026-06-02",
+      "location": "New York",
+      "status": "post_complete",
+      "series": null,
+      "what": "Evening session from Fin and Clay on bringing support, success and sales together around AI customer agents.",
+      "recapPending": true,
+      "speakers": [
+        {
+          "name": "Declan Ivory",
+          "title": "VP of Customer Support, Fin / Intercom",
+          "company": "Intercom",
+          "linkedin": "https://ie.linkedin.com/in/decivory",
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "George Dilthey",
+          "title": "Head of Support, Clay",
+          "company": "Clay",
+          "linkedin": "https://www.linkedin.com/in/george-dilthey",
+          "roles": [
+            "speaker"
+          ]
+        }
+      ],
+      "topics": [
+        "AI Agents for Customer Experience (CX)",
+        "AI-Native Go-To-Market"
+      ],
+      "companies": [
+        "Clay",
+        "Intercom"
+      ],
+      "takeaways": null,
+      "carousel": null,
+      "posts": [
+        {
+          "kind": "preview",
+          "url": "https://www.linkedin.com/posts/alexyedi_fin-x-clay-5-qa-ugcPost-7467977893684412416-VIpU",
+          "roundup": false,
+          "firstComment": null,
+          "carousel": null
+        },
+        {
+          "kind": "preview",
+          "url": "https://www.linkedin.com/posts/alexyedi_nytechweek-aiagents-gtm-share-7467420524797706242-G123",
+          "roundup": true,
+          "firstComment": null,
+          "carousel": null
+        }
+      ]
+    },
+    {
+      "slug": "2026-05-27-agents-and-mcp-for-postgres",
+      "name": "Agents and MCP for Postgres",
+      "date": "2026-05-27",
+      "location": "Google Chelsea Market, New York",
+      "status": "content_drafted",
+      "series": null,
+      "what": "NYC Postgres meetup talk at Google on how AI agents use the Model Context Protocol (MCP) to query and reason over Postgres data.",
+      "recapPending": false,
+      "speakers": [
+        {
+          "name": "Gleb Otochkin",
+          "title": "Cloud Advocate, Databases, Google",
+          "company": "Google",
+          "linkedin": "https://www.linkedin.com/in/glebotochkin/",
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Mason Sharp",
+          "title": "Chief Database Architect, pgEdge",
+          "company": "pgEdge",
+          "linkedin": "https://www.linkedin.com/in/masonsharp/",
+          "roles": [
+            "host",
+            "organizer"
+          ]
+        }
+      ],
+      "topics": [
+        "MCP for Databases / Agentic Data Access (beyond RAG)",
+        "Postgres as the Agent Data Layer"
+      ],
+      "companies": [
+        "Google",
+        "pgEdge"
+      ],
+      "takeaways": null,
+      "carousel": null,
+      "posts": [
+        {
+          "kind": "recap",
+          "url": "https://www.linkedin.com/posts/alexyedi_mcp-user-journey-vs-api-features-and-ugcPost-7466188578767929344-Da0r",
+          "roundup": false,
+          "firstComment": null,
+          "carousel": null
+        }
+      ]
+    },
+    {
+      "slug": "2026-05-26-scaling-enterprise-ai-agents",
+      "name": "Scaling Enterprise AI Agents: Security, Privacy & Real-World Deployment",
+      "date": "2026-05-26",
+      "location": "Alumni Ventures, New York",
+      "status": "content_drafted",
+      "series": null,
+      "what": "Evening panel hosted by Alumni Ventures and OpenHands on deploying AI agents in the enterprise: security, privacy, governance and reliability. Speakers from OpenHands, Vercel, NVIDIA and AMD.",
+      "recapPending": false,
+      "speakers": [
+        {
+          "name": "Alex Starr",
+          "title": "Corporate Fellow, AMD",
+          "company": "AMD",
+          "linkedin": null,
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Dillon Zhang Forrest",
+          "title": "Solutions Architect, Vercel",
+          "company": "Vercel",
+          "linkedin": "https://www.linkedin.com/in/dillonzfo/",
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Mahan Salehi",
+          "title": "Senior PM Lead, Generative AI & Deep Learning, NVIDIA",
+          "company": "NVIDIA",
+          "linkedin": "https://www.linkedin.com/in/mahansalehi/",
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Robert Brennan",
+          "title": "CEO & Co-Founder, OpenHands / All Hands AI",
+          "company": "OpenHands / All Hands AI",
+          "linkedin": "https://www.linkedin.com/in/robert-a-brennan/",
+          "roles": [
+            "speaker",
+            "host"
+          ]
+        },
+        {
+          "name": "Chris Bradbury",
+          "title": "Principal, Alumni Ventures",
+          "company": "Alumni Ventures",
+          "linkedin": "https://www.linkedin.com/in/chris-bradbury-0bb239108/",
+          "roles": [
+            "host",
+            "organizer"
+          ]
+        }
+      ],
+      "topics": [
+        "Enterprise AI Agent Security & Governance",
+        "Scaling AI Agents to Production / Reliability"
+      ],
+      "companies": [
+        "Alumni Ventures",
+        "AMD",
+        "NVIDIA",
+        "OpenHands / All Hands AI",
+        "Vercel"
+      ],
+      "takeaways": null,
+      "carousel": null,
+      "posts": [
+        {
+          "kind": "recap",
+          "url": "https://www.linkedin.com/posts/alexyedi_last-nights-scaling-enterprise-ai-agents-share-7465435627837079552-rX3n",
+          "roundup": false,
+          "firstComment": null,
+          "carousel": null
+        }
+      ]
+    },
+    {
+      "slug": "2026-05-21-ai-demo-night-new-york",
+      "name": "AI Demo Night New York",
+      "date": "2026-05-21",
+      "location": "Canopy, New York",
+      "status": "intake",
+      "series": "AI Demo Night",
+      "what": "Recurring live-demo night organized by ClickHouse with Langfuse, LibreChat and Docker: builders give five-minute demos of working AI projects, no slides.",
+      "recapPending": true,
+      "speakers": [
+        {
+          "name": "Advik Bhatt",
+          "title": "Engineer, Rolemate",
+          "company": "Rolemate",
+          "linkedin": null,
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Chris Crone",
+          "title": "Sr Director of Engineering, Docker",
+          "company": "Docker",
+          "linkedin": null,
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Doneyli De Jesus",
+          "title": "Principal AI Architect, ClickHouse",
+          "company": "ClickHouse",
+          "linkedin": "https://www.linkedin.com/in/doneyli",
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Grace Ableidinger",
+          "title": "AI Developer Advocate, Red Hat",
+          "company": "Red Hat",
+          "linkedin": "https://www.linkedin.com/in/grace-ableidinger",
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Hari Varsha V",
+          "title": "MS CS Student, NYU",
+          "company": "NYU",
+          "linkedin": null,
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Ino de Bruijn",
+          "title": "Data Visualization Team Lead, Memorial Sloan Kettering Cancer Center",
+          "company": "Memorial Sloan Kettering Cancer Center",
+          "linkedin": null,
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Mendeley Wells",
+          "title": "Engineer, Applause",
+          "company": "Applause",
+          "linkedin": null,
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Pier Paolo Ippolito",
+          "title": "Senior GenAI Solutions Architect, Google",
+          "company": "Google",
+          "linkedin": "https://www.linkedin.com/in/pier-paolo-ippolito",
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Ryan Rana",
+          "title": "Builder, Blueprint",
+          "company": "Blueprint",
+          "linkedin": null,
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Lotte Verheyden",
+          "title": "Developer Relations, LangFuse / ClickHouse",
+          "company": "LangFuse",
+          "linkedin": null,
+          "roles": [
+            "host"
+          ]
+        },
+        {
+          "name": "Zoe Steinkamp",
+          "title": "Senior Developer Advocate, ClickHouse",
+          "company": "ClickHouse",
+          "linkedin": "https://www.linkedin.com/in/zoe-steinkamp",
+          "roles": [
+            "host"
+          ]
+        }
+      ],
+      "topics": [
+        "AI Developer Tooling Ecosystem",
+        "LLM Observability and Tracing",
+        "Open-source AI Infrastructure",
+        "Production AI Demos and Shipping Patterns"
+      ],
+      "companies": [
+        "Applause",
+        "Blueprint",
+        "ClickHouse",
+        "Docker",
+        "Google",
+        "LangFuse",
+        "Memorial Sloan Kettering Cancer Center",
+        "NYU",
+        "Red Hat",
+        "Rolemate"
+      ],
+      "takeaways": null,
+      "carousel": null,
+      "posts": []
+    },
+    {
+      "slug": "2026-05-14-practical-agent-patterns",
+      "name": "Practical Agent Patterns: Super Employees v. the AI Org Chart",
+      "date": "2026-05-14",
+      "location": null,
+      "status": "intake",
+      "series": null,
+      "what": "Evening of technical talks and a fireside chat on structuring AI agents in production, with speakers from Headway and Every.",
+      "recapPending": true,
+      "speakers": [
+        {
+          "name": "Arnaud Ferreri",
+          "title": "CTO, Headway",
+          "company": "Headway",
+          "linkedin": "https://www.linkedin.com/in/arnaudferreri/",
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Mike Taylor",
+          "title": "Head of AI Technology Consulting, Every",
+          "company": "Every",
+          "linkedin": "https://www.linkedin.com/in/mjt145/",
+          "roles": [
+            "speaker"
+          ]
+        }
+      ],
+      "topics": [
+        "Agent Architecture Patterns",
+        "Custom AI Infrastructure in Regulated Environments",
+        "Programmatic Prompt Optimization (DSPy)"
+      ],
+      "companies": [
+        "Every",
+        "Headway"
+      ],
+      "takeaways": null,
+      "carousel": null,
+      "posts": [
+        {
+          "kind": "preview",
+          "url": "https://www.linkedin.com/posts/alexyedi_happy-nyc-ai-week-2026-if-youre-looking-share-7459686333372968960-Jrz1",
+          "roundup": true,
+          "firstComment": null,
+          "carousel": null
+        }
+      ]
+    },
+    {
+      "slug": "2026-05-13-fost-new-york",
+      "name": "FOST New York 2026",
+      "date": "2026-05-13",
+      "location": null,
+      "status": "intake",
+      "series": null,
+      "what": "Two-day API industry conference from Apidays on where APIs meet AI, covering API design for agents, MCP and API governance.",
+      "recapPending": true,
+      "speakers": [
+        {
+          "name": "Adam Arellano",
+          "title": "Field CTO, Traceable by Harness",
+          "company": "Harness",
+          "linkedin": "https://www.linkedin.com/in/adamrossarellano/",
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Cristina Flaschen",
+          "title": "CEO & Founder, Pandium",
+          "company": "Pandium",
+          "linkedin": null,
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Erez Yalon",
+          "title": "VP of Security Research, Checkmarx",
+          "company": "Checkmarx",
+          "linkedin": "https://www.linkedin.com/in/erezyalon/",
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Hahnbee Lee",
+          "title": "Co-Founder & CTO, Mintlify",
+          "company": "Mintlify",
+          "linkedin": "https://www.linkedin.com/in/hahnbee-lee/",
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Hugo Guerrero",
+          "title": "Principal Technical Product Marketing Manager, Kong",
+          "company": "Kong",
+          "linkedin": "https://www.linkedin.com/in/hugoguerrero/",
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Kin Lane",
+          "title": "Co-Founder & Chief Community Officer, Naftiko",
+          "company": "Naftiko",
+          "linkedin": "https://www.linkedin.com/in/kinlane",
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Lin Sun",
+          "title": "VP of Open Source, Solo.io",
+          "company": "Solo.io",
+          "linkedin": "https://www.linkedin.com/in/lin-sun-a9b7a7b/",
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Mark Boyd",
+          "title": "Director, Platformable",
+          "company": "Platformable",
+          "linkedin": "https://www.linkedin.com/in/mark-boyd-platformable",
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Mehdi Medjaoui",
+          "title": "Founder & Chairman, Apidays Conferences; Founder, Olympe.legal",
+          "company": "Apidays",
+          "linkedin": "https://www.linkedin.com/in/medjaoui/",
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Rodric Rabbah",
+          "title": "Head of Product, Postman Flows",
+          "company": "Postman",
+          "linkedin": "https://www.linkedin.com/in/rodric/",
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Roy Derks",
+          "title": "Principal Product Manager, Developer Experience & Agents, IBM",
+          "company": "IBM",
+          "linkedin": "https://www.linkedin.com/in/royderks/",
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Zack Butcher",
+          "title": "Founding & Principal Engineer, Tetrate",
+          "company": "Tetrate",
+          "linkedin": "https://www.linkedin.com/in/zackbutcher/",
+          "roles": [
+            "speaker"
+          ]
+        }
+      ],
+      "topics": [
+        "Agent-Ready APIs (OpenAPI for Agents)",
+        "AI-Era API Security",
+        "API Governance for Agentic Systems",
+        "MCP at Enterprise Scale"
+      ],
+      "companies": [
+        "Apidays",
+        "Checkmarx",
+        "Harness",
+        "IBM",
+        "Kong",
+        "Mintlify",
+        "Naftiko",
+        "Pandium",
+        "Platformable",
+        "Postman",
+        "Solo.io",
+        "Tetrate"
+      ],
+      "takeaways": null,
+      "carousel": null,
+      "posts": [
+        {
+          "kind": "preview",
+          "url": "https://www.linkedin.com/posts/alexyedi_happy-nyc-ai-week-2026-if-youre-looking-share-7459686333372968960-Jrz1",
+          "roundup": true,
+          "firstComment": null,
+          "carousel": null
+        }
+      ]
+    },
+    {
+      "slug": "2026-05-12-future-of-engineering-leadership",
+      "name": "The Future of Engineering Leadership in the AI Era",
+      "date": "2026-05-12",
+      "location": null,
+      "status": "intake",
+      "series": null,
+      "what": "Panel of senior engineering leaders, hosted by Revelo, on how AI is changing engineering team structures, hiring and delivery.",
+      "recapPending": true,
+      "speakers": [
+        {
+          "name": "Alec Turnbull",
+          "title": null,
+          "company": null,
+          "linkedin": "https://www.linkedin.com/in/alecturnbull/",
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Derek Bronston",
+          "title": "CTO, Petfolk",
+          "company": "Petfolk",
+          "linkedin": null,
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Jason Varzarevsky",
+          "title": "EVP of Product Development, CMI Media Group",
+          "company": "CMI Media Group",
+          "linkedin": null,
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Rich Lau",
+          "title": "VP Global AI Transformation, Omnicell",
+          "company": "Omnicell",
+          "linkedin": "https://www.linkedin.com/in/richlau1/",
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Josh Anderson",
+          "title": "Field CTO, Revelo",
+          "company": "Revelo",
+          "linkedin": "https://www.linkedin.com/in/joshuadavidanderson/",
+          "roles": [
+            "host",
+            "organizer"
+          ]
+        }
+      ],
+      "topics": [
+        "Engineering Leadership in the AI Era",
+        "Hiring in AI-Era Engineering Orgs"
+      ],
+      "companies": [
+        "CMI Media Group",
+        "Omnicell",
+        "Petfolk",
+        "Revelo"
+      ],
+      "takeaways": null,
+      "carousel": null,
+      "posts": [
+        {
+          "kind": "preview",
+          "url": "https://www.linkedin.com/posts/alexyedi_great-event-tonight-at-neuehouse-madison-ugcPost-7460046381421043712-broF",
+          "roundup": false,
+          "firstComment": null,
+          "carousel": null
+        },
+        {
+          "kind": "preview",
+          "url": "https://www.linkedin.com/posts/alexyedi_happy-nyc-ai-week-2026-if-youre-looking-share-7459686333372968960-Jrz1",
+          "roundup": true,
+          "firstComment": null,
+          "carousel": null
+        }
+      ]
+    },
+    {
+      "slug": "2026-05-11-llm-knowledge-bases-ai-memory",
+      "name": "LLM Knowledge Bases, AI Memory, and more",
+      "date": "2026-05-11",
+      "location": null,
+      "status": "intake",
+      "series": null,
+      "what": "Evening meetup from the AI Alliance, sponsored by IBM and Speedsize, on LLM knowledge bases and memory for AI systems.",
+      "recapPending": true,
+      "speakers": [
+        {
+          "name": "Adam Pingel",
+          "title": "Head of Knowledge Engineering, AI Alliance @ IBM; Project Lead, Semiont",
+          "company": "IBM",
+          "linkedin": "https://www.linkedin.com/in/adampingel/",
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Veljko Kovac",
+          "title": "Head of Field Development Engineering, Cognee AI",
+          "company": "Cognee",
+          "linkedin": "https://www.linkedin.com/in/veljko-kovac/",
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Vlad Malanin",
+          "title": "Co-Founder & CTO, SpeedSize",
+          "company": "SpeedSize",
+          "linkedin": "https://www.linkedin.com/in/vlad-malanin/",
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Greg Spektor",
+          "title": null,
+          "company": null,
+          "linkedin": "https://www.linkedin.com/in/greg-spektor-36766a30/",
+          "roles": [
+            "host",
+            "organizer"
+          ]
+        }
+      ],
+      "topics": [
+        "AI Agent Memory Layer",
+        "AI Media Compression for eCommerce",
+        "Context Engineering",
+        "LLM Knowledge Bases",
+        "Self-Hosted AI Inference"
+      ],
+      "companies": [
+        "Cognee",
+        "IBM",
+        "SpeedSize"
+      ],
+      "takeaways": null,
+      "carousel": null,
+      "posts": [
+        {
+          "kind": "preview",
+          "url": "https://www.linkedin.com/posts/alexyedi_happy-nyc-ai-week-2026-if-youre-looking-share-7459686333372968960-Jrz1",
+          "roundup": true,
+          "firstComment": null,
+          "carousel": null
+        }
+      ]
+    },
+    {
+      "slug": "2026-04-27-shortlist-april-founder-showcase",
+      "name": "The Shortlist NYC — April Founder Showcase (#4)",
+      "date": "2026-04-27",
+      "location": "Betaworks, New York",
+      "status": "researched",
+      "series": "The Shortlist",
+      "what": "Monthly application-only founder showcase run by The Shortlist: six early-stage NYC founders present what they are building and the roles they are hiring for, followed by a mixer.",
+      "recapPending": true,
+      "speakers": [
+        {
+          "name": "Akash Magoon",
+          "title": "Co-Founder & CEO, Adonis",
+          "company": "Adonis",
+          "linkedin": null,
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Andrew Pignanelli",
+          "title": "Co-Founder & CEO, The General Intelligence Company of New York",
+          "company": "The General Intelligence Company of New York",
+          "linkedin": "https://www.linkedin.com/in/andrewpignanelli/",
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Ben Guo",
+          "title": "Co-Founder, Zo Computer",
+          "company": "Zo Computer",
+          "linkedin": "https://www.linkedin.com/in/0thernet/",
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Brian Distelburger",
+          "title": "Co-Founder, Windmill (The AI Management Company); Co-Founder, Yext (NYSE: YEXT)",
+          "company": "Windmill (Brian Distelburger)",
+          "linkedin": "https://www.linkedin.com/in/briandistelburger/",
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Daniel Kahn",
+          "title": "Co-Founder & COO, Sparrow",
+          "company": "Sparrow",
+          "linkedin": "https://www.linkedin.com/in/daniel-kahn-a43943174/",
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Regan Jayne (Plekenpol)",
+          "title": "Co-Founder & CEO, Rediem",
+          "company": "Rediem",
+          "linkedin": "https://www.linkedin.com/in/reganplekenpol/",
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Sarah Ganzenmuller",
+          "title": "Co-Founder, Rediem",
+          "company": "Rediem",
+          "linkedin": null,
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Andrew Yeung",
+          "title": "Founder, Fibe; Co-Founder, The Shortlist NYC; Partner, Next Wave NYC",
+          "company": "Fibe",
+          "linkedin": "https://www.linkedin.com/in/andyeung/",
+          "roles": [
+            "host",
+            "organizer"
+          ]
+        },
+        {
+          "name": "Ivor Stratford",
+          "title": "Co-Founder, Morpheus Talent Solutions; Co-Founder, The Shortlist NYC",
+          "company": "Morpheus Talent Solutions",
+          "linkedin": "https://www.linkedin.com/in/ivorstratford/",
+          "roles": [
+            "host",
+            "organizer"
+          ]
+        }
+      ],
+      "topics": [
+        "Agentic Commerce (thesis: real vs. narrative + who owns the relationship)",
+        "AI for HR & Performance Management",
+        "AI in Credit-Union / Community Banking",
+        "AI in Healthcare Revenue Cycle Management",
+        "AI-Native Vertical SaaS",
+        "Domain-Expertise-as-Moat",
+        "Future of Work & Org Design (AI era)",
+        "GTM Engineering (the emerging role)",
+        "Personal & Local AI Infrastructure",
+        "Personal Cloud Infrastructure & Democratized Computing",
+        "The NYC AI Talent Layer",
+        "Workflow Collapse — The 2026 GTM Pattern"
+      ],
+      "companies": [
+        "Adonis",
+        "Fibe",
+        "Morpheus Talent Solutions",
+        "Rediem",
+        "Sparrow",
+        "The General Intelligence Company of New York",
+        "Windmill (Brian Distelburger)",
+        "Zo Computer"
+      ],
+      "takeaways": null,
+      "carousel": null,
+      "posts": []
+    }
+  ]
+}
