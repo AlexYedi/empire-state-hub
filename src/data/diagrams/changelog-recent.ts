@@ -68,25 +68,25 @@ export const RECENT_FIGURES = {
         vertical: true,
         steps: [
           [n("a", "worktree A", { kind: "pill" }), n("b", "worktree B", { kind: "pill" }), n("c", "worktree C", { kind: "pill" })],
-          n("ledger", "build-sessions.jsonl", { kind: "store", accent: true, sub: "every stop appends" }),
+          n("ledger", "build-sessions.jsonl", { kind: "store", accent: true, sub: "tracked · every stop appended (retired)" }),
           n("conflict", "merge conflict", { sub: "14 churn commits/month" }),
         ],
       },
     },
     right: {
-      title: "After · a shard per session",
+      title: "After · a shard per session, out of git",
       spec: {
         type: "flow",
         vertical: true,
         steps: [
           [n("a", "worktree A", { kind: "pill" }), n("b", "worktree B", { kind: "pill" }), n("c", "worktree C", { kind: "pill" })],
           [n("sa", "a.jsonl", { kind: "store" }), n("sb", "b.jsonl", { kind: "store" }), n("sc", "c.jsonl", { kind: "store" })],
-          n("union", "merge = union of files", { accent: true, sub: "readers read both" }),
+          n("union", "gitignored — nothing to merge", { accent: true, sub: "tracked history frozen; readers read both" }),
         ],
       },
     },
     caption:
-      "Every session's Stop hook used to append to one tracked file, which made it the one change guaranteed to conflict. Each session now writes its own file, so merging worktrees is a union that can't collide; the old ledger stays as frozen history and readers read both.",
+      "Every session's Stop hook used to append to one tracked file, which made it the one change guaranteed to conflict. Each session got its own file first (a union that can't collide), and on 2026-09-28 those shards moved out of git entirely, so a Stop hook no longer produces a commit at all. The old tracked ledger and shards stay as frozen history, and readers read both.",
   },
 
   "adr8-correction": {

@@ -60,6 +60,7 @@ export const SystemMapSchema = z.object({
     graph_edges: z.number(),
     unmapped_files: z.number(),
   }),
+  counts: z.object({ skills: z.number(), agents: z.number(), commands: z.number(), components: z.number() }),
   zones: z.array(z.object({ id: z.string(), name: z.string(), blurb: z.string() })),
   components: z.array(ComponentSchema),
   edges: z.array(EdgeSchema),

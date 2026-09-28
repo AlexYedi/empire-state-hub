@@ -2,15 +2,16 @@
 
 import Link from "next/link";
 import { useLens } from "./lens-provider";
-import { SYSTEM } from "@/data/architecture";
 
 /** The thesis in the hero itself: the same project, told two ways. */
-export function Hero() {
+export type SystemCounts = { skills: number; agents: number; commands: number };
+
+export function Hero({ counts }: { counts: SystemCounts }) {
   const { lens } = useLens();
 
   return (
     <section className="mx-auto w-full max-w-5xl px-6 py-24 sm:py-32">
-      {lens === "editorial" ? <EditorialHero /> : <TechnicalHero />}
+      {lens === "editorial" ? <EditorialHero /> : <TechnicalHero counts={counts} />}
     </section>
   );
 }
@@ -44,12 +45,11 @@ function EditorialHero() {
   );
 }
 
-function TechnicalHero() {
-  const { counts } = SYSTEM;
+function TechnicalHero({ counts }: { counts: SystemCounts }) {
   const stats: [number, string][] = [
     [counts.skills, "skills"],
     [counts.agents, "subagents"],
-    [counts.commands, "workflows"],
+    [counts.commands, "commands"],
   ];
 
   return (
