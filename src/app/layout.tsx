@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Fraunces } from "next/font/google";
 import { cookies } from "next/headers";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { DEFAULT_LENS, isLens, LENS_COOKIE, type Lens } from "@/lib/lens";
 import { LensProvider } from "@/components/lens-provider";
@@ -30,6 +31,7 @@ export default async function RootLayout({
     >
       <body className="min-h-full flex flex-col">
         <LensProvider initialLens={lens}>{children}</LensProvider>
+        <Analytics />
       </body>
     </html>
   );
