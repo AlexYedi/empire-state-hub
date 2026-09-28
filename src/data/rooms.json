@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-09-28T10:08:23.088Z",
+  "generated_at": "2026-09-28T10:20:28.780Z",
   "rooms": [
     {
       "slug": "2026-09-23-agentic-gtm-grok-bot-clay",
       "name": "Agentic GTM with Grok Bot & Clay",
       "date": "2026-09-23",
-      "location": "Webinar — Clay livestream (clay.com/livestreams)",
+      "location": "Webinar",
       "status": "attended",
       "series": null,
       "what": "Clay livestream with Growth Engine X and Clay's growth team on using AI agents to run daily outbound operations.",
@@ -36,8 +36,7 @@
       ],
       "companies": [
         "Clay",
-        "Growth Engine X",
-        "xAI"
+        "Growth Engine X"
       ],
       "takeaways": null,
       "carousel": null,
@@ -61,7 +60,7 @@
       "slug": "2026-09-23-gtm-world-tour-new-york",
       "name": "GTM World Tour · New York",
       "date": "2026-09-23",
-      "location": "111 W 19th St, New York, NY (Clay HQ) — invite-only, address released to accepted guests",
+      "location": "Clay HQ, New York",
       "status": "attended",
       "series": null,
       "what": "New York stop of the GTM World Tour, a ten-city go-to-market event series from BetterContact and Scalantec, held at Clay's office.",
@@ -103,15 +102,6 @@
           "roles": [
             "host"
           ]
-        },
-        {
-          "name": "Muriel Pfeiffer",
-          "title": null,
-          "company": "Scalantec",
-          "linkedin": null,
-          "roles": [
-            "organizer"
-          ]
         }
       ],
       "topics": [
@@ -119,7 +109,8 @@
       ],
       "companies": [
         "BetterContact",
-        "Landbase",
+        "Clay",
+        "Growth Engine X",
         "Scalantec"
       ],
       "takeaways": null,
@@ -144,7 +135,7 @@
       "slug": "2026-09-17-signal-rich-action-poor",
       "name": "Signal Rich, Action Poor: What AI-Native Revenue Teams Do After the Insight — Sept 17 2026",
       "date": "2026-09-17",
-      "location": "Virtual (Luma / Goldcast) — https://luma.com/rg-airspeed-sept",
+      "location": "Virtual",
       "status": "attended",
       "series": "RevGenius",
       "what": "Online RevGenius panel with leaders from Airspeed, Clay, HubSpot and Apollo on how revenue teams turn signals into completed actions.",
@@ -209,10 +200,7 @@
         "RevGenius"
       ],
       "takeaways": null,
-      "carousel": {
-        "pdf": "/rooms/signal-rich-action-poor-2026-09-17/carousel.pdf",
-        "preview": null
-      },
+      "carousel": null,
       "posts": [
         {
           "kind": "preview",
@@ -254,7 +242,7 @@
       "slug": "2026-09-16-postgres-tuning-in-the-age-of-ai",
       "name": "Postgres Tuning in the Age of AI: Context Is Everything — Sept 16 2026",
       "date": "2026-09-16",
-      "location": "7 W 34th St, New York, NY 10001",
+      "location": "New York",
       "status": "attended",
       "series": null,
       "what": "Talk from pganalyze on giving AI the Postgres performance and configuration context it needs to tune queries safely, including pganalyze's MCP server.",
@@ -286,7 +274,6 @@
         "Postgres as the Agent Data Layer"
       ],
       "companies": [
-        "AWS",
         "pganalyze"
       ],
       "takeaways": null,
@@ -348,7 +335,7 @@
       "slug": "2026-09-14-leaddev-new-york-meetup",
       "name": "LeadDev New York Meetup (LDX3 eXpress) — Sept 14 2026",
       "date": "2026-09-14",
-      "location": "New York Times Building, 620 8th Ave, New York, NY 10018 (Datadog HQ floor) — RSVP required; bring a government-issued ID",
+      "location": "New York Times Building, New York",
       "status": "post_complete",
       "series": "LeadDev New York",
       "what": "LeadDev New York community meetup, an LDX3 eXpress evening sponsored by Datadog: two talks on engineering leadership and a panel on build versus buy in the age of AI coding.",
@@ -438,17 +425,13 @@
         "Bonial",
         "Datadog",
         "Jobber",
-        "LeadDev",
         "M3 USA / MDLinx",
         "PubliCare GmbH",
         "Ro",
         "The New York Times — Games"
       ],
       "takeaways": null,
-      "carousel": {
-        "pdf": "/rooms/leaddev-nyc-2026-09-14/carousel.pdf",
-        "preview": null
-      },
+      "carousel": null,
       "posts": [
         {
           "kind": "preview",
@@ -502,7 +485,7 @@
       "slug": "2026-09-09-daytona-ai-builders",
       "name": "Daytona AI Builders NYC (Sept 2026)",
       "date": "2026-09-09",
-      "location": "56 Greene St, NYC",
+      "location": "New York",
       "status": "researched",
       "series": "Daytona AI Builders",
       "what": "Daytona's AI engineering meetup with WorkOS, You.com and Veris AI: short talks on reinforcement learning for code models, self-improving agents, simulated environments and sandboxes.",
@@ -609,7 +592,7 @@
       "slug": "2026-09-08-glm-5-3-exec-briefing",
       "name": "GLM-5.3 Exec Briefing (webinar)",
       "date": "2026-09-08",
-      "location": "Webinar (online)",
+      "location": "Webinar",
       "status": "researched",
       "series": null,
       "what": "Online briefing on the GLM-5.3 model with speakers from Baseten and Artificial Analysis.",
@@ -662,7 +645,7 @@
       "slug": "2026-09-01-nyc-voice-ai-meetup",
       "name": "NYC Voice AI Meetup: Build Smarter Voice Agents (AssemblyAI × LiveKit × Boardy)",
       "date": "2026-09-01",
-      "location": "NYC — Luma: https://luma.com/event/evt-AW5RXgD7B3HgBBl",
+      "location": "New York",
       "status": "content_drafted",
       "series": null,
       "what": "Evening meetup from AssemblyAI and LiveKit, co-hosted by Boardy: a live demo of realtime speech-to-text, then a panel on shipping voice agents in production.",
@@ -705,8 +688,7 @@
       "companies": [
         "AssemblyAI",
         "Boardy",
-        "Flagler Health",
-        "LiveKit"
+        "Flagler Health"
       ],
       "takeaways": null,
       "carousel": null,
@@ -738,7 +720,7 @@
       "slug": "2026-08-27-nyc-gtm-leaders-vol-1",
       "name": "NYC GTM Leaders, Vol. 1: Breaking Through the AI Slop",
       "date": "2026-08-27",
-      "location": "Midtown NYC (address on approval) — Luma",
+      "location": "Midtown NYC",
       "status": "post_complete",
       "series": "NYC GTM Leaders",
       "what": "Small evening for GTM leaders on standing out when every channel is full of AI-generated outreach: three short talks and a working session. Hosted by Vibranium Labs, MindStudio and Bond AI.",
@@ -801,10 +783,8 @@
       ],
       "companies": [
         "Bond AI",
-        "Clay",
         "Flex",
         "MindStudio (Remy)",
-        "Plug and Play",
         "Vibranium Labs"
       ],
       "takeaways": null,
@@ -822,11 +802,11 @@
           "url": "https://www.linkedin.com/posts/alexyedi_gtm-slop-carousel-activity-7499111045257674753-bQ5w",
           "roundup": false,
           "firstComment": [
-            "Clay's AI-writing policy (\"stand behind every sentence,\" Aug 19 2026) — the room's thesis, codified by the outbound incumbent: clay.com/blog/ai-writing-policy (http://clay.com/blog/ai-writing-policy)",
-            "Link to last weeks post with quotes from leaders at Clay, Attention, and Hubspot: https://www.linkedin.com/posts/alexyedi_revgenius-buyside-inversion-activity-7493691641170640896-umx3?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAfcYLYBMwAHgN58PPXGXD5S0qL5ef0kJNc",
-            "Tanny Kang — Incidents.World (http://incidents.world/) — newsletter-as-GTM for on-call/incident management (thought-leadership-as-channel, lived): incidents.world (http://incidents.world/)",
-            "Josh Kim / MindStudio + Remy — community-led growth in practice (free agent bootcamps): mindstudio.ai (http://mindstudio.ai/)",
-            "Signal-based vs generic outbound (5–18% vs 1–3%, directional) — spuriq.ai/blog/signal-based-outbound-vs-cold-outbound (http://spuriq.ai/blog/signal-based-outbound-vs-cold-outbound)"
+            "Clay's AI-writing policy (\"stand behind every sentence,\" Aug 19 2026) — the room's thesis, codified by the outbound incumbent: http://clay.com/blog/ai-writing-policy",
+            "Link to last weeks post with quotes from leaders at Clay, Attention, and Hubspot: https://www.linkedin.com/posts/alexyedi_revgenius-buyside-inversion-activity-7493691641170640896-umx3",
+            "Tanny Kang — http://incidents.world/ — newsletter-as-GTM for on-call/incident management (thought-leadership-as-channel, lived): http://incidents.world/",
+            "Josh Kim / MindStudio + Remy — community-led growth in practice (free agent bootcamps): http://mindstudio.ai/",
+            "Signal-based vs generic outbound (5–18% vs 1–3%, directional) — http://spuriq.ai/blog/signal-based-outbound-vs-cold-outbound"
           ],
           "carousel": null
         },
@@ -849,7 +829,7 @@
       "slug": "2026-08-24-shortlist-august-founder-showcase",
       "name": "The Shortlist: August Founder Showcase",
       "date": "2026-08-24",
-      "location": "NYC (application-only, address on approval) — Luma",
+      "location": "New York",
       "status": "content_drafted",
       "series": "The Shortlist",
       "what": "Monthly application-only founder showcase run by The Shortlist: six seed-to-Series B founders present their companies and open roles, followed by a mixer.",
@@ -954,7 +934,7 @@
       "slug": "2026-08-12-revgenius-irl-hype-to-revenue",
       "name": "RevGenius IRL: From Hype to Revenue (Panel + Happy Hour)",
       "date": "2026-08-12",
-      "location": "Spara HQ, 7 World Trade Center, New York, NY 10006",
+      "location": "Spara HQ, New York",
       "status": "researched",
       "series": "RevGenius",
       "what": "In-person RevGenius panel and happy hour at Spara's office on moving AI in revenue teams from hype to results.",
@@ -1067,7 +1047,7 @@
       "slug": "2026-07-28-mcp-release-party",
       "name": "MCP Release Party",
       "date": "2026-07-28",
-      "location": "New York Times Building, 620 8th Ave, New York, NY",
+      "location": "New York Times Building, New York",
       "status": "post_complete",
       "series": null,
       "what": "Release party from the Agentic AI Foundation (AAIF) for the 2026-07-28 MCP specification, with talks on the stateless spec, evaluating an MCP server and MCP authorization.",
@@ -1118,7 +1098,6 @@
       ],
       "companies": [
         "Agentic AI Foundation (AAIF)",
-        "Anthropic",
         "Block",
         "Datadog",
         "Solo.io"
@@ -1138,10 +1117,10 @@
           "url": "https://www.linkedin.com/posts/alexyedi_mcp-aiagents-platformengineering-share-7488312311338930176-rY7H",
           "roundup": false,
           "firstComment": [
-            "Datadog MCP Server: datadoghq.com/product/ai/mcp-server (http://datadoghq.com/product/ai/mcp-server)",
-            "MCP 2026-07-28 release candidate: blog.modelcontextprotocol.io/posts/2026-07-28-release-candidate/ (http://blog.modelcontextprotocol.io/posts/2026-07-28-release-candidate/)",
-            "What MCP is: modelcontextprotocol.io (http://modelcontextprotocol.io/)",
-            "AAIF events: aaif.io/events (http://aaif.io/events)"
+            "Datadog MCP Server: http://datadoghq.com/product/ai/mcp-server",
+            "MCP 2026-07-28 release candidate: http://blog.modelcontextprotocol.io/posts/2026-07-28-release-candidate/",
+            "What MCP is: http://modelcontextprotocol.io/",
+            "AAIF events: http://aaif.io/events"
           ],
           "carousel": null
         },
@@ -1150,13 +1129,13 @@
           "url": "https://www.linkedin.com/posts/alexyedi_mcp-release-ugcPost-7488264312982183937-OImy",
           "roundup": false,
           "firstComment": [
-            "MCP 2026-07-28 release candidate (largest spec revision since launch): blog.modelcontextprotocol.io/posts/2026-07-28-release-candidate/ (http://blog.modelcontextprotocol.io/posts/2026-07-28-release-candidate/)",
-            "What MCP is: modelcontextprotocol.io (http://modelcontextprotocol.io/)",
-            "New extensions referenced: MCP Apps (SEP-1865), Tasks (SEP-2663), Extensions framework (SEP-2133) — github.com/modelcontextprotocol (http://github.com/modelcontextprotocol)",
-            "Goose (Block's open-source agent, one of the first MCP clients): block.github.io/goose (http://block.github.io/goose)",
-            "Datadog MCP Server: datadoghq.com/product/ai/mcp-server (http://datadoghq.com/product/ai/mcp-server)",
-            "Solo.io (http://solo.io/) agentgateway (where Levan argues security belongs): solo.io (http://solo.io/)",
-            "AAIF events + the six-city party series: aaif.io/events (http://aaif.io/events)"
+            "MCP 2026-07-28 release candidate (largest spec revision since launch): http://blog.modelcontextprotocol.io/posts/2026-07-28-release-candidate/",
+            "What MCP is: http://modelcontextprotocol.io/",
+            "New extensions referenced: MCP Apps (SEP-1865), Tasks (SEP-2663), Extensions framework (SEP-2133) — http://github.com/modelcontextprotocol",
+            "Goose (Block's open-source agent, one of the first MCP clients): http://block.github.io/goose",
+            "Datadog MCP Server: http://datadoghq.com/product/ai/mcp-server",
+            "http://solo.io/ agentgateway (where Levan argues security belongs): http://solo.io/",
+            "AAIF events + the six-city party series: http://aaif.io/events"
           ],
           "carousel": null
         }
@@ -1166,7 +1145,7 @@
       "slug": "2026-06-30-gtm-eng-nyc-coding-agents",
       "name": "GTM Eng NYC: Coding Agents + GTM Lightning Talks",
       "date": "2026-06-30",
-      "location": "Ramp HQ, 28 W 23rd St, New York, NY 10010",
+      "location": "Ramp HQ, New York",
       "status": "post_complete",
       "series": "GTM Eng NYC",
       "what": "Lightning talks hosted by Deepline and Ramp: GTM practitioners from Ramp, Modal, Notion, OpenAI and Attention on using coding agents to build go-to-market systems.",
@@ -1252,12 +1231,7 @@
         "Reliable GTM Systems with Code"
       ],
       "companies": [
-        "Attention",
-        "Deepline",
-        "Modal Labs",
-        "Notion",
-        "OpenAI",
-        "Ramp"
+        "Attention"
       ],
       "takeaways": null,
       "carousel": null,
@@ -1282,7 +1256,7 @@
       "slug": "2026-06-26-voice-ai-agents-hackathon",
       "name": "Build, Listen, Deploy: Voice AI Agents Hackathon | Agora x ScaleDown AI",
       "date": "2026-06-26",
-      "location": "Amazon JFK27 'Hank', 12 W 39th St, New York, NY",
+      "location": "Amazon JFK27 'Hank', New York",
       "status": "content_drafted",
       "series": null,
       "what": "Two-day voice AI hackathon run by Agora and ScaleDown AI: a kickoff night of lightning talks and team formation, then a full build day with demos and judging.",
@@ -1335,7 +1309,7 @@
       "slug": "2026-06-25-agents-behaving-badly",
       "name": "Agents Behaving Badly: The Perils of Pushing AI Agents into Production",
       "date": "2026-06-25",
-      "location": "Datadog @ NYT Building, 620 8th Ave, New York, NY",
+      "location": "Datadog @ NYT Building, New York",
       "status": "content_drafted",
       "series": null,
       "what": "Panel at Datadog's New York office on evaluating AI agents in production: reliability, regressions and drift, with researchers from Meta and Arklex.AI.",
@@ -1408,7 +1382,6 @@
         "AccelGentic",
         "Arklex.AI",
         "Datadog",
-        "Generationship",
         "Meta Superintelligence Labs"
       ],
       "takeaways": null,
@@ -1427,7 +1400,7 @@
       "slug": "2026-06-24-nyc-ai-demos-10",
       "name": "NYC AI Demos #10: Venture Spotlight — Brooklyn, June 2026",
       "date": "2026-06-24",
-      "location": "The Refinery at Domino, 300 Kent Ave, Brooklyn, NY 11249",
+      "location": "The Refinery at Domino, Brooklyn",
       "status": "content_drafted",
       "series": "NYC AI Demos",
       "what": "Tenth NYC AI Demos, at The Refinery at Domino in Brooklyn: startups selected by venture firms give five-minute live demos. Hosted by Pensar with Tech:NYC and Two Trees.",
@@ -1443,7 +1416,7 @@
           "url": "https://www.linkedin.com/posts/alexyedi_ai-venturecapital-gtm-share-7475650116415205377-cuqO",
           "roundup": false,
           "firstComment": [
-            "Hosts: Kyle Bhiro (Pensar) + Tech:NYC + Two Trees. Event: luma.com/nyc10 (http://luma.com/nyc10)"
+            "Hosts: Kyle Bhiro (Pensar) + Tech:NYC + Two Trees. Event: http://luma.com/nyc10"
           ],
           "carousel": null
         },
@@ -1452,10 +1425,10 @@
           "url": "https://www.linkedin.com/posts/alexyedi_ai-nyctech-aiagents-share-7476617215631360001-Lp6c",
           "roundup": false,
           "firstComment": [
-            "Spring Health (Able Partners) — ~$466M raised. AI/ML platform + AI-safety product: springhealth.com/open-roles (http://springhealth.com/open-roles)",
-            "Pace (Thrive + Sequoia) — $46M Series B, May 2026. ML + forward-deployed engineers, agent PM (NYC): withpace.com (http://withpace.com/)",
-            "Uncovr (Index) — $7M seed. Full-stack + ML + forward-deployed engineers (NY & Paris): uncovr.ai/careers (http://uncovr.ai/careers)",
-            "Spara (Radical + Inspired) — $15M seed. AI/full-stack/forward-deployed engineers + a founding AE (NYC): spara.com/careers (http://spara.com/careers)"
+            "Spring Health (Able Partners) — ~$466M raised. AI/ML platform + AI-safety product: http://springhealth.com/open-roles",
+            "Pace (Thrive + Sequoia) — $46M Series B, May 2026. ML + forward-deployed engineers, agent PM (NYC): http://withpace.com/",
+            "Uncovr (Index) — $7M seed. Full-stack + ML + forward-deployed engineers (NY & Paris): http://uncovr.ai/careers",
+            "Spara (Radical + Inspired) — $15M seed. AI/full-stack/forward-deployed engineers + a founding AE (NYC): http://spara.com/careers"
           ],
           "carousel": null
         }
@@ -1465,7 +1438,7 @@
       "slug": "2026-06-23-daytona-ai-builders",
       "name": "Daytona AI Builders w/ Oracle & Datadog — NYC, June 2026",
       "date": "2026-06-23",
-      "location": "620 8th Ave, 45th Floor (NYT Building), New York, NY",
+      "location": "NYT Building, New York",
       "status": "content_drafted",
       "series": "Daytona AI Builders",
       "what": "Daytona's AI engineering meetup, co-hosted with Datadog, with talks from Daytona, Oracle, Blacksmith and Anchor Browser on agent infrastructure and testing.",
@@ -1573,7 +1546,7 @@
       "slug": "2026-06-09-marketing-engineer-meetup",
       "name": "Marketing Engineer Meetup",
       "date": "2026-06-09",
-      "location": "WorkOS, 56 Greene St Floor 4, New York, NY 10012",
+      "location": "WorkOS, New York",
       "status": "post_complete",
       "series": null,
       "what": "Meetup hosted by WorkOS and Bond AI on the marketing engineer role, with speakers from Profound, Ramp, Clay, Cursor, WorkOS and Knock on using AI to build marketing systems.",
@@ -1719,7 +1692,7 @@
       "slug": "2026-06-04-2x-ai-tools",
       "name": "2x AI: We gave everyone the tools, and it worked",
       "date": "2026-06-04",
-      "location": "18 E 50th St, New York, NY 10022",
+      "location": "New York",
       "status": "intake",
       "series": null,
       "what": "Talk from Fin's product leadership on how company-wide AI tooling changed its product velocity and led to a rebuild of its helpdesk, with a guest speaker from Anthropic.",
@@ -1775,7 +1748,7 @@
       "slug": "2026-06-03-nyc-gtm-ai-masterclass-5",
       "name": "NYC GTM+AI Masterclass #5 — NY Tech Week Special",
       "date": "2026-06-03",
-      "location": "Insight Partners, 1114 6th Ave, 36th floor, New York, NY 10036",
+      "location": "Insight Partners, New York",
       "status": "researched",
       "series": "NYC GTM+AI Masterclass",
       "what": "NY Tech Week edition of the NYC GTM Community masterclass, held at Insight Partners, on moving from solo AI-assisted go-to-market work to team- and network-wide GTM systems.",
@@ -1849,10 +1822,7 @@
         "Growth Engine X",
         "GTM Partners",
         "Impact 11",
-        "Insight Partners",
-        "NYC GTM Community",
-        "Optimizely",
-        "Swan"
+        "Optimizely"
       ],
       "takeaways": null,
       "carousel": null,
@@ -1884,7 +1854,7 @@
       "slug": "2026-06-02-fin-x-clay-scaling-cx",
       "name": "Fin x Clay: Scaling CX in the AI Era",
       "date": "2026-06-02",
-      "location": "18 East 50th Street, 18 E 50th St, New York, NY",
+      "location": "New York",
       "status": "post_complete",
       "series": null,
       "what": "Evening session from Fin and Clay on bringing support, success and sales together around AI customer agents.",
@@ -1940,7 +1910,7 @@
       "slug": "2026-05-27-agents-and-mcp-for-postgres",
       "name": "Agents and MCP for Postgres",
       "date": "2026-05-27",
-      "location": "Google Chelsea Market, 75 9th Avenue, New York, NY",
+      "location": "Google Chelsea Market, New York",
       "status": "content_drafted",
       "series": null,
       "what": "NYC Postgres meetup talk at Google on how AI agents use the Model Context Protocol (MCP) to query and reason over Postgres data.",
@@ -1990,7 +1960,7 @@
       "slug": "2026-05-26-scaling-enterprise-ai-agents",
       "name": "Scaling Enterprise AI Agents: Security, Privacy & Real-World Deployment",
       "date": "2026-05-26",
-      "location": "Alumni Ventures, 183 Madison Ave 18th Floor, New York, NY 10016",
+      "location": "Alumni Ventures, New York",
       "status": "content_drafted",
       "series": null,
       "what": "Evening panel hosted by Alumni Ventures and OpenHands on deploying AI agents in the enterprise: security, privacy, governance and reliability. Speakers from OpenHands, Vercel, NVIDIA and AMD.",
@@ -2071,7 +2041,7 @@
       "slug": "2026-05-21-ai-demo-night-new-york",
       "name": "AI Demo Night New York",
       "date": "2026-05-21",
-      "location": "49 Elizabeth St / Canopy, NYC",
+      "location": "Canopy, New York",
       "status": "intake",
       "series": "AI Demo Night",
       "what": "Recurring live-demo night organized by ClickHouse with Langfuse, LibreChat and Docker: builders give five-minute demos of working AI projects, no slides.",
@@ -2190,7 +2160,6 @@
         "Docker",
         "Google",
         "LangFuse",
-        "LibreChat",
         "Memorial Sloan Kettering Cancer Center",
         "NYU",
         "Red Hat",
@@ -2413,8 +2382,8 @@
       "speakers": [
         {
           "name": "Alec Turnbull",
-          "title": "Head of Product, Thalo Labs",
-          "company": "PowerFlex",
+          "title": null,
+          "company": null,
           "linkedin": "https://www.linkedin.com/in/alecturnbull/",
           "roles": [
             "speaker"
@@ -2466,7 +2435,6 @@
         "CMI Media Group",
         "Omnicell",
         "Petfolk",
-        "PowerFlex",
         "Revelo"
       ],
       "takeaways": null,
@@ -2544,12 +2512,9 @@
         "Self-Hosted AI Inference"
       ],
       "companies": [
-        "Bayer",
         "Cognee",
         "IBM",
-        "NumFOCUS",
-        "SpeedSize",
-        "The AI Alliance"
+        "SpeedSize"
       ],
       "takeaways": null,
       "carousel": null,
@@ -2567,7 +2532,7 @@
       "slug": "2026-04-27-shortlist-april-founder-showcase",
       "name": "The Shortlist NYC — April Founder Showcase (#4)",
       "date": "2026-04-27",
-      "location": "Betaworks, 29 Little W 12th St, NYC (Meatpacking)",
+      "location": "Betaworks, New York",
       "status": "researched",
       "series": "The Shortlist",
       "what": "Monthly application-only founder showcase run by The Shortlist: six early-stage NYC founders present what they are building and the roles they are hiring for, followed by a mixer.",

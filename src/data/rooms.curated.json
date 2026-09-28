@@ -10,7 +10,13 @@
   },
   {
     "slug": "2026-05-12-future-of-engineering-leadership",
-    "what": "Panel of senior engineering leaders, hosted by Revelo, on how AI is changing engineering team structures, hiring and delivery."
+    "what": "Panel of senior engineering leaders, hosted by Revelo, on how AI is changing engineering team structures, hiring and delivery.",
+    "speaker_overrides": {
+      "Alec Turnbull": {
+        "title": null,
+        "company": null
+      }
+    }
   },
   {
     "slug": "2026-05-13-fost-new-york",
@@ -113,8 +119,7 @@
   {
     "slug": "2026-09-14-leaddev-new-york-meetup",
     "series": "LeadDev New York",
-    "what": "LeadDev New York community meetup, an LDX3 eXpress evening sponsored by Datadog: two talks on engineering leadership and a panel on build versus buy in the age of AI coding.",
-    "carousel": "content-drafts/leaddev-nyc-2026-09-14/carousel.pdf"
+    "what": "LeadDev New York community meetup, an LDX3 eXpress evening sponsored by Datadog: two talks on engineering leadership and a panel on build versus buy in the age of AI coding."
   },
   {
     "slug": "2026-09-16-postgres-tuning-in-the-age-of-ai",
@@ -123,8 +128,7 @@
   {
     "slug": "2026-09-17-signal-rich-action-poor",
     "series": "RevGenius",
-    "what": "Online RevGenius panel with leaders from Airspeed, Clay, HubSpot and Apollo on how revenue teams turn signals into completed actions.",
-    "carousel": "content-drafts/signal-rich-action-poor-2026-09-17/carousel.pdf"
+    "what": "Online RevGenius panel with leaders from Airspeed, Clay, HubSpot and Apollo on how revenue teams turn signals into completed actions."
   },
   {
     "slug": "2026-09-23-agentic-gtm-grok-bot-clay",
@@ -132,6 +136,7 @@
   },
   {
     "slug": "2026-09-23-gtm-world-tour-new-york",
-    "what": "New York stop of the GTM World Tour, a ten-city go-to-market event series from BetterContact and Scalantec, held at Clay's office."
+    "what": "New York stop of the GTM World Tour, a ten-city go-to-market event series from BetterContact and Scalantec, held at Clay's office.",
+    "location": "Clay HQ, New York"
   }
 ]

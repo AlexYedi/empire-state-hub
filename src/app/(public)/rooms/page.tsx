@@ -6,7 +6,7 @@ import { RoomsIndex } from "./rooms-index";
 export const metadata: Metadata = {
   title: "Rooms — Empire State",
   description:
-    "An archive of New York AI rooms: who spoke, what was said, and the posts that came out of each one.",
+    "An archive of New York AI rooms: who spoke and what the room was working through, and the posts that came out of each one.",
 };
 
 export default function RoomsPage() {

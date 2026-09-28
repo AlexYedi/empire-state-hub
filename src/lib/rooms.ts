@@ -14,8 +14,13 @@ import ROOMS_JSON from "@/data/rooms.json";
  *   name            optional · display-name override
  *   series          optional · series pill + filter, e.g. "The Shortlist", "Daytona AI Builders"
  *   what            optional · 1–2 curated sentences; replaces the (never exported) Event Description
+ *   location        optional · "Venue, City" override; wins over the (reduced) Notion Location. Never a street
+ *                   address — the exporter rejects anything address-like
+ *   speaker_overrides optional · { "<Name>": { "title": null, "company": null, "linkedin": null } } — may only
+ *                   REMOVE a published fact (null), never add or change one (e.g. an unresolved employer)
  *   carousel        optional · room-level carousel, a pipeline path like `content-drafts/<dir>/carousel.pdf`;
- *                   must be committed in the pipeline repo or it is ignored
+ *                   ONLY for a carousel already posted publicly (normally a carousel attaches through its
+ *                   published post). Must be committed in the pipeline repo or it is ignored
  *   extra_post_ids  optional · Content Drafts page ids to attach when a published post has no Event relation
  *                   (still must be `published` with a Published URL)
  *   takeaways       optional · `true` exports this room's post_event_brief takeaways. Off by default: briefs are
@@ -28,6 +33,10 @@ export const RoomOverlaySchema = z.object({
   name: z.string().optional(),
   series: z.string().optional(),
   what: z.string().optional(),
+  location: z.string().optional(),
+  speaker_overrides: z
+    .record(z.string(), z.object({ title: z.null(), company: z.null(), linkedin: z.null() }).partial().strict())
+    .optional(),
   carousel: z.string().optional(),
   extra_post_ids: z.array(z.string()).optional(),
   takeaways: z.boolean().optional(),

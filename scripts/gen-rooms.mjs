@@ -10,8 +10,13 @@
 //
 // What leaves Notion, and nothing else:
 //   room      name · date · location · status (Events row). NEVER Event Description / Calendar ID.
+//             Location is reduced to "Venue, City" (no street number, floor/suite, ZIP or access note);
+//             an overlay `location` wins.
 //   speakers  People on the event with Role Context ∩ {speaker, host, organizer}: name · title ·
-//             company · LinkedIn URL. Empty Role Context = dropped + reported (fail closed).
+//             company · LinkedIn URL. Empty Role Context = dropped + reported (fail closed). Overlay
+//             `speaker_overrides` may null title/company/linkedin, never set them.
+//   companies ONLY the exported speakers' companies — never the Event's Companies relation.
+//   URLs      linkedin.com URLs lose their query string + fragment (tracking params).
 //   takeaways OPT-IN per room (overlay `takeaways: true`). post_event_brief sections Quick Take · The Thesis · first 5 Insights · Tools Mentioned.
 //             Quote Bank / Hot Takes / Anecdotes / Speaker Map / People & Outreach / Open Loops are
 //             never read into the output. Quote blocks and quote-led lines are dropped.
@@ -79,7 +84,16 @@ const rt = (arr = [], withLinks = false) =>
     .map((t) => {
       const text = t.plain_text ?? "";
       const href = t.href ?? t.text?.link?.url ?? null;
-      return withLinks && href && !text.includes(href) ? `${text} (${href})` : text;
+      if (!withLinks || !href) return text;
+      // "clay.com/blog" linked to http://clay.com/blog already shows the link — don't append it twice
+      // (the host-less text becomes the href itself, so the line still carries a real URL)
+      if (text.includes(href)) return text;
+      const bare = href.replace(/^https?:\/\/(?:www\.)?/i, "").replace(/\/+$/, "");
+      if ((text.match(/https?:\/\/\S+/g) ?? []).some((u) => u.includes(bare))) return text;
+      const i = bare ? text.toLowerCase().indexOf(bare.toLowerCase()) : -1;
+      if (i < 0) return `${text} (${href})`;
+      const start = text.slice(0, i).match(/(?:www\.)?$/i)[0].length;
+      return text.slice(0, i - start) + href + text.slice(i + bare.length).replace(/^\/+/, "");
     })
     .join("");
 const titleOf = (page) => {
@@ -155,6 +169,74 @@ export async function extractTakeaways(blocks, source, report) {
   }
   const any = Object.values(out).some((v) => v.length);
   return any ? out : null;
+}
+
+// ---------- URLs ----------
+/** LinkedIn share links carry tracking params (?utm_…&rcm=…, which can identify the sharer): strip the
+ *  query string and fragment from any linkedin.com URL. Other hosts pass through unchanged. */
+export function cleanUrl(u) {
+  if (!u) return u;
+  try {
+    const x = new URL(u);
+    if (!/(^|\.)linkedin\.com$/i.test(x.hostname) && !/(^|\.)lnkd\.in$/i.test(x.hostname)) return u;
+    x.search = "";
+    x.hash = "";
+    return x.toString();
+  } catch {
+    return u;
+  }
+}
+
+// ---------- location (venue + city only; never a street address or access note) ----------
+const STREET =
+  /\b(?:st|street|ave|avenue|blvd|boulevard|broadway|pl|place|rd|road|ln|lane|dr|drive|way|plaza|sq|square|pkwy|parkway|hwy|ter|terrace)\b\.?/i;
+const FLOOR = /\b(?:floor|fl|suite|ste|unit|room|rm)\b|\b\d+(?:st|nd|rd|th)\s+fl/i;
+const ACCESS_NOTE = /address|invite|approval|rsvp|application|accepted|guests|bring|\bid\b|required|released|luma|https?:|\.com\b/i;
+const CITY = { nyc: "New York", "new york": "New York", "new york city": "New York", brooklyn: "Brooklyn", queens: "Queens", manhattan: "New York" };
+const STATE_ZIP = /^(?:NY|New York State)?\s*\d{5}(?:-\d{4})?$|^NY$/i;
+/** True when a string still looks like a street address (house number + street word, or a ZIP). */
+export function looksLikeAddress(s) {
+  if (!s) return false;
+  return (
+    /\b\d{5}(?:-\d{4})?\b/.test(s) ||
+    /\b\d+[A-Za-z]?\s+(?:[NSEW]\.?\s+|North\s+|South\s+|East\s+|West\s+)?[\w'.-]+(?:\s+[\w'.-]+){0,3}\s+(?:st|street|ave|avenue|blvd|broadway|pl|place|rd|road|ln|lane|dr|drive|way|plaza)\b/i.test(s) ||
+    /(?:^|,\s*)\d+\s+\S/.test(s.trim())
+  );
+}
+/** Reduce a Notion Location to "Venue, City": drop street numbers, suite/floor, ZIPs and every access
+ *  note ("address released to…", "invite-only", RSVP/ID instructions, URLs). Fail closed: a part that
+ *  still looks like an address is dropped. */
+export function publicLocation(raw) {
+  if (!raw) return null;
+  let s = raw.split(/\s+[—–]\s+/)[0]; // " — invite-only, address released to…" and similar trailing notes
+  s = s.replace(/https?:\/\/\S+/g, "");
+  const parens = [];
+  s = s.replace(/\s*\(([^()]*)\)/g, (_, inner) => {
+    parens.push(inner.trim());
+    return "";
+  });
+  const venue = [];
+  let city = null;
+  for (let part of s.split(/\s*[,/]\s*/)) {
+    part = collapse(part);
+    if (!part) continue;
+    const c = CITY[part.toLowerCase()];
+    if (c) {
+      city ??= c;
+      continue;
+    }
+    if (STATE_ZIP.test(part) || /^\d/.test(part) || STREET.test(part) || FLOOR.test(part) || ACCESS_NOTE.test(part) || looksLikeAddress(part)) continue;
+    if (!venue.includes(part)) venue.push(part);
+  }
+  // a parenthetical names the venue only when nothing else did ("111 W 19th St, New York (Clay HQ)")
+  if (!venue.length)
+    for (const p of parens)
+      if (p && !/^\d/.test(p) && !STREET.test(p) && !FLOOR.test(p) && !ACCESS_NOTE.test(p) && !looksLikeAddress(p) && !/^(?:online|virtual)$/i.test(p)) {
+        venue.push(p);
+        break;
+      }
+  const out = [...venue, city].filter(Boolean).join(", ");
+  return out || null;
 }
 
 // ---------- speaker fields (People rows carry research notes inline) ----------
@@ -236,7 +318,11 @@ export function cleanFirstComment(rawLines, variant, report) {
         host = "";
       }
       if (!host || PRIVATE_HOST.test(host)) line = line.split(u).join("");
-      else pub++;
+      else {
+        const c = cleanUrl(u);
+        if (c !== u) line = line.split(u).join(c);
+        pub++;
+      }
     }
     line = collapse(line.replace(/\(\s*\)/g, "").replace(/^[\s>*•\-–—→:]+/, ""));
     if (!pub || !line) continue;
@@ -284,6 +370,7 @@ function carouselFromText(texts, committed) {
 }
 
 // ---------- overlay ----------
+const SPEAKER_OVERRIDABLE = ["title", "company", "linkedin"];
 export function validateOverlay(overlay) {
   if (!Array.isArray(overlay)) throw new Error("rooms.curated.json must be a JSON array");
   const seen = new Set();
@@ -291,6 +378,19 @@ export function validateOverlay(overlay) {
     if (!r || typeof r.slug !== "string" || !SLUG.test(r.slug)) throw new Error(`overlay: bad slug ${JSON.stringify(r?.slug)}`);
     if (seen.has(r.slug)) throw new Error(`overlay: duplicate slug ${r.slug}`);
     seen.add(r.slug);
+    if (r.location !== undefined && (typeof r.location !== "string" || !r.location.trim() || looksLikeAddress(r.location)))
+      throw new Error(`overlay: ${r.slug} location must be "Venue, City" — never a street address`);
+    if (r.speaker_overrides !== undefined) {
+      const so = r.speaker_overrides;
+      if (!so || typeof so !== "object" || Array.isArray(so)) throw new Error(`overlay: ${r.slug} speaker_overrides must be an object`);
+      for (const [name, o] of Object.entries(so)) {
+        if (!o || typeof o !== "object" || Array.isArray(o)) throw new Error(`overlay: ${r.slug} speaker_overrides["${name}"] must be an object`);
+        for (const [k, v] of Object.entries(o))
+          // the overlay may REMOVE a published fact, never add or change one
+          if (!SPEAKER_OVERRIDABLE.includes(k) || v !== null)
+            throw new Error(`overlay: ${r.slug} speaker_overrides["${name}"].${k} — only null for ${SPEAKER_OVERRIDABLE.join("/")} is allowed`);
+      }
+    }
   }
   return overlay;
 }
@@ -378,9 +478,19 @@ export async function buildRooms({ overlay, source, committed, now }) {
         name,
         title: cleanTitle(richText(prop(p, "Current Title"))),
         company: companyId ? titleOf(await page(companyId)) || null : null,
-        linkedin: li && /^https:\/\/([a-z]+\.)?linkedin\.com\//i.test(li) ? li : null,
+        linkedin: li && /^https:\/\/([a-z]+\.)?linkedin\.com\//i.test(li) ? cleanUrl(li) : null,
         roles: pubRoles,
       });
+    }
+    // overlay speaker_overrides can only null a field (validated) — e.g. an unresolved employer
+    const overrides = entry.speaker_overrides ?? {};
+    for (const [name, o] of Object.entries(overrides)) {
+      const s = speakers.find((x) => x.name === name);
+      if (!s) {
+        (report.overrideMisses ??= []).push(`${entry.slug} — ${name}`);
+        continue;
+      }
+      for (const k of Object.keys(o)) s[k] = null;
     }
     speakers.sort((a, b) => PUBLIC_ROLES.indexOf(a.roles[0]) - PUBLIC_ROLES.indexOf(b.roles[0]) || a.name.localeCompare(b.name));
     r.speakers = speakers.length;
@@ -394,7 +504,9 @@ export async function buildRooms({ overlay, source, committed, now }) {
       return [...new Set(out)].sort((a, b) => a.localeCompare(b));
     };
     const topics = await titles(relationIds(prop(ev, "Topics")));
-    const companies = await titles(relationIds(prop(ev, "Companies")));
+    // Companies come ONLY from the exported speakers/hosts/organizers. The Event's own Companies relation
+    // is never read: it also holds attendee employers and companies merely mentioned in the room.
+    const companies = [...new Set(speakers.map((s) => s.company).filter(Boolean))].sort((a, b) => a.localeCompare(b));
 
     // takeaways — newest post_event_brief on this event
     const onEvent = (d) => relationIds(prop(d, "Event")).includes(eventId);
@@ -421,7 +533,7 @@ export async function buildRooms({ overlay, source, committed, now }) {
     const posts = [];
     for (const d of candidates) {
       const kind = POST_KINDS[selectName(prop(d, "Content Type"))];
-      const url = urlValue(prop(d, "Published URL"));
+      const url = cleanUrl(urlValue(prop(d, "Published URL")));
       if (!kind || selectName(prop(d, "Content Status")) !== "published" || !url || !/^https:\/\//.test(url)) continue;
       const blocks = await source.getBlocks(d.id);
       const texts = [titleOf(d), ...blocks.map((b) => blockText(b, true))];
@@ -445,6 +557,8 @@ export async function buildRooms({ overlay, source, committed, now }) {
     posts.sort((a, b) => order.indexOf(a.kind) - order.indexOf(b.kind) || Number(a.roundup) - Number(b.roundup) || a.url.localeCompare(b.url));
     r.posts = posts.length;
 
+    // Carousels normally attach through a published post (above). The overlay `carousel` is only for a
+    // carousel already posted publicly whose post can't be linked — never an unconfirmed one.
     let roomCarousel = null;
     if (entry.carousel) {
       const c = carouselFor(entry.carousel, committed);
@@ -459,7 +573,7 @@ export async function buildRooms({ overlay, source, committed, now }) {
       slug: entry.slug,
       name: entry.name || titleOf(ev),
       date: date ? date.slice(0, 10) : entry.slug.slice(0, 10),
-      location: richText(prop(ev, "Location")) || null,
+      location: entry.location ?? publicLocation(richText(prop(ev, "Location"))),
       status: selectName(prop(ev, "Event Status")),
       series: entry.series ?? null,
       what: entry.what ?? null,
@@ -481,9 +595,12 @@ export async function buildRooms({ overlay, source, committed, now }) {
 /** The same checks verify-public-safe runs, applied before anything is written. */
 export function safetyScan(json) {
   const s = typeof json === "string" ? json : JSON.stringify(json);
+  const data = typeof json === "string" ? JSON.parse(json) : json;
   return {
     phrases: (s.match(new RegExp(OFF_RECORD.source, "gi")) ?? []).length,
     emails: (s.match(new RegExp(EMAIL.source, "g")) ?? []).length,
+    addresses: (data.rooms ?? []).filter((r) => looksLikeAddress(r.location)).length,
+    trackedLinks: (s.match(/https?:\/\/[a-z.]*linkedin\.com\/[^\s"]*[?#]/gi) ?? []).length,
   };
 }
 
@@ -594,13 +711,22 @@ async function main() {
   console.log(`Role Context gaps: ${gaps.length} room(s), ${t("noRole")} linked people with no Role Context (dropped, fail closed)`);
   console.log(`phrase/contact lines dropped: ${report.phraseDrops} · working-note/quote takeaway lines dropped: ${report.noteDrops ?? 0} · rooms with takeaways held by a no-record room norm: ${report.normHeld ?? 0} · briefs not opted in (takeaways: true): ${report.takeawaysOff ?? 0} · placeholder-name speakers dropped: ${report.nameDrops ?? 0}`);
   const scan = safetyScan(data);
-  console.log(`output scan: ${scan.phrases} off-the-record phrase hit(s) · ${scan.emails} email literal(s)`);
+  console.log(
+    `output scan: ${scan.phrases} off-the-record phrase hit(s) · ${scan.emails} email literal(s) · ${scan.addresses} address-like location(s) · ${scan.trackedLinks} linkedin URL(s) with a query/fragment`,
+  );
+  for (const m of report.overrideMisses ?? []) console.log(`  ! speaker_overrides name not among exported speakers: ${m}`);
+  // eyeball aid: the same person across rooms (spot a wrong merge or a stale title)
+  const seenIn = new Map();
+  for (const room of data.rooms) for (const sp of room.speakers) seenIn.set(sp.name, [...(seenIn.get(sp.name) ?? []), room.slug]);
+  const multi = [...seenIn].filter(([, slugs]) => slugs.length > 1).sort((a, b) => b[1].length - a[1].length || a[0].localeCompare(b[0]));
+  console.log(`speakers in more than one room: ${multi.length}`);
+  for (const [name, slugs] of multi) console.log(`  ${name} → ${slugs.join(", ")}`);
 
   if (dry) {
     console.log("dry run — nothing written");
     return;
   }
-  if (scan.phrases || scan.emails) {
+  if (scan.phrases || scan.emails || scan.addresses || scan.trackedLinks) {
     console.error("✗ output failed the safety scan — nothing written");
     process.exit(1);
   }

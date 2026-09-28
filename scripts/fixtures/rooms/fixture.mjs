@@ -56,7 +56,7 @@ const events = [
   page(IDS.event, {
     "Event Name": title("Agents in Production: NYC"),
     "Event Date": date("2026-09-16T18:00:00.000-04:00"),
-    Location: text("Some Venue, New York"),
+    Location: text("Some Venue, 123 W 45th St, 6th Floor, New York, NY 10036 — invite-only, address released to LEAK_ACCESS_NOTE accepted guests"),
     "Event Status": select("post_complete"),
     "Event Description": text("LEAK_EVENT_DESCRIPTION raw invite text"),
     "Google Calendar Event ID": text("LEAK_GCAL_ID"),
@@ -88,13 +88,13 @@ const people = [
     "Phone Number": { type: "phone_number", phone_number: "LEAK_212-555-0100" },
     Notes: text("LEAK_PERSON_NOTES private"),
     "Known POV / Bio": text("LEAK_BIO judgement"),
-    "LinkedIn URL": url("https://www.linkedin.com/in/sam-speaker"),
+    "LinkedIn URL": url("https://www.linkedin.com/in/sam-speaker?utm_source=LEAK_UTM&rcm=LEAK_RCM"),
     "Role Context": multi("speaker"),
     Company: rel(IDS.company),
   }),
   page(IDS.host, {
     Name: title("Hana Host"),
-    "Current Title": text("Organizer"),
+    "Current Title": text("LEAK_OVERRIDDEN_TITLE Organizer"),
     "LinkedIn URL": url("http://not-linkedin.example/hana"),
     "Role Context": multi("host", "attendee"),
     Company: rel(),
@@ -113,7 +113,7 @@ const people = [
 
 const entities = [
   page(IDS.company, { "Company Name": title("Acme AI"), Description: text("LEAK_COMPANY_DESCRIPTION") }),
-  page(IDS.company2, { "Company Name": title("Beta Labs") }),
+  page(IDS.company2, { "Company Name": title("LEAK_NON_SPEAKER_COMPANY Beta Labs") }), // on the Event's Companies relation only (an attendee employer)
   page(IDS.topic, { Topic: title("Agent Reliability"), Challenges: text("LEAK_TOPIC_BODY") }),
 ];
 
@@ -143,7 +143,7 @@ const drafts = [
     title: "Pre-Event Post",
     type: "linkedin_post_pre",
     status: "published",
-    url: "https://www.linkedin.com/posts/preview-456",
+    url: "https://www.linkedin.com/posts/preview-456?utm_source=LEAK_UTM_POST",
     events: [IDS.event],
   }),
   draft(IDS.roundup, {
@@ -223,6 +223,7 @@ export const BLOCKS = {
       [
         "Sources + going deeper:",
         "→ The talk slides: https://example.com/slides",
+        "→ The host's recap: https://www.linkedin.com/posts/host-recap-1?utm_source=share&rcm=LEAK_RCM_COMMENT#comments",
         "→ [VERIFY] The paper: https://arxiv.org/abs/2501.00001",
         "→ [LINK: repo TBD]",
         "[Variant B only] → B-only link: https://example.com/LEAK_VARIANT_B",
@@ -241,6 +242,7 @@ export const BLOCKS = {
   [IDS.preview]: [
     h2("Learn-More Set (first comment)"),
     linkPara("Primer on agent evals", "https://example.com/primer"),
+    linkPara("Further reading: clay.com/blog", "http://clay.com/blog"),
     p("A line with no link at all"),
     p("See content-drafts/demo-dir/uncommitted.pdf"),
   ],
@@ -259,7 +261,13 @@ export const COMMITTED = new Set([
 ]);
 
 export const OVERLAY = [
-  { slug: "2026-09-16-agents-in-production-nyc", series: "Test Series", what: "A room about agents in production.", takeaways: true },
+  {
+    slug: "2026-09-16-agents-in-production-nyc",
+    series: "Test Series",
+    what: "A room about agents in production.",
+    takeaways: true,
+    speaker_overrides: { "Hana Host": { title: null } },
+  },
   {
     slug: "2026-06-24-nyc-ai-demos-10",
     notion_page_id: "389d3699-c2db-81e0-9fd4-feced66c7501",
@@ -267,6 +275,7 @@ export const OVERLAY = [
     carousel: "content-drafts/other-dir/carousel.pdf",
   },
   { slug: "2026-09-20-held-room", publish: false },
+  { slug: "2026-09-16-another-room-same-night", location: "Other Venue, New York", speaker_overrides: { "Nobody Here": { title: null } } },
   { slug: "2026-09-18-nowhere", what: "no event on this date" },
 ];
 

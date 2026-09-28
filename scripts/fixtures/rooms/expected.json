@@ -22,7 +22,7 @@
         },
         {
           "name": "Hana Host",
-          "title": "Organizer",
+          "title": null,
           "company": null,
           "linkedin": null,
           "roles": [
@@ -34,8 +34,7 @@
         "Agent Reliability"
       ],
       "companies": [
-        "Acme AI",
-        "Beta Labs"
+        "Acme AI"
       ],
       "takeaways": {
         "quickTake": [
@@ -63,7 +62,8 @@
           "url": "https://www.linkedin.com/posts/preview-456",
           "roundup": false,
           "firstComment": [
-            "Primer on agent evals (https://example.com/primer)"
+            "Primer on agent evals (https://example.com/primer)",
+            "Further reading: http://clay.com/blog"
           ],
           "carousel": null
         },
@@ -80,6 +80,7 @@
           "roundup": false,
           "firstComment": [
             "The talk slides: https://example.com/slides",
+            "The host's recap: https://www.linkedin.com/posts/host-recap-1",
             "The paper: https://arxiv.org/abs/2501.00001",
             "A-only link: https://example.com/variant-a",
             "The event page: https://example.com/event"
@@ -88,6 +89,30 @@
             "pdf": "/rooms/demo-dir/post-event-carousel.pdf",
             "preview": null
           }
+        }
+      ]
+    },
+    {
+      "slug": "2026-09-16-another-room-same-night",
+      "name": "Another Room Same Night",
+      "date": "2026-09-16",
+      "location": "Other Venue, New York",
+      "status": null,
+      "series": null,
+      "what": null,
+      "recapPending": true,
+      "speakers": [],
+      "topics": [],
+      "companies": [],
+      "takeaways": null,
+      "carousel": null,
+      "posts": [
+        {
+          "kind": "preview",
+          "url": "https://www.linkedin.com/posts/roundup-789",
+          "roundup": true,
+          "firstComment": null,
+          "carousel": null
         }
       ]
     },

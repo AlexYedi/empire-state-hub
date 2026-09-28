@@ -52,7 +52,7 @@ export function RoomsIndex({ rooms, generatedAt }: { rooms: Room[]; generatedAt:
             : "mt-4 font-mono text-3xl font-semibold tracking-tight sm:text-4xl"
         }
       >
-        {ed ? "Every room, on the record." : "Event archive, generated."}
+        {ed ? "Every room, one page." : "Event archive, generated."}
       </h1>
       <p className="mt-4 max-w-2xl text-lg leading-relaxed text-muted">
         {ed

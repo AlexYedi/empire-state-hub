@@ -6,7 +6,20 @@ import assert from "node:assert/strict";
 import { readFileSync, writeFileSync, existsSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
-import { buildRooms, validateOverlay, cleanFirstComment, publishedVariant, safetyScan, extractTakeaways, hasQuotedSpeech, cleanTitle, publicName } from "../../gen-rooms.mjs";
+import {
+  buildRooms,
+  validateOverlay,
+  cleanFirstComment,
+  publishedVariant,
+  safetyScan,
+  extractTakeaways,
+  hasQuotedSpeech,
+  cleanTitle,
+  publicName,
+  cleanUrl,
+  publicLocation,
+  looksLikeAddress,
+} from "../../gen-rooms.mjs";
 import { source, COMMITTED, OVERLAY } from "./fixture.mjs";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
@@ -26,7 +39,7 @@ test("nothing outside the allowlist leaks (Quote Bank, attendees, Event Descript
   const out = JSON.stringify(data);
   const leaks = out.match(/LEAK_[A-Za-z_]*/g) ?? [];
   assert.deepEqual(leaks, [], `leaked: ${[...new Set(leaks)].join(", ")}`);
-  assert.deepEqual(safetyScan(data), { phrases: 0, emails: 0 });
+  assert.deepEqual(safetyScan(data), { phrases: 0, emails: 0, addresses: 0, trackedLinks: 0 });
   for (const banned of ["Event Description", "Quote Bank", "Hot Take", "email", "phone", "Notes", "Bio"])
     assert.ok(!out.includes(`"${banned}"`), `field name ${banned} present`);
 });
@@ -71,11 +84,12 @@ test("first comment: public URLs only, editor notes and other-variant lines stri
   const recap = room.posts.find((p) => p.kind === "recap");
   assert.deepEqual(recap.firstComment, [
     "The talk slides: https://example.com/slides",
+    "The host's recap: https://www.linkedin.com/posts/host-recap-1",
     "The paper: https://arxiv.org/abs/2501.00001",
     "A-only link: https://example.com/variant-a",
     "The event page: https://example.com/event",
   ]);
-  assert.deepEqual(room.posts[0].firstComment, ["Primer on agent evals (https://example.com/primer)"]);
+  assert.deepEqual(room.posts[0].firstComment, ["Primer on agent evals (https://example.com/primer)", "Further reading: http://clay.com/blog"]);
   const legacy = data.rooms.find((r) => r.slug === "2026-06-24-nyc-ai-demos-10");
   assert.equal(legacy.posts[0].firstComment, null, "variant-only line with unknown published variant is dropped");
 });
@@ -153,4 +167,54 @@ test("speaker fields: research notes stripped from titles, placeholder names dro
   assert.equal(publicName("Michael (Datadog) — last name TBC"), null);
   assert.equal(publicName("Jack (Insight Partners)"), null);
   assert.equal(publicName("Miaolai (Mila) Zhou"), "Miaolai (Mila) Zhou");
+});
+
+test("companies: only the exported speakers' companies — never the Event's Companies relation", async () => {
+  const { data } = await run();
+  const room = data.rooms.find((r) => r.slug === "2026-09-16-agents-in-production-nyc");
+  // the fixture event's Companies relation holds Acme AI (a speaker's) AND a non-speaker company
+  assert.deepEqual(room.companies, ["Acme AI"]);
+  assert.ok(!JSON.stringify(data).includes("Beta Labs"), "a non-speaker company on the Event relation must not publish");
+  const other = data.rooms.find((r) => r.slug === "2026-09-16-another-room-same-night");
+  assert.deepEqual(other.companies, []);
+});
+
+test("location: venue + city only; overlay location wins; addresses never publish", async () => {
+  const { data } = await run();
+  assert.equal(data.rooms.find((r) => r.slug === "2026-09-16-agents-in-production-nyc").location, "Some Venue, New York");
+  assert.equal(data.rooms.find((r) => r.slug === "2026-09-16-another-room-same-night").location, "Other Venue, New York");
+  assert.equal(publicLocation("111 W 19th St, New York, NY (Clay HQ) — invite-only, address released to accepted guests"), "Clay HQ, New York");
+  assert.equal(publicLocation("Insight Partners, 1114 6th Ave, 36th floor, New York, NY 10036"), "Insight Partners, New York");
+  assert.equal(publicLocation("620 8th Ave, 45th Floor (NYT Building), New York, NY"), "NYT Building, New York");
+  assert.equal(publicLocation("49 Elizabeth St / Canopy, NYC"), "Canopy, New York");
+  assert.equal(publicLocation("Spara HQ, 7 World Trade Center, New York, NY 10006"), "Spara HQ, New York");
+  assert.equal(publicLocation("18 E 50th St, New York, NY 10022"), "New York");
+  assert.equal(publicLocation("NYC (application-only, address on approval) — Luma"), "New York");
+  assert.equal(publicLocation("Virtual (Luma / Goldcast) — https://luma.com/x"), "Virtual");
+  assert.equal(publicLocation(""), null);
+  for (const r of data.rooms) assert.ok(!looksLikeAddress(r.location), `${r.slug}: ${r.location}`);
+  assert.throws(() => validateOverlay([{ slug: "2026-01-01-a", location: "111 W 19th St, New York" }]));
+});
+
+test("speaker_overrides: may only null a field; applied after export", async () => {
+  const { data, report } = await run();
+  const hana = data.rooms.find((r) => r.slug === "2026-09-16-agents-in-production-nyc").speakers.find((s) => s.name === "Hana Host");
+  assert.equal(hana.title, null);
+  assert.deepEqual(report.overrideMisses, ["2026-09-16-another-room-same-night — Nobody Here"]);
+  assert.throws(() => validateOverlay([{ slug: "2026-01-01-a", speaker_overrides: { X: { company: "Added Co" } } }]));
+  assert.throws(() => validateOverlay([{ slug: "2026-01-01-a", speaker_overrides: { X: { name: null } } }]));
+  assert.doesNotThrow(() => validateOverlay([{ slug: "2026-01-01-a", speaker_overrides: { X: { title: null, company: null } } }]));
+});
+
+test("linkedin URLs lose tracking query strings and fragments everywhere they are emitted", async () => {
+  assert.equal(cleanUrl("https://www.linkedin.com/posts/x_activity-1-abc?utm_source=share&utm_medium=member_desktop&rcm=ACoAAB#c"), "https://www.linkedin.com/posts/x_activity-1-abc");
+  assert.equal(cleanUrl("https://example.com/a?b=1"), "https://example.com/a?b=1");
+  assert.deepEqual(cleanFirstComment(["Recap: https://www.linkedin.com/feed/update/urn:li:activity:1/?utm_source=x&rcm=y"], null, { phraseDrops: 0 }), [
+    "Recap: https://www.linkedin.com/feed/update/urn:li:activity:1/",
+  ]);
+  const { data } = await run();
+  const out = JSON.stringify(data);
+  assert.ok(!/linkedin\.com\/[^"\s]*[?#]/.test(out), "a linkedin URL with a query/fragment was emitted");
+  const room = data.rooms.find((r) => r.slug === "2026-09-16-agents-in-production-nyc");
+  assert.equal(room.speakers[0].linkedin, "https://www.linkedin.com/in/sam-speaker");
 });
