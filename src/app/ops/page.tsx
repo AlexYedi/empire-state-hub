@@ -2,21 +2,32 @@ import Link from "next/link";
 import { getContentDraftBoard } from "@/lib/content-drafts";
 import { getEventWindows } from "@/lib/events";
 import { getEntityCounts } from "@/lib/entities";
+import { getCarryOvers } from "@/lib/linear/carry-overs";
+import { groupFor, nyDate } from "@/lib/linear/carry-over-template";
 
 export const dynamic = "force-dynamic";
 
 export default async function OpsOverview() {
-  const [board, windows, entities] = await Promise.all([
+  const [board, windows, entities, carryOvers] = await Promise.all([
     getContentDraftBoard(),
     getEventWindows(),
     getEntityCounts(),
+    getCarryOvers(),
   ]);
+  const today = nyDate(new Date());
+  const overdueTodos = carryOvers?.open.filter((i) => groupFor(i.dueDate, today) === "overdue").length;
 
   const draftsTotal = board.reduce((sum, col) => sum + col.drafts.length, 0);
   const published = board.find((c) => c.status === "published")?.drafts.length ?? 0;
   const needsReview = board.find((c) => c.status === "needs_review")?.drafts.length ?? 0;
 
   const tiles = [
+    {
+      label: "overdue to-dos",
+      value: overdueTodos ?? "—",
+      sub: carryOvers ? `${carryOvers.open.length} open carry-overs` : "Linear not configured",
+      href: "/ops/todos",
+    },
     { label: "drafts", value: draftsTotal, sub: `${needsReview} need review`, href: "/ops/content" },
     { label: "published *", value: published, sub: "status proxy", href: "/ops/content" },
     { label: "events", value: windows.total, sub: `${windows.last30.length} in 30d`, href: "/ops/events" },
@@ -31,7 +42,7 @@ export default async function OpsOverview() {
   return (
     <div>
       <h1 className="text-lg font-semibold">Overview</h1>
-      <p className="mt-1 text-xs text-muted">Live operating state — pulled from Notion.</p>
+      <p className="mt-1 text-xs text-muted">Live operating state — pulled from Notion and Linear.</p>
 
       <div className="mt-6 grid grid-cols-2 gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-3">
         {tiles.map((tile) => (

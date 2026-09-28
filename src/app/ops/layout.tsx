@@ -4,6 +4,7 @@ import Link from "next/link";
 // data-lens="technical" pins the dark/mono tokens for this whole subtree.
 const NAV = [
   { href: "/ops", label: "Overview" },
+  { href: "/ops/todos", label: "To-dos" },
   { href: "/ops/content", label: "Content" },
   { href: "/ops/events", label: "Events" },
   { href: "/ops/entities", label: "Entities" },
