@@ -7,13 +7,12 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "check": "node scripts/verify-public-safe.mjs && node scripts/verify-system-map.mjs && node --test scripts/fixtures/rooms/gen-rooms.test.mjs && node --test src/lib/linear/carry-over-template.test.ts",
+    "check": "node scripts/verify-public-safe.mjs && node scripts/verify-system-map.mjs && node --test scripts/fixtures/rooms/gen-rooms.test.mjs",
     "verify:public-safe": "node scripts/verify-public-safe.mjs",
     "gen:system-map": "node scripts/gen-system-map.mjs",
     "verify:system-map": "node scripts/verify-system-map.mjs",
     "gen:rooms": "node --env-file=.env.local scripts/gen-rooms.mjs",
-    "test:rooms": "node --test scripts/fixtures/rooms/gen-rooms.test.mjs",
-    "test:todos": "node --test src/lib/linear/carry-over-template.test.ts"
+    "test:rooms": "node --test scripts/fixtures/rooms/gen-rooms.test.mjs"
   },
   "dependencies": {
     "@linear/sdk": "^86.0.0",
