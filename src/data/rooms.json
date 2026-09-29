@@ -1,6 +1,194 @@
 {
-  "generated_at": "2026-09-28T13:43:04.682Z",
+  "generated_at": "2026-09-29T20:36:53.228Z",
   "rooms": [
+    {
+      "slug": "2026-09-28-shortlist-september-founder-showcase",
+      "name": "The Shortlist: September Founder Showcase",
+      "date": "2026-09-28",
+      "location": "Betaworks, New York",
+      "status": "post_complete",
+      "series": "The Shortlist",
+      "what": "Monthly application-only founder showcase run by The Shortlist: six seed-to-Series B NYC founders present their companies and open roles, followed by a mixer.",
+      "recapPending": false,
+      "speakers": [
+        {
+          "name": "Alvin Wu",
+          "title": "CPO & Co-Founder, Amperos Health",
+          "company": "Amperos Health",
+          "linkedin": "https://www.linkedin.com/in/wualvin/",
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Aris Saxena",
+          "title": "Co-Founder & CEO, Solstice Health",
+          "company": "Solstice Health",
+          "linkedin": "https://www.linkedin.com/in/aris-saxena-a82808149/",
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Ayush Sharma",
+          "title": "Founder & CEO, Warp (warp.co)",
+          "company": "Warp (warp.co)",
+          "linkedin": null,
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Brendan Hellweg",
+          "title": "Co-Founder, Holly",
+          "company": "Holly",
+          "linkedin": "https://www.linkedin.com/in/brendanhellweg/",
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Cherie Chung",
+          "title": "Co-Founder, Holly",
+          "company": "Holly",
+          "linkedin": null,
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Logan Brown",
+          "title": "Founder & CEO, Soxton",
+          "company": "Soxton",
+          "linkedin": "https://www.linkedin.com/in/logan-brown-03765552/",
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Michal Miernowski",
+          "title": "CEO & Co-Founder, Amperos Health",
+          "company": "Amperos Health",
+          "linkedin": "https://www.linkedin.com/in/michalmiernowski/",
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Rick Huang",
+          "title": "Co-Founder, Pascal",
+          "company": "Pascal",
+          "linkedin": "https://www.linkedin.com/in/huangr/",
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Yiwen Li",
+          "title": "Co-Founder, Solstice Health",
+          "company": "Solstice Health",
+          "linkedin": "https://www.linkedin.com/in/yiwen1/",
+          "roles": [
+            "speaker"
+          ]
+        },
+        {
+          "name": "Andrew Yeung",
+          "title": "Founder, Fibe; Co-Founder, The Shortlist NYC; Partner, Next Wave NYC",
+          "company": "Fibe",
+          "linkedin": "https://www.linkedin.com/in/andyeung/",
+          "roles": [
+            "host",
+            "organizer"
+          ]
+        },
+        {
+          "name": "Ivor Stratford",
+          "title": "Co-Founder, Morpheus Talent Solutions; Co-Founder, The Shortlist NYC",
+          "company": "Morpheus Talent Solutions",
+          "linkedin": "https://www.linkedin.com/in/ivorstratford/",
+          "roles": [
+            "host",
+            "organizer"
+          ]
+        },
+        {
+          "name": "Sangavi Suresh",
+          "title": "Marketing & Events, The Shortlist NYC / Fibe / InPress",
+          "company": "The Shortlist NYC",
+          "linkedin": "https://www.linkedin.com/in/sangavisuresh/",
+          "roles": [
+            "host",
+            "organizer"
+          ]
+        }
+      ],
+      "topics": [
+        "AI for HR & Performance Management",
+        "AI in Healthcare Revenue Cycle Management",
+        "AI in Pharma Marketing & MLR Review",
+        "AI-Native Services Firms (services-as-software)",
+        "AI-Native Startup Talent Market (NYC)",
+        "GovTech / Public-Sector Workforce AI",
+        "Legal & Compliance AI",
+        "Vertical AI Applications"
+      ],
+      "companies": [
+        "Amperos Health",
+        "Fibe",
+        "Holly",
+        "Morpheus Talent Solutions",
+        "Pascal",
+        "Solstice Health",
+        "Soxton",
+        "The Shortlist NYC",
+        "Warp (warp.co)"
+      ],
+      "takeaways": null,
+      "carousel": null,
+      "posts": [
+        {
+          "kind": "preview",
+          "url": "https://lnkd.in/p/eajbyEgD",
+          "roundup": false,
+          "firstComment": null,
+          "carousel": null
+        },
+        {
+          "kind": "preview",
+          "url": "https://lnkd.in/p/ey3uTiG8",
+          "roundup": true,
+          "firstComment": [
+            "MON · The Shortlist: September Founder Showcase: https://luma.com/shortlistseptember",
+            "TUE · Token Economics (VentureBeat): https://luma.com/i6yn0nbv",
+            "TUE · The Multi-Model Future (Brex, Baseten, Extend, Vercel): https://luma.com/brexextendsep29",
+            "TUE · Data, Dashboards, and Drinks (Metabase × Datadog): https://luma.com/metabase-datadog-nyc",
+            "WED · MongoDB.local NYC: https://luma.com/7hlijfri",
+            "WED · Clay in NYC (Clay Club NY): https://luma.com/jndkges4",
+            "THU · AI Demos #11: Media: https://luma.com/nyc11"
+          ],
+          "carousel": null
+        },
+        {
+          "kind": "recap",
+          "url": "https://lnkd.in/p/eQTcjYYZ",
+          "roundup": false,
+          "firstComment": [
+            "The Shortlist (next showcase + newsletter): https://www.shortlistnyc.com",
+            "1/ Warp: https://www.warp.co/careers",
+            "2/ Soxton: no public job board yet. Reach Logan Brown via https://www.soxton.ai",
+            "3/ Solstice: https://jobs.ashbyhq.com/solstice",
+            "4/ Pascal: https://jobs.ashbyhq.com/teampascal (the founding commercial role isn't posted; reach out directly)",
+            "5/ Amperos Health: https://jobs.ashbyhq.com/amperos",
+            "6/ Holly: https://ats.rippling.com/holly/jobs"
+          ],
+          "carousel": {
+            "pdf": "/rooms/shortlist-september-2026-09-28/post-event-carousel.pdf",
+            "preview": null
+          }
+        }
+      ]
+    },
     {
       "slug": "2026-09-23-agentic-gtm-grok-bot-clay",
       "name": "Agentic GTM with Grok Bot & Clay",

@@ -139,5 +139,10 @@
     "slug": "2026-09-23-gtm-world-tour-new-york",
     "what": "New York stop of the GTM World Tour, a ten-city go-to-market event series from BetterContact and Scalantec, held at Clay's office.",
     "location": "Clay HQ, New York"
+  },
+  {
+    "slug": "2026-09-28-shortlist-september-founder-showcase",
+    "series": "The Shortlist",
+    "what": "Monthly application-only founder showcase run by The Shortlist: six seed-to-Series B NYC founders present their companies and open roles, followed by a mixer."
   }
 ]
