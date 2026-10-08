@@ -21,8 +21,9 @@
 //             Quote Bank / Hot Takes / Anecdotes / Speaker Map / People & Outreach / Open Loops are
 //             never read into the output. Quote blocks and quote-led lines are dropped.
 //   posts     Content Drafts of type linkedin_post_{post,pre,synthesis} with Content Status =
-//             published AND a Published URL. Per post: its carousel (a content-drafts/<dir>/*.pdf the
-//             draft names, copied from the pipeline's COMMITTED tree) and its `## First comment`
+//             published AND a Published URL. Per post: its carousel (an `Event Content/<dir>/*.pdf`, or a
+//             legacy `content-drafts/<dir>/*.pdf` resolved through the pipeline's content-drafts-moves.json,
+//             that the draft names, copied from the pipeline's COMMITTED tree) and its `## First comment`
 //             lines that carry a public URL, with editor notes / unpublished-variant lines stripped.
 // Every exported line is also checked against the off-the-record phrase list and dropped on a hit.
 import { readFileSync, writeFileSync, mkdirSync, rmSync, existsSync } from "node:fs";
@@ -348,24 +349,54 @@ async function firstCommentLines(blocks, source) {
 }
 
 // ---------- carousel (committed pipeline files only) ----------
-const CAROUSEL_REF = /content-drafts\/([A-Za-z0-9._-]+)\/([A-Za-z0-9._-]+\.pdf)/g;
+// Two ref shapes. Legacy `content-drafts/<dir>/<file>.pdf` (what older Notion drafts name) keeps its public
+// path /rooms/<dir>/<file> so published links stay stable; the file itself is found through MOVES (the
+// pipeline moved content-drafts/ into Event Content/ on 2026-10-08). Current `Event Content/<dir…>/<file>.pdf`
+// refs publish under a kebab-cased path (the folder names carry spaces, '#', commas).
+const LEGACY_REF = /content-drafts\/([A-Za-z0-9._-]+)\/([A-Za-z0-9._-]+\.pdf)/g;
+const EVENT_REF = /Event Content\/((?:(?:(?!\.pdf)[^/`\n"<>])+\/)+)([^/`\n"<>]+?\.pdf)/g;
+export const MOVES_FILE = "Event Content/content-drafts-moves.json";
 
-export function carouselFor(relPath, committed) {
-  if (!relPath || !committed.has(relPath)) return null;
-  const dir = relPath.split("/").slice(0, -1).join("/");
-  const previews = [...committed]
-    .filter((f) => f.startsWith(dir + "/") && /\/(?:preview-[^/]*|carousel-preview)\.png$/.test(f))
-    .sort();
-  const pub = (p) => "/rooms/" + p.replace(/^content-drafts\//, "");
-  return { pdf: pub(relPath), preview: previews[0] ? pub(previews[0]) : null, _src: [relPath, previews[0]].filter(Boolean) };
+const urlSeg = (s) => s.replace(/\.pdf$/i, "").replace(/\.png$/i, "").split(/[^A-Za-z0-9]+/).filter(Boolean).join("-").toLowerCase();
+
+/** pipeline ref -> { src: committed path, rel: public path under /rooms/ } (no existence check) */
+function resolveRef(ref, moves) {
+  if (ref.startsWith("content-drafts/")) return { src: moves.get(ref) ?? ref, rel: ref.slice("content-drafts/".length) };
+  if (ref.startsWith("Event Content/")) {
+    const segs = ref.slice("Event Content/".length).split("/");
+    const file = segs.pop();
+    return { src: ref, rel: [...segs.map(urlSeg), urlSeg(file) + ".pdf"].join("/") };
+  }
+  return null;
 }
 
-function carouselFromText(texts, committed) {
-  for (const t of texts)
-    for (const m of t.matchAll(CAROUSEL_REF)) {
-      const c = carouselFor(`content-drafts/${m[1]}/${m[2]}`, committed);
+export function carouselFor(ref, committed, moves = new Map()) {
+  const r = ref ? resolveRef(ref, moves) : null;
+  if (!r || !committed.has(r.src)) return null;
+  const dir = r.src.split("/").slice(0, -1).join("/");
+  const relDir = r.rel.split("/").slice(0, -1).join("/");
+  const preview = [...committed]
+    .filter((f) => f.startsWith(dir + "/") && /\/(?:preview-[^/]*|carousel-preview)\.png$/.test(f))
+    .sort()[0];
+  const previewRel = preview ? relDir + "/" + urlSeg(preview.split("/").pop()) + ".png" : null;
+  return {
+    pdf: "/rooms/" + r.rel,
+    preview: previewRel ? "/rooms/" + previewRel : null,
+    _assets: [[r.src, r.rel], ...(preview ? [[preview, previewRel]] : [])],
+  };
+}
+
+export function carouselFromText(texts, committed, moves = new Map()) {
+  for (const t of texts) {
+    const refs = [
+      ...[...t.matchAll(LEGACY_REF)].map((m) => ({ at: m.index, ref: `content-drafts/${m[1]}/${m[2]}` })),
+      ...[...t.matchAll(EVENT_REF)].map((m) => ({ at: m.index, ref: `Event Content/${m[1]}${m[2]}` })),
+    ].sort((a, b) => a.at - b.at);
+    for (const { ref } of refs) {
+      const c = carouselFor(ref, committed, moves);
       if (c) return c;
     }
+  }
   return null;
 }
 
@@ -421,10 +452,11 @@ function resolveEvent(entry, events) {
  * @param {object} o
  * @param {object[]} o.overlay   validated curated entries
  * @param {object}   o.source    { listEvents(), listDrafts(), getPage(id), getBlocks(id) }
- * @param {Set<string>} o.committed  pipeline paths tracked in git (content-drafts/**)
+ * @param {Set<string>} o.committed  pipeline paths tracked in git (Event Content/** + legacy content-drafts/**)
+ * @param {Map<string,string>} [o.moves] legacy content-drafts path -> its Event Content path
  * @param {string}   o.now       ISO timestamp for generated_at
  */
-export async function buildRooms({ overlay, source, committed, now }) {
+export async function buildRooms({ overlay, source, committed, moves = new Map(), now }) {
   const report = { rooms: [], unresolved: [], held: [], phraseDrops: 0 };
   const assets = new Map(); // pipeline path -> public path
   const events = await source.listEvents();
@@ -539,11 +571,11 @@ export async function buildRooms({ overlay, source, committed, now }) {
       const texts = [titleOf(d), ...blocks.map((b) => blockText(b, true))];
       const raw = await firstCommentLines(blocks, source);
       const firstComment = raw ? cleanFirstComment(raw, publishedVariant(texts), report) : null;
-      const carousel = carouselFromText(texts, committed);
+      const carousel = carouselFromText(texts, committed, moves);
       if (firstComment) r.firstComments++;
       if (carousel) {
         r.carousels++;
-        for (const s of carousel._src) assets.set(s, s.replace(/^content-drafts\//, ""));
+        for (const [s, rel] of carousel._assets) assets.set(s, rel);
       }
       posts.push({
         kind,
@@ -561,10 +593,10 @@ export async function buildRooms({ overlay, source, committed, now }) {
     // carousel already posted publicly whose post can't be linked — never an unconfirmed one.
     let roomCarousel = null;
     if (entry.carousel) {
-      const c = carouselFor(entry.carousel, committed);
+      const c = carouselFor(entry.carousel, committed, moves);
       if (c) {
         roomCarousel = { pdf: c.pdf, preview: c.preview };
-        for (const s of c._src) assets.set(s, s.replace(/^content-drafts\//, ""));
+        for (const [s, rel] of c._assets) assets.set(s, rel);
       } else r.carouselMissing = entry.carousel;
     }
 
@@ -663,10 +695,20 @@ async function notionSource() {
   };
 }
 
+/** legacy content-drafts path -> Event Content path, from the pipeline's committed move map */
+export function committedMoves(pipelineDir) {
+  try {
+    const out = execFileSync("git", ["-C", pipelineDir, "show", `HEAD:${MOVES_FILE}`], { encoding: "utf8" });
+    return new Map(Object.entries(JSON.parse(out)));
+  } catch {
+    return new Map();
+  }
+}
+
 export function committedFiles(pipelineDir) {
   try {
-    const out = execFileSync("git", ["-C", pipelineDir, "ls-files", "content-drafts"], { encoding: "utf8" });
-    return new Set(out.split("\n").filter(Boolean));
+    const out = execFileSync("git", ["-C", pipelineDir, "ls-files", "-z", "Event Content", "content-drafts"], { encoding: "utf8" });
+    return new Set(out.split("\0").filter(Boolean));
   } catch {
     console.warn(`! pipeline repo not readable at ${pipelineDir} — no carousels will match`);
     return new Set();
@@ -685,10 +727,12 @@ async function main() {
 
   const overlay = validateOverlay(JSON.parse(readFileSync(overlayPath, "utf8")));
   const committed = committedFiles(PIPELINE_DIR);
+  const moves = committedMoves(PIPELINE_DIR);
   const { data, report, assets } = await buildRooms({
     overlay,
     source: await notionSource(),
     committed,
+    moves,
     now: new Date().toISOString(),
   });
 

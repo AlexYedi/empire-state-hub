@@ -19,6 +19,8 @@ import {
   cleanUrl,
   publicLocation,
   looksLikeAddress,
+  carouselFor,
+  carouselFromText,
 } from "../../gen-rooms.mjs";
 import { source, COMMITTED, OVERLAY } from "./fixture.mjs";
 
@@ -217,4 +219,42 @@ test("linkedin URLs lose tracking query strings and fragments everywhere they ar
   assert.ok(!/linkedin\.com\/[^"\s]*[?#]/.test(out), "a linkedin URL with a query/fragment was emitted");
   const room = data.rooms.find((r) => r.slug === "2026-09-16-agents-in-production-nyc");
   assert.equal(room.speakers[0].linkedin, "https://www.linkedin.com/in/sam-speaker");
+});
+
+test("carousel paths: legacy refs resolve through the move map; Event Content refs publish kebab-cased", () => {
+  const committed = new Set([
+    "Event Content/09 16 26 Postgres Tuning in the Age of AI/carousel.pdf",
+    "Event Content/09 16 26 Postgres Tuning in the Age of AI/preview-slide1.png",
+    "Event Content/Upcoming Weeks/09 14 26 Upcoming Week/carousel.pdf",
+    "Event Content/10 01 26 NYC AI Demos #11/carousel.pdf",
+  ]);
+  const moves = new Map([
+    ["content-drafts/postgres-tuning-ai-2026-09-16/carousel.pdf", "Event Content/09 16 26 Postgres Tuning in the Age of AI/carousel.pdf"],
+  ]);
+  // legacy ref: public path unchanged (stable links), file read from its new home
+  const legacy = carouselFor("content-drafts/postgres-tuning-ai-2026-09-16/carousel.pdf", committed, moves);
+  assert.deepEqual(legacy.pdf, "/rooms/postgres-tuning-ai-2026-09-16/carousel.pdf");
+  assert.deepEqual(legacy.preview, "/rooms/postgres-tuning-ai-2026-09-16/preview-slide1.png");
+  assert.deepEqual(legacy._assets[0], ["Event Content/09 16 26 Postgres Tuning in the Age of AI/carousel.pdf", "postgres-tuning-ai-2026-09-16/carousel.pdf"]);
+  // legacy ref with no move entry and no committed file: no match
+  assert.equal(carouselFor("content-drafts/gone/carousel.pdf", committed, moves), null);
+  // Event Content ref: nested folders, spaces and '#' become a URL-safe path
+  assert.equal(carouselFor("Event Content/Upcoming Weeks/09 14 26 Upcoming Week/carousel.pdf", committed).pdf, "/rooms/upcoming-weeks/09-14-26-upcoming-week/carousel.pdf");
+  assert.equal(carouselFor("Event Content/10 01 26 NYC AI Demos #11/carousel.pdf", committed).pdf, "/rooms/10-01-26-nyc-ai-demos-11/carousel.pdf");
+  assert.equal(carouselFor("Event Content/10 01 26 NYC AI Demos #11/missing.pdf", committed), null);
+});
+
+test("carousel paths: refs are read from draft text in order; the first committed one wins", () => {
+  const committed = new Set([
+    "Event Content/10 01 26 NYC AI Demos #11/carousel.pdf",
+    "Event Content/09 16 26 Postgres Tuning in the Age of AI/carousel.pdf",
+  ]);
+  const moves = new Map([["content-drafts/postgres-tuning-ai-2026-09-16/carousel.pdf", "Event Content/09 16 26 Postgres Tuning in the Age of AI/carousel.pdf"]]);
+  // two refs on one line: an uncommitted draft PDF, then the committed carousel
+  const line = "Rendered: `Event Content/10 01 26 NYC AI Demos #11/draft.pdf` and Event Content/10 01 26 NYC AI Demos #11/carousel.pdf (5 pages)";
+  assert.equal(carouselFromText([line], committed).pdf, "/rooms/10-01-26-nyc-ai-demos-11/carousel.pdf");
+  // a legacy ref earlier in the text beats a later Event Content ref
+  const mixed = "Old: content-drafts/postgres-tuning-ai-2026-09-16/carousel.pdf · New: Event Content/10 01 26 NYC AI Demos #11/carousel.pdf";
+  assert.equal(carouselFromText([mixed], committed, moves).pdf, "/rooms/postgres-tuning-ai-2026-09-16/carousel.pdf");
+  assert.equal(carouselFromText(["no carousel named here"], committed, moves), null);
 });

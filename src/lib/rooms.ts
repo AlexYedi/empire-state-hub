@@ -18,7 +18,8 @@ import ROOMS_JSON from "@/data/rooms.json";
  *                   address — the exporter rejects anything address-like
  *   speaker_overrides optional · { "<Name>": { "title": null, "company": null, "linkedin": null } } — may only
  *                   REMOVE a published fact (null), never add or change one (e.g. an unresolved employer)
- *   carousel        optional · room-level carousel, a pipeline path like `content-drafts/<dir>/carousel.pdf`;
+ *   carousel        optional · room-level carousel, a pipeline path like `Event Content/<dir>/carousel.pdf`
+ *                   (legacy `content-drafts/<dir>/carousel.pdf` still resolves through the pipeline's move map);
  *                   ONLY for a carousel already posted publicly (normally a carousel attaches through its
  *                   published post). Must be committed in the pipeline repo or it is ignored
  *   extra_post_ids  optional · Content Drafts page ids to attach when a published post has no Event relation
