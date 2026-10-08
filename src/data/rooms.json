@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-29T20:36:53.228Z",
+  "generated_at": "2026-10-08T13:19:56.029Z",
   "rooms": [
     {
       "slug": "2026-09-28-shortlist-september-founder-showcase",
@@ -515,7 +515,10 @@
             "Datadog Security Labs, SQL injection in the (archived) reference PostgreSQL MCP server, on why a raw Postgres MCP connection needs guardrails: https://securitylabs.datadoghq.com/articles/mcp-vulnerability-case-study-SQL-injection-in-the-postgresql-mcp-server/",
             "Postgres Summit US 2026 (NYC, Sept 30–Oct 2; Ryan Booz is speaking): https://2026.postgressummit.us/"
           ],
-          "carousel": null
+          "carousel": {
+            "pdf": "/rooms/09-16-26-postgres-tuning-in-the-age-of-ai/context-carousel.pdf",
+            "preview": null
+          }
         }
       ]
     },
@@ -652,7 +655,10 @@
             "LeadDev, The Engineering Leadership Report 2026: https://leaddev.com/the-engineering-leadership-report-2026",
             "HBR, \"AI-Generated 'Workslop' Is Destroying Productivity\" (the adjacent failure: slop you send vs. slop your agent hands you): https://hbr.org/2025/09/ai-generated-workslop-is-destroying-productivity"
           ],
-          "carousel": null
+          "carousel": {
+            "pdf": "/rooms/09-14-26-leaddev-nyc-meetup/centaur-carousel.pdf",
+            "preview": null
+          }
         },
         {
           "kind": "recap",
@@ -665,7 +671,10 @@
             "OpenAI, \"Harness engineering\" (what Hooper's \"build\" converges toward): https://openai.com/index/harness-engineering/",
             "Retool, 2026 Build vs. Buy Report (35% of enterprises have already replaced a SaaS tool): https://www.businesswire.com/news/home/20260217548274/en/Retools-2026-Build-vs.-Buy-Report-Reveals-35-of-Enterprises-Have-Already-Replaced-SaaS-With-Custom-Software"
           ],
-          "carousel": null
+          "carousel": {
+            "pdf": "/rooms/09-14-26-leaddev-nyc-meetup/build-buy-vibe-map.pdf",
+            "preview": null
+          }
         }
       ]
     },
