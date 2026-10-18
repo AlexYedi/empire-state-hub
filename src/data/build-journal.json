@@ -1,13 +1,366 @@
 {
-  "generated_at": "2026-09-28T07:24:44Z",
+  "generated_at": "2026-10-16T16:56:24Z",
   "since": "2026-07-01",
   "entries": [
+    {
+      "date": "2026-10-16",
+      "headline": "The second leak attempt changed the shape of the filter",
+      "summary": "A cross-repo git cleanup across all five public repos: more than 30 dead branches and four stale worktrees gone, every delete of unmerged work preceded by an archive tag, and repo settings (auto-delete merged branches, no force-push or deletion on main) so the pile can't rebuild itself. The real find was underneath: talk transcripts exported from a different tool had slipped past my name-based ignore rules for the second time, so recorded speech under the event tree is now ignored by file type, and only known-good files are let back in (#207). The lesson: a privacy rule keyed on file names fails the moment the export tool changes, and a fix you have to remember isn't a fix.  — Second ship: eight carousels (ElasticON, Quantum, Durable State, Revolt) and the 10-07 healthcare-territory ruling in role-radar, cut to the half the comp script didn't already hold (#194).",
+      "curated": true,
+      "shipped": [
+        {
+          "repo": "pipeline",
+          "num": 207,
+          "title": "gitignore: recorded speech under Event Content ignored by extension, not name",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/207"
+        },
+        {
+          "repo": "pipeline",
+          "num": 194,
+          "title": "role-radar: healthcare/life-sciences territory = drop (Alex, 2026-10-07)",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/194"
+        }
+      ],
+      "linear": [],
+      "metrics": {
+        "prs": 2,
+        "commits": 4,
+        "sessions": 20,
+        "tools": 2041
+      }
+    },
+    {
+      "date": "2026-10-15",
+      "headline": "yed 259 routing diagnostician",
+      "summary": "",
+      "curated": false,
+      "shipped": [
+        {
+          "repo": "pipeline",
+          "num": 206,
+          "title": "yed 259 routing diagnostician",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/206"
+        },
+        {
+          "repo": "pipeline",
+          "num": 205,
+          "title": "yed 259 post event synthesizer",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/205"
+        },
+        {
+          "repo": "pipeline",
+          "num": 204,
+          "title": "yed 259 wire notion writer",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/204"
+        },
+        {
+          "repo": "pipeline",
+          "num": 203,
+          "title": "yed 259 visual renderer",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/203"
+        },
+        {
+          "repo": "pipeline",
+          "num": 202,
+          "title": "yed 259 routing file",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/202"
+        },
+        {
+          "repo": "pipeline",
+          "num": 201,
+          "title": "yed 259 secret scan",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/201"
+        },
+        {
+          "repo": "pipeline",
+          "num": 200,
+          "title": "yed 259 notion writer",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/200"
+        },
+        {
+          "repo": "pipeline",
+          "num": 199,
+          "title": "yed 259 output evaluator",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/199"
+        },
+        {
+          "repo": "pipeline",
+          "num": 198,
+          "title": "yed 259 dispatch record",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/198"
+        },
+        {
+          "repo": "pipeline",
+          "num": 197,
+          "title": "yed 259 rules text",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/197"
+        }
+      ],
+      "linear": [
+        "YED-259"
+      ],
+      "metrics": {
+        "prs": 10,
+        "commits": 13,
+        "sessions": 7,
+        "tools": 772
+      }
+    },
+    {
+      "date": "2026-10-12",
+      "headline": "job search mission scaffold",
+      "summary": "",
+      "curated": false,
+      "shipped": [
+        {
+          "repo": "pipeline",
+          "num": 196,
+          "title": "job search mission scaffold",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/196"
+        }
+      ],
+      "linear": [],
+      "metrics": {
+        "prs": 1,
+        "commits": 3,
+        "sessions": 80,
+        "tools": 13911
+      }
+    },
+    {
+      "date": "2026-10-08",
+      "headline": "consolidate event content",
+      "summary": "",
+      "curated": false,
+      "shipped": [
+        {
+          "repo": "pipeline",
+          "num": 195,
+          "title": "consolidate event content",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/195"
+        },
+        {
+          "repo": "hub",
+          "num": 32,
+          "title": "rooms event content paths",
+          "url": "https://github.com/AlexYedi/empire-state-hub/pull/32"
+        }
+      ],
+      "linear": [],
+      "metrics": {
+        "prs": 2,
+        "commits": 3,
+        "sessions": 2,
+        "tools": 37
+      }
+    },
+    {
+      "date": "2026-10-07",
+      "headline": "linkedin comment cap",
+      "summary": "",
+      "curated": false,
+      "shipped": [
+        {
+          "repo": "pipeline",
+          "num": 192,
+          "title": "linkedin comment cap",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/192"
+        },
+        {
+          "repo": "pipeline",
+          "num": 191,
+          "title": "comp gate synthetic floor",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/191"
+        },
+        {
+          "repo": "pipeline",
+          "num": 190,
+          "title": "role radar scripts",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/190"
+        },
+        {
+          "repo": "pipeline",
+          "num": 189,
+          "title": "talk to repo a",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/189"
+        },
+        {
+          "repo": "pipeline",
+          "num": 188,
+          "title": "linkedin media specs",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/188"
+        },
+        {
+          "repo": "pipeline",
+          "num": 186,
+          "title": "sf ai map targets",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/186"
+        },
+        {
+          "repo": "pipeline",
+          "num": 184,
+          "title": "no sub cap length targets",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/184"
+        }
+      ],
+      "linear": [],
+      "metrics": {
+        "prs": 7,
+        "commits": 5,
+        "sessions": 29,
+        "tools": 1120
+      }
+    },
     {
       "date": "2026-09-28",
       "headline": "The rigor system became the work, so I cut it down",
       "summary": "A 30-day inventory of my own repo said something uncomfortable: roughly two of every three commits were about governing the build (judges, gates, hooks, telemetry, rules) rather than the product, and about half the agents and commands had not been used once. The systems analysis named the pattern Shifting the Burden: each gate stood in for my own call on what is good enough and what to delete, then needed that call anyway to operate, and because nothing ever removed a rule (357 governance files added all time, 15 deleted) the pile only grew. The irony is that the gate at the center was prescribed in June by an analysis that named the same archetype. So one sitting of deletion: the three-seat judge with its quorum and trust ladder became one on-demand Sonnet reviewer (YED-231, #155); telemetry moved out of git and eleven hooks became one (YED-229, #153); about 6,200 lines of unused agents, commands and duplicate skills came off the live surface, all still recoverable from git (#154); the project instructions went from 6,400 words to 1,770 (#156) and memory from about 70 files to 18; the hub's ops pages and system map are being cut to what is actually true; the event recordings got a backup. What is left is the product, stated plainly: a one-person field bureau for New York's AI scene. The lesson: a rigor system with no removal path grows until it becomes the work, so the ceiling has to be held by a person, not by one more mechanism.",
       "curated": true,
       "shipped": [
+        {
+          "repo": "pipeline",
+          "num": 187,
+          "title": "content voice v2",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/187"
+        },
+        {
+          "repo": "pipeline",
+          "num": 185,
+          "title": "removal tail",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/185"
+        },
+        {
+          "repo": "pipeline",
+          "num": 183,
+          "title": "todos in notion",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/183"
+        },
+        {
+          "repo": "pipeline",
+          "num": 182,
+          "title": "roadmap notion only",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/182"
+        },
+        {
+          "repo": "pipeline",
+          "num": 181,
+          "title": "roadmap notion canonical",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/181"
+        },
+        {
+          "repo": "pipeline",
+          "num": 180,
+          "title": "yed 248 roadmap",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/180"
+        },
+        {
+          "repo": "pipeline",
+          "num": 179,
+          "title": "carry over rule",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/179"
+        },
+        {
+          "repo": "pipeline",
+          "num": 178,
+          "title": "rooms hook",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/178"
+        },
+        {
+          "repo": "pipeline",
+          "num": 177,
+          "title": "redact private material",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/177"
+        },
+        {
+          "repo": "pipeline",
+          "num": 176,
+          "title": "remove gate bookkeeping",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/176"
+        },
+        {
+          "repo": "pipeline",
+          "num": 175,
+          "title": "supercut verified",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/175"
+        },
+        {
+          "repo": "pipeline",
+          "num": 174,
+          "title": "judge test fixtures",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/174"
+        },
+        {
+          "repo": "pipeline",
+          "num": 173,
+          "title": "substrate gate verbs",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/173"
+        },
+        {
+          "repo": "pipeline",
+          "num": 172,
+          "title": "retire dormant arcs",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/172"
+        },
+        {
+          "repo": "pipeline",
+          "num": 171,
+          "title": "prune evals exhaust",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/171"
+        },
+        {
+          "repo": "pipeline",
+          "num": 170,
+          "title": "yed 233 value frame lazy",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/170"
+        },
+        {
+          "repo": "pipeline",
+          "num": 169,
+          "title": "yed 208 prior post index",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/169"
+        },
+        {
+          "repo": "pipeline",
+          "num": 168,
+          "title": "prune path read skills",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/168"
+        },
+        {
+          "repo": "pipeline",
+          "num": 167,
+          "title": "prune retired gate narrative",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/167"
+        },
+        {
+          "repo": "pipeline",
+          "num": 166,
+          "title": "untrack transcripts",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/166"
+        },
+        {
+          "repo": "pipeline",
+          "num": 165,
+          "title": "yed 193 evergreen fold",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/165"
+        },
+        {
+          "repo": "pipeline",
+          "num": 164,
+          "title": "remove duplicated skills",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/164"
+        },
+        {
+          "repo": "pipeline",
+          "num": 163,
+          "title": "yed 103 audience first review",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/163"
+        },
+        {
+          "repo": "pipeline",
+          "num": 162,
+          "title": "reset drift fixes",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/162"
+        },
         {
           "repo": "pipeline",
           "num": 161,
@@ -64,26 +417,52 @@
         },
         {
           "repo": "hub",
+          "num": 31,
+          "title": "remove ops todos",
+          "url": "https://github.com/AlexYedi/empire-state-hub/pull/31"
+        },
+        {
+          "repo": "hub",
+          "num": 30,
+          "title": "ops todos",
+          "url": "https://github.com/AlexYedi/empire-state-hub/pull/30"
+        },
+        {
+          "repo": "hub",
+          "num": 29,
+          "title": "rooms",
+          "url": "https://github.com/AlexYedi/empire-state-hub/pull/29"
+        },
+        {
+          "repo": "hub",
+          "num": 28,
+          "title": "prune rigor residue",
+          "url": "https://github.com/AlexYedi/empire-state-hub/pull/28"
+        },
+        {
+          "repo": "hub",
           "num": 27,
           "title": "reset hub pass",
           "url": "https://github.com/AlexYedi/empire-state-hub/pull/27"
         }
       ],
       "linear": [
+        "YED-103",
+        "YED-193",
         "YED-196",
         "YED-197",
+        "YED-208",
         "YED-229",
         "YED-230",
-        "YED-231"
+        "YED-231",
+        "YED-233",
+        "YED-248"
       ],
       "metrics": {
-        "prs": 10,
-        "commits": 29,
-        "sessions": 84,
-        "tools": 6394,
-        "dod_met": true,
-        "dod_waived": false,
-        "correction_rounds": 3
+        "prs": 38,
+        "commits": 76,
+        "sessions": 218,
+        "tools": 39466
       }
     },
     {
@@ -322,10 +701,7 @@
         "prs": 34,
         "commits": 87,
         "sessions": 172,
-        "tools": 46206,
-        "dod_met": true,
-        "dod_waived": true,
-        "correction_rounds": 8
+        "tools": 46206
       }
     },
     {
@@ -375,10 +751,7 @@
         "prs": 5,
         "commits": 12,
         "sessions": 39,
-        "tools": 7435,
-        "dod_met": false,
-        "dod_waived": false,
-        "correction_rounds": 0
+        "tools": 7435
       }
     },
     {
@@ -409,10 +782,7 @@
         "prs": 2,
         "commits": 7,
         "sessions": 17,
-        "tools": 1322,
-        "dod_met": true,
-        "dod_waived": false,
-        "correction_rounds": 0
+        "tools": 1322
       }
     },
     {
@@ -439,10 +809,7 @@
         "prs": 2,
         "commits": 0,
         "sessions": 0,
-        "tools": 0,
-        "dod_met": false,
-        "dod_waived": false,
-        "correction_rounds": 0
+        "tools": 0
       }
     },
     {
@@ -478,10 +845,7 @@
         "prs": 3,
         "commits": 8,
         "sessions": 21,
-        "tools": 2896,
-        "dod_met": true,
-        "dod_waived": true,
-        "correction_rounds": 3
+        "tools": 2896
       }
     },
     {
@@ -554,10 +918,7 @@
         "prs": 9,
         "commits": 20,
         "sessions": 44,
-        "tools": 9104,
-        "dod_met": true,
-        "dod_waived": true,
-        "correction_rounds": 1
+        "tools": 9104
       }
     },
     {
@@ -681,10 +1042,7 @@
         "prs": 16,
         "commits": 32,
         "sessions": 1,
-        "tools": 5,
-        "dod_met": false,
-        "dod_waived": false,
-        "correction_rounds": 0
+        "tools": 5
       }
     },
     {
@@ -698,12 +1056,6 @@
           "num": 79,
           "title": "backlog reconciliation",
           "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/79"
-        },
-        {
-          "repo": "pipeline",
-          "num": 78,
-          "title": "yed 167 postgres knowledge",
-          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/78"
         },
         {
           "repo": "pipeline",
@@ -734,13 +1086,10 @@
         "YED-34"
       ],
       "metrics": {
-        "prs": 4,
+        "prs": 3,
         "commits": 24,
         "sessions": 50,
-        "tools": 14636,
-        "dod_met": true,
-        "dod_waived": true,
-        "correction_rounds": 1
+        "tools": 14636
       }
     },
     {
@@ -773,10 +1122,7 @@
         "prs": 3,
         "commits": 6,
         "sessions": 8,
-        "tools": 808,
-        "dod_met": false,
-        "dod_waived": false,
-        "correction_rounds": 0
+        "tools": 808
       }
     },
     {
@@ -813,10 +1159,7 @@
         "prs": 3,
         "commits": 11,
         "sessions": 19,
-        "tools": 1950,
-        "dod_met": true,
-        "dod_waived": true,
-        "correction_rounds": 1
+        "tools": 1950
       }
     },
     {
@@ -911,10 +1254,7 @@
         "prs": 12,
         "commits": 37,
         "sessions": 13,
-        "tools": 1967,
-        "dod_met": false,
-        "dod_waived": false,
-        "correction_rounds": 0
+        "tools": 1967
       }
     },
     {
@@ -932,10 +1272,7 @@
         "prs": 0,
         "commits": 13,
         "sessions": 1,
-        "tools": 0,
-        "dod_met": false,
-        "dod_waived": false,
-        "correction_rounds": 0
+        "tools": 0
       }
     },
     {
@@ -976,10 +1313,7 @@
         "prs": 4,
         "commits": 8,
         "sessions": 10,
-        "tools": 448,
-        "dod_met": true,
-        "dod_waived": true,
-        "correction_rounds": 1
+        "tools": 448
       }
     },
     {
@@ -1000,10 +1334,7 @@
         "prs": 1,
         "commits": 5,
         "sessions": 143,
-        "tools": 14861,
-        "dod_met": true,
-        "dod_waived": true,
-        "correction_rounds": 8
+        "tools": 14861
       }
     },
     {
@@ -1024,10 +1355,7 @@
         "prs": 1,
         "commits": 3,
         "sessions": 6,
-        "tools": 199,
-        "dod_met": false,
-        "dod_waived": false,
-        "correction_rounds": 0
+        "tools": 199
       }
     },
     {
@@ -1056,10 +1384,7 @@
         "prs": 2,
         "commits": 5,
         "sessions": 25,
-        "tools": 1135,
-        "dod_met": false,
-        "dod_waived": false,
-        "correction_rounds": 0
+        "tools": 1135
       }
     },
     {
@@ -1109,10 +1434,7 @@
         "prs": 5,
         "commits": 17,
         "sessions": 17,
-        "tools": 1227,
-        "dod_met": true,
-        "dod_waived": true,
-        "correction_rounds": 3
+        "tools": 1227
       }
     },
     {
@@ -1137,10 +1459,7 @@
         "prs": 1,
         "commits": 16,
         "sessions": 9,
-        "tools": 467,
-        "dod_met": true,
-        "dod_waived": false,
-        "correction_rounds": 1
+        "tools": 467
       }
     },
     {
@@ -1164,10 +1483,7 @@
         "prs": 1,
         "commits": 4,
         "sessions": 16,
-        "tools": 1243,
-        "dod_met": false,
-        "dod_waived": false,
-        "correction_rounds": 0
+        "tools": 1243
       }
     },
     {
@@ -1200,10 +1516,7 @@
         "prs": 3,
         "commits": 8,
         "sessions": 10,
-        "tools": 333,
-        "dod_met": true,
-        "dod_waived": true,
-        "correction_rounds": 1
+        "tools": 333
       }
     },
     {
@@ -1230,10 +1543,7 @@
         "prs": 2,
         "commits": 2,
         "sessions": 11,
-        "tools": 460,
-        "dod_met": false,
-        "dod_waived": false,
-        "correction_rounds": 0
+        "tools": 460
       }
     },
     {
@@ -1262,10 +1572,7 @@
         "prs": 2,
         "commits": 3,
         "sessions": 27,
-        "tools": 2821,
-        "dod_met": true,
-        "dod_waived": true,
-        "correction_rounds": 0
+        "tools": 2821
       }
     },
     {
@@ -1387,10 +1694,7 @@
         "prs": 17,
         "commits": 28,
         "sessions": 15,
-        "tools": 742,
-        "dod_met": false,
-        "dod_waived": false,
-        "correction_rounds": 0
+        "tools": 742
       }
     },
     {
@@ -1457,10 +1761,7 @@
         "prs": 8,
         "commits": 16,
         "sessions": 0,
-        "tools": 0,
-        "dod_met": false,
-        "dod_waived": false,
-        "correction_rounds": 0
+        "tools": 0
       }
     },
     {
@@ -1483,10 +1784,7 @@
         "prs": 1,
         "commits": 2,
         "sessions": 0,
-        "tools": 0,
-        "dod_met": false,
-        "dod_waived": false,
-        "correction_rounds": 0
+        "tools": 0
       }
     },
     {
@@ -1513,10 +1811,7 @@
         "prs": 2,
         "commits": 4,
         "sessions": 68,
-        "tools": 14639,
-        "dod_met": true,
-        "dod_waived": true,
-        "correction_rounds": 3
+        "tools": 14639
       }
     },
     {
@@ -1543,10 +1838,7 @@
         "prs": 2,
         "commits": 7,
         "sessions": 2,
-        "tools": 13,
-        "dod_met": false,
-        "dod_waived": false,
-        "correction_rounds": 0
+        "tools": 13
       }
     },
     {
@@ -1567,10 +1859,7 @@
         "prs": 1,
         "commits": 0,
         "sessions": 0,
-        "tools": 0,
-        "dod_met": false,
-        "dod_waived": false,
-        "correction_rounds": 0
+        "tools": 0
       }
     },
     {
@@ -1586,10 +1875,7 @@
         "prs": 0,
         "commits": 1,
         "sessions": 0,
-        "tools": 0,
-        "dod_met": false,
-        "dod_waived": false,
-        "correction_rounds": 0
+        "tools": 0
       }
     },
     {
@@ -1603,10 +1889,7 @@
         "prs": 0,
         "commits": 6,
         "sessions": 27,
-        "tools": 2923,
-        "dod_met": true,
-        "dod_waived": true,
-        "correction_rounds": 3
+        "tools": 2923
       }
     },
     {
@@ -1620,10 +1903,7 @@
         "prs": 0,
         "commits": 2,
         "sessions": 0,
-        "tools": 0,
-        "dod_met": false,
-        "dod_waived": false,
-        "correction_rounds": 0
+        "tools": 0
       }
     },
     {
@@ -1644,10 +1924,7 @@
         "prs": 1,
         "commits": 4,
         "sessions": 82,
-        "tools": 7044,
-        "dod_met": true,
-        "dod_waived": true,
-        "correction_rounds": 7
+        "tools": 7044
       }
     }
   ]
