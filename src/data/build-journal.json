@@ -1,7 +1,64 @@
 {
-  "generated_at": "2026-10-21T12:31:06Z",
+  "generated_at": "2026-10-24T06:02:40Z",
   "since": "2026-07-01",
   "entries": [
+    {
+      "date": "2026-10-24",
+      "headline": "I graded my own AI checker, then made the one Notion writer prove itself against the real thing",
+      "summary": "I labelled 58 of my output-evaluator's verdicts myself. It agreed with me on 54 of 57, against 37 if I'd had no checker, so it now does the first pass on every public draft. Then I closed the gaps the audit had found. Every Notion write now goes through one writer that a tested validator constrains: known databases only, approved pages only, no contact details I didn't supply. CI now blocks any agent that can both read the web and write. And I cut the skill library from 278 to 189. The lesson of the day came from testing on a real scratch page: Notion silently escapes HTML comments, which would have broken every edit the design depended on. It passed review and failed on contact with the real system.",
+      "curated": true,
+      "shipped": [
+        {
+          "repo": "pipeline",
+          "num": 215,
+          "title": "writer fallback stop",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/215"
+        },
+        {
+          "repo": "pipeline",
+          "num": 214,
+          "title": "sweep workflow refs",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/214"
+        },
+        {
+          "repo": "pipeline",
+          "num": 213,
+          "title": "rules review amendments",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/213"
+        },
+        {
+          "repo": "pipeline",
+          "num": 212,
+          "title": "notion writer rollout",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/212"
+        },
+        {
+          "repo": "pipeline",
+          "num": 211,
+          "title": "dispatch record fixes",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/211"
+        },
+        {
+          "repo": "pipeline",
+          "num": 210,
+          "title": "sec03 tools lint",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/210"
+        },
+        {
+          "repo": "pipeline",
+          "num": 209,
+          "title": "gap only hedges",
+          "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/209"
+        }
+      ],
+      "linear": [],
+      "metrics": {
+        "prs": 7,
+        "commits": 14,
+        "sessions": 7,
+        "tools": 301
+      }
+    },
     {
       "date": "2026-10-21",
       "headline": "A 62-minute recording became three posts, and the checkers earned their keep",
@@ -11,9 +68,9 @@
       "linear": [],
       "metrics": {
         "prs": 0,
-        "commits": 1,
-        "sessions": 16,
-        "tools": 1282
+        "commits": 3,
+        "sessions": 85,
+        "tools": 10694
       }
     },
     {
