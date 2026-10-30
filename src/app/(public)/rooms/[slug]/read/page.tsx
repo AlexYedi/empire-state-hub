@@ -3,6 +3,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getLongRead, getLongReadSlugs } from "@/lib/long-reads";
 import { getRoom } from "@/lib/rooms";
+import { xShareUrl } from "@/lib/share";
+import { pageUrl } from "@/lib/site-url";
+import { ShareOnX } from "@/components/share-on-x";
 import { BlockRenderer } from "@/components/long-read/blocks";
 
 // Like the room page: every long read is known at build time (the committed
@@ -20,9 +23,26 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!room || !read) return {};
   const title = `${room.name} — Long read · Empire State`;
   const firstParagraph = read.blocks.find((b) => b.type === "paragraph")?.text;
+  const description = firstParagraph ?? room.what ?? undefined;
   return {
     title,
-    description: firstParagraph ?? room.what ?? undefined,
+    description,
+    // E-06 item 2: X card on long reads, reusing the site-wide Open Graph image
+    // (src/app/opengraph-image.tsx route). Setting images explicitly: defining
+    // openGraph/twitter in generateMetadata overrides the file convention's
+    // inherited image on these routes (verified against the built HTML).
+    openGraph: {
+      title: room.name,
+      description,
+      url: pageUrl(`/rooms/${room.slug}/read`),
+      images: [pageUrl("/opengraph-image")],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: room.name,
+      description,
+      images: [pageUrl("/opengraph-image")],
+    },
   };
 }
 
@@ -71,6 +91,13 @@ export default async function LongReadPage({ params }: { params: Promise<{ slug:
           <BlockRenderer key={i} block={block} />
         ))}
       </div>
+
+      <footer className="mt-16 border-t border-border pt-4">
+        <ShareOnX
+          // Built server-side: the origin env vars are not available client-side.
+          href={xShareUrl({ title: room.name, url: pageUrl(`/rooms/${room.slug}/read`) })}
+        />
+      </footer>
     </article>
   );
 }

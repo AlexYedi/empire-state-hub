@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useLens } from "@/components/lens-provider";
+import { ShareOnX } from "@/components/share-on-x";
 import { POST_KIND_LABEL, roomCarousels, type Room } from "@/lib/rooms";
 import { hasLongRead } from "@/lib/long-reads";
 import { fmtRoomDate } from "../rooms-index";
@@ -34,7 +35,7 @@ function Section({ title, children }: { title: string; children: React.ReactNode
   );
 }
 
-export function RoomView({ room }: { room: Room }) {
+export function RoomView({ room, shareUrl }: { room: Room; shareUrl: string }) {
   const { lens } = useLens();
   const ed = lens === "editorial";
   const carousels = roomCarousels(room);
@@ -219,6 +220,10 @@ export function RoomView({ room }: { room: Room }) {
           </div>
         </Section>
       )}
+
+      <footer className="mt-16 border-t border-border pt-4">
+        <ShareOnX href={shareUrl} />
+      </footer>
     </div>
   );
 }
