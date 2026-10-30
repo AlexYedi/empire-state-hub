@@ -1,0 +1,139 @@
+{
+  "slug": "2026-09-28-shortlist-september-founder-showcase",
+  "updated": "2026-10-30",
+  "blocks": [
+    {
+      "type": "image",
+      "src": "/long-reads/2026-09-28-shortlist-september-founder-showcase/hero.png",
+      "alt": "Cover page of the post-event carousel for The Shortlist September Founder Showcase",
+      "caption": "From the post-event carousel. [confirm] Which carousel page should be the hero is an open editorial question — page 1 is used as the draft default."
+    },
+    {
+      "type": "heading",
+      "text": "Six founders, one night at Betaworks"
+    },
+    {
+      "type": "paragraph",
+      "text": "On a Monday evening in late September, six New York founders stood up at Betaworks and pitched, one after another, to a room full of the people they most want to hire. Between them they have raised about $160 million and they were carrying more than 60 open roles. The event was The Shortlist's September Founder Showcase: application-only, monthly, and built around a simple inversion — instead of candidates auditioning for companies, founders audition for candidates."
+    },
+    {
+      "type": "stat",
+      "value": "$160M",
+      "label": "raised across the six presenting companies, combined (approx.)",
+      "source": "Alex Yedibalian, LinkedIn recap, 2026-09-28 event"
+    },
+    {
+      "type": "quote",
+      "text": "Founders will only tell you good things about their company. Ask the people who already joined.",
+      "attribution": "Ivor Stratford, co-founder, The Shortlist NYC, opening the September showcase (as published in Alex Yedibalian's recap)"
+    },
+    {
+      "type": "paragraph",
+      "text": "Stratford co-founded The Shortlist with Andrew Yeung because, in their telling, hiring is broken in two specific ways. Founders' DMs are buried under AI-written pitches. And candidates often never meet the team before they join. The Shortlist's answer is to put the founders on stage and the teams in the crowd, with an in-event digital UI that facilitates and manages the connections that get made. If that sounds like a dating show for the seed-to-Series B set, that is roughly the energy — except every match is a job."
+    },
+    {
+      "type": "image",
+      "src": "/long-reads/2026-09-28-shortlist-september-founder-showcase/raise-chart.png",
+      "alt": "Bar chart of amounts raised by the six presenting companies: Warp $60M, Solstice $21M, Amperos Health $16M, Pascal $5M, Soxton AI $2.5M, Holly $2.2M",
+      "caption": "Money raised, by company. Source: Alex Yedibalian, LinkedIn recap of The Shortlist September Founder Showcase, 2026-09-28 (published 2026-09-29)."
+    },
+    {
+      "type": "heading",
+      "text": "The theme underneath the lineup"
+    },
+    {
+      "type": "paragraph",
+      "text": "A week before the event, Alex's preview post put a name on what this particular lineup had in common: vertical AI that sells the finished work, not software seats. Not a tool a pharma team uses to get an ad approved — the ad itself, pre-checked. Not compliance software for a law firm — the law firm. The buyer pays per result: an appealed insurance claim, a reviewed contract. The organizers' own framing, as quoted in the preview: \"AI going where software never worked before.\""
+    },
+    {
+      "type": "callout",
+      "text": "Services-as-software, as framed in the preview post: when an AI company sells the appealed insurance claim instead of a software seat, the work doesn't vanish — it moves, and someone has to own it. The lineup, translated to outcomes: Amperos — insurance denials worked and appealed. Solstice — pharma ads pre-checked before MLR (medical, legal, regulatory) review. Holly — drafted job classifications for government HR. Soxton — the law firm itself. Pascal — the stress test: consumer-brand data, not a regulated service. Warp — the AI employment platform."
+    },
+    {
+      "type": "paragraph",
+      "text": "That framing did real work in the room. It explains why a pre-seed company shows up with a lawyer on every AI draft, and why a Series A healthcare company still staffs human billers for edge cases. Selling the finished work means selling the errors too."
+    },
+    {
+      "type": "heading",
+      "text": "The six, in pitch order"
+    },
+    {
+      "type": "paragraph",
+      "text": "1/ Warp — Ayush Sharma, CEO. $60M Series B led by Battery, with angels including Tobi Lütke and Drew Houston. The pitch: payroll and HR still run on systems older than the internet, and agents do the work — starting from the hardest part, multi-state payroll tax. Sharma's origin story, as told on stage: payroll broke at his last startup, and fixing it took 60 hours. Hiring: 21 roles across engineering and go-to-market."
+    },
+    {
+      "type": "stat",
+      "value": "$60M",
+      "label": "Warp's Series B, led by Battery",
+      "source": "LinkedIn recap, 2026-09-28"
+    },
+    {
+      "type": "paragraph",
+      "text": "2/ Soxton AI — Logan Brown, founder. $2.5M pre-seed led by Moxxie, with Caterina Fake. Founders skip legal until they can afford Big Law; Soxton's answer is to be the law firm — privilege, malpractice cover, a lawyer on every AI draft, since only attorneys can give legal advice. Per the preview post, contracts run about $100 flat-fee. Brown interned at a district attorney's office at 12; his first Big Law task was making signature lines the same length. Hiring: marketing — there is no marketing team yet."
+    },
+    {
+      "type": "paragraph",
+      "text": "3/ Solstice Health — Aris Saxena and Yiwen Li. $21M Series A led by Transformation Capital, with Twelve Below. One pharma email can take about three months and roughly 100 hands to ship. Solstice runs as an AI-native agency with its own regulatory reviewers, and reported review rounds down from 3.2 to 1.2 per asset, catching problems before the MLR committee does. Saxena and Li have been Penn hallmates since freshman year — they tried to leave healthcare and couldn't. Hiring: 15 roles across engineering, go-to-market, and ops."
+    },
+    {
+      "type": "stat",
+      "value": "3.2 → 1.2",
+      "label": "review rounds per pharma marketing asset, before vs. after Solstice's own reviewers",
+      "source": "Alex Yedibalian, preview post, 2026-09-21"
+    },
+    {
+      "type": "paragraph",
+      "text": "4/ Pascal — Rick Huang and Matthew Ko. $5M, per Huang on stage; the team of three includes execs from Decagon and Cognition. Consumer brands run retail on portals, PDFs, and spreadsheets; Pascal builds the data layer first, then agents that claw back invalid deductions. Huang and Ko have been MIT friends for over ten years; Ko officiated Huang's wedding. Hiring: a founding engineer and a founding commercial hire."
+    },
+    {
+      "type": "paragraph",
+      "text": "5/ Amperos Health — Michal Miernowski and Alvin Wu. $16M Series A led by Bessemer, with Uncork and Neo. The problem they attack is large and unglamorous: providers lose roughly $260 billion a year to insurance denials. Amperos's agents call insurers, work the portals, and file appeals; human billers take the edge cases. The origin story that got the room's attention: a clinic CFO with 100 doctors who needed 300 collections staff. Hiring: 20 roles across go-to-market, engineering, and billing."
+    },
+    {
+      "type": "stat",
+      "value": "~$260B",
+      "label": "what providers lose per year to insurance denials, per Amperos's pitch",
+      "source": "LinkedIn recap, 2026-09-28"
+    },
+    {
+      "type": "paragraph",
+      "text": "6/ Holly — Cherie Chung and Brendan Hellweg, co-CEOs. $2.2M pre-seed led by J2 Ventures, with Roble and Gaingels. A city pay study takes consultants about a year and $300K or more; Holly is built only for government class and compensation — a living system, not a PDF. Hellweg scaled Baltimore's COVID health corps from 0 to 275. Hiring: 5 roles, including engineering and a chief of staff."
+    },
+    {
+      "type": "heading",
+      "text": "The open question the night leaves you with"
+    },
+    {
+      "type": "paragraph",
+      "text": "The preview post ended on the question this whole model has to answer: does the margin survive the human in the loop, or does review become the cost center? Every company on that stage had a different answer. Soxton puts a lawyer on every draft and calls that the product. Solstice uses its own reviewers to catch problems before the committee does. Amperos keeps humans on the edge cases and lets agents take the volume. Whether review is the moat or the margin-killer is the thing to check when these companies raise again — and it is the reason to keep going back to the Shortlist stage."
+    },
+    {
+      "type": "paragraph",
+      "text": "More than 60 open roles were live across the six companies on the night. Careers links for all six are in the first comment of the published recap, and on the room page."
+    },
+    {
+      "type": "callout",
+      "text": "All 8 pages of the post-event carousel are in the published PDF: /rooms/shortlist-september-2026-09-28/post-event-carousel.pdf"
+    },
+    {
+      "type": "sources",
+      "items": [
+        {
+          "label": "Alex Yedibalian, recap post for The Shortlist September Founder Showcase, published 2026-09-28 (event date)",
+          "url": "https://lnkd.in/p/eQTcjYYZ"
+        },
+        {
+          "label": "Alex Yedibalian, preview post \"Vertical AI Sells Finished Work, Not Software Seats,\" published 2026-09-21 (one week pre-event) [confirm publish date — post shows \"1 month\" relative timestamp]",
+          "url": "https://lnkd.in/p/eajbyEgD"
+        },
+        {
+          "label": "Room page: rooms index — event metadata, speakers, topics (src/data/rooms.json)"
+        },
+        {
+          "label": "Post-event carousel (PDF), all 8 pages",
+          "url": "/rooms/shortlist-september-2026-09-28/post-event-carousel.pdf"
+        }
+      ]
+    }
+  ]
+}

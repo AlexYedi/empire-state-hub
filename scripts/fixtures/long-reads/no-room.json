@@ -1,0 +1,7 @@
+{
+  "slug": "9999-99-99-no-such-room",
+  "updated": "2026-01-01",
+  "blocks": [
+    { "type": "paragraph", "text": "A slug with no matching room must fail." }
+  ]
+}
