@@ -1,0 +1,4 @@
+# Repo policy — empire-state-hub
+defaultBranch: main
+mergeMethod: squash
+deleteBranchOnMerge: true
