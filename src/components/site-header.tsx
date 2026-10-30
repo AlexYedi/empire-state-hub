@@ -7,6 +7,7 @@ import { useLens } from "./lens-provider";
 const NAV = [
   { href: "/architecture", label: "The System" },
   { href: "/build-arcs", label: "Build Arcs" },
+  { href: "/builds", label: "Builds" },
   { href: "/journal", label: "Journal" },
   { href: "/changelog", label: "Changelog" },
   { href: "/rooms", label: "Rooms" },

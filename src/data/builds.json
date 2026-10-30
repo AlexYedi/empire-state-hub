@@ -1,0 +1,25 @@
+{
+  "builds": [
+    {
+      "slug": "events-pipeline",
+      "name": "Empire State Events Pipeline",
+      "date": "2026-04-09",
+      "oneLine": "An AI-native content and research pipeline built as a Claude Code harness — skills, agents, commands, hooks, and scripts that turn New York AI events into research and content.",
+      "repoUrl": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3",
+      "stack": ["Python", "Claude Code"]
+    },
+    {
+      "slug": "empire-state-hub",
+      "name": "Empire State Hub",
+      "date": "2026-06-12",
+      "oneLine": "A dual-lens portfolio and live operator cockpit, built on the pipeline's own data.",
+      "repoUrl": "https://github.com/AlexYedi/empire-state-hub",
+      "stack": ["Next.js", "TypeScript", "React", "Tailwind CSS"]
+    },
+    {
+      "slug": "warm-path-finder",
+      "name": "warm-path-finder",
+      "stack": []
+    }
+  ]
+}
