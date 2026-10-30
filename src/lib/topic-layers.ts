@@ -86,6 +86,8 @@ const FILE = z
       asOf: z.string().min(1),
     }),
     topics: z.array(TopicLayerSchema),
+    // Old names of topics soft-merged away in the graph → the live topic's name.
+    aliases: z.array(z.object({ name: z.string().min(1), topic: z.string().min(1) })).default([]),
   })
   .parse(TOPIC_LAYERS_JSON);
 
@@ -106,6 +108,12 @@ function assertIntegrity(topics: z.infer<typeof TopicLayerSchema>[]): void {
 assertIntegrity(FILE.topics);
 
 const BY_NAME = new Map(FILE.topics.map((t) => [t.name, t]));
+for (const a of FILE.aliases) {
+  if (BY_NAME.has(a.name)) throw new Error(`topic-layers.json: alias "${a.name}" collides with a live topic`);
+  const target = BY_NAME.get(a.topic);
+  if (!target) throw new Error(`topic-layers.json: alias "${a.name}" points at unknown topic "${a.topic}"`);
+  BY_NAME.set(a.name, target);
+}
 
 export type LayerView = {
   id: (typeof LAYER_IDS)[number];
@@ -130,7 +138,7 @@ export function getLayers(): LayerView[] {
       const topic = BY_NAME.get(name);
       if (!topic) continue; // unmapped room topic — counted in layerCoverage(), not silently merged in
       primary.get(topic.layer)!.rooms.add(room.slug);
-      primary.get(topic.layer)!.topics.add(name);
+      primary.get(topic.layer)!.topics.add(topic.name);
       if (topic.secondary) secondary.get(topic.secondary)!.add(room.slug);
     }
   }

@@ -6,7 +6,8 @@
 // so the hub ships a committed, reviewable file keyed by NAME — no graph access at runtime.
 //
 // duplicate_of is dropped on purpose: it is a PROPOSAL awaiting Alex's ruling, and the hub
-// view must not collapse or dedupe topics on it.
+// view must not collapse or dedupe topics on it. Aliases are different: they are merges Alex
+// already ran, so the old name resolves to the live topic.
 //
 // Run: pnpm gen:topic-layers           (PIPELINE_DIR=/path/to/pipeline to override the sibling default)
 // Exits non-zero on: missing/untracked inputs, a snapshot id the map doesn't cover (or vice versa),
@@ -92,10 +93,23 @@ for (const [id, entry] of Object.entries(rawLayers)) {
   byName.set(name, { id, layer: entry.layer, secondary: entry.secondary ?? null });
 }
 
+// ---------- aliases: topics soft-merged away in the graph (S-03 snapshot `aliases`) ----------
+// Room topic names come from Notion and keep their pre-merge spelling; each alias resolves an old
+// name to the live topic it merged into, so a merge never silently drops a room from the layer view.
+const aliases = [];
+for (const a of snapshot.aliases ?? []) {
+  const target = idName.get(a.merged_into);
+  if (!target) fail(`alias "${a.name}": merged_into ${a.merged_into} is not a live snapshot topic`);
+  if (byName.has(a.name)) fail(`alias "${a.name}" collides with a live topic name`);
+  aliases.push({ name: a.name, topic: target });
+}
+aliases.sort((x, y) => x.name.localeCompare(y.name));
+const resolveName = (name) => aliases.find((a) => a.name === name)?.topic ?? name;
+
 // ---------- cross-reference the hub's rooms ----------
 const rooms = JSON.parse(readFileSync(join(HUB, "src", "data", "rooms.json"), "utf8")).rooms;
 const roomTopicNames = [...new Set(rooms.flatMap((r) => r.topics ?? []))].sort();
-const unmapped = roomTopicNames.filter((name) => !byName.has(name));
+const unmapped = roomTopicNames.filter((name) => !byName.has(resolveName(name)));
 if (unmapped.length) {
   console.warn(`gen-topic-layers: WARNING — ${unmapped.length} room topic(s) have no graph mapping and are excluded from layer counts:`);
   for (const name of unmapped) console.warn(`  - ${name}`);
@@ -119,6 +133,7 @@ const output = {
     asOf: snapshot.as_of,
   },
   topics,
+  aliases,
 };
 
 writeFileSync(OUT, JSON.stringify(output, null, 2) + "\n");
@@ -128,7 +143,7 @@ const perLayer = new Map(LAYER_IDS.map((id) => [id, new Set()]));
 const secondaryRooms = new Map(LAYER_IDS.map((id) => [id, new Set()]));
 for (const room of rooms) {
   for (const name of room.topics ?? []) {
-    const t = byName.get(name);
+    const t = byName.get(resolveName(name));
     if (!t) continue;
     perLayer.get(t.layer)?.add(room.slug);
     if (t.secondary) secondaryRooms.get(t.secondary)?.add(room.slug);

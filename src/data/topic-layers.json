@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-10-30T20:08:22.022Z",
+  "generatedAt": "2026-10-30T22:08:00.866Z",
   "source": {
     "repo": "AlexYedi/Empire_State_Events_Pipeline_Take_3",
-    "commit": "e5b8167",
+    "commit": "0caefeb",
     "paths": [
       ".claude/references/topic-layers.json",
       ".claude/references/topics-snapshot.json",
@@ -186,16 +186,6 @@
       "layer": "environment"
     },
     {
-      "id": "8b16c353-7636-4e2c-90ca-47179cbc510a",
-      "name": "Personal AI Computers / Personal Cloud",
-      "layer": "environment"
-    },
-    {
-      "id": "d537c561-64dd-45ba-a0e1-f4a355e36e4b",
-      "name": "Personal Cloud Infrastructure & Democratized Computing",
-      "layer": "environment"
-    },
-    {
       "id": "33c904e7-ac9d-4d4b-8cfe-e4f3885e807f",
       "name": "Production Agentic Infrastructure",
       "layer": "environment"
@@ -238,11 +228,6 @@
     {
       "id": "3b156af3-48ce-441b-9080-4a6c2e5b7c3b",
       "name": "Vercel Workflows",
-      "layer": "environment"
-    },
-    {
-      "id": "bd566924-79a6-4ba6-8172-c876b5d2eeec",
-      "name": "Voice AI Infrastructure & Ultra-Low-Latency RTC",
       "layer": "environment"
     },
     {
@@ -560,11 +545,6 @@
       "layer": "data-retrieval"
     },
     {
-      "id": "4c11b238-a1e3-4d11-a797-61a04b8e1b2f",
-      "name": "Apache Spark & Spark 4.2",
-      "layer": "data-retrieval"
-    },
-    {
       "id": "c3cbf965-68eb-44a7-8eb9-f7ac0710d409",
       "name": "BI & Self-Serve Analytics in the AI Era",
       "layer": "data-retrieval"
@@ -572,11 +552,6 @@
     {
       "id": "c7f77208-ee61-4c4c-8837-29cc7be094e1",
       "name": "Cassandra / Astra DB Data Modeling for AI",
-      "layer": "data-retrieval"
-    },
-    {
-      "id": "2f93c671-f29b-4ca6-884b-e582100ba3ed",
-      "name": "Context Engineering (data integration, quality, governance for AI)",
       "layer": "data-retrieval"
     },
     {
@@ -690,11 +665,6 @@
       "layer": "data-retrieval"
     },
     {
-      "id": "6379d780-5730-4430-acdf-36facea27527",
-      "name": "RAG with Vector Databases (real-time / beyond-RAG)",
-      "layer": "data-retrieval"
-    },
-    {
       "id": "ab9488d9-11e3-4cd9-8e7c-3270a2501e26",
       "name": "Retrieval Quality: Embeddings, Reranking & Hybrid Search",
       "layer": "data-retrieval"
@@ -720,21 +690,6 @@
       "name": "Training Data Curation",
       "layer": "data-retrieval",
       "secondary": "model"
-    },
-    {
-      "id": "97c45592-03c8-435f-92ca-e8e2053b8a3d",
-      "name": "Agent Evaluation & Reliability in Production",
-      "layer": "evals-observability"
-    },
-    {
-      "id": "379dbc8c-76c9-4166-93a3-b58c01d8da76",
-      "name": "Agent Observability & Management",
-      "layer": "evals-observability"
-    },
-    {
-      "id": "06ac33ef-ddd5-4bd6-9617-7abac828d030",
-      "name": "Agent Observability & Monitoring",
-      "layer": "evals-observability"
     },
     {
       "id": "1c9738a3-47b4-4344-bd56-58a6f3238dff",
@@ -764,11 +719,6 @@
     {
       "id": "37408825-adc1-443a-adee-6dd2b4821e93",
       "name": "LLM Evaluation",
-      "layer": "evals-observability"
-    },
-    {
-      "id": "18a297db-c26e-47a4-8e55-45015fc0000b",
-      "name": "LLM Evaluation Practice (2026 State of the Art)",
       "layer": "evals-observability"
     },
     {
@@ -900,11 +850,6 @@
     {
       "id": "fe21f72d-6e4c-43a1-bdb9-65f6f3e63b8d",
       "name": "Agentic Marketing",
-      "layer": "gtm-distribution"
-    },
-    {
-      "id": "cdcb9d16-0033-4048-8d51-216c8004fa68",
-      "name": "Agentic Marketing Workflows",
       "layer": "gtm-distribution"
     },
     {
@@ -1051,23 +996,8 @@
       "layer": "gtm-distribution"
     },
     {
-      "id": "614e3c88-a319-4f5f-9525-346c148a9b2e",
-      "name": "Go-to-Market Strategy for AI (and AI for GTM)",
-      "layer": "gtm-distribution"
-    },
-    {
       "id": "61192274-1043-4a64-a5a9-87ea56fcf3e2",
       "name": "GTM Engineering",
-      "layer": "gtm-distribution"
-    },
-    {
-      "id": "2adcf90b-9f81-4be2-b3c9-11ddc902cb57",
-      "name": "GTM Engineering (GTME) as a Discipline",
-      "layer": "gtm-distribution"
-    },
-    {
-      "id": "cfb148cf-60ae-4dc2-9065-127748c768b0",
-      "name": "GTM Engineering (the emerging role)",
       "layer": "gtm-distribution"
     },
     {
@@ -1122,11 +1052,6 @@
       "layer": "gtm-distribution"
     },
     {
-      "id": "9e6b4041-8b67-47f4-9dc4-36831d7077f2",
-      "name": "The Marketing Engineer (AI-Native Marketing)",
-      "layer": "gtm-distribution"
-    },
-    {
       "id": "507b55fd-335a-4a61-8683-3498e221aecd",
       "name": "The SDR Role Reshape",
       "layer": "gtm-distribution"
@@ -1160,12 +1085,6 @@
     {
       "id": "3c283ad9-6e4b-49f5-8871-439bfddaaa7c",
       "name": "Agentic Commerce",
-      "layer": "domain-applications",
-      "secondary": "gtm-distribution"
-    },
-    {
-      "id": "77a32dd5-3e20-4c79-9bb4-4f174dbe7511",
-      "name": "Agentic Commerce (thesis: real vs. narrative + who owns the relationship)",
       "layer": "domain-applications",
       "secondary": "gtm-distribution"
     },
@@ -1400,6 +1319,72 @@
       "id": "c286acfd-6b26-4070-a6b3-9940528fa554",
       "name": "The NYC AI/Data Scene Gatekeeper Structure",
       "layer": "market-context"
+    }
+  ],
+  "aliases": [
+    {
+      "name": "Agent Evaluation & Reliability in Production",
+      "topic": "AI Agent Reliability & Evaluation"
+    },
+    {
+      "name": "Agent Observability & Management",
+      "topic": "AI Agent Observability"
+    },
+    {
+      "name": "Agent Observability & Monitoring",
+      "topic": "AI Agent Observability"
+    },
+    {
+      "name": "Agentic Commerce (thesis: real vs. narrative + who owns the relationship)",
+      "topic": "Agentic Commerce"
+    },
+    {
+      "name": "Agentic Marketing Workflows",
+      "topic": "Agentic Marketing"
+    },
+    {
+      "name": "Apache Spark & Spark 4.2",
+      "topic": "Apache Spark"
+    },
+    {
+      "name": "Context Engineering (data integration, quality, governance for AI)",
+      "topic": "Context Engineering"
+    },
+    {
+      "name": "Go-to-Market Strategy for AI (and AI for GTM)",
+      "topic": "AI-Native Go-To-Market"
+    },
+    {
+      "name": "GTM Engineering (GTME) as a Discipline",
+      "topic": "GTM Engineering"
+    },
+    {
+      "name": "GTM Engineering (the emerging role)",
+      "topic": "GTM Engineering"
+    },
+    {
+      "name": "LLM Evaluation Practice (2026 State of the Art)",
+      "topic": "LLM Evaluation"
+    },
+    {
+      "name": "Personal AI Computers / Personal Cloud",
+      "topic": "Personal & Local AI Infrastructure"
+    },
+    {
+      "name": "Personal Cloud Infrastructure & Democratized Computing",
+      "topic": "Personal & Local AI Infrastructure"
+    },
+    {
+      "name": "RAG with Vector Databases (real-time / beyond-RAG)",
+      "topic": "RAG (Retrieval-Augmented Generation)"
+    },
+    {
+      "name": "The Marketing Engineer (AI-Native Marketing)",
+      "topic": "Marketing Engineering (the role)"
+    },
+    {
+      "name": "Voice AI Infrastructure & Ultra-Low-Latency RTC",
+      "topic": "Real-Time Voice AI Infrastructure"
     }
   ]
 }
