@@ -6,7 +6,7 @@
       "type": "image",
       "src": "/long-reads/2026-09-28-shortlist-september-founder-showcase/hero.png",
       "alt": "Cover page of the post-event carousel for The Shortlist September Founder Showcase",
-      "caption": "From the post-event carousel. [confirm] Which carousel page should be the hero is an open editorial question — page 1 is used as the draft default."
+      "caption": "Cover page of the post-event carousel for The Shortlist September Founder Showcase."
     },
     {
       "type": "heading",
@@ -14,12 +14,12 @@
     },
     {
       "type": "paragraph",
-      "text": "On a Monday evening in late September, six New York founders stood up at Betaworks and pitched, one after another, to a room full of the people they most want to hire. Between them they have raised about $160 million and they were carrying more than 60 open roles. The event was The Shortlist's September Founder Showcase: application-only, monthly, and built around a simple inversion — instead of candidates auditioning for companies, founders audition for candidates."
+      "text": "On a Monday evening in late September, six New York founders stood up at Betaworks and pitched, one after another, to a room full of the people they most want to hire. Between them they have raised about $160 million to date across all rounds, and they were carrying more than 60 open roles. The event was The Shortlist's September Founder Showcase: application-only, monthly, and built around a simple inversion — instead of candidates auditioning for companies, founders audition for candidates."
     },
     {
       "type": "stat",
       "value": "$160M",
-      "label": "raised across the six presenting companies, combined (approx.)",
+      "label": "raised to date across the six presenting companies, all rounds combined (approx.) — the latest announced rounds alone sum to about $107M",
       "source": "Alex Yedibalian, LinkedIn recap, 2026-09-28 event"
     },
     {
@@ -34,8 +34,8 @@
     {
       "type": "image",
       "src": "/long-reads/2026-09-28-shortlist-september-founder-showcase/raise-chart.png",
-      "alt": "Bar chart of amounts raised by the six presenting companies: Warp $60M, Solstice $21M, Amperos Health $16M, Pascal $5M, Soxton AI $2.5M, Holly $2.2M",
-      "caption": "Money raised, by company. Source: Alex Yedibalian, LinkedIn recap of The Shortlist September Founder Showcase, 2026-09-28 (published 2026-09-29)."
+      "alt": "Bar chart of the latest announced round raised by the six presenting companies: Warp $60M, Solstice $21M, Amperos Health $16M, Pascal $5M, Soxton AI $2.5M, Holly $2.2M",
+      "caption": "Latest announced round, by company ($160M combined refers to all rounds raised to date). Source: Alex Yedibalian, LinkedIn recap of The Shortlist September Founder Showcase, 2026-09-28 (published 2026-09-29)."
     },
     {
       "type": "heading",
@@ -59,7 +59,7 @@
     },
     {
       "type": "paragraph",
-      "text": "1/ Warp — Ayush Sharma, CEO. $60M Series B led by Battery, with angels including Tobi Lütke and Drew Houston. The pitch: payroll and HR still run on systems older than the internet, and agents do the work — starting from the hardest part, multi-state payroll tax. Sharma's origin story, as told on stage: payroll broke at his last startup, and fixing it took 60 hours. Hiring: 21 roles across engineering and go-to-market."
+      "text": "1/ Warp — Ayush Sharma, CEO. $60M Series B led by Battery, with angels including Tobi Lütke and Drew Houston (per the published recap post). The pitch: payroll and HR still run on systems older than the internet, and agents do the work — starting from the hardest part, multi-state payroll tax. Sharma's origin story, as told on stage: payroll broke at his last startup, and fixing it took 60 hours. Hiring: 21 roles across engineering and go-to-market."
     },
     {
       "type": "stat",
@@ -69,11 +69,11 @@
     },
     {
       "type": "paragraph",
-      "text": "2/ Soxton AI — Logan Brown, founder. $2.5M pre-seed led by Moxxie, with Caterina Fake. Founders skip legal until they can afford Big Law; Soxton's answer is to be the law firm — privilege, malpractice cover, a lawyer on every AI draft, since only attorneys can give legal advice. Per the preview post, contracts run about $100 flat-fee. Brown interned at a district attorney's office at 12; his first Big Law task was making signature lines the same length. Hiring: marketing — there is no marketing team yet."
+      "text": "2/ Soxton AI — Logan Brown, founder. $2.5M pre-seed led by Moxxie, with Caterina Fake (per the published recap post). Founders skip legal until they can afford Big Law; Soxton's answer is to be the law firm — privilege, malpractice cover, a lawyer on every AI draft, since only attorneys can give legal advice. Per the preview post, contracts run about $100 flat-fee. Brown interned at a district attorney's office at 12; his first Big Law task was making signature lines the same length. Hiring: marketing — there is no marketing team yet."
     },
     {
       "type": "paragraph",
-      "text": "3/ Solstice Health — Aris Saxena and Yiwen Li. $21M Series A led by Transformation Capital, with Twelve Below. One pharma email can take about three months and roughly 100 hands to ship. Solstice runs as an AI-native agency with its own regulatory reviewers, and reported review rounds down from 3.2 to 1.2 per asset, catching problems before the MLR committee does. Saxena and Li have been Penn hallmates since freshman year — they tried to leave healthcare and couldn't. Hiring: 15 roles across engineering, go-to-market, and ops."
+      "text": "3/ Solstice Health — Aris Saxena and Yiwen Li. $21M Series A led by Transformation Capital, with Twelve Below (per the published recap post). One pharma email can take about three months and roughly 100 hands to ship. Solstice runs as an AI-native agency with its own regulatory reviewers, and reported review rounds down from 3.2 to 1.2 per asset, catching problems before the MLR committee does. Saxena and Li have been Penn hallmates since freshman year — they tried to leave healthcare and couldn't. Hiring: 15 roles across engineering, go-to-market, and ops."
     },
     {
       "type": "stat",
@@ -83,11 +83,11 @@
     },
     {
       "type": "paragraph",
-      "text": "4/ Pascal — Rick Huang and Matthew Ko. $5M, per Huang on stage; the team of three includes execs from Decagon and Cognition. Consumer brands run retail on portals, PDFs, and spreadsheets; Pascal builds the data layer first, then agents that claw back invalid deductions. Huang and Ko have been MIT friends for over ten years; Ko officiated Huang's wedding. Hiring: a founding engineer and a founding commercial hire."
+      "text": "4/ Pascal — Rick Huang and Matthew Ko. $5M, as stated by Huang on stage and published in the recap post; the team of three includes execs from Decagon and Cognition (per the published recap post). Consumer brands run retail on portals, PDFs, and spreadsheets; Pascal builds the data layer first, then agents that claw back invalid deductions. Huang and Ko have been MIT friends for over ten years; Ko officiated Huang's wedding. Hiring: a founding engineer and a founding commercial hire."
     },
     {
       "type": "paragraph",
-      "text": "5/ Amperos Health — Michal Miernowski and Alvin Wu. $16M Series A led by Bessemer, with Uncork and Neo. The problem they attack is large and unglamorous: providers lose roughly $260 billion a year to insurance denials. Amperos's agents call insurers, work the portals, and file appeals; human billers take the edge cases. The origin story that got the room's attention: a clinic CFO with 100 doctors who needed 300 collections staff. Hiring: 20 roles across go-to-market, engineering, and billing."
+      "text": "5/ Amperos Health — Michal Miernowski and Alvin Wu. $16M Series A led by Bessemer, with Uncork and Neo (per the published recap post). The problem they attack is large and unglamorous: providers lose roughly $260 billion a year to insurance denials. Amperos's agents call insurers, work the portals, and file appeals; human billers take the edge cases. The origin story that got the room's attention: a clinic CFO with 100 doctors who needed 300 collections staff. Hiring: 20 roles across go-to-market, engineering, and billing."
     },
     {
       "type": "stat",
@@ -97,7 +97,7 @@
     },
     {
       "type": "paragraph",
-      "text": "6/ Holly — Cherie Chung and Brendan Hellweg, co-CEOs. $2.2M pre-seed led by J2 Ventures, with Roble and Gaingels. A city pay study takes consultants about a year and $300K or more; Holly is built only for government class and compensation — a living system, not a PDF. Hellweg scaled Baltimore's COVID health corps from 0 to 275. Hiring: 5 roles, including engineering and a chief of staff."
+      "text": "6/ Holly — Cherie Chung and Brendan Hellweg, co-CEOs. $2.2M pre-seed led by J2 Ventures, with Roble and Gaingels (per the published recap post). A city pay study takes consultants about a year and $300K or more; Holly is built only for government class and compensation — a living system, not a PDF. Hellweg scaled Baltimore's COVID health corps from 0 to 275. Hiring: 5 roles, including engineering and a chief of staff."
     },
     {
       "type": "heading",
@@ -123,7 +123,7 @@
           "url": "https://lnkd.in/p/eQTcjYYZ"
         },
         {
-          "label": "Alex Yedibalian, preview post \"Vertical AI Sells Finished Work, Not Software Seats,\" published 2026-09-21 (one week pre-event) [confirm publish date — post shows \"1 month\" relative timestamp]",
+          "label": "Alex Yedibalian, preview post \"Vertical AI Sells Finished Work, Not Software Seats,\" published 2026-09-21 (one week pre-event)",
           "url": "https://lnkd.in/p/eajbyEgD"
         },
         {
