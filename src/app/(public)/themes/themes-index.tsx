@@ -4,8 +4,25 @@ import Link from "next/link";
 import { useLens } from "@/components/lens-provider";
 import { getRoom } from "@/lib/rooms";
 import type { Theme } from "@/lib/themes";
+import type { LayerView } from "@/lib/topic-layers";
 
-export function ThemesIndex({ themes, sourceRooms }: { themes: Theme[]; sourceRooms: number }) {
+type Coverage = {
+  mappedTopics: number;
+  totalRoomTopics: number;
+  source: { repo: string; commit: string; asOf: string };
+};
+
+export function ThemesIndex({
+  themes,
+  sourceRooms,
+  layers,
+  coverage,
+}: {
+  themes: Theme[];
+  sourceRooms: number;
+  layers: LayerView[];
+  coverage: Coverage;
+}) {
   const { lens } = useLens();
   const ed = lens === "editorial";
   const postTotal = themes.reduce((n, t) => n + t.postUrls.length, 0);
@@ -42,6 +59,8 @@ export function ThemesIndex({ themes, sourceRooms }: { themes: Theme[]; sourceRo
           ))}
         </div>
       )}
+
+      <LayersSection layers={layers} coverage={coverage} ed={ed} />
     </div>
   );
 }
@@ -86,6 +105,75 @@ function ThemeCard({ theme, ed }: { theme: Theme; ed: boolean }) {
             >
               post {i + 1} ↗
             </a>
+          ))}
+        </div>
+      )}
+    </article>
+  );
+}
+
+// "By layer" (E-10 item 3 / YED-126): the same rooms, cut by the pipeline's S-03 ten-layer
+// reference architecture. Counts derive from the committed topic-layers.json at build time;
+// a topic counts toward its primary layer only, with secondary-only touches shown separately.
+function LayersSection({ layers, coverage, ed }: { layers: LayerView[]; coverage: Coverage; ed: boolean }) {
+  return (
+    <section className="mt-16 border-t border-border pt-12">
+      <p className="font-mono text-xs uppercase tracking-widest text-muted">
+        {ed ? "By layer" : "layers"}
+      </p>
+      <h2
+        className={
+          ed
+            ? "mt-4 font-display text-2xl leading-tight tracking-tight sm:text-3xl"
+            : "mt-4 font-mono text-2xl font-semibold tracking-tight"
+        }
+      >
+        {ed ? "Where the signal concentrates." : "Layer density, derived."}
+      </h2>
+      <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted">
+        {ed
+          ? "The same rooms, cut by a ten-layer reference architecture for applied AI: how much of the archive lands in each layer of the stack."
+          : "Room counts per S-03 layer (primary assignment). Secondary-only touches are shown separately, never merged into the primary count."}
+      </p>
+      <p className="mt-1 font-mono text-[11px] text-muted">
+        {coverage.mappedTopics} of {coverage.totalRoomTopics} room topics carry a layer · map from{" "}
+        {coverage.source.repo} @ {coverage.source.commit} (as of {coverage.source.asOf})
+      </p>
+
+      <div className="mt-8 grid gap-4 sm:grid-cols-2">
+        {layers.map((layer) => (
+          <LayerCard key={layer.id} layer={layer} ed={ed} />
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function LayerCard({ layer, ed }: { layer: LayerView; ed: boolean }) {
+  return (
+    <article className="rounded-lg border border-border p-5">
+      <div className="flex flex-wrap items-baseline justify-between gap-2">
+        <h3 className={ed ? "font-display text-lg tracking-tight" : "font-mono text-base font-semibold tracking-tight"}>
+          {layer.label}
+        </h3>
+        <p className="font-mono text-[11px] text-muted">
+          {layer.roomCount} rooms · {layer.topicCount} topics
+          {layer.secondaryRoomCount > 0 && ` · +${layer.secondaryRoomCount} via secondary`}
+        </p>
+      </div>
+
+      <p className="mt-2 text-sm leading-relaxed text-muted">{layer.description}</p>
+
+      {layer.rooms.length > 0 && (
+        <div className="mt-3 flex flex-wrap gap-2 text-sm">
+          {layer.rooms.map((room) => (
+            <Link
+              key={room.slug}
+              href={`/rooms/${room.slug}`}
+              className="rounded-full border border-border px-3 py-1 text-muted transition-colors hover:text-fg"
+            >
+              {room.name}
+            </Link>
           ))}
         </div>
       )}
