@@ -1,9 +1,17 @@
+import type { Metadata } from "next";
 import { Suspense } from "react";
 import mapJson from "@/data/system-map.json";
 import { SystemMapSchema } from "@/lib/system-map/schema";
 import { getIssues } from "@/lib/linear/issues";
 import { ArchitectureIntro } from "./intro";
 import { MapClient } from "./map-client";
+
+// Copy is drawn from the page's own copy (E-01 item 4: no new claims).
+export const metadata: Metadata = {
+  title: "The System — Empire State",
+  description:
+    "A map you can ask questions of — the pipeline as it actually is, every part clickable.",
+};
 
 // The System Map (YED-232, docs/system-map.prd.md). Facts are generated from the pipeline repo
 // (pnpm gen:system-map); reasoning is the curated overlay; the build path's state is read from
