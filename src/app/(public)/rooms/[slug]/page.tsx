@@ -56,7 +56,8 @@ function EventJsonLd({ room }: { room: Room }) {
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(eventJsonLd(room)) }}
+      // Escape "<" so a room field containing "</script>" can never close the tag early.
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(eventJsonLd(room)).replace(/</g, "\\u003c") }}
     />
   );
 }
