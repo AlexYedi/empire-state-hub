@@ -7,7 +7,6 @@ const NAV = [
   { href: "/ops/content", label: "Content" },
   { href: "/ops/events", label: "Events" },
   { href: "/ops/entities", label: "Entities" },
-  { href: "/ops/content-performance", label: "Content Perf" },
 ];
 
 export default function OpsLayout({ children }: { children: React.ReactNode }) {
