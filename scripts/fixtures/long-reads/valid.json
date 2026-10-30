@@ -1,0 +1,13 @@
+{
+  "slug": "2026-09-28-shortlist-september-founder-showcase",
+  "updated": "2026-01-01",
+  "blocks": [
+    { "type": "heading", "text": "A valid fixture" },
+    { "type": "paragraph", "text": "This block list exercises every v1 block type and passes." },
+    { "type": "quote", "text": "A quote always carries attribution.", "attribution": "Fixture author" },
+    { "type": "image", "src": "/long-reads/fixture.png", "alt": "A fixture image with alt text", "caption": "Fixture caption" },
+    { "type": "stat", "value": "$1", "label": "fixture value", "source": "fixture source" },
+    { "type": "callout", "title": "Fixture", "text": "A callout with a title." },
+    { "type": "sources", "items": [{ "label": "Fixture source", "url": "https://example.com/fixture" }] }
+  ]
+}

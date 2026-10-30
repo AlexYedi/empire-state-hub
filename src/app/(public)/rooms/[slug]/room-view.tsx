@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useLens } from "@/components/lens-provider";
 import { POST_KIND_LABEL, roomCarousels, type Room } from "@/lib/rooms";
+import { hasLongRead } from "@/lib/long-reads";
 import { fmtRoomDate } from "../rooms-index";
 
 const URL_SPLIT = /(https?:\/\/[^\s)]+)/g;
@@ -66,6 +67,15 @@ export function RoomView({ room }: { room: Room }) {
         {room.name}
       </h1>
       {room.what && <p className="mt-4 text-lg leading-relaxed text-muted">{room.what}</p>}
+
+      {hasLongRead(room.slug) && (
+        <Link
+          href={`/rooms/${room.slug}/read`}
+          className="mt-4 inline-block font-medium text-accent underline decoration-accent/40 underline-offset-4 hover:decoration-accent"
+        >
+          Read the long read →
+        </Link>
+      )}
 
       {room.speakers.length > 0 && (
         <Section title={ed ? "On stage" : `speakers (${room.speakers.length})`}>
