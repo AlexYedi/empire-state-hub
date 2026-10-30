@@ -9,7 +9,7 @@ export function HeadingBlock({ text }: { text: string }) {
 }
 
 export function ParagraphBlock({ text }: { text: string }) {
-  return <p className="mt-6 leading-relaxed text-fg/90">{text}</p>;
+  return <p className="mt-6 text-[17px] leading-[1.75] text-fg/90">{text}</p>;
 }
 
 // Pull-quotes get an acid-green left rule... in the technical lens that is the
@@ -17,7 +17,7 @@ export function ParagraphBlock({ text }: { text: string }) {
 export function QuoteBlock({ text, attribution }: { text: string; attribution: string }) {
   return (
     <blockquote className="mt-8 border-l-2 border-accent pl-5">
-      <p className="font-display text-xl leading-relaxed">“{text}”</p>
+      <p className="font-display text-xl leading-relaxed sm:text-2xl sm:leading-relaxed">“{text}”</p>
       <footer className="mt-2 text-xs uppercase tracking-widest text-muted">{attribution}</footer>
     </blockquote>
   );
