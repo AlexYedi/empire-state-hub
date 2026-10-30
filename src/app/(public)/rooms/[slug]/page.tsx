@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getRoom, getRooms, type Room } from "@/lib/rooms";
+import { xShareUrl } from "@/lib/share";
+import { pageUrl } from "@/lib/site-url";
 import { RoomView } from "./room-view";
 
 // Every room is known at build time (the committed rooms.json); anything else is a 404.
@@ -14,9 +16,26 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const room = getRoom(slug);
   if (!room) return {};
+  const description = room.what ?? `Speakers, takeaways and posts from ${room.name}.`;
   return {
     title: `${room.name} — Rooms · Empire State`,
-    description: room.what ?? `Speakers, takeaways and posts from ${room.name}.`,
+    description,
+    // E-06 item 2: X card on rooms, reusing the site-wide Open Graph image
+    // (src/app/opengraph-image.tsx route). Setting images explicitly: defining
+    // openGraph/twitter in generateMetadata overrides the file convention's
+    // inherited image on these routes (verified against the built HTML).
+    openGraph: {
+      title: room.name,
+      description,
+      url: pageUrl(`/rooms/${room.slug}`),
+      images: [pageUrl("/opengraph-image")],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: room.name,
+      description,
+      images: [pageUrl("/opengraph-image")],
+    },
   };
 }
 
@@ -27,7 +46,11 @@ export default async function RoomPage({ params }: { params: Promise<{ slug: str
   return (
     <>
       <EventJsonLd room={room} />
-      <RoomView room={room} />
+      <RoomView
+        room={room}
+        // Built server-side: the origin env vars are not inlined into client bundles.
+        shareUrl={xShareUrl({ title: room.name, url: pageUrl(`/rooms/${room.slug}`) })}
+      />
     </>
   );
 }
