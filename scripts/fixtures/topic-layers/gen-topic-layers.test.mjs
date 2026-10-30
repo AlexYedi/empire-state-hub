@@ -16,12 +16,12 @@ import { fileURLToPath } from "node:url";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
 
-function fixturePipeline(layerMap, { trackRefs = true } = {}) {
+function fixturePipeline(layerMap, { trackRefs = true, aliases } = {}) {
   const pipe = mkdtempSync(join(tmpdir(), "topic-layers-pipeline-"));
   mkdirSync(join(pipe, ".claude", "references"), { recursive: true });
   writeFileSync(
     join(pipe, ".claude", "references", "topics-snapshot.json"),
-    JSON.stringify({ as_of: "2026-10-30", source: "public.topic (id, name only)", topics: [{ id: "11111111-1111-1111-1111-111111111111", name: "RAG (Retrieval-Augmented Generation)" }] }),
+    JSON.stringify({ as_of: "2026-10-30", source: "public.topic (id, name only)", topics: [{ id: "11111111-1111-1111-1111-111111111111", name: "RAG (Retrieval-Augmented Generation)" }], ...(aliases ? { aliases } : {}) }),
   );
   writeFileSync(join(pipe, ".claude", "references", "topic-layers.json"), JSON.stringify(layerMap));
   writeFileSync(
@@ -84,6 +84,20 @@ test("generator refuses a layer id outside the reference architecture", () => {
     const output = (run.stdout ?? "") + (run.stderr ?? "");
     assert.notEqual(run.status, 0, `expected refusal, got success:\n${output}`);
     assert.match(output, /unknown layer/);
+  } finally {
+    rmSync(pipe, { recursive: true, force: true });
+  }
+});
+
+test("generator refuses an alias whose merged_into is not a live topic", () => {
+  const map = { "11111111-1111-1111-1111-111111111111": { layer: "data-retrieval", secondary: null, duplicate_of: null } };
+  const aliases = [{ id: "22222222-2222-2222-2222-222222222222", name: "RAG with Vector Databases", merged_into: "33333333-3333-3333-3333-333333333333" }];
+  const pipe = fixturePipeline(map, { aliases });
+  try {
+    const run = runGenerator(pipe);
+    const output = (run.stdout ?? "") + (run.stderr ?? "");
+    assert.notEqual(run.status, 0, `expected refusal, got success:\n${output}`);
+    assert.match(output, /not a live snapshot topic/);
   } finally {
     rmSync(pipe, { recursive: true, force: true });
   }
