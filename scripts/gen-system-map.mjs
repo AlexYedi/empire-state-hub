@@ -214,13 +214,39 @@ function gitTracked() {
   }
 }
 
+// Privacy layer 2 (YED-236): `git ls-files` is the allowlist, but a path can be tracked AND match
+// .gitignore (a force-added `me-model.md`) — meaning it is already public in the pipeline repo. That
+// is not a filtering case, it is an incident: fail closed and name the path so a human sees it.
+function failOnIgnoredPaths(trackedIds) {
+  let out;
+  try {
+    out = execFileSync("git", ["-C", PIPELINE_DIR, "check-ignore", "--no-index", "--stdin"], {
+      input: trackedIds.join("\n"),
+      encoding: "utf8",
+      maxBuffer: 64 * 1024 * 1024,
+    });
+  } catch (e) {
+    if (e.status === 1) return; // check-ignore exits 1 when nothing matches — the good case
+    console.error(`✗ privacy guard: git check-ignore failed in ${PIPELINE_DIR} — refusing to publish (YED-236)`);
+    process.exit(1);
+  }
+  const hits = out.trim().split("\n").filter(Boolean);
+  if (hits.length) {
+    console.error(
+      `✗ privacy guard: ${hits.length} tracked file(s) match the pipeline's .gitignore — a private file is committed and public in the pipeline repo. Refusing to publish (YED-236); remove or untrack the file(s), then re-run:\n  ${hits.join("\n  ")}`,
+    );
+    process.exit(1);
+  }
+}
+
 // ---------- live pipeline inventory (replaces the retired ADR-8 graph cache) ----------
 // ADR-8 Increment 1 was retired (see its status line; build_graph.py is archived at
 // docs/archive/scripts/), so the map no longer reads .claude/.state/system-graph. The inventory is
 // rebuilt from live pipeline state on every run: tracked files under ADR-8's artifact roots, with
 // the subtype derived from location (ADR-8's schema table). Because the only input is `git ls-files`
-// — the same fail-closed allowlist the YED-236 privacy guard uses — a gitignored or untracked path
-// can never reach the public map, by construction.
+// (the same fail-closed allowlist the YED-236 privacy guard uses, backed by a fail-closed
+// check-ignore audit of the tracked set) — a gitignored or untracked path can never reach the
+// public map, by construction or by refusal.
 const ARTIFACT_EXCLUDED = [/^\.claude\/(evals\/logs|artifacts|\.state|worktrees)\//];
 function isArtifactFile(id) {
   return (
@@ -278,6 +304,7 @@ function main() {
   // Live inventory instead of the retired ADR-8 graph cache: nodes are the pipeline's tracked
   // artifacts (fail-closed via `git ls-files`), edges are the path references between them.
   const tracked = gitTracked();
+  failOnIgnoredPaths([...tracked]);
   const nodes = [...tracked].filter(isArtifactFile).sort().map((id) => ({ id, subtype: subtypeOf(id) }));
   if (!nodes.length) {
     console.error(`✗ no tracked artifacts found under ${PIPELINE_DIR} — is PIPELINE_DIR pointing at the pipeline repo?`);

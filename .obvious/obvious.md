@@ -56,4 +56,4 @@ See `.obvious/codebase-map.md`.
 ## Work queue and rules
 
 - **Rules:** `AGENTS.md`, plus the `hub-guardrails` skill (its invariants load on every turn).
-- **Specs:** `docs/specs/empire/` (E-01, E-02, E-03, E-04, E-06, E-10). The cross-repo index lives in the pipeline repo at `docs/specs/README.md`.
+- **Specs:** `docs/specs/empire/` (E-01, E-02, E-03, E-04, E-06, E-10). The cross-repo index lives in the pipeline repo: <https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/blob/main/docs/specs/README.md>.

@@ -35,9 +35,6 @@ const EXT = String.raw`(?:md|py|sh|sql|mjs|ts|tsx|js|json|ya?ml|txt|example)`;
 // copy?) so they are out of scope — the check errs toward under-flagging.
 const PATH_RE = new RegExp(String.raw`(?:[A-Za-z0-9_.-]+\/)+[A-Za-z0-9_.-]+\.${EXT}`, "g");
 const IGNORE = [/^node_modules\//, /^\.git\//, /^_pipeline\//];
-// Guidance may name a file that lives in the companion pipeline repo (the cross-repo specs index).
-// Those resolve against the same PIPELINE_DIR convention the map scripts use — valid, just not here.
-const SIBLING = process.env.PIPELINE_DIR || join(REPO, "..", "Empire_State_Events_Pipeline_Take_3");
 
 // One git pass over history: { path → last commit date (YYYY-MM-DD) }.
 function lastCommitDates() {
@@ -78,7 +75,6 @@ for (const doc of DOCS) {
       if (/[*<>…{}]/.test(ref)) continue; // glob / placeholder / ellipsis / brace-contraction — skip
       checked++;
       if (!existsSync(join(REPO, ref))) {
-        if (existsSync(join(SIBLING, ref))) continue; // a deliberate cross-repo reference — valid
         problems.push(`${docRel}: references ${ref} — file does not exist (stale guidance)`);
         continue;
       }

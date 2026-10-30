@@ -1295,9 +1295,10 @@
         "hub:/rooms",
         "hub:/rooms/[slug]",
         "hub:/rooms/[slug]/read",
+        "hub:/themes",
         "hub:/work"
       ],
-      "fileCount": 15,
+      "fileCount": 16,
       "reviewed_at": "2026-09-28",
       "overlayStale": false
     },
