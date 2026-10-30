@@ -28,7 +28,6 @@ for (const c of map.components) {
 for (const c of curated.components) if (!ids.has(c.id)) problems.push(`${c.id}: in the overlay but missing from the generated map (regenerate)`);
 for (const e of map.edges) if (!ids.has(e.source) || !ids.has(e.target)) problems.push(`edge ${e.id}: unknown endpoint`);
 for (const it of map.buildPath.items) for (const x of it.extends) if (!ids.has(x)) problems.push(`${it.issue}: extends unknown component ${x}`);
-if (!map.buildPath.anchors.length) problems.push("no anchors parsed from roadmap.md § 6");
 // Phase is computed from roadmap.md by the generator; a phase written into prose is duplicated,
 // unreconciled state (the YED-226 defect the judge caught on 2026-09-27) — refuse it.
 for (const it of curated.buildPath.items) if (/\bP[0-3]\b|\(P[0-3]\)|Phase [0-3]/.test(it.why)) problems.push(`${it.issue}: phase tag written in prose ("${it.why.match(/\(?P[0-3]\)?|Phase [0-3]/)[0]}") — the generator derives phase from roadmap.md; remove it`);
@@ -37,6 +36,13 @@ for (const it of curated.buildPath.items) if (/\bP[0-3]\b|\(P[0-3]\)|Phase [0-3]
 // pipeline checkout is present (every local generate); skipped with a note where it isn't (Vercel build).
 let privacyNote = "";
 const PIPELINE_DIR = process.env.PIPELINE_DIR || join(ROOT, "..", "Empire_State_Events_Pipeline_Take_3");
+
+// Anchors and phases are parsed from roadmap.md by the generator. The roadmap moved to Notion on
+// 2026-09-28 — the repo copy is a deliberate stub — so empty phases/anchors are correct until the
+// roadmap returns to the repo. The check only bites when the repo copy carries Phase content again.
+const roadmapPath = join(PIPELINE_DIR, ".claude", "references", "roadmap.md");
+const roadmapHasPhases = existsSync(roadmapPath) && /^### Phase \d+/m.test(readFileSync(roadmapPath, "utf8"));
+if (!map.buildPath.anchors.length && roadmapHasPhases) problems.push("no anchors parsed from roadmap.md § 6");
 if (existsSync(join(PIPELINE_DIR, ".git"))) {
   const files = JSON.parse(readFileSync(`${ROOT}src/data/system-map.files.json`, "utf8"));
   const paths = [...new Set([...files.nodes.map((n) => n.id), ...files.edges.flatMap((e) => [e.src, e.dst])])]
