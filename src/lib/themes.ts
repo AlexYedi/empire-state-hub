@@ -3,8 +3,8 @@
 // beyond those fields. Parsed and cross-checked at import, so a malformed export — or drift
 // from rooms.json — fails the build instead of rendering something wrong.
 //
-// Follow-up (not in scope until S-03 merges): src/data/topic-layers.json adds the "By layer"
-// view (E-10 item 3).
+// The "By layer" companion view (E-10 item 3) lives in src/lib/topic-layers.ts over
+// src/data/topic-layers.json — the S-03 reference-architecture cut of the same rooms.
 import { z } from "zod";
 import THEMES_JSON from "@/data/themes.json";
 import { getRoom, getRooms } from "@/lib/rooms";
