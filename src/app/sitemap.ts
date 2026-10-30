@@ -13,7 +13,7 @@ function siteOrigin(): string {
 
 // Static public routes, enumerated by hand — /ops/* is deliberately absent (E-01
 // item 5); nothing under src/app/ops may ever be crawlable.
-const STATIC_ROUTES = ["", "/rooms", "/architecture", "/journal", "/about", "/changelog", "/build-arcs", "/work"];
+const STATIC_ROUTES = ["", "/rooms", "/themes", "/architecture", "/journal", "/about", "/changelog", "/build-arcs", "/work"];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const origin = siteOrigin();
