@@ -51,3 +51,8 @@ Per `AGENTS.md`: this is NOT the Next.js in your training data — read the rele
 ## Codebase map
 
 See `.obvious/codebase-map.md`.
+
+## Work queue and rules
+
+- **Rules:** `AGENTS.md`, plus the `hub-guardrails` skill (its invariants load on every turn).
+- **Specs:** `docs/specs/empire/` (E-01, E-02, E-03, E-04, E-06, E-10). The cross-repo index lives in the pipeline repo at `docs/specs/README.md`.
