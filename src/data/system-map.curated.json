@@ -239,7 +239,6 @@
         ".claude/references/audience-north-star.md",
         ".claude/skills/content-patterns/**",
         ".claude/skills/update-voice-and-style.md",
-        ".claude/skills/update-anti-patterns.md",
         "docs/archive/notes/eric-coldoutboundskills-harvest-2026-09-24.md"
       ]
     },
@@ -409,8 +408,7 @@
         "docs/archive/notes/substrate-vs-reconciliation-sequencing-2026-09-18.md",
         "docs/archive/notes/yed-160-scope-2026-09-17.md",
         "docs/archive/notes/yed-217-conditioner-aiming-2026-09-25.md",
-        "docs/archive/notes/yed-47-premortem-2026-09-27.md",
-        ".claude/skills/doc-knowledge-base/**"
+        "docs/archive/notes/yed-47-premortem-2026-09-27.md"
       ]
     },
     {
@@ -775,7 +773,6 @@
         "docs/archive/notes/open-items-inventory-2026-09-13.md",
         "docs/archive/notes/backlog-triage-2026-09-18.md",
         ".claude/references/second-fix-stop-rule.md",
-        ".claude/hooks/second-fix-nudge.sh",
         "docs/history.md"
       ],
       "toolsExclude": [

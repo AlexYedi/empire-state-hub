@@ -12,4 +12,4 @@ Read `CLAUDE.md`, and in the companion pipeline repo, `CLAUDE.md` §4. Both repo
 4. No new analytics or tracking scripts, and no new env vars, unless a spec names them.
 5. Public prose must pass a source check before merge (pipeline `CLAUDE.md` §6). Every firm or person claim and every figure must be cited to a published source or attributed as said. No `[confirm]`/`TODO` markers in public data. Never restate an attributed figure as fact.
 6. Verify with `pnpm check && pnpm lint && pnpm build` before the PR.
-7. Specs live in `docs/specs/empire/`. The cross-repo index is in the pipeline repo, `docs/specs/README.md`. Put the spec ID (E-n) in the PR title.
+7. Specs live in `docs/specs/empire/`. The cross-repo index is in the pipeline repo: <https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/blob/main/docs/specs/README.md>. Put the spec ID (E-n) in the PR title.

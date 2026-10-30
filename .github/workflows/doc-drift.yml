@@ -1,0 +1,38 @@
+# Documentation-rot trigger (Shared hygiene bundle): flags agent guidance (AGENTS.md /
+# .obvious/obvious.md) that references files the repo no longer has — hard-fails on stale
+# references, warns on code that changed after the doc was last touched. Runs for both this repo's
+# guidance and the sibling pipeline repo's (the doc-drift script is repo-agnostic via --dir).
+# Full history is needed for the drift dates. Node builtins only; no install step needed.
+name: doc-drift
+on:
+  pull_request:
+  push:
+    branches: [main]
+jobs:
+  hub:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: check-doc-drift (hub guidance)
+        run: node scripts/check-doc-drift.mjs
+  pipeline:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/checkout@v4
+        with:
+          repository: AlexYedi/Empire_State_Events_Pipeline_Take_3
+          path: _pipeline
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: check-doc-drift (pipeline guidance)
+        run: node scripts/check-doc-drift.mjs --dir=_pipeline

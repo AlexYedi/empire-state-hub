@@ -55,9 +55,9 @@ export const SystemMapSchema = z.object({
   generated_at: z.string(),
   source: z.object({
     pipeline_sha: z.string(),
-    graph_built_at: z.string().nullable(),
-    graph_nodes: z.number(),
-    graph_edges: z.number(),
+    generated_from: z.string(),
+    artifacts: z.number(),
+    references: z.number(),
     unmapped_files: z.number(),
   }),
   counts: z.object({ skills: z.number(), agents: z.number(), commands: z.number(), components: z.number() }),

@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 // gen-system-map.mjs — build src/data/system-map.json (+ system-map.files.json) for the public
-// /architecture map. Facts come from the pipeline repo (frontmatter, the ADR-8 system graph, git
-// dates, roadmap.md); judgement comes from src/data/system-map.curated.json and is preserved as-is
-// (merge-don't-clobber). PRD: docs/system-map.prd.md (YED-232).
+// /architecture map. Facts come from the pipeline repo scanned live (tracked artifacts, file
+// headers, path references, git dates, roadmap.md); judgement comes from
+// src/data/system-map.curated.json and is preserved as-is (merge-don't-clobber).
+// PRD: docs/system-map.prd.md (YED-232).
 //
 // Run: pnpm gen:system-map            (PIPELINE_DIR=/path/to/pipeline to override the sibling default)
 // Prints: components + files resolved · patterns matching nothing · unmapped files · overlay entries
@@ -14,8 +15,6 @@ import { fileURLToPath } from "node:url";
 
 const HUB = join(dirname(fileURLToPath(import.meta.url)), "..");
 const PIPELINE_DIR = process.env.PIPELINE_DIR || join(HUB, "..", "Empire_State_Events_Pipeline_Take_3");
-// GRAPH_DIR lets the ADR-8 graph be built in a scratch clone (never write into the pipeline checkout).
-const GRAPH_DIR = process.env.GRAPH_DIR || join(PIPELINE_DIR, ".claude", ".state", "system-graph");
 const CURATED = join(HUB, "src", "data", "system-map.curated.json");
 const OUT = join(HUB, "src", "data", "system-map.json");
 const OUT_FILES = join(HUB, "src", "data", "system-map.files.json");
@@ -23,12 +22,6 @@ const REPO_URL = "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_
 const LINEAR_URL = "https://linear.app/yedibalian/issue/";
 
 // ---------- small helpers ----------
-const readJsonl = (p) =>
-  readFileSync(p, "utf8")
-    .split("\n")
-    .filter(Boolean)
-    .map((l) => JSON.parse(l));
-
 function frontmatter(text) {
   const m = text.match(/^---\n([\s\S]*?)\n---/);
   return m ? m[1] : "";
@@ -209,21 +202,6 @@ function matcher(pattern) {
   return (id) => id === pattern;
 }
 
-// YED-236: which of these repo paths are gitignored in the pipeline repo? Exits the generator on any git
-// failure — a privacy check that can't run must not publish (fail closed).
-function gitIgnored(paths) {
-  const repoPaths = [...new Set(paths.filter((p) => p && !p.startsWith("~") && !p.startsWith("/")))];
-  if (!repoPaths.length) return new Set();
-  try {
-    const out = execFileSync("git", ["-C", PIPELINE_DIR, "check-ignore", "--stdin"], { input: repoPaths.join("\n"), encoding: "utf8" });
-    return new Set(out.split("\n").map((s) => s.trim()).filter(Boolean));
-  } catch (e) {
-    if (e.status === 1) return new Set(); // git check-ignore exits 1 when nothing matched
-    console.error(`✗ privacy guard: git check-ignore failed in ${PIPELINE_DIR} — refusing to publish (YED-236)`);
-    process.exit(1);
-  }
-}
-
 // YED-236 (second layer): the public map indexes TRACKED files only. `git ls-files` is the allowlist —
 // stricter than check-ignore, it also drops untracked-but-unignored files on disk. Fails closed.
 function gitTracked() {
@@ -236,29 +214,104 @@ function gitTracked() {
   }
 }
 
-function main() {
-  if (!existsSync(join(GRAPH_DIR, "nodes.jsonl"))) {
+// Privacy layer 2 (YED-236): `git ls-files` is the allowlist, but a path can be tracked AND match
+// .gitignore (a force-added `me-model.md`) — meaning it is already public in the pipeline repo. That
+// is not a filtering case, it is an incident: fail closed and name the path so a human sees it.
+function failOnIgnoredPaths(trackedIds) {
+  let out;
+  try {
+    out = execFileSync("git", ["-C", PIPELINE_DIR, "check-ignore", "--no-index", "--stdin"], {
+      input: trackedIds.join("\n"),
+      encoding: "utf8",
+      maxBuffer: 64 * 1024 * 1024,
+    });
+  } catch (e) {
+    if (e.status === 1) return; // check-ignore exits 1 when nothing matches — the good case
+    console.error(`✗ privacy guard: git check-ignore failed in ${PIPELINE_DIR} — refusing to publish (YED-236)`);
+    process.exit(1);
+  }
+  const hits = out.trim().split("\n").filter(Boolean);
+  if (hits.length) {
     console.error(
-      `✗ ADR-8 graph not found at ${GRAPH_DIR}\n  Run \`python3 .claude/scripts/build_graph.py\` in the pipeline repo (or set PIPELINE_DIR) and retry.`,
+      `✗ privacy guard: ${hits.length} tracked file(s) match the pipeline's .gitignore — a private file is committed and public in the pipeline repo. Refusing to publish (YED-236); remove or untrack the file(s), then re-run:\n  ${hits.join("\n  ")}`,
     );
     process.exit(1);
   }
+}
+
+// ---------- live pipeline inventory (replaces the retired ADR-8 graph cache) ----------
+// ADR-8 Increment 1 was retired (see its status line; build_graph.py is archived at
+// docs/archive/scripts/), so the map no longer reads .claude/.state/system-graph. The inventory is
+// rebuilt from live pipeline state on every run: tracked files under ADR-8's artifact roots, with
+// the subtype derived from location (ADR-8's schema table). Because the only input is `git ls-files`
+// (the same fail-closed allowlist the YED-236 privacy guard uses, backed by a fail-closed
+// check-ignore audit of the tracked set) — a gitignored or untracked path can never reach the
+// public map, by construction or by refusal.
+const ARTIFACT_EXCLUDED = [/^\.claude\/(evals\/logs|artifacts|\.state|worktrees)\//];
+function isArtifactFile(id) {
+  return (
+    id === "CLAUDE.md" ||
+    (/^\.claude\/.+\.(md|py|sh|sql)$/.test(id) && !ARTIFACT_EXCLUDED.some((r) => r.test(id))) ||
+    /^docs\/.+\.(md|py)$/.test(id)
+  );
+}
+function subtypeOf(id) {
+  if (id === "CLAUDE.md" || id === ".claude/WORKFLOWS.md") return "policy";
+  if (/^\.claude\/skills\/[^/]+\/SKILL\.md$/.test(id)) return "skill";
+  if (id.startsWith(".claude/skills/")) return "skill-ref";
+  if (id.startsWith(".claude/agents/")) return "agent";
+  if (id.startsWith(".claude/commands/")) return "command";
+  if (id.startsWith(".claude/hooks/")) return "hook";
+  if (id.startsWith(".claude/scripts/")) return "script";
+  if (id.startsWith(".claude/references/")) return "reference";
+  if (id.startsWith(".claude/evals/rubrics/")) return "rubric";
+  if (id.startsWith(".claude/evals/prompts/")) return "prompt";
+  if (id.startsWith("docs/adr/")) return "adr";
+  if (/^docs\/.+\.py$/.test(id)) return "script"; // archived pipeline scripts (docs/archive/scripts/)
+  return "doc";
+}
+
+// Conservative path-reference extraction — check-refs.sh's skip rules (no URLs, globs, placeholders
+// or ellipses; err toward under-flagging). One edge per (src, dst), keeping the first line that
+// names it. Only references between tracked artifacts become edges.
+function referenceEdges(nodeIds) {
+  const PATH_RE = /(?:[A-Za-z0-9_.-]+\/)+[A-Za-z0-9_.-]+\.(?:md|py|sh|sql)/g;
+  const edges = [];
+  const seen = new Set();
+  for (const src of nodeIds) {
+    const lines = readFileSync(join(PIPELINE_DIR, src), "utf8").split("\n");
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i];
+      if (/https?:\/\//.test(line)) continue; // a URL's path is not a repo reference (conservative)
+      for (const m of line.matchAll(PATH_RE)) {
+        const dst = m[0];
+        if (dst === src || !nodeIds.has(dst)) continue;
+        if (/[*<>…]/.test(dst)) continue; // glob / placeholder / ellipsis — skip
+        const key = `${src}--${dst}`;
+        if (seen.has(key)) continue;
+        seen.add(key);
+        edges.push({ src, dst, line: i + 1 });
+      }
+    }
+  }
+  return edges;
+}
+
+function main() {
   const curated = JSON.parse(readFileSync(CURATED, "utf8"));
   let prev = { components: [], buildPath: { items: [] } };
   try { prev = JSON.parse(readFileSync(OUT, "utf8")); } catch { /* first run */ }
-  const rawNodes = readJsonl(join(GRAPH_DIR, "nodes.jsonl")).filter((n) => n.exists !== false);
-  const rawEdges = readJsonl(join(GRAPH_DIR, "edges.jsonl")).filter((e) => e.exists !== false);
-  // YED-236 privacy guard (fail-closed): nothing gitignored in the pipeline repo may reach the public map,
-  // even if the graph was built from a working checkout that holds private, untracked files.
-  const ignored = gitIgnored([...rawNodes.map((n) => n.id), ...rawEdges.flatMap((e) => [e.src, e.dst])]);
+  // Live inventory instead of the retired ADR-8 graph cache: nodes are the pipeline's tracked
+  // artifacts (fail-closed via `git ls-files`), edges are the path references between them.
   const tracked = gitTracked();
-  const ok = (p) => !ignored.has(p) && tracked.has(p);
-  const nodes = rawNodes.filter((n) => ok(n.id));
-  const edges = rawEdges.filter((e) => ok(e.src) && ok(e.dst));
-  if (ignored.size) console.log(`  ! privacy guard: dropped ${ignored.size} gitignored path(s) from the public map`);
-  const untracked = rawNodes.filter((n) => !ignored.has(n.id) && !tracked.has(n.id)).length;
-  if (untracked) console.log(`  ! privacy guard: dropped ${untracked} untracked node(s) from the public map`);
-  const meta = existsSync(join(GRAPH_DIR, "meta.json")) ? JSON.parse(readFileSync(join(GRAPH_DIR, "meta.json"), "utf8")) : {};
+  failOnIgnoredPaths([...tracked]);
+  const nodes = [...tracked].filter(isArtifactFile).sort().map((id) => ({ id, subtype: subtypeOf(id) }));
+  if (!nodes.length) {
+    console.error(`✗ no tracked artifacts found under ${PIPELINE_DIR} — is PIPELINE_DIR pointing at the pipeline repo?`);
+    process.exit(1);
+  }
+  const nodeSet = new Set(nodes.map((n) => n.id));
+  const edges = referenceEdges(nodeSet);
   const nodeIds = nodes.map((n) => n.id);
   const { first, last, sha } = gitDates();
   const rm = roadmap();
@@ -340,7 +393,7 @@ function main() {
   // file layer: every existing graph node, who owns it, what it says it is
   const unmapped = nodeIds.filter((id) => !fileOwner.has(id));
   const filesOut = {
-    generated_note: "GENERATED by scripts/gen-system-map.mjs from the pipeline's ADR-8 system graph. Do not hand-edit.",
+    generated_note: "GENERATED by scripts/gen-system-map.mjs from live pipeline state (git ls-files + path references). Do not hand-edit.",
     nodes: nodes.map((n) => ({
       id: n.id,
       subtype: n.subtype,
@@ -358,7 +411,7 @@ function main() {
       "GENERATED by scripts/gen-system-map.mjs. Facts (descriptions, dates, tools, files) come from the pipeline repo; " +
       "judgement (why, status reasons, edges, build path) is preserved from system-map.curated.json — edit THAT file, then run `pnpm gen:system-map`.",
     generated_at: process.env.GEN_DATE || new Date().toISOString().slice(0, 10),
-    source: { pipeline_sha: sha, graph_built_at: meta.built_at ?? null, graph_nodes: nodes.length, graph_edges: edges.length, unmapped_files: unmapped.length },
+    source: { pipeline_sha: sha, generated_from: "live pipeline scan (retired ADR-8 cache no longer used)", artifacts: nodes.length, references: edges.length, unmapped_files: unmapped.length },
     // Pipeline inventory by file type, counted from the same graph — the home page reads these, so the site
     // has one source of truth for "how big is the system" (replaces the retired toolbox.json / architecture.ts).
     counts: {
@@ -382,7 +435,7 @@ function main() {
   const added = [...components.filter((c) => !prevIds.has(c.id)).map((c) => c.id), ...items.filter((i) => !prevPlanned.has(i.issue)).map((i) => `plan:${i.issue}`)];
   const removed = [...prev.components.filter((c) => !ids.has(c.id)).map((c) => c.id), ...(prev.buildPath?.items ?? []).filter((i) => !items.some((x) => x.issue === i.issue)).map((i) => `plan:${i.issue}`)];
   console.log(`✓ wrote src/data/system-map.json (${components.length} components · ${edgesOut.length} edges · ${items.length} planned) + system-map.files.json (${nodes.length} files · ${edges.length} references)`);
-  console.log(`  pipeline ${sha} · graph built ${meta.built_at ?? "?"} · phases ${rm.phases.map((p) => p.id).join(",")} · anchors ${rm.anchors.map((a) => `${a.id}=${a.date}`).join(" ")}`);
+  console.log(`  pipeline ${sha} · inventory: live scan · phases ${rm.phases.map((p) => p.id).join(",")} · anchors ${rm.anchors.map((a) => `${a.id}=${a.date}`).join(" ")}`);
   const byZone = {};
   for (const c of components) byZone[c.zone] = (byZone[c.zone] ?? 0) + 1;
   console.log(`  per zone: ${JSON.stringify(byZone)}`);

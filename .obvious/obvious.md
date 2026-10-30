@@ -17,9 +17,10 @@ Public portfolio + operator cockpit for an AI-native GTM pipeline. Next.js (App 
 | Dev server | `pnpm dev` | http://localhost:3000, parses as "Ready" in output |
 | Lint | `pnpm lint` | eslint 9; 1 pre-existing warning in `scripts/gen-system-map.mjs` is normal |
 | Typecheck | `npx tsc --noEmit` | no script defined; clean as of onboarding |
-| Public-safety checks | `pnpm check` | runs `verify-public-safe.mjs` + `verify-system-map.mjs` + `node --test` (17 tests) |
+| Public-safety checks | `pnpm check` | runs `verify-public-safe.mjs` + `verify-system-map.mjs` + `check-doc-drift.mjs` + `node --test` (22 tests) |
+| Doc-drift check only | `pnpm check:docs` | flags guidance (AGENTS.md / .obvious/obvious.md) that references files which no longer exist; warns when described code changed after the doc |
 | Unit tests | `pnpm test:rooms` | node:test suite for `scripts/gen-rooms.mjs` |
-| Regenerate system map | `pnpm gen:system-map` | rebuilds `src/data/system-map{,.files}.json` from the pipeline repo; needs `PIPELINE_DIR` |
+| Regenerate system map | `pnpm gen:system-map` | rebuilds `src/data/system-map{,.files}.json` from live pipeline state (tracked artifacts + path references; the retired ADR-8 graph cache is no longer read); needs `PIPELINE_DIR` |
 
 ## Environment variables
 
@@ -55,4 +56,4 @@ See `.obvious/codebase-map.md`.
 ## Work queue and rules
 
 - **Rules:** `AGENTS.md`, plus the `hub-guardrails` skill (its invariants load on every turn).
-- **Specs:** `docs/specs/empire/` (E-01, E-02, E-03, E-04, E-06, E-10). The cross-repo index lives in the pipeline repo at `docs/specs/README.md`.
+- **Specs:** `docs/specs/empire/` (E-01, E-02, E-03, E-04, E-06, E-10). The cross-repo index lives in the pipeline repo: <https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/blob/main/docs/specs/README.md>.

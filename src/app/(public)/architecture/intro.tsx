@@ -29,8 +29,15 @@ export function ArchitectureIntro({ map, linear }: { map: SystemMap; linear: Lin
             {stale === 1 ? "one part is" : `${stale} parts are`} <span className="text-amber-500">stale</span>, {scaffolded}{" "}
             {scaffolded === 1 ? "is an honest scaffold" : "are honest scaffolds"} and {parked} {parked === 1 ? "is" : "are"} parked.
             The dashed items are the build path — {planned} pieces of planned work, read live from Linear
-            {linearLive ? "" : " (offline at the moment, so their state is unknown)"}, the next anchor being{" "}
-            <span className="text-fg">{nextAnchor?.label}</span> on {nextAnchor?.date}.
+            {linearLive ? "" : " (offline at the moment, so their state is unknown)"}
+            {nextAnchor ? (
+              <>
+                , the next anchor being{" "}
+                <span className="text-fg">{nextAnchor.label}</span> on {nextAnchor.date}
+              </>
+            ) : (
+              "; the roadmap now lives in Notion, so repo anchors resume when it returns"
+            )}.
           </p>
           <p className="text-fg">
             Flip to <span className="font-mono text-sm">Technical</span> for tools, files and the reference graph under each part.
@@ -45,11 +52,16 @@ export function ArchitectureIntro({ map, linear }: { map: SystemMap; linear: Lin
       <h1 className="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl">Two layers, generated, honest.</h1>
       <p className="mt-4 max-w-3xl text-sm leading-relaxed text-muted">
         Layer 1: {map.components.length} curated components across {map.zones.length} zones and {map.edges.length} typed edges (reads · writes ·
-        dispatches · gates · produces · depends-on). Layer 2: the ADR-8 system graph — {map.source.graph_nodes} artifacts and{" "}
-        {map.source.graph_edges} load-bearing references, rebuilt from the repo at every session start, {map.source.unmapped_files} of them not yet
+        dispatches · gates · produces · depends-on). Layer 2: a live file inventory — {map.source.artifacts} tracked artifacts and{" "}
+        {map.source.references} path references between them, scanned from the pipeline repo each time the map is generated, {map.source.unmapped_files} of them not yet
         assigned to a component. Facts (descriptions, dates, tools, files) are generated from the pipeline at {map.source.pipeline_sha};
-        the reasoning is a hand-curated overlay where every claim names its source. Build path: roadmap phases{" "}
-        {map.buildPath.phases.map((p) => p.id).join(" → ")}, states read from Linear{linearLive ? " (live)" : " (unreachable now — states unknown)"}.
+        the reasoning is a hand-curated overlay where every claim names its source.{" "}
+        {map.buildPath.phases.length ? (
+          <>Build path: roadmap phases {map.buildPath.phases.map((p) => p.id).join(" → ")}, </>
+        ) : (
+          "The roadmap now lives in Notion, so no repo phases; "
+        )}
+        states read from Linear{linearLive ? " (live)" : " (unreachable now — states unknown)"}.
         Generated {map.generated_at}.
       </p>
     </div>
