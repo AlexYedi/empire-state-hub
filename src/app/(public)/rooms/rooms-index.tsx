@@ -15,7 +15,17 @@ export const fmtRoomDate = (d: string) =>
 
 const KEYS = ["series", "topic", "company"] as const;
 
-export function RoomsIndex({ rooms, generatedAt }: { rooms: Room[]; generatedAt: string | null }) {
+export function RoomsIndex({
+  rooms,
+  generatedAt,
+  longReadSlugs,
+}: {
+  rooms: Room[];
+  generatedAt: string | null;
+  // E-02 executable 5: computed server-side and passed in — this module is a
+  // client component and only renders what it's given.
+  longReadSlugs: string[];
+}) {
   const { lens } = useLens();
   const ed = lens === "editorial";
   const params = useSearchParams();
@@ -88,7 +98,7 @@ export function RoomsIndex({ rooms, generatedAt }: { rooms: Room[]; generatedAt:
       ) : (
         <div className="mt-8 grid gap-3 sm:grid-cols-2">
           {shown.map((r) => (
-            <RoomCard key={r.slug} room={r} />
+            <RoomCard key={r.slug} room={r} hasLongRead={longReadSlugs.includes(r.slug)} />
           ))}
         </div>
       )}
@@ -127,7 +137,7 @@ function FilterSelect({
   );
 }
 
-function RoomCard({ room }: { room: Room }) {
+function RoomCard({ room, hasLongRead }: { room: Room; hasLongRead: boolean }) {
   const carousels = roomCarousels(room);
   const preview = carousels.find((c) => c.preview)?.preview;
   return (
@@ -152,6 +162,9 @@ function RoomCard({ room }: { room: Room }) {
           <span>{room.speakers.length} speakers</span>
           <span>{room.posts.length} posts</span>
           {carousels.length > 0 && <span className="rounded border border-border px-1.5 py-0.5">carousel</span>}
+          {hasLongRead && (
+            <span className="rounded border border-accent/60 px-1.5 py-0.5 text-accent">long read</span>
+          )}
           {room.recapPending && <span className="italic">recap pending</span>}
         </div>
       </div>

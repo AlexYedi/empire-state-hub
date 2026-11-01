@@ -27,21 +27,23 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return {
     title,
     description,
-    // E-06 item 2: X card on long reads, reusing the site-wide Open Graph image
-    // (src/app/opengraph-image.tsx route). Setting images explicitly: defining
-    // openGraph/twitter in generateMetadata overrides the file convention's
-    // inherited image on these routes (verified against the built HTML).
+    // E-06 item 2 + E-02 executable 6: the per-read Open Graph image, an
+    // explicit route handler at a stable path (see opengraph-image/route.tsx
+    // for why it isn't the file convention). Setting images explicitly:
+    // defining openGraph/twitter in generateMetadata overrides the file
+    // convention's inherited image on these routes (verified against the
+    // built HTML).
     openGraph: {
       title: room.name,
       description,
       url: pageUrl(`/rooms/${room.slug}/read`),
-      images: [pageUrl("/opengraph-image")],
+      images: [pageUrl(`/rooms/${room.slug}/read/opengraph-image`)],
     },
     twitter: {
       card: "summary_large_image",
       title: room.name,
       description,
-      images: [pageUrl("/opengraph-image")],
+      images: [pageUrl(`/rooms/${room.slug}/read/opengraph-image`)],
     },
   };
 }

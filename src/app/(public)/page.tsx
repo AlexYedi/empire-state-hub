@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Hero } from "@/components/hero";
+import { LatestReads } from "@/components/long-read/latest-reads";
 import systemMap from "@/data/system-map.json";
 
 // Copy is drawn from the hero copy below (E-01 item 2: no new claims).
@@ -12,5 +13,11 @@ export const metadata: Metadata = {
 export default function Home() {
   // One source of truth for the system's size: the generated system map (pnpm gen:system-map).
   const { skills, agents, commands } = systemMap.counts;
-  return <Hero counts={{ skills, agents, commands }} />;
+  return (
+    <>
+      <Hero counts={{ skills, agents, commands }} />
+      {/* E-02 executable 5: home-page "Latest long reads" module (newest 3). */}
+      <LatestReads />
+    </>
+  );
 }

@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { getRooms } from "@/lib/rooms";
+import { getLongReadSummaries } from "@/lib/long-reads";
 import { siteOrigin } from "@/lib/site-url";
 
 // Static public routes, enumerated by hand — /ops/* is deliberately absent (E-01
@@ -18,6 +19,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...getRooms().map((room) => ({
       url: `${origin}/rooms/${room.slug}`,
       lastModified: now,
+    })),
+    // E-02 executable 6: each long read is its own crawlable page, keyed by the
+    // read's own updated date rather than "now".
+    ...getLongReadSummaries().map((read) => ({
+      url: `${origin}/rooms/${read.slug}/read`,
+      lastModified: new Date(read.updated + "T00:00:00Z"),
     })),
   ];
 }

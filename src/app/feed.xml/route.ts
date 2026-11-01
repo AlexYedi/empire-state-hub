@@ -3,6 +3,7 @@
 // no Notion import here by design. Statically generated at build time.
 import { z } from "zod";
 import { getRooms } from "@/lib/rooms";
+import { getLongReadSummaries } from "@/lib/long-reads";
 import JOURNAL from "@/data/build-journal.json";
 
 // Next 16: GET route handlers are dynamic by default; this feed is fully
@@ -46,6 +47,15 @@ function collectFeedItems(): FeedItem[] {
     description: room.what ?? undefined,
   }));
 
+  // E-02 executable 6: each long read is its own feed item, dated by the
+  // read's updated date (it amends the event after the fact).
+  const longReadItems: FeedItem[] = getLongReadSummaries().map((read) => ({
+    title: `${read.roomName} — Long read`,
+    link: `/rooms/${read.slug}/read`,
+    date: read.updated,
+    description: read.excerpt,
+  }));
+
   const journalItems: FeedItem[] = JournalFileSchema.parse(JOURNAL).entries.map(
     (entry) => ({
       title: entry.headline,
@@ -55,7 +65,7 @@ function collectFeedItems(): FeedItem[] {
     }),
   );
 
-  return [...roomItems, ...journalItems]
+  return [...roomItems, ...longReadItems, ...journalItems]
     .sort((a, b) => b.date.localeCompare(a.date))
     .slice(0, 50);
 }

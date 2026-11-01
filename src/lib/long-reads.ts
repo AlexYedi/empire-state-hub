@@ -130,3 +130,36 @@ export function hasLongRead(slug: string): boolean {
 export function getLongReadSlugs(): string[] {
   return LONG_READS.map((r) => r.slug);
 }
+
+/**
+ * Promotion-facing summaries (E-02 executables 5/6): everything the home module,
+ * sitemap and RSS need, without handing them the full block list. Sorted
+ * newest-first by the room's event date.
+ */
+export type LongReadSummary = {
+  slug: string;
+  roomName: string;
+  roomDate: string;
+  updated: string;
+  readingMinutes: number;
+  /** First paragraph block's text, for feed descriptions and card previews. */
+  excerpt?: string;
+};
+
+export function getLongReadSummaries(): LongReadSummary[] {
+  return LONG_READS.map((read) => {
+    const room = getRoom(read.slug);
+    if (!room) {
+      // load() already guarantees a room exists; this keeps types honest.
+      throw new Error(`long-reads: slug "${read.slug}" does not match any room in src/data/rooms.json`);
+    }
+    return {
+      slug: read.slug,
+      roomName: room.name,
+      roomDate: room.date,
+      updated: read.updated,
+      readingMinutes: read.readingMinutes ?? computeReadingMinutes(read.blocks),
+      excerpt: read.blocks.find((b) => b.type === "paragraph")?.text,
+    };
+  }).sort((a, b) => b.roomDate.localeCompare(a.roomDate));
+}

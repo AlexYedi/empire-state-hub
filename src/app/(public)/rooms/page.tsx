@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
 import { getRooms, roomsGeneratedAt } from "@/lib/rooms";
+import { getLongReadSlugs } from "@/lib/long-reads";
 import { RoomsIndex } from "./rooms-index";
 
 export const metadata: Metadata = {
@@ -12,7 +13,7 @@ export const metadata: Metadata = {
 export default function RoomsPage() {
   return (
     <Suspense>
-      <RoomsIndex rooms={getRooms()} generatedAt={roomsGeneratedAt} />
+      <RoomsIndex rooms={getRooms()} generatedAt={roomsGeneratedAt} longReadSlugs={getLongReadSlugs()} />
     </Suspense>
   );
 }
