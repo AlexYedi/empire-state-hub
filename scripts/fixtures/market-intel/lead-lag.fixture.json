@@ -1,49 +1,20 @@
 {
-  "description": "Fixture theme_lead_lag rows — one visible (both lenses above floor, lead outside the null band), one inside the band, one below floor, one with a null band.",
-  "lead_lag": [
-    {
-      "theme_id": "t-agentic",
-      "theme": "Agentic infrastructure",
-      "market_first_seen": "2026-W36",
-      "attended_first_seen": "2026-W40",
-      "lead_weeks": 4,
-      "band_low": -1,
-      "band_high": 1,
-      "attended_count_8w": 3,
-      "market_count_8w": 5
+  "description": "Fixture public.mi_slice envelope for the frontier_vs_room lead/lag slice — 0016 pins market_lead_weeks = attended_first_seen − market_first_seen; positive means the market led. A lead on a floored row renders 'no information (floor)', its number suppressed. Themes are fictional; no PII.",
+  "leadlag_envelope": {
+    "view": "mi.theme_week",
+    "window": {
+      "anchored_on": "2026-11-02",
+      "weeks": ["2026-W38", "2026-W39", "2026-W40", "2026-W41", "2026-W42", "2026-W43", "2026-W44", "2026-W45"]
     },
-    {
-      "theme_id": "t-inference",
-      "theme": "Inference cost curves",
-      "market_first_seen": "2026-W39",
-      "attended_first_seen": "2026-W40",
-      "lead_weeks": 1,
-      "band_low": -2,
-      "band_high": 2,
-      "attended_count_8w": 4,
-      "market_count_8w": 4
-    },
-    {
-      "theme_id": "t-thin",
-      "theme": "Thin theme",
-      "market_first_seen": "2026-W38",
-      "attended_first_seen": "2026-W41",
-      "lead_weeks": 3,
-      "band_low": -1,
-      "band_high": 1,
-      "attended_count_8w": 2,
-      "market_count_8w": 9
-    },
-    {
-      "theme_id": "t-noband",
-      "theme": "No band theme",
-      "market_first_seen": "2026-W36",
-      "attended_first_seen": "2026-W40",
-      "lead_weeks": 4,
-      "band_low": null,
-      "band_high": null,
-      "attended_count_8w": 6,
-      "market_count_8w": 6
+    "rows": [
+      { "theme": "Agent protocols", "iso_week": "2026-W45", "lens": "attended", "facts": 6, "floor_flag": "ok", "market_lead_weeks": 6 },
+      { "theme": "Context engineering", "iso_week": "2026-W45", "lens": "attended", "facts": 2, "floor_flag": "insufficient_data", "market_lead_weeks": 14 },
+      { "theme": "Room-led theme", "iso_week": "2026-W45", "lens": "attended", "facts": 5, "floor_flag": "ok", "market_lead_weeks": -3 },
+      { "theme": "No lead field", "iso_week": "2026-W45", "lens": "research", "facts": 5, "floor_flag": "ok" }
+    ],
+    "denominators": {
+      "attended": "events in window: 7",
+      "research": "briefs (documents) in window: 2"
     }
-  ]
+  }
 }

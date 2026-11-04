@@ -1,21 +1,64 @@
 {
-  "description": "Fixture theme_week rows for the market-intel selftests — the cases the proposal's honesty rules decide (floor at 3 facts, seed resolution, unknown lens, malformed rows, window clipping).",
-  "theme_week": [
-    { "theme_id": "t-agentic", "theme": "Agentic infrastructure", "lens": "attended", "iso_week": "2026-W40", "facts": 2, "distinct_companies": 2, "distinct_sources": 1, "denominator": 84, "theme_resolved": "live" },
-    { "theme_id": "t-agentic", "theme": "Agentic infrastructure", "lens": "attended", "iso_week": "2026-W41", "facts": 1, "distinct_companies": 1, "distinct_sources": 1, "denominator": 84, "theme_resolved": "live" },
-    { "theme_id": "t-agentic", "theme": "Agentic infrastructure", "lens": "market", "iso_week": "2026-W40", "facts": 3, "distinct_companies": 3, "distinct_sources": 2, "denominator": 40, "theme_resolved": "live" },
-    { "theme_id": "t-agentic", "theme": "Agentic infrastructure", "lens": "market", "iso_week": "2026-W41", "facts": 2, "distinct_companies": 2, "distinct_sources": 1, "denominator": 40, "theme_resolved": "live" },
-    { "theme_id": "t-inference", "theme": "Inference cost curves", "lens": "attended", "iso_week": "2026-W41", "facts": 4, "distinct_companies": 3, "distinct_sources": 2, "denominator": 84, "theme_resolved": "seed" },
-    { "theme_id": "t-inference", "theme": "Inference cost curves", "lens": "research", "iso_week": "2026-W41", "facts": 6, "distinct_companies": null, "distinct_sources": 3, "denominator": 12, "theme_resolved": "seed" },
-    { "theme_id": "t-old", "theme": "Outside the window", "lens": "attended", "iso_week": "2026-W20", "facts": 9, "distinct_companies": 5, "distinct_sources": 2, "denominator": 80, "theme_resolved": "live" },
-    { "theme_id": "t-unknown", "theme": "Unknown lens", "lens": "podcast", "iso_week": "2026-W41", "facts": 5, "theme_resolved": "live" },
-    { "theme_id": "", "theme": "No id", "lens": "attended", "iso_week": "2026-W41", "facts": 5, "theme_resolved": "live" },
-    { "theme_id": "t-neg", "theme": "Negative facts", "lens": "attended", "iso_week": "2026-W41", "facts": -2, "theme_resolved": "live" },
-    "not-even-an-object"
+  "description": "Fixture public.mi_slice envelopes for the market-intel selftests — the 0016 contract ({view, rows, denominators, window}) plus the negative cases that must render instrumenting, never a partial slice. Themes are fictional; no PII (AGENTS.md rule 4).",
+  "heatmap_envelope": {
+    "view": "mi.theme_week",
+    "window": {
+      "anchored_on": "2026-11-02",
+      "weeks": ["2026-W38", "2026-W39", "2026-W40", "2026-W41", "2026-W42", "2026-W43", "2026-W44", "2026-W45"]
+    },
+    "rows": [
+      { "theme": "Agentic infrastructure", "iso_week": "2026-W45", "lens": "attended", "facts": 4, "companies": 2, "sources": 2, "floor_flag": "ok" },
+      { "theme": "Agentic infrastructure", "iso_week": "2026-W44", "lens": "attended", "facts": 3, "companies": 1, "sources": 1, "floor_flag": "ok" },
+      { "theme": "Agentic infrastructure", "iso_week": "2026-W45", "lens": "market", "facts": 9, "companies": 4, "sources": 3, "floor_flag": "ok" },
+      { "theme": "Agentic infrastructure", "topic": "(general)", "iso_week": "2026-W45", "lens": "market", "facts": 2, "general_facts": 2, "floor_flag": "ok" },
+      { "theme": "Inference cost curves", "iso_week": "2026-W45", "lens": "attended", "facts": 1, "floor_flag": "insufficient_data" },
+      { "theme": "Inference cost curves", "iso_week": "2026-W45", "lens": "research", "facts": 6, "sources": 2, "floor_flag": "ok" }
+    ],
+    "denominators": {
+      "attended": "events in window: 4 (2026-10-05..2026-11-02)",
+      "market": "facts from 5 sources; watchlist coverage 12/40",
+      "research": "briefs (documents) in window: 2"
+    }
+  },
+  "derived_window_envelope": {
+    "view": "mi.theme_week",
+    "window": { "anchored_on": "2026-11-02" },
+    "rows": [
+      { "theme": "Agentic infrastructure", "iso_week": "2026-W45", "lens": "attended", "facts": 4, "floor_flag": "ok" }
+    ],
+    "denominators": { "attended": "events in window: 4" }
+  },
+  "invalid_bare_array": [
+    { "theme": "Agentic infrastructure", "iso_week": "2026-W45", "lens": "attended", "facts": 4, "floor_flag": "ok" }
   ],
-  "window": {
-    "description": "With the anchor at 2026-W41 and a 8-week window, weeks W20 falls outside; W40 and W41 stay in.",
-    "anchor": "2026-W41",
-    "windowWeeks": 8
+  "invalid_missing_window": {
+    "view": "mi.theme_week",
+    "rows": [],
+    "denominators": {}
+  },
+  "invalid_denominator_gap": {
+    "view": "mi.theme_week",
+    "window": { "anchored_on": "2026-11-02", "weeks": ["2026-W45"] },
+    "rows": [
+      { "theme": "Agentic infrastructure", "iso_week": "2026-W45", "lens": "attended", "facts": 4, "floor_flag": "ok" },
+      { "theme": "Agentic infrastructure", "iso_week": "2026-W45", "lens": "market", "facts": 9, "floor_flag": "ok" }
+    ],
+    "denominators": { "attended": "events in window: 4" }
+  },
+  "invalid_blended_lens": {
+    "view": "mi.theme_week",
+    "window": { "anchored_on": "2026-11-02", "weeks": ["2026-W45"] },
+    "rows": [
+      { "theme": "Agentic infrastructure", "iso_week": "2026-W45", "lens": "all", "facts": 99, "floor_flag": "ok" }
+    ],
+    "denominators": { "attended": "events in window: 4" }
+  },
+  "invalid_row_outside_window": {
+    "view": "mi.theme_week",
+    "window": { "anchored_on": "2026-11-02", "weeks": ["2026-W45"] },
+    "rows": [
+      { "theme": "Outside the window", "iso_week": "2026-W20", "lens": "attended", "facts": 9, "floor_flag": "ok" }
+    ],
+    "denominators": { "attended": "events in window: 4" }
   }
 }
