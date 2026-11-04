@@ -1,21 +1,28 @@
 // Pure rendering-layer folds over validated mi_slice envelopes (migration 0016, ADR-13).
 // The hub is rendering-only: SQL owns the floor, the denominators and the window — this
 // module never re-derives them, never sums across lenses, and never surfaces a number the
-// SQL floored. Rules mirrored from slice.py / docs/proposals/2026-11-04-market-lens-and-slices.md §3.3:
+// SQL floored. Contract facts mirrored from supabase/migrations/0016_mi_semantic_layer.sql:
 //   1. No cross-lens total — a lens cell exists per lens, never an "all" aggregate.
-//   2. Denominators arrive per lens from SQL (prose strings) and render verbatim.
-//   3. Floors before labels — a floored cell renders "insufficient_data"; a lead figure on
-//      a floored row renders "no information (floor)". Numbers are suppressed, never shown
-//      "for context".
-//   4. A theme's (general) topic counts are labelled, never merged into named-topic counts.
+//   2. Denominators arrive per lens from SQL, nested per lens (attended.events,
+//      research.briefs, market.facts_by_source/watchlist_*, job.boards_scanned), and render
+//      verbatim. The private target-tier list leaves the DB only as aggregate watchlist
+//      counts in the market denominators (ADR-13 F1) — never as a row column.
+//   3. Floors before labels — floor_flag is SQL's verdict for the trailing-8-week basis; a
+//      cell under the FACT_FLOOR renders "insufficient_data", its count zeroed, never shown
+//      "for context". lead_lag_shown = false → the lead figure is not rendered; the theme
+//      still appears, plainly, as "no information (floor)".
+//   4. A theme's (general) topic facts are counted in general_facts — labelled, never merged
+//      into named-topic counts and never a separate theme.
 //   5. 0016 pins the lead sign: market_lead_weeks = attended_first_seen − market_first_seen,
-//      positive = the market led. Carried as-is; the hub derives no sign.
+//      POSITIVE = the market led. Carried as-is; the hub derives no sign. The permutation
+//      band is Phase B and does not exist yet.
+//   6. The window is {from_week, to_week, anchored_on}, anchored on current_date — never on
+//      the latest row — so a stalled pipeline reads as stale.
 
 export const FACT_FLOOR = 3;
-export const GENERAL_TOPIC = "(general)";
 
-/** Fixed lens vocabulary and display order (proposal §3.1). @type {readonly string[]} */
-export const LENSES = ["attended", "research", "market", "job"];
+/** theme_week's lens vocabulary (migration 0016 §6f: job lens excluded, YED-149). */
+export const THEME_WEEK_LENSES = ["attended", "research", "market"];
 
 // ---------------------------------------------------------------------------
 // 0016 envelope contract — single validation point, shared by the server client
@@ -24,93 +31,142 @@ export const LENSES = ["attended", "research", "market", "job"];
 // partial slice, and no malformed row is silently dropped.
 // ---------------------------------------------------------------------------
 
-/** @typedef {{ theme: string, topic?: string, iso_week: string, lens: string,
- *             facts: number, companies?: number, sources?: number, general_facts?: number,
- *             floor_flag: "ok"|"insufficient_data", market_lead_weeks?: number|null }} MiRow */
-/** @typedef {{ anchored_on: string, weeks?: string[] }} MiWindow */
-/** @typedef {{ view: string, rows: MiRow[], denominators: Record<string,string>, window: MiWindow }} MiEnvelope */
+/** @typedef {{ theme_id: string, theme: string, iso_week: string, lens: string,
+ *             facts: number, distinct_companies: number, distinct_sources: number,
+ *             general_facts: number, floor_flag: "ok"|"insufficient_data",
+ *             theme_resolved: "seed"|"asof" }} ThemeWeekRow */
+/** @typedef {{ theme_id: string, theme: string, market_first_seen: string|null,
+ *             attended_first_seen: string|null, market_lead_weeks: number|null,
+ *             attended_count_8w: number, market_count_8w: number,
+ *             lead_lag_shown: boolean }} LeadLagRow */
+/** @typedef {{ from_week: string, to_week: string, anchored_on: string }} MiWindow */
+/** @typedef {{ attended: {events:number}, research: {briefs:number},
+ *             market: {facts_by_source: Record<string,number>, watchlist_covered:number,
+ *                      watchlist_size:number},
+ *             job: {boards_scanned:number} }} MiDenominators */
+/** @typedef {{ view: "mi.theme_week", rows: ThemeWeekRow[], denominators: MiDenominators,
+ *             window: MiWindow }} ThemeWeekEnvelope
+ * @typedef {{ view: "mi.theme_lead_lag", rows: LeadLagRow[], denominators: MiDenominators,
+ *             window: MiWindow }} LeadLagEnvelope
+ * @typedef {ThemeWeekEnvelope|LeadLagEnvelope} MiEnvelope */
 
 const ISO_DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
+const MI_VIEWS = ["mi.theme_week", "mi.theme_lead_lag"];
 
-function isNonnegNumber(v) {
-  return typeof v === "number" && Number.isFinite(v) && v >= 0;
+function isNonnegInt(v) {
+  return typeof v === "number" && Number.isInteger(v) && v >= 0;
 }
 
-function rowDefects(row) {
+function nonEmptyString(v) {
+  return typeof v === "string" && v.length > 0;
+}
+
+function dateOrNull(v) {
+  return v === null || (typeof v === "string" && ISO_DATE_RE.test(v));
+}
+
+function themeWeekRowDefects(row) {
   if (row == null || typeof row !== "object" || Array.isArray(row)) return "not an object";
-  if (typeof row.theme !== "string" || row.theme.length === 0) return "theme missing";
+  if (!nonEmptyString(row.theme_id)) return "theme_id missing";
+  if (!nonEmptyString(row.theme)) return "theme missing";
   if (typeof row.iso_week !== "string" || parseIsoWeek(row.iso_week) == null) return "iso_week malformed";
-  if (!LENSES.includes(row.lens)) return `unknown lens ${JSON.stringify(row.lens)}`;
-  if (!isNonnegNumber(row.facts)) return "facts missing or invalid";
-  if (row.floor_flag !== "ok" && row.floor_flag !== "insufficient_data") return "unknown floor_flag";
-  for (const k of ["topic", "companies", "sources", "general_facts"]) {
-    if (row[k] !== undefined && !isNonnegNumber(row[k]) && typeof row[k] !== "string") {
-      return `${k} invalid`;
-    }
+  if (!THEME_WEEK_LENSES.includes(row.lens)) return `unknown lens ${JSON.stringify(row.lens)}`;
+  if (!isNonnegInt(row.facts)) return "facts missing or invalid";
+  for (const k of ["distinct_companies", "distinct_sources", "general_facts"]) {
+    if (!isNonnegInt(row[k])) return `${k} missing or invalid`;
   }
-  if (
-    row.market_lead_weeks !== undefined &&
-    row.market_lead_weeks !== null &&
-    typeof row.market_lead_weeks !== "number"
-  ) {
+  if (row.floor_flag !== "ok" && row.floor_flag !== "insufficient_data") return "unknown floor_flag";
+  if (row.theme_resolved !== "seed" && row.theme_resolved !== "asof") return "unknown theme_resolved";
+  return null;
+}
+
+function leadLagRowDefects(row) {
+  if (row == null || typeof row !== "object" || Array.isArray(row)) return "not an object";
+  if (!nonEmptyString(row.theme_id)) return "theme_id missing";
+  if (!nonEmptyString(row.theme)) return "theme missing";
+  if (!dateOrNull(row.market_first_seen)) return "market_first_seen invalid";
+  if (!dateOrNull(row.attended_first_seen)) return "attended_first_seen invalid";
+  if (row.market_lead_weeks !== null && typeof row.market_lead_weeks !== "number") {
     return "market_lead_weeks invalid";
   }
+  if (!Number.isFinite(/** @type {number} */ (row.market_lead_weeks ?? 0)) && row.market_lead_weeks !== null) {
+    return "market_lead_weeks not finite";
+  }
+  if (!isNonnegInt(row.attended_count_8w)) return "attended_count_8w missing or invalid";
+  if (!isNonnegInt(row.market_count_8w)) return "market_count_8w missing or invalid";
+  if (typeof row.lead_lag_shown !== "boolean") return "lead_lag_shown missing or invalid";
   return null;
 }
 
 /**
- * Validate one mi_slice envelope against the 0016 contract. Beyond the shape, the row
- * contract holds (slice.py rules): a denominator must exist for EVERY lens present in
- * rows, and every row's iso_week must fall inside the declared window. Any violation is
- * a contract mismatch → null → the surface renders instrumenting.
+ * Validate the mi_slice denominators object against the 0016 shape. Structural only —
+ * the hub renders these verbatim and derives nothing from them.
+ * @param {Record<string, unknown>} d
+ * @returns {string|null} defect or null
+ */
+function denominatorsDefects(d) {
+  if (d == null || typeof d !== "object" || Array.isArray(d)) return "denominators not an object";
+  if (!isNonnegInt(/** @type {any} */ (d.attended)?.events)) return "denominators.attended.events invalid";
+  if (!isNonnegInt(/** @type {any} */ (d.research)?.briefs)) return "denominators.research.briefs invalid";
+  const market = /** @type {any} */ (d.market);
+  if (market == null || typeof market !== "object" || Array.isArray(market)) {
+    return "denominators.market not an object";
+  }
+  if (market.facts_by_source == null || typeof market.facts_by_source !== "object" || Array.isArray(market.facts_by_source)) {
+    return "denominators.market.facts_by_source invalid";
+  }
+  for (const [src, n] of Object.entries(market.facts_by_source)) {
+    if (!nonEmptyString(src) || !isNonnegInt(n)) return "denominators.market.facts_by_source entry invalid";
+  }
+  if (!isNonnegInt(market.watchlist_covered)) return "denominators.market.watchlist_covered invalid";
+  if (!isNonnegInt(market.watchlist_size)) return "denominators.market.watchlist_size invalid";
+  if (!isNonnegInt(/** @type {any} */ (d.job)?.boards_scanned)) return "denominators.job.boards_scanned invalid";
+  return null;
+}
+
+/**
+ * Validate one mi_slice envelope against the merged 0016 contract. Beyond the shape, the
+ * row contract holds: every theme_week row's iso_week must fall inside the declared
+ * [from_week, to_week] window. Any violation is a contract mismatch → null → the surface
+ * renders instrumenting.
  * @param {unknown} payload
+ * @param {"mi.theme_week"|"mi.theme_lead_lag"} view the view this fetch asked for
  * @returns {MiEnvelope|null}
  */
-export function parseMiEnvelope(payload) {
+export function parseMiEnvelope(payload, view) {
+  if (!MI_VIEWS.includes(view)) return null;
   if (payload == null || typeof payload !== "object" || Array.isArray(payload)) return null;
   const p = /** @type {Record<string, unknown>} */ (payload);
-  if (typeof p.view !== "string" || !/^mi\.[a-z_]+$/.test(p.view)) return null;
+  if (p.view !== view) return null;
   if (!Array.isArray(p.rows)) return null;
   if (p.window == null || typeof p.window !== "object" || Array.isArray(p.window)) return null;
   const window = /** @type {Record<string, unknown>} */ (p.window);
   if (typeof window.anchored_on !== "string" || !ISO_DATE_RE.test(window.anchored_on)) return null;
-  if (window.weeks !== undefined) {
-    if (!Array.isArray(window.weeks) || window.weeks.some((w) => typeof w !== "string" || parseIsoWeek(w) == null)) {
-      return null;
-    }
-  }
-  if (p.denominators == null || typeof p.denominators !== "object" || Array.isArray(p.denominators)) return null;
-  const denominators = /** @type {Record<string, unknown>} */ (p.denominators);
+  if (typeof window.from_week !== "string" || parseIsoWeek(window.from_week) == null) return null;
+  if (typeof window.to_week !== "string" || parseIsoWeek(window.to_week) == null) return null;
+  if (window.from_week > window.to_week) return null;
+  const denDefect = denominatorsDefects(/** @type {Record<string, unknown>} */ (p.denominators ?? null));
+  if (denDefect) return null;
 
-  /** @type {MiRow[]} */
+  const rowDefects = view === "mi.theme_week" ? themeWeekRowDefects : leadLagRowDefects;
   const rows = [];
   for (const raw of p.rows) {
     const defect = rowDefects(raw);
     if (defect) return null;
-    rows.push(/** @type {MiRow} */ (raw));
-  }
-
-  // Denominators per lens — a rate without its denominator is a contract error (§3.3 rule 2).
-  for (const row of rows) {
-    const den = denominators[row.lens];
-    if (typeof den !== "string" || den.length === 0) return null;
+    rows.push(raw);
   }
 
   // Rows outside the declared window are a mismatch, not a clip-and-render.
-  if (Array.isArray(window.weeks)) {
-    const weeks = new Set(/** @type {string[]} */ (window.weeks));
-    if (rows.some((r) => !weeks.has(r.iso_week))) return null;
+  // (theme_lead_lag rows carry no iso_week — its window is fixed 8-week on asserted_week.)
+  if (view === "mi.theme_week") {
+    for (const row of /** @type {ThemeWeekRow[]} */ (rows)) {
+      if (row.iso_week < window.from_week || row.iso_week > window.to_week) return null;
+    }
   }
 
-  return {
-    view: p.view,
-    rows,
-    denominators: /** @type {Record<string,string>} */ ({ ...denominators }),
-    window: /** @type {MiWindow} */ ({
-      anchored_on: window.anchored_on,
-      ...(Array.isArray(window.weeks) ? { weeks: /** @type {string[]} */ (window.weeks) } : {}),
-    }),
-  };
+  return view === "mi.theme_week"
+    ? { view, rows: /** @type {ThemeWeekRow[]} */ (rows), denominators: p.denominators, window }
+    : { view, rows: /** @type {LeadLagRow[]} */ (rows), denominators: p.denominators, window };
 }
 
 // ---------------------------------------------------------------------------
@@ -148,32 +204,18 @@ export function parseIsoWeek(label) {
   return formatIsoWeek(monday) === label ? monday : null;
 }
 
-/** ISO week label containing the given ISO date ("2026-11-02"). */
-export function weekLabelForDate(dateIso) {
-  const ms = Date.parse(`${dateIso}T00:00:00Z`);
-  if (Number.isNaN(ms)) return null;
-  const d = new Date(ms);
-  const day = d.getUTCDay() || 7;
-  return formatIsoWeek(ms + (1 - day) * 86400000);
-}
-
 /**
- * The heatmap window's week labels: SQL declares the window; when it ships weeks we use
- * them verbatim, else we derive the trailing calendar window from window.anchored_on —
- * the anchor is TODAY, so a stalled pipeline reads as mostly-empty, not as fresh.
- * @param {{ anchored_on: string, weeks?: string[] }} window
- * @param {number} count
+ * The window's week labels, enumerated from SQL's declared [from_week, to_week] — both
+ * anchored on current_date, so a stalled pipeline reads as mostly-empty, not as fresh.
+ * @param {MiWindow} window
  * @returns {string[]}
  */
-export function windowWeekList(window, count) {
-  if (window.weeks && window.weeks.length > 0) return [...window.weeks].sort();
-  const anchorLabel = weekLabelForDate(window.anchored_on);
-  if (!anchorLabel) return [];
-  const anchorMs = parseIsoWeek(anchorLabel);
-  if (anchorMs == null || count < 1) return [];
-  const startMs = anchorMs - (count - 1) * 7 * 86400000;
+export function windowWeekList(window) {
+  const fromMs = parseIsoWeek(window.from_week);
+  const toMs = parseIsoWeek(window.to_week);
+  if (fromMs == null || toMs == null || fromMs > toMs) return [];
   const out = [];
-  for (let ms = startMs; ms <= anchorMs; ms += 7 * 86400000) {
+  for (let ms = fromMs; ms <= toMs; ms += 7 * 86400000) {
     out.push(formatIsoWeek(ms));
   }
   return out;
@@ -184,77 +226,59 @@ export function windowWeekList(window, count) {
 // ---------------------------------------------------------------------------
 
 /**
- * @typedef {{ facts: number, generalFacts: number, companies: number|null, sources: number|null,
+ * @typedef {{ facts: number, generalFacts: number, companies: number, sources: number,
  *             status: "ok"|"insufficient_data" }} HeatmapCell
- * @typedef {{ theme: string, isGeneral: boolean, cells: Record<string, HeatmapCell|null> }} HeatmapRow
- * @typedef {{ lenses: string[], weeks: string[], anchoredOn: string, denominators: Record<string,string>,
- *             rows: HeatmapRow[] }} Heatmap
+ * @typedef {{ themeId: string, theme: string, seedResolved: boolean,
+ *             cells: Record<string, HeatmapCell|null> }} HeatmapRow
+ * @typedef {{ lenses: string[], weeks: string[], anchoredOn: string, fromWeek: string,
+ *             toWeek: string, denominators: MiDenominators, rows: HeatmapRow[] }} Heatmap
  */
 
 /**
- * Fold a validated mi.theme_week envelope into a theme × lens matrix. Rows outside the
- * declared window cannot occur (the envelope parser rejects them). Floored weekly rows are
- * suppressed by SQL — their counts are never folded into a visible number; a cell renders
- * "insufficient_data" unless enough unfloored facts remain over the window.
+ * Fold a validated mi.theme_week envelope into a theme × lens matrix over the declared
+ * window. Per-week floor_flag rows are folded into the window total (the floor's basis IS
+ * the trailing-8-week sum); a cell renders its total only when the total clears
+ * FACT_FLOOR, else "insufficient_data" with the count zeroed — never "for context".
  *
  * No cross-lens aggregate is ever produced — not omitted, structurally absent.
- * @param {import("./schema").MiEnvelope} envelope
+ * @param {ThemeWeekEnvelope} envelope
  * @returns {Heatmap}
  */
 export function buildHeatmap(envelope) {
-  const weeks = windowWeekList(envelope.window, 8);
+  const weeks = windowWeekList(envelope.window);
   const weekSet = new Set(weeks);
-  const inWindow = envelope.rows.filter((r) => weekSet.has(r.iso_week));
 
   /** @type {Map<string, HeatmapRow>} */
   const byKey = new Map();
 
-  for (const row of inWindow) {
-    // (general)-topic counts stay their own labelled group — never merged (PR #267 rule).
-    const isGeneral = row.topic === GENERAL_TOPIC;
-    const key = `${row.theme}::${isGeneral ? GENERAL_TOPIC : "-"}`;
+  for (const row of envelope.rows) {
+    if (!weekSet.has(row.iso_week)) continue; // defensive; the parser already rejects these
+    const key = row.theme_id;
     let themeRow = byKey.get(key);
     if (!themeRow) {
-      themeRow = { theme: row.theme, isGeneral, cells: {} };
+      themeRow = { themeId: row.theme_id, theme: row.theme, seedResolved: false, cells: {} };
       byKey.set(key, themeRow);
     }
-
-    if (row.floor_flag === "insufficient_data") {
-      // SQL floored this week — its number is suppressed, but the cell still exists and
-      // reads insufficient_data (a floored cell is data honesty, not absence).
-      themeRow.cells[row.lens] ??= {
-        facts: 0,
-        generalFacts: 0,
-        companies: null,
-        sources: null,
-        status: "insufficient_data",
-      };
-      continue;
-    }
+    if (row.theme_resolved === "seed") themeRow.seedResolved = true;
 
     const cell = themeRow.cells[row.lens] ?? {
       facts: 0,
       generalFacts: 0,
-      companies: null,
-      sources: null,
+      companies: 0,
+      sources: 0,
       status: "ok",
     };
     cell.facts += row.facts;
-    cell.generalFacts += row.general_facts ?? 0;
-    if (row.companies != null) {
-      cell.companies = (cell.companies ?? 0) + row.companies;
-    }
-    if (row.sources != null) {
-      cell.sources = (cell.sources ?? 0) + row.sources;
-    }
+    cell.generalFacts += row.general_facts;
+    cell.companies = Math.max(cell.companies, row.distinct_companies);
+    cell.sources = Math.max(cell.sources, row.distinct_sources);
     themeRow.cells[row.lens] = cell;
   }
 
-  // Floors before labels: status is recomputed from the surviving total — a floored-only
-  // cell that gains enough unfloored facts upgrades, a thin total downgrades — and a
-  // suppressed cell carries no displayable number (slice.py: never "for context").
+  // Floors before labels: the window total decides — a thin total is zeroed and rendered
+  // "insufficient_data" (slice.py: the number is suppressed, never shown "for context").
   const out = [...byKey.values()].map((row) => {
-    for (const lens of LENSES) {
+    for (const lens of THEME_WEEK_LENSES) {
       const cell = row.cells[lens];
       if (cell) {
         row.cells[lens] =
@@ -268,15 +292,17 @@ export function buildHeatmap(envelope) {
 
   // Display order: strongest single-lens count first (never a cross-lens sum), then name.
   out.sort((a, b) => {
-    const maxA = Math.max(...LENSES.map((l) => a.cells[l]?.facts ?? 0));
-    const maxB = Math.max(...LENSES.map((l) => b.cells[l]?.facts ?? 0));
+    const maxA = Math.max(...THEME_WEEK_LENSES.map((l) => a.cells[l]?.facts ?? 0));
+    const maxB = Math.max(...THEME_WEEK_LENSES.map((l) => b.cells[l]?.facts ?? 0));
     return maxB - maxA || a.theme.localeCompare(b.theme);
   });
 
   return {
-    lenses: [...LENSES],
+    lenses: [...THEME_WEEK_LENSES],
     weeks,
     anchoredOn: envelope.window.anchored_on,
+    fromWeek: envelope.window.from_week,
+    toWeek: envelope.window.to_week,
     denominators: envelope.denominators,
     rows: out,
   };
@@ -287,29 +313,24 @@ export function buildHeatmap(envelope) {
 // ---------------------------------------------------------------------------
 
 /**
- * @typedef {{ theme: string, marketLeadWeeks: number }} VisibleLeadRow
- * @typedef {{ theme: string, reason: "floor" }} GatedLeadRow
- * @typedef {{ visible: VisibleLeadRow[], gated: GatedLeadRow[] }} LeadLag
+ * @typedef {{ theme: string, shown: boolean, marketLeadWeeks: number|null }} LeadLagRowOut
+ * @typedef {{ rows: LeadLagRowOut[] }} LeadLag
  */
 
 /**
- * Lead/lag rows carry the 0016-signed `market_lead_weeks` (positive = the market led).
- * A lead on a floored row renders "no information (floor)" — the number is suppressed.
- * SQL owns the visibility verdict (floor_flag); the hub derives nothing.
- * @param {MiEnvelope} envelope
+ * Lead/lag rows carry the 0016-signed `market_lead_weeks` (POSITIVE = the market led) and
+ * SQL's own `lead_lag_shown` verdict. When SQL says false the figure is not rendered —
+ * but the theme still appears, plainly, as "no information (floor)". The hub hides
+ * nothing and special-cases nothing: an all-false window renders as an all-floor list.
+ * @param {LeadLagEnvelope} envelope
  * @returns {LeadLag}
  */
 export function buildLeadLag(envelope) {
-  const visible = [];
-  const gated = [];
-  for (const row of envelope.rows) {
-    if (row.market_lead_weeks == null) continue;
-    if (row.floor_flag === "ok") {
-      visible.push({ theme: row.theme, marketLeadWeeks: row.market_lead_weeks });
-    } else {
-      gated.push({ theme: row.theme, reason: "floor" });
-    }
-  }
-  return { visible, gated };
+  return {
+    rows: envelope.rows.map((row) => ({
+      theme: row.theme,
+      shown: row.lead_lag_shown,
+      marketLeadWeeks: row.lead_lag_shown ? row.market_lead_weeks : null,
+    })),
+  };
 }
-

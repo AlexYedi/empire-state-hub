@@ -1,20 +1,33 @@
 {
-  "description": "Fixture public.mi_slice envelope for the frontier_vs_room lead/lag slice — 0016 pins market_lead_weeks = attended_first_seen − market_first_seen; positive means the market led. A lead on a floored row renders 'no information (floor)', its number suppressed. Themes are fictional; no PII.",
-  "leadlag_envelope": {
-    "view": "mi.theme_week",
-    "window": {
-      "anchored_on": "2026-11-02",
-      "weeks": ["2026-W38", "2026-W39", "2026-W40", "2026-W41", "2026-W42", "2026-W43", "2026-W44", "2026-W45"]
-    },
+  "valid": {
+    "view": "mi.theme_lead_lag",
     "rows": [
-      { "theme": "Agent protocols", "iso_week": "2026-W45", "lens": "attended", "facts": 6, "floor_flag": "ok", "market_lead_weeks": 6 },
-      { "theme": "Context engineering", "iso_week": "2026-W45", "lens": "attended", "facts": 2, "floor_flag": "insufficient_data", "market_lead_weeks": 14 },
-      { "theme": "Room-led theme", "iso_week": "2026-W45", "lens": "attended", "facts": 5, "floor_flag": "ok", "market_lead_weeks": -3 },
-      { "theme": "No lead field", "iso_week": "2026-W45", "lens": "research", "facts": 5, "floor_flag": "ok" }
+      { "theme_id": "t1", "theme": "Agent infra", "market_first_seen": "2026-05-04", "attended_first_seen": "2026-06-22", "market_lead_weeks": 7.0, "attended_count_8w": 6, "market_count_8w": 5, "lead_lag_shown": true },
+      { "theme_id": "t2", "theme": "Eval tooling", "market_first_seen": "2026-09-07", "attended_first_seen": "2026-08-10", "market_lead_weeks": -4.0, "attended_count_8w": 4, "market_count_8w": 1, "lead_lag_shown": false },
+      { "theme_id": "t4", "theme": "Rooms-only theme", "market_first_seen": null, "attended_first_seen": "2026-10-05", "market_lead_weeks": null, "attended_count_8w": 3, "market_count_8w": 0, "lead_lag_shown": false }
     ],
     "denominators": {
-      "attended": "events in window: 7",
-      "research": "briefs (documents) in window: 2"
-    }
+      "attended": { "events": 6 },
+      "research": { "briefs": 9 },
+      "market": { "facts_by_source": { "arxiv": 12 }, "watchlist_covered": 2, "watchlist_size": 40 },
+      "job": { "boards_scanned": 0 }
+    },
+    "window": { "from_week": "2026-W38", "to_week": "2026-W45", "anchored_on": "2026-11-02" }
+  },
+  "invalid_shown_missing": {
+    "view": "mi.theme_lead_lag",
+    "rows": [
+      { "theme_id": "t1", "theme": "Agent infra", "market_first_seen": "2026-05-04", "attended_first_seen": "2026-06-22", "market_lead_weeks": 7.0, "attended_count_8w": 6, "market_count_8w": 5 }
+    ],
+    "denominators": { "attended": { "events": 1 }, "research": { "briefs": 1 }, "market": { "facts_by_source": {}, "watchlist_covered": 0, "watchlist_size": 0 }, "job": { "boards_scanned": 0 } },
+    "window": { "from_week": "2026-W38", "to_week": "2026-W45", "anchored_on": "2026-11-02" }
+  },
+  "invalid_bad_date": {
+    "view": "mi.theme_lead_lag",
+    "rows": [
+      { "theme_id": "t1", "theme": "Agent infra", "market_first_seen": "05/2026", "attended_first_seen": "2026-06-22", "market_lead_weeks": 7.0, "attended_count_8w": 6, "market_count_8w": 5, "lead_lag_shown": true }
+    ],
+    "denominators": { "attended": { "events": 1 }, "research": { "briefs": 1 }, "market": { "facts_by_source": {}, "watchlist_covered": 0, "watchlist_size": 0 }, "job": { "boards_scanned": 0 } },
+    "window": { "from_week": "2026-W38", "to_week": "2026-W45", "anchored_on": "2026-11-02" }
   }
 }

@@ -1,64 +1,64 @@
 {
-  "description": "Fixture public.mi_slice envelopes for the market-intel selftests — the 0016 contract ({view, rows, denominators, window}) plus the negative cases that must render instrumenting, never a partial slice. Themes are fictional; no PII (AGENTS.md rule 4).",
-  "heatmap_envelope": {
+  "valid": {
     "view": "mi.theme_week",
-    "window": {
-      "anchored_on": "2026-11-02",
-      "weeks": ["2026-W38", "2026-W39", "2026-W40", "2026-W41", "2026-W42", "2026-W43", "2026-W44", "2026-W45"]
-    },
     "rows": [
-      { "theme": "Agentic infrastructure", "iso_week": "2026-W45", "lens": "attended", "facts": 4, "companies": 2, "sources": 2, "floor_flag": "ok" },
-      { "theme": "Agentic infrastructure", "iso_week": "2026-W44", "lens": "attended", "facts": 3, "companies": 1, "sources": 1, "floor_flag": "ok" },
-      { "theme": "Agentic infrastructure", "iso_week": "2026-W45", "lens": "market", "facts": 9, "companies": 4, "sources": 3, "floor_flag": "ok" },
-      { "theme": "Agentic infrastructure", "topic": "(general)", "iso_week": "2026-W45", "lens": "market", "facts": 2, "general_facts": 2, "floor_flag": "ok" },
-      { "theme": "Inference cost curves", "iso_week": "2026-W45", "lens": "attended", "facts": 1, "floor_flag": "insufficient_data" },
-      { "theme": "Inference cost curves", "iso_week": "2026-W45", "lens": "research", "facts": 6, "sources": 2, "floor_flag": "ok" }
+      { "theme_id": "t1", "theme": "Agent infra", "iso_week": "2026-W45", "lens": "attended", "facts": 4, "distinct_companies": 3, "distinct_sources": 4, "general_facts": 1, "floor_flag": "ok", "theme_resolved": "asof" },
+      { "theme_id": "t1", "theme": "Agent infra", "iso_week": "2026-W44", "lens": "attended", "facts": 2, "distinct_companies": 2, "distinct_sources": 2, "general_facts": 0, "floor_flag": "ok", "theme_resolved": "asof" },
+      { "theme_id": "t1", "theme": "Agent infra", "iso_week": "2026-W45", "lens": "market", "facts": 5, "distinct_companies": 4, "distinct_sources": 5, "general_facts": 2, "floor_flag": "ok", "theme_resolved": "asof" },
+      { "theme_id": "t2", "theme": "Eval tooling", "iso_week": "2026-W45", "lens": "attended", "facts": 1, "distinct_companies": 1, "distinct_sources": 1, "general_facts": 0, "floor_flag": "insufficient_data", "theme_resolved": "seed" },
+      { "theme_id": "t2", "theme": "Eval tooling", "iso_week": "2026-W40", "lens": "research", "facts": 3, "distinct_companies": 2, "distinct_sources": 3, "general_facts": 3, "floor_flag": "ok", "theme_resolved": "asof" },
+      { "theme_id": "t3", "theme": "Thin signal", "iso_week": "2026-W39", "lens": "attended", "facts": 9, "distinct_companies": 5, "distinct_sources": 5, "general_facts": 0, "floor_flag": "ok", "theme_resolved": "asof" }
     ],
     "denominators": {
-      "attended": "events in window: 4 (2026-10-05..2026-11-02)",
-      "market": "facts from 5 sources; watchlist coverage 12/40",
-      "research": "briefs (documents) in window: 2"
-    }
-  },
-  "derived_window_envelope": {
-    "view": "mi.theme_week",
-    "window": { "anchored_on": "2026-11-02" },
-    "rows": [
-      { "theme": "Agentic infrastructure", "iso_week": "2026-W45", "lens": "attended", "facts": 4, "floor_flag": "ok" }
-    ],
-    "denominators": { "attended": "events in window: 4" }
+      "attended": { "events": 6 },
+      "research": { "briefs": 9 },
+      "market": { "facts_by_source": { "arxiv": 12, "hn": 7 }, "watchlist_covered": 2, "watchlist_size": 40 },
+      "job": { "boards_scanned": 0 }
+    },
+    "window": { "from_week": "2026-W38", "to_week": "2026-W45", "anchored_on": "2026-11-02" }
   },
   "invalid_bare_array": [
-    { "theme": "Agentic infrastructure", "iso_week": "2026-W45", "lens": "attended", "facts": 4, "floor_flag": "ok" }
+    { "theme_id": "t1", "theme": "Agent infra", "iso_week": "2026-W45", "lens": "attended", "facts": 4 }
   ],
   "invalid_missing_window": {
     "view": "mi.theme_week",
     "rows": [],
-    "denominators": {}
+    "denominators": { "attended": { "events": 1 }, "research": { "briefs": 1 }, "market": { "facts_by_source": {}, "watchlist_covered": 0, "watchlist_size": 0 }, "job": { "boards_scanned": 0 } }
   },
-  "invalid_denominator_gap": {
-    "view": "mi.theme_week",
-    "window": { "anchored_on": "2026-11-02", "weeks": ["2026-W45"] },
-    "rows": [
-      { "theme": "Agentic infrastructure", "iso_week": "2026-W45", "lens": "attended", "facts": 4, "floor_flag": "ok" },
-      { "theme": "Agentic infrastructure", "iso_week": "2026-W45", "lens": "market", "facts": 9, "floor_flag": "ok" }
-    ],
-    "denominators": { "attended": "events in window: 4" }
+  "invalid_wrong_view": {
+    "view": "mi.company_cohort",
+    "rows": [],
+    "denominators": { "attended": { "events": 1 }, "research": { "briefs": 1 }, "market": { "facts_by_source": {}, "watchlist_covered": 0, "watchlist_size": 0 }, "job": { "boards_scanned": 0 } },
+    "window": { "from_week": "2026-W38", "to_week": "2026-W45", "anchored_on": "2026-11-02" }
   },
-  "invalid_blended_lens": {
+  "invalid_malformed_iso_week": {
     "view": "mi.theme_week",
-    "window": { "anchored_on": "2026-11-02", "weeks": ["2026-W45"] },
     "rows": [
-      { "theme": "Agentic infrastructure", "iso_week": "2026-W45", "lens": "all", "facts": 99, "floor_flag": "ok" }
+      { "theme_id": "t1", "theme": "Agent infra", "iso_week": "2026-W99", "lens": "attended", "facts": 4, "distinct_companies": 1, "distinct_sources": 1, "general_facts": 0, "floor_flag": "ok", "theme_resolved": "asof" }
     ],
-    "denominators": { "attended": "events in window: 4" }
+    "denominators": { "attended": { "events": 1 }, "research": { "briefs": 1 }, "market": { "facts_by_source": {}, "watchlist_covered": 0, "watchlist_size": 0 }, "job": { "boards_scanned": 0 } },
+    "window": { "from_week": "2026-W38", "to_week": "2026-W45", "anchored_on": "2026-11-02" }
+  },
+  "invalid_unknown_lens": {
+    "view": "mi.theme_week",
+    "rows": [
+      { "theme_id": "t1", "theme": "Agent infra", "iso_week": "2026-W45", "lens": "job", "facts": 4, "distinct_companies": 1, "distinct_sources": 1, "general_facts": 0, "floor_flag": "ok", "theme_resolved": "asof" }
+    ],
+    "denominators": { "attended": { "events": 1 }, "research": { "briefs": 1 }, "market": { "facts_by_source": {}, "watchlist_covered": 0, "watchlist_size": 0 }, "job": { "boards_scanned": 0 } },
+    "window": { "from_week": "2026-W38", "to_week": "2026-W45", "anchored_on": "2026-11-02" }
   },
   "invalid_row_outside_window": {
     "view": "mi.theme_week",
-    "window": { "anchored_on": "2026-11-02", "weeks": ["2026-W45"] },
     "rows": [
-      { "theme": "Outside the window", "iso_week": "2026-W20", "lens": "attended", "facts": 9, "floor_flag": "ok" }
+      { "theme_id": "t1", "theme": "Agent infra", "iso_week": "2026-W30", "lens": "attended", "facts": 4, "distinct_companies": 1, "distinct_sources": 1, "general_facts": 0, "floor_flag": "ok", "theme_resolved": "asof" }
     ],
-    "denominators": { "attended": "events in window: 4" }
+    "denominators": { "attended": { "events": 1 }, "research": { "briefs": 1 }, "market": { "facts_by_source": {}, "watchlist_covered": 0, "watchlist_size": 0 }, "job": { "boards_scanned": 0 } },
+    "window": { "from_week": "2026-W38", "to_week": "2026-W45", "anchored_on": "2026-11-02" }
+  },
+  "invalid_denominator_shape": {
+    "view": "mi.theme_week",
+    "rows": [],
+    "denominators": { "attended": { "events": 1 }, "research": { "briefs": 1 }, "market": { "facts_by_source": "arxiv:12", "watchlist_covered": 0, "watchlist_size": 0 }, "job": { "boards_scanned": 0 } },
+    "window": { "from_week": "2026-W38", "to_week": "2026-W45", "anchored_on": "2026-11-02" }
   }
 }
