@@ -164,13 +164,16 @@ function LeadLagStrip({ leadLag }: { leadLag: LeadLag }) {
                     ? `market leads by ${row.marketLeadWeeks}w`
                     : row.marketLeadWeeks != null
                       ? `rooms lead by ${-row.marketLeadWeeks}w`
-                      : "no information (floor)"}
+                      : "no information yet"}
                 </span>
               ) : (
                 // SQL's lead_lag_shown = false: the figure stays unrendered. The theme
-                // still shows, plainly — an all-false window is the correct null state,
-                // not an error and not something to hide.
-                <span className="shrink-0 text-[11px] text-muted/70">no information (floor)</span>
+                // still shows, plainly — an all-false window (today: the market lens has
+                // 0 facts in the last 8 weeks) is the correct null state, not an error
+                // and not something to hide.
+                <span className="shrink-0 text-[11px] text-muted/70">
+                  no information yet (market lens empty)
+                </span>
               )}
             </li>
           ))}
@@ -223,8 +226,8 @@ export default async function MarketIntelPage() {
             <p className="mt-2 text-[11px] text-muted/70">
               A lead renders only when SQL&rsquo;s lead_lag_shown is true (both lenses
               clear the floor over the trailing 8 weeks); otherwise the theme reads
-              &ldquo;no information (floor)&rdquo;. With a thin market lens that is the
-              correct null state for every theme.
+              &ldquo;no information yet (market lens empty)&rdquo;. With a thin market
+              lens that is the correct null state for every theme.
             </p>
           </section>
         </>

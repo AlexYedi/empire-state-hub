@@ -51,6 +51,9 @@ export const THEME_WEEK_LENSES = ["attended", "research", "market"];
  * @typedef {ThemeWeekEnvelope|LeadLagEnvelope} MiEnvelope */
 
 const ISO_DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
+// first_seen fields arrive from Postgres timestamptz, e.g. "2026-04-15T00:00:00+00:00"
+// (verified live) — accept a bare date or a full ISO timestamp.
+const ISO_DATE_OR_TS_RE = /^\d{4}-\d{2}-\d{2}(?:T\S+)?$/;
 const MI_VIEWS = ["mi.theme_week", "mi.theme_lead_lag"];
 
 function isNonnegInt(v) {
@@ -62,7 +65,9 @@ function nonEmptyString(v) {
 }
 
 function dateOrNull(v) {
-  return v === null || (typeof v === "string" && ISO_DATE_RE.test(v));
+  // first_seen fields are timestamptz strings from Postgres — a bare date or a full
+  // ISO timestamp is valid; window dates use the strict date-only regex instead.
+  return v === null || (typeof v === "string" && ISO_DATE_OR_TS_RE.test(v));
 }
 
 function themeWeekRowDefects(row) {

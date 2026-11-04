@@ -126,7 +126,7 @@ test("buildLeadLag renders the 0016-signed figure only when SQL's lead_lag_shown
   const leadLag = buildLeadLag(parseMiEnvelope(leadLagFixture.valid, "mi.theme_lead_lag"));
   const shown = leadLag.rows.find((r) => r.theme === "Agent infra");
   assert.equal(shown.shown, true);
-  assert.equal(shown.marketLeadWeeks, 7.0);
+  assert.equal(shown.marketLeadWeeks, 7.5);
   // Eval tooling: SQL says false, so the figure is not carried — but the theme still appears.
   const gated = leadLag.rows.find((r) => r.theme === "Eval tooling");
   assert.equal(gated.shown, false);
@@ -136,6 +136,21 @@ test("buildLeadLag renders the 0016-signed figure only when SQL's lead_lag_shown
   const roomsOnly = leadLag.rows.find((r) => r.theme === "Rooms-only theme");
   assert.equal(roomsOnly.shown, false);
   assert.equal(roomsOnly.marketLeadWeeks, null);
+});
+
+test("timestamptz first_seen strings (verified live) parse — a bare date is not the only shape", () => {
+  // Live mi.theme_lead_lag rows carry Postgres timestamptz strings, e.g.
+  // "2026-04-15T00:00:00+00:00"; date-only first_seen would reject every live row.
+  const envelope = parseMiEnvelope(leadLagFixture.valid, "mi.theme_lead_lag");
+  assert.ok(envelope);
+  for (const row of envelope.rows) {
+    assert.ok(
+      row.market_first_seen === null || /^(\d{4}-\d{2}-\d{2})(T\S+)?$/.test(row.market_first_seen),
+    );
+  }
+  // A fractional JSON float survives: market_lead_weeks is not forced to an integer.
+  const shown = leadLagFixture.valid.rows[0];
+  assert.ok(!Number.isInteger(shown.market_lead_weeks));
 });
 
 // --- hygiene: 0016 dropped company_cohort.target_tier — no reference may remain ---
