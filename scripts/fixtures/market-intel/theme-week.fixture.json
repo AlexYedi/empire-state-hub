@@ -1,0 +1,21 @@
+{
+  "description": "Fixture theme_week rows for the market-intel selftests — the cases the proposal's honesty rules decide (floor at 3 facts, seed resolution, unknown lens, malformed rows, window clipping).",
+  "theme_week": [
+    { "theme_id": "t-agentic", "theme": "Agentic infrastructure", "lens": "attended", "iso_week": "2026-W40", "facts": 2, "distinct_companies": 2, "distinct_sources": 1, "denominator": 84, "theme_resolved": "live" },
+    { "theme_id": "t-agentic", "theme": "Agentic infrastructure", "lens": "attended", "iso_week": "2026-W41", "facts": 1, "distinct_companies": 1, "distinct_sources": 1, "denominator": 84, "theme_resolved": "live" },
+    { "theme_id": "t-agentic", "theme": "Agentic infrastructure", "lens": "market", "iso_week": "2026-W40", "facts": 3, "distinct_companies": 3, "distinct_sources": 2, "denominator": 40, "theme_resolved": "live" },
+    { "theme_id": "t-agentic", "theme": "Agentic infrastructure", "lens": "market", "iso_week": "2026-W41", "facts": 2, "distinct_companies": 2, "distinct_sources": 1, "denominator": 40, "theme_resolved": "live" },
+    { "theme_id": "t-inference", "theme": "Inference cost curves", "lens": "attended", "iso_week": "2026-W41", "facts": 4, "distinct_companies": 3, "distinct_sources": 2, "denominator": 84, "theme_resolved": "seed" },
+    { "theme_id": "t-inference", "theme": "Inference cost curves", "lens": "research", "iso_week": "2026-W41", "facts": 6, "distinct_companies": null, "distinct_sources": 3, "denominator": 12, "theme_resolved": "seed" },
+    { "theme_id": "t-old", "theme": "Outside the window", "lens": "attended", "iso_week": "2026-W20", "facts": 9, "distinct_companies": 5, "distinct_sources": 2, "denominator": 80, "theme_resolved": "live" },
+    { "theme_id": "t-unknown", "theme": "Unknown lens", "lens": "podcast", "iso_week": "2026-W41", "facts": 5, "theme_resolved": "live" },
+    { "theme_id": "", "theme": "No id", "lens": "attended", "iso_week": "2026-W41", "facts": 5, "theme_resolved": "live" },
+    { "theme_id": "t-neg", "theme": "Negative facts", "lens": "attended", "iso_week": "2026-W41", "facts": -2, "theme_resolved": "live" },
+    "not-even-an-object"
+  ],
+  "window": {
+    "description": "With the anchor at 2026-W41 and a 8-week window, weeks W20 falls outside; W40 and W41 stay in.",
+    "anchor": "2026-W41",
+    "windowWeeks": 8
+  }
+}

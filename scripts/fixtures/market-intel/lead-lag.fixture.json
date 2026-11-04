@@ -1,0 +1,49 @@
+{
+  "description": "Fixture theme_lead_lag rows — one visible (both lenses above floor, lead outside the null band), one inside the band, one below floor, one with a null band.",
+  "lead_lag": [
+    {
+      "theme_id": "t-agentic",
+      "theme": "Agentic infrastructure",
+      "market_first_seen": "2026-W36",
+      "attended_first_seen": "2026-W40",
+      "lead_weeks": 4,
+      "band_low": -1,
+      "band_high": 1,
+      "attended_count_8w": 3,
+      "market_count_8w": 5
+    },
+    {
+      "theme_id": "t-inference",
+      "theme": "Inference cost curves",
+      "market_first_seen": "2026-W39",
+      "attended_first_seen": "2026-W40",
+      "lead_weeks": 1,
+      "band_low": -2,
+      "band_high": 2,
+      "attended_count_8w": 4,
+      "market_count_8w": 4
+    },
+    {
+      "theme_id": "t-thin",
+      "theme": "Thin theme",
+      "market_first_seen": "2026-W38",
+      "attended_first_seen": "2026-W41",
+      "lead_weeks": 3,
+      "band_low": -1,
+      "band_high": 1,
+      "attended_count_8w": 2,
+      "market_count_8w": 9
+    },
+    {
+      "theme_id": "t-noband",
+      "theme": "No band theme",
+      "market_first_seen": "2026-W36",
+      "attended_first_seen": "2026-W40",
+      "lead_weeks": 4,
+      "band_low": null,
+      "band_high": null,
+      "attended_count_8w": 6,
+      "market_count_8w": 6
+    }
+  ]
+}
