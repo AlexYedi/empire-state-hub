@@ -1,0 +1,33 @@
+{
+  "valid": {
+    "view": "mi.theme_lead_lag",
+    "rows": [
+      { "theme_id": "t1", "theme": "Agent infra", "market_first_seen": "2026-05-04T00:00:00+00:00", "attended_first_seen": "2026-06-22T00:00:00+00:00", "market_lead_weeks": 7.5, "attended_count_8w": 6, "market_count_8w": 5, "lead_lag_shown": true },
+      { "theme_id": "t2", "theme": "Eval tooling", "market_first_seen": "2026-09-07T00:00:00+00:00", "attended_first_seen": "2026-08-10T00:00:00+00:00", "market_lead_weeks": -4.0, "attended_count_8w": 4, "market_count_8w": 1, "lead_lag_shown": false },
+      { "theme_id": "t4", "theme": "Rooms-only theme", "market_first_seen": null, "attended_first_seen": "2026-10-05T00:00:00+00:00", "market_lead_weeks": null, "attended_count_8w": 3, "market_count_8w": 0, "lead_lag_shown": false }
+    ],
+    "denominators": {
+      "attended": { "events": 6 },
+      "research": { "briefs": 9 },
+      "market": { "facts_by_source": { "arxiv": 12 }, "watchlist_covered": 2, "watchlist_size": 40 },
+      "job": { "boards_scanned": 0 }
+    },
+    "window": { "from_week": "2026-W38", "to_week": "2026-W45", "anchored_on": "2026-11-02" }
+  },
+  "invalid_shown_missing": {
+    "view": "mi.theme_lead_lag",
+    "rows": [
+      { "theme_id": "t1", "theme": "Agent infra", "market_first_seen": "2026-05-04T00:00:00+00:00", "attended_first_seen": "2026-06-22T00:00:00+00:00", "market_lead_weeks": 7.5, "attended_count_8w": 6, "market_count_8w": 5 }
+    ],
+    "denominators": { "attended": { "events": 1 }, "research": { "briefs": 1 }, "market": { "facts_by_source": {}, "watchlist_covered": 0, "watchlist_size": 0 }, "job": { "boards_scanned": 0 } },
+    "window": { "from_week": "2026-W38", "to_week": "2026-W45", "anchored_on": "2026-11-02" }
+  },
+  "invalid_bad_date": {
+    "view": "mi.theme_lead_lag",
+    "rows": [
+      { "theme_id": "t1", "theme": "Agent infra", "market_first_seen": "05/2026", "attended_first_seen": "2026-06-22T00:00:00+00:00", "market_lead_weeks": 7.5, "attended_count_8w": 6, "market_count_8w": 5, "lead_lag_shown": true }
+    ],
+    "denominators": { "attended": { "events": 1 }, "research": { "briefs": 1 }, "market": { "facts_by_source": {}, "watchlist_covered": 0, "watchlist_size": 0 }, "job": { "boards_scanned": 0 } },
+    "window": { "from_week": "2026-W38", "to_week": "2026-W45", "anchored_on": "2026-11-02" }
+  }
+}
