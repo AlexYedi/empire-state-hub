@@ -1,11 +1,12 @@
 import type { MetadataRoute } from "next";
 import { getRooms } from "@/lib/rooms";
 import { getLongReadSummaries } from "@/lib/long-reads";
+import { getProjects } from "@/lib/projects";
 import { siteOrigin } from "@/lib/site-url";
 
 // Static public routes, enumerated by hand — /ops/* is deliberately absent (E-01
 // item 5); nothing under src/app/ops may ever be crawlable.
-const STATIC_ROUTES = ["", "/rooms", "/themes", "/architecture", "/journal", "/about", "/changelog", "/build-arcs", "/work"];
+const STATIC_ROUTES = ["", "/projects", "/rooms", "/themes", "/architecture", "/journal", "/about", "/changelog", "/build-arcs", "/work"];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const origin = siteOrigin();
@@ -19,6 +20,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...getRooms().map((room) => ({
       url: `${origin}/rooms/${room.slug}`,
       lastModified: now,
+    })),
+    // E-11: each project page, keyed by its own last update.
+    ...getProjects().map((p) => ({
+      url: `${origin}/projects/${p.slug}`,
+      lastModified: new Date(p.updated + "T00:00:00Z"),
     })),
     // E-02 executable 6: each long read is its own crawlable page, keyed by the
     // read's own updated date rather than "now".

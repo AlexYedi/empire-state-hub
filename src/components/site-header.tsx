@@ -5,6 +5,7 @@ import { LensToggle } from "./lens-toggle";
 import { useLens } from "./lens-provider";
 
 const NAV = [
+  { href: "/projects", label: "In Flight" },
   { href: "/architecture", label: "The System" },
   { href: "/build-arcs", label: "Build Arcs" },
   { href: "/builds", label: "Builds" },
