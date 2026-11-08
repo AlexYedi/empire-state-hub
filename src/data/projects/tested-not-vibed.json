@@ -1,7 +1,7 @@
 {
   "slug": "tested-not-vibed",
   "title": "Tested, not vibed: GTM writing evals",
-  "tagline": "Testing whether the instructions behind AI-written GTM copy beat saying nothing, with every room attended debriefed into the graph behind it.",
+  "tagline": "Testing which of the instructions behind AI-written GTM copy beat saying nothing, with a public suite anyone can re-run.",
   "kind": "project",
   "status": "active",
   "health": "at-risk",
@@ -10,13 +10,12 @@
   "started": "2026-11-04",
   "target": "2026-12-19",
   "updated": "2026-11-08",
-  "why": "The pipeline writes every post, note and brief from a style guide of more than 100 rules, and none of them has ever been run against a no-guidance control, so nobody can say which rules change the output. Debriefs lag too: most attended rooms never got a post-event brief, so the graph holds a fraction of what was heard.",
-  "mission": "A public, re-runnable eval suite for GTM agent writing. It screens failure types from Alex's own review comments against a no-guidance control, then tests rule wordings only where the control fails. Alongside it: a backfill of every undebriefed attended room, and an audit of the whole rulebook.",
-  "destination": "A pre-registered study with raw samples, grader code and outside graders, published so a stranger can re-run it. The rulebook keeps only rules that beat saying nothing, and at least 50 attended rooms are debriefed into the graph. Anyone can check by re-running the suite and reading the coverage count.",
+  "why": "The pipeline writes every post, note and brief from a style guide of more than 100 guidance lines. As of 8 November 2026, none of them had been run against a no-guidance control (first-party check of the pipeline repo), so nobody can say which lines change the output.",
+  "mission": "A public, re-runnable eval suite for GTM agent writing, aimed at Alex's own rulebook. It screens failure types drawn from his review comments against a no-guidance control, then tests rule wordings only where the control fails. Alongside it, an audit of every rule and a backfill of debriefs for attended rooms that never got one.",
+  "destination": "A pre-registered study published with its raw samples, grader code and agreement between graders, so a stranger can re-run it. The rulebook keeps only the rules that beat saying nothing, and the count of rules tested appears on this page as a metric. Anyone can check by re-running the suite.",
   "showcase": [
-    "Designing a behaviour eval the way a lab would: pre-registration before the first sample, a no-guidance control, yes/no graders, a rep count chosen for statistical power, and every raw sample published",
-    "Running a falsification search before claiming a 'first', then narrowing the claim to what the prior-art search left standing",
-    "Re-deriving a cited number from the raw labels before relying on it, and correcting the record when the two disagreed",
+    "Designing a behaviour eval the way a lab would (designed, not yet run): pre-registration before the first sample, a no-guidance control, yes/no graders and a rep count set for statistical power",
+    "Screening many failure types against the control first instead of hand-picking test cases, which removes author selection bias",
     "Sizing a build by two budgets: the hours only Alex can give (decisions, labels, reads) and the hours agents can run overnight",
     "Applying a method from software engineering (test the instruction against its absence first) to sales and marketing writing"
   ],
@@ -39,14 +38,14 @@
       "date": "2026-11-14"
     },
     {
-      "title": "Screen up to 8 failure types against the no-guidance control",
-      "status": "next",
-      "date": "2026-11-22"
-    },
-    {
       "title": "Debrief backfill, first wave of three rooms",
       "status": "next",
       "date": "2026-11-15"
+    },
+    {
+      "title": "Screen up to 8 failure types against the no-guidance control",
+      "status": "next",
+      "date": "2026-11-22"
     },
     {
       "title": "Full run on the failure types the control fails",
@@ -59,7 +58,7 @@
       "date": "2026-12-12"
     },
     {
-      "title": "At least 50 attended rooms debriefed",
+      "title": "Debrief backfill complete for attended rooms",
       "status": "later",
       "date": "2026-12-19"
     }
@@ -78,13 +77,13 @@
     },
     {
       "date": "2026-11-08",
-      "decision": "Backfilled debriefs write to the knowledge graph without step-by-step review. Drafts, outreach and CRM records stay out of the backfill.",
-      "why": "Lead with building and add controls when a real failure shows up."
+      "decision": "Backfilled debriefs feed only the private knowledge graph. Drafts, outreach and CRM records stay out of the backfill, and every backfilled claim is tagged as backfill (by design).",
+      "why": "Rooms debriefed weeks later are useful context, but they shouldn't read as first-hand records."
     },
     {
       "date": "2026-11-08",
-      "decision": "Narrow the headline from 'first eval of GTM agent writing' to 'first head-to-head test of marketplace GTM skills against a no-guidance control, blind and independently graded'.",
-      "why": "A prior-art search found a public single-skill comparison and a public sales-outreach benchmark, so the broad claim wouldn't hold."
+      "decision": "Make no claim of being first until the write-up publishes with its prior-art section.",
+      "why": "A claim of being first is only as strong as the search behind it, and that search belongs in the public write-up."
     }
   ],
   "open": [
@@ -118,11 +117,11 @@
   "log": [
     {
       "date": "2026-11-08",
-      "text": "Plan rewritten at full scale and its headline claims checked against prior art. The backfill was approved."
+      "text": "Plan rewritten at full scale, with its claims checked against prior art and narrowed."
     },
     {
       "date": "2026-11-06",
-      "text": "First plan written, red-teamed and published for review."
+      "text": "First plan written, red-teamed and shared for review."
     },
     {
       "date": "2026-11-04",
