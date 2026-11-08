@@ -1,0 +1,147 @@
+{
+  "slug": "tested-not-vibed",
+  "title": "Tested, not vibed: GTM writing evals",
+  "tagline": "Testing whether the instructions behind AI-written GTM copy beat saying nothing, with every room attended debriefed into the graph behind it.",
+  "kind": "project",
+  "status": "active",
+  "health": "at-risk",
+  "phase": "Week 1: pre-registration and throughput test",
+  "owner": "Alex Yedibalian + Claude Code",
+  "started": "2026-11-04",
+  "target": "2026-12-19",
+  "updated": "2026-11-08",
+  "why": "The pipeline writes every post, note and brief from a style guide of more than 100 rules, and none of them has ever been run against a no-guidance control, so nobody can say which rules change the output. Debriefs lag too: most attended rooms never got a post-event brief, so the graph holds a fraction of what was heard.",
+  "mission": "A public, re-runnable eval suite for GTM agent writing. It screens failure types from Alex's own review comments against a no-guidance control, then tests rule wordings only where the control fails. Alongside it: a backfill of every undebriefed attended room, and an audit of the whole rulebook.",
+  "destination": "A pre-registered study with raw samples, grader code and outside graders, published so a stranger can re-run it. The rulebook keeps only rules that beat saying nothing, and at least 50 attended rooms are debriefed into the graph. Anyone can check by re-running the suite and reading the coverage count.",
+  "showcase": [
+    "Designing a behaviour eval the way a lab would: pre-registration before the first sample, a no-guidance control, yes/no graders, a rep count chosen for statistical power, and every raw sample published",
+    "Running a falsification search before claiming a 'first', then narrowing the claim to what the prior-art search left standing",
+    "Re-deriving a cited number from the raw labels before relying on it, and correcting the record when the two disagreed",
+    "Sizing a build by two budgets: the hours only Alex can give (decisions, labels, reads) and the hours agents can run overnight",
+    "Applying a method from software engineering (test the instruction against its absence first) to sales and marketing writing"
+  ],
+  "milestones": [
+    {
+      "title": "First plan: adopt the method, not the skills",
+      "status": "done",
+      "date": "2026-11-06",
+      "note": "12 moves over 8 weeks, red-teamed before review."
+    },
+    {
+      "title": "Plan rewritten at full scale, claims checked against prior art",
+      "status": "done",
+      "date": "2026-11-08",
+      "note": "Five lanes to the end of the year. Agents build and run the samples. Alex decides, labels and reads."
+    },
+    {
+      "title": "Pre-registration signed and sampling throughput measured",
+      "status": "active",
+      "date": "2026-11-14"
+    },
+    {
+      "title": "Screen up to 8 failure types against the no-guidance control",
+      "status": "next",
+      "date": "2026-11-22"
+    },
+    {
+      "title": "Debrief backfill, first wave of three rooms",
+      "status": "next",
+      "date": "2026-11-15"
+    },
+    {
+      "title": "Full run on the failure types the control fails",
+      "status": "later",
+      "date": "2026-11-29"
+    },
+    {
+      "title": "Eval suite and write-up published",
+      "status": "later",
+      "date": "2026-12-12"
+    },
+    {
+      "title": "At least 50 attended rooms debriefed",
+      "status": "later",
+      "date": "2026-12-19"
+    }
+  ],
+  "metrics": [],
+  "decisions": [
+    {
+      "date": "2026-11-06",
+      "decision": "Adopt the testing method, not the borrowed skills: an instruction stays only if it beats saying nothing.",
+      "why": "Imported skills were written for coding agents. The method transfers to writing, the wording doesn't."
+    },
+    {
+      "date": "2026-11-08",
+      "decision": "Screen many failure types against a control instead of hand-picking two test cases.",
+      "why": "Picking the cases yourself biases the study, and two small cases make the whole result hang on chance."
+    },
+    {
+      "date": "2026-11-08",
+      "decision": "Backfilled debriefs write to the knowledge graph without step-by-step review. Drafts, outreach and CRM records stay out of the backfill.",
+      "why": "Lead with building and add controls when a real failure shows up."
+    },
+    {
+      "date": "2026-11-08",
+      "decision": "Narrow the headline from 'first eval of GTM agent writing' to 'first head-to-head test of marketplace GTM skills against a no-guidance control, blind and independently graded'.",
+      "why": "A prior-art search found a public single-skill comparison and a public sales-outreach benchmark, so the broad claim wouldn't hold."
+    }
+  ],
+  "open": [
+    {
+      "question": "Final sign-off on the five-lane plan, so the per-lane work can be opened.",
+      "owner": "Alex"
+    },
+    {
+      "question": "Sign the pre-registration (failure types, yes/no checks, primary comparisons, kill rules) before any study sample is generated.",
+      "owner": "Alex"
+    },
+    {
+      "question": "Name and home of the public eval-suite repo.",
+      "owner": "Alex"
+    }
+  ],
+  "risks": [
+    {
+      "risk": "The subscription may not sustain the sampling rate the study needs. The rate hasn't been measured yet.",
+      "mitigation": "A timed 100-sample throughput test in week 1, with a set order of what gets cut if the rate binds. The study itself is cut last."
+    },
+    {
+      "risk": "The author wrote the rules, the failure cases and the grader, so a positive result could just be the author agreeing with himself.",
+      "mitigation": "By design: pre-registration before the first sample, yes/no checks graded by code where possible, a blind grader that never sees the style guide, raw samples published, and outside graders whose agreement is reported."
+    },
+    {
+      "risk": "Backfilled debriefs written weeks after the event could read as fact to later runs.",
+      "mitigation": "By design, every backfilled claim is tagged as backfill, and nothing public is written from a backfilled event."
+    }
+  ],
+  "log": [
+    {
+      "date": "2026-11-08",
+      "text": "Plan rewritten at full scale and its headline claims checked against prior art. The backfill was approved."
+    },
+    {
+      "date": "2026-11-06",
+      "text": "First plan written, red-teamed and published for review."
+    },
+    {
+      "date": "2026-11-04",
+      "text": "Attended a talk on test-first agent instructions, which started the project."
+    }
+  ],
+  "links": [
+    {
+      "label": "Pipeline repo",
+      "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3"
+    }
+  ],
+  "tracking": [
+    "YED-338"
+  ],
+  "stack": [
+    "Claude Code",
+    "Python",
+    "Notion",
+    "Supabase Postgres"
+  ]
+}
