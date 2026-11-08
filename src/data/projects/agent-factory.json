@@ -1,0 +1,47 @@
+{
+  "slug": "agent-factory",
+  "title": "Agent factory",
+  "tagline": "A repo-agnostic system where agents write, test and review every pull request, and a human decides only what needs judgment.",
+  "kind": "project",
+  "status": "active",
+  "health": "on-track",
+  "phase": "Phase 0: portable core and gate",
+  "owner": "Alex Yedibalian + Claude Code",
+  "started": "2026-11-05",
+  "target": "2026-11-13",
+  "updated": "2026-11-08",
+  "why": "For a week an external autonomous builder opened most of the pull requests here. When its trial ended, coding sessions were the only builder left and there was no independent review. Every merge either waited on one person or skipped review.",
+  "mission": "A portable gate any repo can adopt. Tests run with no secrets. A reviewer agent sees only the diff, as data, with no tools. Each change is sorted into a risk tier, and low-risk tiers merge without a human, while privacy code, migrations and workflow files always stop for a person.",
+  "destination": "A reference-only pull request merges with no human touch, a guarded one stops for review, and the reviewer has been back-tested on a labelled set of past pull requests. A day-14 read-out decides whether it stays.",
+  "showcase": [
+    "Trust-boundary design for agents: untrusted text, private data and write access never meet in one job",
+    "Failing closed: a missing or malformed verdict, an expired token or a usage limit blocks the merge instead of passing it",
+    "Red-teaming a design before building it, and treating its blockers as entry criteria rather than backlog",
+    "Risk tiering, where anything the rules don't recognise defaults to the strictest tier"
+  ],
+  "milestones": [
+    { "title": "Design, systems analysis, eval plan and red-team review", "status": "done", "date": "2026-11-05" },
+    { "title": "Go decision on separate identities, agent review on every code PR, and the brief contract", "status": "done", "date": "2026-11-06" },
+    { "title": "Portable core: test workflow with no secrets, gate workflow defined from the base branch", "status": "active" },
+    { "title": "Separate identities: sessions stop merging under the owner's login", "status": "next" },
+    { "title": "Pilot on this pipeline repo", "status": "next" },
+    { "title": "Day-14 read-out against a baseline of human-authored PRs, with a kill rule", "status": "later" }
+  ],
+  "metrics": [],
+  "decisions": [
+    { "date": "2026-11-06", "decision": "Split identities: an agent account authors, an app approves low-risk tiers, and a person approves guarded paths in the browser.", "why": "An approval from the same login that wrote the change is not an independent review." },
+    { "date": "2026-11-06", "decision": "Run agent code review on every code PR, with no rubric or score, and a kill rule at day 14.", "why": "A reviewer that runs on every change has to prove it's worth its cost, so the test is quality per token." }
+  ],
+  "open": [],
+  "risks": [
+    { "risk": "Prompt injection: a diff can carry text written to talk the reviewer into approving.", "mitigation": "The reviewer gets a stripped diff only, no tools and no PR text, and needs a positive reviewed verdict to pass." },
+    { "risk": "A leak is published at push time, before any gate runs.", "mitigation": "A local pre-push scan, plus a lowest tier limited to reference and evidence files." }
+  ],
+  "log": [
+    { "date": "2026-11-06", "text": "Go decision taken on all three design questions. Phase 0 build started." },
+    { "date": "2026-11-05", "text": "Four independent analyses and a red-team review finished. Five blockers were named as entry criteria." }
+  ],
+  "links": [],
+  "tracking": ["YED-340", "YED-352"],
+  "stack": ["GitHub Actions", "GitHub Apps", "Claude Code", "Python"]
+}

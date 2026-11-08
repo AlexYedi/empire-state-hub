@@ -1,0 +1,81 @@
+{
+  "slug": "market-intelligence-lenses",
+  "title": "Market-intelligence lenses",
+  "tagline": "Turning a graph of NYC AI rooms into four readable lenses (attended, research, market, job), fed by scheduled lanes and read every Monday.",
+  "kind": "project",
+  "status": "active",
+  "health": "at-risk",
+  "phase": "Phase A: scheduled lanes",
+  "owner": "Alex Yedibalian + Claude Code",
+  "started": "2026-11-03",
+  "target": "2026-11-25",
+  "updated": "2026-11-08",
+  "why": "Topic trends had quietly stopped absorbing new topics after 8 August. 102 of 272 topics had no theme, and 9 of the 25 events attended since 6 August added nothing to any trend. The health check stayed green because it only checked that the maths was consistent.",
+  "mission": "A knowledge graph read through four lenses, sliceable by theme, segment, cohort and time. Each lens is fed by a lane, and every lane has a schedule, a run ledger, an alarm, a named consumer and a kill rule.",
+  "destination": "Every lane writes on schedule and alarms when it goes quiet. A Monday Market Brief reads the lenses, so prep for any room starts from what moved that week, not from a blank page.",
+  "showcase": [
+    "Diagnosing a silent data failure from the live database, and stating the do-nothing baseline before claiming a fix",
+    "Dimensional modelling for analytics: a slice contract with effective-dated theme membership, so a merge never breaks trend comparability",
+    "A privacy guard at the only write path, with every schema change rehearsed on a twin database before it reaches production",
+    "Operating discipline for pipelines: each lane ships with a ledger, an alarm, a consumer and a kill rule, or it doesn't ship"
+  ],
+  "milestones": [
+    { "title": "Diagnose the clustering gap and write the fix plan", "status": "done", "date": "2026-11-03" },
+    { "title": "Topic dedup and in-session theme assignment for the backlog", "status": "done", "date": "2026-11-04", "note": "Three new themes were added after review. Assignment now happens when a topic is created, with a nightly backstop." },
+    { "title": "Lane 0: link every topical claim to topics and companies", "status": "done", "date": "2026-11-05" },
+    { "title": "Lane 3: research frontier (trending models and weekly papers)", "status": "done", "date": "2026-11-05" },
+    { "title": "Lane 1: hiring pulse, from dry run to live writes", "status": "active", "note": "The lane runs weekly in dry-run. Its coverage alarm fired on 6 November, which is the alarm doing its job." },
+    { "title": "Lane 4: feeds staging table and fetcher", "status": "active", "note": "Both are reviewed and waiting to merge. The table is rehearsed on the twin, not yet applied to production." },
+    { "title": "Lane 2: choose the company-signals source before the vendor trial ends", "status": "next" },
+    { "title": "Monday Market Brief reads the lenses", "status": "later" }
+  ],
+  "metrics": [
+    {
+      "label": "Topics with no theme (invisible to trends)",
+      "baseline": "102 of 272",
+      "current": "1",
+      "asOf": "2026-11-08",
+      "source": { "label": "Baseline: PR #264. Now: read-only query of the production graph, excluding merged-away topics", "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/264" },
+      "note": "The one left is unassigned on purpose until a theme fits it."
+    },
+    {
+      "label": "Attended-room claims linked to a topic",
+      "baseline": "0",
+      "current": "1,179",
+      "asOf": "2026-11-05",
+      "source": { "label": "PR #295", "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/295" }
+    },
+    {
+      "label": "Research claims linked to a company",
+      "baseline": "55%",
+      "current": "82%",
+      "asOf": "2026-11-05",
+      "source": { "label": "PR #297", "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/297" }
+    }
+  ],
+  "decisions": [
+    { "date": "2026-11-03", "decision": "Replace the fixed 30-theme taxonomy with topics and subtopics that can group and evolve.", "why": "A fixed list kept dropping new subjects on the floor." },
+    { "date": "2026-11-04", "decision": "Assign a topic to a theme at the moment it's created, in the session that has full context. The nightly job becomes a backstop.", "why": "An embedding-only assigner placed 3% of the backlog at usable precision." },
+    { "date": "2026-11-04", "decision": "Build four lenses with sliceable cohorts instead of one trend view.", "why": "Thin data is a reason to ingest more, not to shrink the scope." }
+  ],
+  "open": [
+    { "question": "Which source replaces the company-signals trial when it lapses at the end of November?", "owner": "Alex" },
+    { "question": "Should the feeds table get a database-level PII check, or rely on the write-path guard for now?", "owner": "Alex" }
+  ],
+  "risks": [
+    { "risk": "The nightly health check is red while lane 1 stays in dry-run, and a red check can hide a real failure.", "mitigation": "Take lane 1 writes live after its first Sunday run is checked." },
+    { "risk": "Classifying feed text with a model in the session that holds write tools mixes untrusted input with write access.", "mitigation": "Move classification to a non-model runner, so the writing session never reads raw feed text." }
+  ],
+  "log": [
+    { "date": "2026-11-06", "text": "Lane 1's coverage alarm fired after three zero-write runs. Everything else in the nightly check passed." },
+    { "date": "2026-11-05", "text": "Lanes 0 and 3 merged. Lane 4's table and fetcher passed review." },
+    { "date": "2026-11-04", "text": "Backlog assigned and themes extended. Every attended event since August now counts toward trends." },
+    { "date": "2026-11-03", "text": "Gap diagnosed on the live graph and the fix plan written." }
+  ],
+  "links": [
+    { "label": "Fix plan (PR #264)", "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/264" },
+    { "label": "Pipeline repo", "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3" }
+  ],
+  "tracking": ["YED-304", "YED-307"],
+  "stack": ["Supabase Postgres", "Python", "GitHub Actions", "Claude Code"]
+}

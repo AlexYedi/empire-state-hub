@@ -1,0 +1,50 @@
+{
+  "slug": "autonomous-builder-week",
+  "title": "A week with an autonomous PR builder",
+  "tagline": "Running an external autonomous builder (Obvious) on this pipeline for a week, with Claude Code as the reviewer of record.",
+  "kind": "sprint",
+  "status": "archived",
+  "health": "on-track",
+  "phase": "Closed",
+  "owner": "Alex Yedibalian + Claude Code",
+  "started": "2026-10-30",
+  "completed": "2026-11-06",
+  "updated": "2026-11-08",
+  "why": "A hackathon on 30 October came with an autonomous builder that opens pull requests by itself. The question was whether it could carry real pipeline work under real review, and what it would cost to keep.",
+  "mission": "The builder took scoped specs and opened pull requests. Claude Code reviewed every one against the live system rather than the builder's own fixtures. Merges stayed with a person.",
+  "destination": "A clear keep-or-drop call, and its unfinished work handed back to the in-house sessions.",
+  "showcase": [
+    "Running an autonomous builder under independent review, and checking its work against production state rather than its own tests",
+    "Closing merge-gate drift with repository rules, so an approval only counts where it can be seen",
+    "Telling throughput from value: more pull requests is not more shipped value, so the call used the review results"
+  ],
+  "milestones": [
+    { "title": "Hackathon build day", "status": "done", "date": "2026-10-30" },
+    { "title": "Merge gate moved to repository rules: one approval plus required checks", "status": "done", "date": "2026-11-04" },
+    { "title": "Decision: not keeping it after the trial", "status": "done", "date": "2026-11-04" },
+    { "title": "Trial ended; open pull requests handed back to in-house sessions", "status": "done", "date": "2026-11-06" }
+  ],
+  "metrics": [
+    {
+      "label": "Pull requests merged in the pipeline repo per week",
+      "baseline": "7 (23–29 Oct, before the builder)",
+      "current": "82 (30 Oct – 6 Nov, 46 of them from the builder)",
+      "asOf": "2026-11-06",
+      "source": { "label": "GitHub pull-request history", "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pulls?q=is%3Apr+created%3A2026-10-30..2026-11-06" },
+      "note": "Throughput, not quality: six of the builder's pull requests were still open when the trial ended, and they went back to in-house sessions."
+    }
+  ],
+  "decisions": [
+    { "date": "2026-11-04", "decision": "Don't keep the builder after the trial.", "why": "Its cost wasn't justified next to in-house sessions, which already hold the production context its pull requests kept missing." },
+    { "date": "2026-11-04", "decision": "Enforce the merge gate in repository rules, not in any tool's own interface.", "why": "Approvals given inside the tool were invisible on GitHub, so the gate could drift without anyone seeing it." }
+  ],
+  "log": [
+    { "date": "2026-11-06", "text": "Trial ended. Six open pull requests moved to the in-house queue." },
+    { "date": "2026-11-04", "text": "Repository rules went live across all four repos." },
+    { "date": "2026-10-30", "text": "Hackathon build day." }
+  ],
+  "links": [
+    { "label": "Pipeline repo", "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3" }
+  ],
+  "stack": ["Obvious", "Claude Code", "GitHub rulesets"]
+}
