@@ -45,7 +45,7 @@
       "title": "Lane 2: bake-off of company-signals sources against the paid trial",
       "status": "done",
       "date": "2026-11-06",
-      "note": "The free stack plus Clay cleared all three floors the proposal set. The free stack alone cleared one."
+      "note": "The free stack plus Clay cleared the proposal's recall and coverage floors but not its precision floor, by design: a classifier in front of the brief does the filtering. The free stack alone cleared only the coverage floor."
     },
     {
       "title": "Lane 1: hiring pulse, from dry run to live writes",
@@ -108,7 +108,7 @@
         "label": "Lane 2 bake-off, runs 1 and 1b (PR #307)",
         "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/307"
       },
-      "note": "Share of the paid source's true signals the candidate also found, matched on company, kind and date within 3 days. Shifting dates by 10 days, the null, gives 0.07 to 0.18."
+      "note": "akta is the paid company-signals trial used as the reference. Recall is the share of akta's true signals that the candidate also found, matched on company, kind and date within 3 days. With dates shifted by 10 days, the null is 0.06–0.13 for the free stack and 0.07–0.18 for the free stack plus Clay. A blinded model labelled the signals. Alex's 20-label spot check agreed on 17 of 20, a first-party measurement from 2026-11-08."
     }
   ],
   "decisions": [
@@ -130,7 +130,7 @@
     {
       "date": "2026-11-06",
       "decision": "Run the bake-off's paid leg on Clay credits already in hand instead of buying a news API first.",
-      "why": "Measure before spending: the free stack's gap was deal and money news, which a third-party research agent could test for about 57 credits."
+      "why": "Measure before spending. The free stack's gap was deal and money news, which a third-party research agent could test on credits already in the workspace. The run used about 57."
     }
   ],
   "open": [
@@ -152,7 +152,7 @@
   "log": [
     {
       "date": "2026-11-06",
-      "text": "Lane 2 bake-off: the free stack plus Clay cleared all three floors (recall 0.69 against a 0.60 floor; coverage 0.88). The free stack alone reached 0.42."
+      "text": "Lane 2 bake-off: the free stack plus Clay reached 0.69 recall against akta (floor 0.60) and 0.88 coverage. The free stack alone reached 0.42 recall."
     },
     {
       "date": "2026-11-06",
