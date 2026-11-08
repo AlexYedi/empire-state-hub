@@ -10,14 +10,14 @@
   "started": "2026-11-05",
   "target": "2026-11-13",
   "updated": "2026-11-08",
-  "why": "Of the last 100 merged pull requests in the pipeline repo (first-party count of public PR history, 5 November 2026), 46 came from an external autonomous builder whose trial ended on 6 November, and all 41 reviews were left from one account. The do-nothing baseline is one person relaying and approving every change, which caps throughput at his attention.",
-  "mission": "A portable gate any repo can adopt. By design, tests run PR code with no credentials, a reviewer agent sees only the diff, as data, with no tools, and each change is sorted into a risk tier. Low-risk tiers will merge without a human; privacy code, migrations and workflow files will always stop for a person.",
-  "destination": "A reference-only pull request merges with no human touch, a guarded one stops for review, and the reviewer has been back-tested on a labelled set of past pull requests. A day-14 read-out decides whether it stays.",
+  "why": "Of the last 100 merged pull requests in the pipeline repo (first-party count of public PR history, 5 November 2026), 46 came from an external autonomous builder whose trial ended on 6 November, and every review on record came from a single account. The do-nothing baseline is review that runs through one person's attention, so throughput is capped by it.",
+  "mission": "A portable gate any repo can adopt. By design, tests will run PR code with no credentials, a reviewer agent will see only the diff, as data, with no tools, and each change will be sorted into a risk tier. Low-risk tiers will merge without a human; privacy code, migrations and workflow files will always stop for a person.",
+  "destination": "Phase 0 (target 13 November) ends with a pilot on the pipeline repo: a change that touches only documentation merges with no human touch, and a change to a protected area such as privacy code or workflow files stops for a person. After that, the reviewer is back-tested on past pull requests with known defects, and a day-14 read-out against the baseline decides whether it stays.",
   "showcase": [
-    "Trust-boundary design for agents: untrusted text, private data and write access never meet in one job",
-    "Failing closed: a missing or malformed verdict, an expired token or a usage limit blocks the merge instead of passing it",
+    "Designing trust boundaries for agents: by design, untrusted text, private data and write access will never meet in one job",
+    "Designing the gate to fail closed: a missing or malformed verdict, an expired token or a usage limit will block the merge instead of passing it",
     "Red-teaming a design before building it, and treating its blockers as entry criteria rather than backlog",
-    "Risk tiering, where anything the rules don't recognise defaults to the strictest tier",
+    "Risk tiering by design, where any file path the rules don't recognise falls into the strictest tier",
     "Holding an agent system to a do-nothing baseline and a day-14 kill rule, so quality per token decides whether it stays"
   ],
   "milestones": [
@@ -27,14 +27,14 @@
       "date": "2026-11-05"
     },
     {
-      "title": "Go decision on separate identities, agent review on every code PR, and the brief contract",
+      "title": "Go decision on separate identities and agent review on every code PR",
       "status": "done",
       "date": "2026-11-06"
     },
     {
       "title": "Portable core: test workflow with no secrets, gate workflow defined from the base branch",
       "status": "active",
-      "note": "Built in its own public repository and through three independent review rounds. It has run only in local tests so far."
+      "note": "Built in its own public repository and through three review rounds (first-party, 7 November 2026). It has run only in local tests so far."
     },
     {
       "title": "Separate identities for authoring, approving and merging",
@@ -69,11 +69,6 @@
       "date": "2026-11-06",
       "decision": "Keep the gate's core in its own public repository, so each project adopts it by pinning a version.",
       "why": "A repo-agnostic system needs one home and one version history, not a copy per project."
-    },
-    {
-      "date": "2026-11-06",
-      "decision": "Research briefs become a reading rather than an approval; drafts arrive with a pre-review, and nothing publishes without Alex.",
-      "why": "Human time goes to judgment calls, not to thumbs-ups on work an agent can check."
     }
   ],
   "open": [
@@ -88,7 +83,7 @@
       "mitigation": "By design, the reviewer will get a stripped diff only, no tools and no PR text, and will need a positive verdict to pass."
     },
     {
-      "risk": "The gate has run only in local tests; its behaviour on GitHub, such as approvals and re-runs after a human review, is unproven.",
+      "risk": "The gate has run only in local tests; its behaviour on GitHub is unproven until the live trials.",
       "mitigation": "One trial PR per risk tier with auto-merge off, before anything merges on its own."
     },
     {
@@ -99,7 +94,7 @@
   "log": [
     {
       "date": "2026-11-07",
-      "text": "Portable core opened for review in its own public repository. Three independent review rounds closed their findings."
+      "text": "Portable core opened for review in its own public repository, after three review rounds whose findings were closed in its commits."
     },
     {
       "date": "2026-11-06",
