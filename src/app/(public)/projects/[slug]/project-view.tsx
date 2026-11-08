@@ -93,10 +93,10 @@ export function ProjectView({
             <ProgressBar milestones={p.milestones} />
           </div>
           <ol className="mt-6 space-y-4">
-            {p.milestones.map((m) => {
+            {p.milestones.map((m, i) => {
               const s = MILESTONE_MARK[m.status];
               return (
-                <li key={m.title} className="flex gap-3">
+                <li key={i} className="flex gap-3">
                   <span className={cn("mt-0.5 w-4 shrink-0 text-center", s.cls)} aria-hidden>
                     {s.mark}
                   </span>
@@ -127,7 +127,7 @@ export function ProjectView({
               {p.metrics.map((m) => (
                 <div key={m.label} className="rounded-lg border border-border p-4">
                   <p className="text-sm font-semibold">{m.label}</p>
-                  <div className="mt-3 grid grid-cols-3 gap-3">
+                  <div className="mt-3 grid gap-3 sm:grid-cols-3">
                     <Figure label="Baseline" value={m.baseline} />
                     <Figure label="Now" value={m.current} strong />
                     <Figure label="Target" value={m.target ?? "—"} />

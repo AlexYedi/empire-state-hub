@@ -20,9 +20,10 @@ The schema enforces these rules:
 1. **Every metric has its do-nothing baseline**, plus `asOf` and a `source`. A number without a baseline isn't published. An empty `metrics` list is allowed and renders as "no metric yet".
 2. `status: "archived"` requires `completed`. Only archived projects carry `completed`.
 3. `log` holds at most 8 entries, at milestone level, and renders newest first.
-4. The slug equals the filename. A `sub-project` names an existing `parent`.
-5. No placeholder markers (`TODO`, `TBD`, `[confirm]`) appear anywhere in the file.
-6. Unknown keys are refused, and links must be https.
+4. The slug equals the filename. A `sub-project`, and only a sub-project, names a `parent`, which must be an existing top-level project (one level deep, no cycles).
+5. No placeholder markers (`TODO`, `TBD`, `[confirm]`) appear in any value.
+6. Unknown keys are refused. Links must be https, and never point at Linear.
+7. Dates are real calendar dates, and `completed` is not before `started`.
 
 ## Public-safety rules (AGENTS.md rules 1–5 apply in full)
 
@@ -34,6 +35,7 @@ The schema enforces these rules:
   - no off-the-record material
   - no inbox content
 - **Open security gaps don't go on this page until they're fixed.** Describe the safeguard once it ships.
+- **Claim a safeguard only when the live system enforces it.** A planned control is written as planned ("by design, the reviewer will…"). Never describe how a gate can be bypassed, or which controls are not yet applied.
 - Every figure cites a public source (a PR, an issue, a published post) or is labelled as a first-party measurement with its date.
 - Linear IDs may appear as plain text in `tracking`. Don't link to them, because the workspace is private.
 

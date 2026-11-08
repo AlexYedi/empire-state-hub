@@ -16,11 +16,19 @@ import { z } from "zod";
 const DIR = join(process.cwd(), "src/data/projects");
 
 const Slug = z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/);
-const IsoDate = z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "dates are YYYY-MM-DD");
+const IsoDate = z
+  .string()
+  .regex(/^\d{4}-\d{2}-\d{2}$/, "dates are YYYY-MM-DD")
+  .refine((s) => {
+    const d = new Date(`${s}T00:00:00Z`);
+    return !Number.isNaN(d.getTime()) && d.toISOString().startsWith(s);
+  }, "not a real calendar date");
+// The Linear workspace is private: IDs go in `tracking` as plain text, never as links.
 const Url = z
   .string()
   .url()
-  .refine((u) => u.startsWith("https://"), "links must be https");
+  .refine((u) => u.startsWith("https://"), "links must be https")
+  .refine((u) => !/^https:\/\/([^/]*\.)?linear\.app\//.test(u), "don't link the private Linear workspace");
 const Text = z.string().trim().min(1);
 
 const Source = z.object({ label: Text, url: Url.optional() }).strict();
@@ -92,12 +100,22 @@ export type Metric = z.infer<typeof Metric>;
 
 const PLACEHOLDER = /\[confirm\]|\bTODO\b|\bTBD\b|lorem ipsum/i;
 
+/** Every string value in the parsed file, so an escaped marker can't slip past the check. */
+function strings(v: unknown): string[] {
+  if (typeof v === "string") return [v];
+  if (Array.isArray(v)) return v.flatMap(strings);
+  if (v && typeof v === "object") return Object.values(v).flatMap(strings);
+  return [];
+}
+
 function load(): Project[] {
   const files = readdirSync(DIR).filter((f) => f.endsWith(".json"));
   const projects = files.map((file) => {
-    const raw = readFileSync(join(DIR, file), "utf8");
-    if (PLACEHOLDER.test(raw)) throw new Error(`projects/${file}: placeholder marker in public data`);
-    const parsed = ProjectSchema.safeParse(JSON.parse(raw));
+    const json: unknown = JSON.parse(readFileSync(join(DIR, file), "utf8"));
+    if (strings(json).some((s) => PLACEHOLDER.test(s))) {
+      throw new Error(`projects/${file}: placeholder marker in public data`);
+    }
+    const parsed = ProjectSchema.safeParse(json);
     if (!parsed.success) {
       throw new Error(`projects/${file}: ${parsed.error.issues.map((i) => `${i.path.join(".")} ${i.message}`).join("; ")}`);
     }
@@ -106,14 +124,20 @@ function load(): Project[] {
     if (p.status === "archived" && !p.completed) throw new Error(`projects/${file}: archived needs a completed date`);
     if (p.status !== "archived" && p.completed) throw new Error(`projects/${file}: only archived projects carry completed`);
     if (p.updated < p.started) throw new Error(`projects/${file}: updated is before started`);
-    if (p.kind === "sub-project" && !p.parent) throw new Error(`projects/${file}: a sub-project names its parent`);
+    if (p.completed && p.completed < p.started) throw new Error(`projects/${file}: completed is before started`);
+    if ((p.kind === "sub-project") !== Boolean(p.parent)) {
+      throw new Error(`projects/${file}: a sub-project names its parent, and only a sub-project does`);
+    }
     return p;
   });
 
-  const slugs = new Set(projects.map((p) => p.slug));
+  const bySlug = new Map(projects.map((p) => [p.slug, p]));
   for (const p of projects) {
-    if (p.parent && (p.parent === p.slug || !slugs.has(p.parent))) {
-      throw new Error(`projects/${p.slug}.json: unknown parent "${p.parent}"`);
+    if (!p.parent) continue;
+    const parent = bySlug.get(p.parent);
+    // Sub-projects are one level deep, so there are no chains and no cycles.
+    if (!parent || parent.slug === p.slug || parent.parent) {
+      throw new Error(`projects/${p.slug}.json: parent "${p.parent}" must be an existing top-level project`);
     }
   }
   return projects.map((p) => ({ ...p, log: [...p.log].sort((a, b) => b.date.localeCompare(a.date)) }));
