@@ -32,7 +32,7 @@ export async function GET(_request: Request, { params }: { params: Promise<{ slu
           flexDirection: "column",
           alignItems: "flex-start",
           justifyContent: "center",
-          background: "#09090b",
+          background: "#0E1320",
           padding: "96px 112px",
         }}
       >
@@ -53,7 +53,7 @@ export async function GET(_request: Request, { params }: { params: Promise<{ slu
             fontWeight: 700,
             letterSpacing: "-0.03em",
             lineHeight: 1.1,
-            color: "#e8e8e4",
+            color: "#F1F3F8",
           }}
         >
           {room.name}
@@ -65,7 +65,7 @@ export async function GET(_request: Request, { params }: { params: Promise<{ slu
             fontSize: 32,
             letterSpacing: "0.18em",
             textTransform: "uppercase",
-            color: "#8b8b85",
+            color: "#9AA6BF",
           }}
         >
           Long read · {room.date}

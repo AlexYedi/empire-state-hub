@@ -1,31 +1,34 @@
 @import "tailwindcss";
 
 /* ----------------------------------------------------------------------------
-   Dual-lens design tokens. Values swap on <html data-lens="...">, so a single
-   toggle re-themes the entire site. Editorial = warm paper + serif. Technical =
-   near-black cockpit + grotesk/mono. @theme `inline` keeps utilities pointed at
-   the live CSS vars so the cascade actually flips at runtime.
+   Design tokens: the house colourway shared with the social carousels
+   (brand decision 2026-09-30; source of truth: pipeline repo
+   .claude/skills/content-patterns/carousel-base.css). Dark navy ground, off-white ink,
+   ONE signature colour: acid green #8FE83A. Both lenses share the palette; the lens
+   flips type and depth. Editorial = serif display on the carousel ground. Technical =
+   grotesk/mono on a deeper cockpit ground. Values swap on <html data-lens="...">, and
+   @theme `inline` keeps utilities pointed at the live CSS vars.
 ---------------------------------------------------------------------------- */
 :root,
 [data-lens="editorial"] {
-  --bg: #faf9f5;
-  --surface: #ffffff;
-  --fg: #1b1a17;
-  --muted: #75726a;
-  --border: #e7e3d9;
-  --accent: #b4521d; /* terracotta ink */
-  --font-display: var(--font-fraunces), Georgia, "Times New Roman", serif;
-  --font-body: var(--font-geist-sans), system-ui, sans-serif;
-  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+  --bg: #0e1320; /* carousel --ground */
+  --surface: #161d2e; /* carousel --panel */
+  --fg: #f1f3f8; /* carousel --ink */
+  --muted: #9aa6bf; /* carousel --muted */
+  --border: #2a3550; /* carousel --rule */
+  --accent: #8fe83a; /* signature acid green */
+  --font-display: "Iowan Old Style", "Palatino", var(--font-fraunces), Georgia, serif;
+  --font-body: "Avenir Next", "Helvetica Neue", var(--font-geist-sans), system-ui, sans-serif;
+  --font-mono: Menlo, "SF Mono", var(--font-geist-mono), ui-monospace, monospace;
 }
 
 [data-lens="technical"] {
-  --bg: #09090b;
-  --surface: #131316;
-  --fg: #e8e8e4;
-  --muted: #8b8b85;
-  --border: #262629;
-  --accent: #5eead4; /* signal teal */
+  --bg: #0a0e18;
+  --surface: #121828;
+  --fg: #f1f3f8;
+  --muted: #9aa6bf;
+  --border: #232c42;
+  --accent: #8fe83a;
   --font-display: var(--font-geist-sans), system-ui, sans-serif;
   --font-body: var(--font-geist-sans), system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
@@ -44,9 +47,6 @@
 }
 
 html {
-  color-scheme: light;
-}
-[data-lens="technical"] {
   color-scheme: dark;
 }
 

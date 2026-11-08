@@ -21,7 +21,7 @@ export default function OpengraphImage() {
           flexDirection: "column",
           alignItems: "flex-start",
           justifyContent: "center",
-          background: "#09090b",
+          background: "#0E1320",
           padding: "96px 112px",
         }}
       >
@@ -41,7 +41,7 @@ export default function OpengraphImage() {
             fontSize: 120,
             fontWeight: 700,
             letterSpacing: "-0.04em",
-            color: "#e8e8e4",
+            color: "#F1F3F8",
           }}
         >
           Empire State
@@ -53,7 +53,7 @@ export default function OpengraphImage() {
             fontSize: 36,
             letterSpacing: "0.18em",
             textTransform: "uppercase",
-            color: "#8b8b85",
+            color: "#9AA6BF",
           }}
         >
           Field notes · New York
