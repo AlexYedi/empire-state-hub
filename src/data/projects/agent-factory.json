@@ -4,20 +4,21 @@
   "tagline": "A repo-agnostic system where agents write, test and review every pull request, and a human decides only what needs judgment.",
   "kind": "project",
   "status": "active",
-  "health": "on-track",
+  "health": "at-risk",
   "phase": "Phase 0: portable core and gate",
   "owner": "Alex Yedibalian + Claude Code",
   "started": "2026-11-05",
   "target": "2026-11-13",
   "updated": "2026-11-08",
-  "why": "For a week an external autonomous builder opened most of the pull requests here. When its trial ended, the in-house coding sessions were the only builder again, and review needed to be a system rather than one person's attention.",
-  "mission": "A portable gate any repo can adopt, designed so tests run with no secrets, a reviewer agent sees only the diff, as data, with no tools, and each change is sorted into a risk tier. Low-risk tiers merge without a human; privacy code, migrations and workflow files always stop for a person.",
+  "why": "Of the last 100 merged pull requests in the pipeline repo (first-party count of public PR history, 5 November 2026), 46 came from an external autonomous builder whose trial ended on 6 November, and all 41 reviews were left from one account. The do-nothing baseline is one person relaying and approving every change, which caps throughput at his attention.",
+  "mission": "A portable gate any repo can adopt. By design, tests run PR code with no credentials, a reviewer agent sees only the diff, as data, with no tools, and each change is sorted into a risk tier. Low-risk tiers will merge without a human; privacy code, migrations and workflow files will always stop for a person.",
   "destination": "A reference-only pull request merges with no human touch, a guarded one stops for review, and the reviewer has been back-tested on a labelled set of past pull requests. A day-14 read-out decides whether it stays.",
   "showcase": [
     "Trust-boundary design for agents: untrusted text, private data and write access never meet in one job",
     "Failing closed: a missing or malformed verdict, an expired token or a usage limit blocks the merge instead of passing it",
     "Red-teaming a design before building it, and treating its blockers as entry criteria rather than backlog",
-    "Risk tiering, where anything the rules don't recognise defaults to the strictest tier"
+    "Risk tiering, where anything the rules don't recognise defaults to the strictest tier",
+    "Holding an agent system to a do-nothing baseline and a day-14 kill rule, so quality per token decides whether it stays"
   ],
   "milestones": [
     {
@@ -32,18 +33,23 @@
     },
     {
       "title": "Portable core: test workflow with no secrets, gate workflow defined from the base branch",
-      "status": "active"
+      "status": "active",
+      "note": "Built in its own public repository and through three independent review rounds. It has run only in local tests so far."
     },
     {
       "title": "Separate identities for authoring, approving and merging",
       "status": "next"
     },
     {
-      "title": "Pilot on this pipeline repo",
+      "title": "Pilot on this pipeline repo: one trial PR per risk tier, with auto-merge off",
       "status": "next"
     },
     {
-      "title": "Day-14 read-out against a baseline of human-authored PRs, with a kill rule",
+      "title": "Back-test the reviewer on a labelled set of past pull requests with known defects",
+      "status": "next"
+    },
+    {
+      "title": "Day-14 read-out against the baseline, with a kill rule",
       "status": "later"
     }
   ],
@@ -58,16 +64,43 @@
       "date": "2026-11-06",
       "decision": "Run agent code review on every code PR, with no rubric or score, and a kill rule at day 14.",
       "why": "A reviewer that runs on every change has to prove it's worth its cost, so the test is quality per token."
+    },
+    {
+      "date": "2026-11-06",
+      "decision": "Keep the gate's core in its own public repository, so each project adopts it by pinning a version.",
+      "why": "A repo-agnostic system needs one home and one version history, not a copy per project."
+    },
+    {
+      "date": "2026-11-06",
+      "decision": "Research briefs become a reading rather than an approval; drafts arrive with a pre-review, and nothing publishes without Alex.",
+      "why": "Human time goes to judgment calls, not to thumbs-ups on work an agent can check."
     }
   ],
-  "open": [],
+  "open": [
+    {
+      "question": "After the pilot, back-test a reviewer from a second model provider against the in-house reviewer, and keep it only if it catches real defects the first one misses?",
+      "owner": "Alex"
+    }
+  ],
   "risks": [
     {
       "risk": "Prompt injection: a diff can carry text written to talk the reviewer into approving.",
       "mitigation": "By design, the reviewer will get a stripped diff only, no tools and no PR text, and will need a positive verdict to pass."
+    },
+    {
+      "risk": "The gate has run only in local tests; its behaviour on GitHub, such as approvals and re-runs after a human review, is unproven.",
+      "mitigation": "One trial PR per risk tier with auto-merge off, before anything merges on its own."
+    },
+    {
+      "risk": "A reviewer on every PR can spend tokens without catching defects.",
+      "mitigation": "The day-14 read-out compares cost and catches with the baseline, and the kill rule removes it if it doesn't pay."
     }
   ],
   "log": [
+    {
+      "date": "2026-11-07",
+      "text": "Portable core opened for review in its own public repository. Three independent review rounds closed their findings."
+    },
     {
       "date": "2026-11-06",
       "text": "Go decision taken on all three design questions. Phase 0 build started."
