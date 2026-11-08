@@ -42,6 +42,12 @@
       "date": "2026-11-05"
     },
     {
+      "title": "Lane 2: bake-off of company-signals sources against the paid trial",
+      "status": "done",
+      "date": "2026-11-06",
+      "note": "The free stack plus Clay cleared all three floors the proposal set. The free stack alone cleared one."
+    },
+    {
       "title": "Lane 1: hiring pulse, from dry run to live writes",
       "status": "active",
       "note": "The lane runs weekly in dry-run. Its coverage alarm fired in the 6 November nightly check, which is the alarm doing its job."
@@ -52,7 +58,7 @@
       "note": "Both are reviewed and waiting to merge. The table is rehearsed on the twin, not yet applied to production."
     },
     {
-      "title": "Lane 2: choose the company-signals source before the vendor trial ends",
+      "title": "Lane 2: pick the standing source and cadence before the trial ends",
       "status": "next"
     },
     {
@@ -91,6 +97,18 @@
         "label": "PR #297",
         "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/297"
       }
+    },
+    {
+      "label": "Recall vs akta (floor 0.60)",
+      "baseline": "0.42 ($0 union)",
+      "current": "0.69 ($0 + Clay)",
+      "target": "0.60",
+      "asOf": "2026-11-06",
+      "source": {
+        "label": "Lane 2 bake-off, runs 1 and 1b (PR #307)",
+        "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/307"
+      },
+      "note": "Share of the paid source's true signals the candidate also found, matched on company, kind and date within 3 days. Shifting dates by 10 days, the null, gives 0.07 to 0.18."
     }
   ],
   "decisions": [
@@ -108,11 +126,16 @@
       "date": "2026-11-04",
       "decision": "Build four lenses with sliceable cohorts instead of one trend view.",
       "why": "Thin data is a reason to ingest more, not to shrink the scope."
+    },
+    {
+      "date": "2026-11-06",
+      "decision": "Run the bake-off's paid leg on Clay credits already in hand instead of buying a news API first.",
+      "why": "Measure before spending: the free stack's gap was deal and money news, which a third-party research agent could test for about 57 credits."
     }
   ],
   "open": [
     {
-      "question": "Which source replaces the company-signals trial when it lapses at the end of November?",
+      "question": "Which source replaces the paid company-signals trial when it lapses at the end of November, and at what cadence? The measured option is the free stack plus Clay, which needs about 260 Clay credits a month to run weekly.",
       "owner": "Alex"
     }
   ],
@@ -120,12 +143,24 @@
     {
       "risk": "The nightly health check is red while lane 1 stays in dry-run, and a red check can hide a real failure.",
       "mitigation": "Take lane 1 writes live after its first Sunday run is checked."
+    },
+    {
+      "risk": "Running Clay weekly costs about 260 credits a month, and the current balance covers about two more weekly runs.",
+      "mitigation": "Choose a paid plan or a slower cadence before the trial ends. The free stack alone keeps the launch and incident news flowing either way."
     }
   ],
   "log": [
     {
       "date": "2026-11-06",
+      "text": "Lane 2 bake-off: the free stack plus Clay cleared all three floors (recall 0.69 against a 0.60 floor; coverage 0.88). The free stack alone reached 0.42."
+    },
+    {
+      "date": "2026-11-06",
       "text": "Lane 1's coverage alarm fired in the nightly check (issue #308). The structural checks passed."
+    },
+    {
+      "date": "2026-11-05",
+      "text": "Lane 2 bake-off run 1: the free stack is a launch and incident feed, not a deal feed."
     },
     {
       "date": "2026-11-05",
@@ -150,13 +185,19 @@
       "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/266"
     },
     {
+      "label": "Lane 2 bake-off (PR #307)",
+      "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/307"
+    },
+    {
       "label": "Pipeline repo",
       "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3"
     }
   ],
   "tracking": [
     "YED-304",
-    "YED-307"
+    "YED-307",
+    "YED-333",
+    "YED-349"
   ],
   "stack": [
     "Supabase Postgres",
