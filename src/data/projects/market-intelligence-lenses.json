@@ -53,13 +53,14 @@
       "note": "The lane runs weekly in dry-run. Its coverage alarm fired in the 6 November nightly check, which is the alarm doing its job."
     },
     {
-      "title": "Lane 4: feeds staging table and fetcher",
+      "title": "Lane 2: build the free stack plus Clay lane",
       "status": "active",
-      "note": "Both are reviewed and waiting to merge. The table is rehearsed on the twin, not yet applied to production."
+      "note": "A weekly fetch of free news sources plus a Clay research agent every second week, staged next to the company feeds for the Monday classifier."
     },
     {
-      "title": "Lane 2: pick the standing source and cadence before the trial ends",
-      "status": "next"
+      "title": "Lane 4: feeds staging table and fetcher",
+      "status": "next",
+      "note": "Both pieces are reviewed and rehearsed on the twin. They wait on the merge and the production apply. Lane 2 stages into the same table."
     },
     {
       "title": "Monday Market Brief reads the lenses",
@@ -131,11 +132,16 @@
       "date": "2026-11-06",
       "decision": "Run the bake-off's paid leg on Clay credits already in hand instead of buying a news API first.",
       "why": "Measure before spending. The free stack's gap was deal and money news, which a third-party research agent could test on credits already in the workspace. The run used about 57."
+    },
+    {
+      "date": "2026-11-08",
+      "decision": "Lane 2 runs on the free stack plus Clay: free sources weekly, the Clay research agent every second week.",
+      "why": "It was the only measured option that cleared the recall and coverage floors (0.69 and 0.88), and it costs credits rather than a new subscription."
     }
   ],
   "open": [
     {
-      "question": "Which source replaces the paid company-signals trial when it lapses at the end of November, and at what cadence? The measured option is the free stack plus Clay, which needs about 260 Clay credits a month to run weekly.",
+      "question": "Once the Clay credits already in hand run out (about two runs at the every-second-week cadence), buy credits or a Clay plan, or narrow the watchlist for the Clay leg?",
       "owner": "Alex"
     }
   ],
@@ -145,11 +151,15 @@
       "mitigation": "Take lane 1 writes live after its first Sunday run is checked."
     },
     {
-      "risk": "Running Clay weekly costs about 260 credits a month, and the current balance covers about two more weekly runs.",
-      "mitigation": "Choose a paid plan or a slower cadence before the trial ends. The free stack alone keeps the launch and incident news flowing either way."
+      "risk": "Clay credits already in hand cover about two runs at the every-second-week cadence.",
+      "mitigation": "Decide on credits or a plan before they run out. The free stack keeps launch and incident news flowing either way."
     }
   ],
   "log": [
+    {
+      "date": "2026-11-08",
+      "text": "Decision: lane 2 runs on the free stack plus Clay. The build has started."
+    },
     {
       "date": "2026-11-06",
       "text": "Lane 2 bake-off: the free stack plus Clay reached 0.69 recall against akta (floor 0.60) and 0.88 coverage. The free stack alone reached 0.42 recall."
@@ -196,8 +206,7 @@
   "tracking": [
     "YED-304",
     "YED-307",
-    "YED-333",
-    "YED-349"
+    "YED-333"
   ],
   "stack": [
     "Supabase Postgres",
