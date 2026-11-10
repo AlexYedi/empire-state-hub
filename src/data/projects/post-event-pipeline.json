@@ -1,0 +1,224 @@
+{
+  "slug": "post-event-pipeline",
+  "title": "Post-event pipeline: from capture to consumption",
+  "tagline": "The post-event stage records a room in depth, then almost nothing reads the record. This project makes every run finish loudly and route what it learned.",
+  "kind": "project",
+  "status": "active",
+  "health": "on-track",
+  "phase": "Phase 2: routing builds",
+  "owner": "Alex Yedibalian + Claude Code",
+  "started": "2026-11-05",
+  "target": "2026-12-03",
+  "updated": "2026-11-10",
+  "why": "A systems review of the 4 November Agentics Spotlight run found that post-event is strong at capture and weak at consumption. The brief ran to about 20,000 words across 17 sections, and only two things read it: one round of posts and the graph's claim extraction. The glossary, tools, anecdotes, open loops, unused angles and follow-up state had no reader. The worst failures were also silent: the command itself noted that a skipped graph write still closed green, and a stalled session lost track of which steps had run.",
+  "mission": "Every post-event run leaves a ledger of what ran, ends with a check that reads the real state and prints PASS or FAIL, and routes each section of the brief to something that acts on it: an issue, a project idea, a follow-up, a story, a content backlog row.",
+  "destination": "Attending a room reliably turns into finished, checked work: posts, follow-ups on a date, build ideas, interview stories and graph claims. Coverage then grows through a backfill of the attended rooms that never got a debrief, and every backfilled room is routed the same way.",
+  "showcase": [
+    "Running a failure-mode analysis (FMEA: severity × occurrence × detection) on a live pipeline and ranking fixes by how silently each failure happens",
+    "A write-ahead run ledger and a read-only close-check, so a stalled or skipped step shows up instead of closing green",
+    "A manual pilot before automating: one brief routed by hand to prove which outputs get used before writing the router",
+    "Every metric reported against its do-nothing baseline, including the ones that are still zero"
+  ],
+  "milestones": [
+    {
+      "title": "Systems review of the post-event stage (consumption audit + robustness and value analysis)",
+      "status": "done",
+      "date": "2026-11-05",
+      "note": "Two proposals: where each brief section should go, and a ranked list of failure modes with a sequenced plan."
+    },
+    {
+      "title": "Privacy fix: post-event working files are private by default",
+      "status": "done",
+      "date": "2026-11-08",
+      "note": "Working files in each event's post-event folder are ignored unless they are a rendered carousel. A CI check that enforces this is next."
+    },
+    {
+      "title": "Manual routing pilot on the Agentics brief",
+      "status": "done",
+      "date": "2026-11-07",
+      "note": "One brief produced five tracked follow-ups: a target-list decision, an upskilling task, two dated second touches and a content backlog item."
+    },
+    {
+      "title": "Run ledger, close-check and agent preflight",
+      "status": "done",
+      "date": "2026-11-08",
+      "note": "51 tests. The first live close-check on Agentics printed FAIL (2), which is the check doing its job."
+    },
+    {
+      "title": "Brief routing block and router step, with a lite debrief mode and one event name derived from Notion",
+      "status": "next",
+      "note": "About 2 to 3 days. The routing block gets proven on the Agentics brief before anything is automated."
+    },
+    {
+      "title": "Themes and content plan on every post-event post, plus X cuts",
+      "status": "later",
+      "note": "Clears the Themes failure in the close-check for every future run."
+    },
+    {
+      "title": "Backfill of attended rooms that never got a debrief",
+      "status": "later",
+      "note": "Runs after the router, so every backfilled room is routed rather than adding another unread brief."
+    },
+    {
+      "title": "Interview prep reads the rooms you were in",
+      "status": "later"
+    }
+  ],
+  "metrics": [
+    {
+      "label": "Post-event steps verified at the end of a run",
+      "baseline": "0 (a skipped graph write closed green)",
+      "current": "6 checks on every run",
+      "asOf": "2026-11-08",
+      "source": {
+        "label": "PR #313",
+        "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/313"
+      },
+      "note": "Graph event row, claims, themes, the Themes property on posts, routing rows, and the Rooms entry."
+    },
+    {
+      "label": "Agentics close-check",
+      "baseline": "Not measurable before the check existed",
+      "current": "3 pass, 1 skipped, 2 fail",
+      "target": "All pass or skipped with a reason",
+      "asOf": "2026-11-08",
+      "source": {
+        "label": "Close-check run on 8 November (PR #313)",
+        "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/313"
+      },
+      "note": "Passing: graph event, 118 claims, 5 themes. Failing: the Themes property on the post, and no Rooms entry. Skipped: routing rows, which the router will write."
+    },
+    {
+      "label": "Brief sections routed to a reader",
+      "baseline": "0 (nothing routed)",
+      "current": "5 follow-ups from one brief, 1 closed",
+      "asOf": "2026-11-10",
+      "source": {
+        "label": "Spec §6, routing yield",
+        "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/blob/main/docs/proposals/2026-11-05-post-event-robustness-and-value.md"
+      },
+      "note": "Three days in. The spec judges routing yield at 30 days, so this is not yet a result."
+    },
+    {
+      "label": "Attended rooms with a post-event debrief",
+      "baseline": "About 1 in 5",
+      "current": "About 1 in 5",
+      "asOf": "2026-11-05",
+      "source": {
+        "label": "Spec §4, coverage",
+        "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/blob/main/docs/proposals/2026-11-05-post-event-robustness-and-value.md"
+      },
+      "note": "Counted from event folders, which include some virtual and pending entries; the true denominator needs the calendar. Moves only once the backfill runs."
+    }
+  ],
+  "decisions": [
+    {
+      "date": "2026-11-05",
+      "decision": "Route every brief section to a reader instead of adding new sections to the brief.",
+      "why": "Nothing in the review needed more capture. Everything needed a reader."
+    },
+    {
+      "date": "2026-11-05",
+      "decision": "Pilot the routing by hand on one event before building the router.",
+      "why": "A manual pass shows which outputs actually get used, for the cost of an afternoon instead of a build."
+    },
+    {
+      "date": "2026-11-08",
+      "decision": "Build the run ledger and close-check first.",
+      "why": "The two highest-risk failures were silent ones (risk scores 80 and 64), and a check that prints FAIL is the cheapest detection."
+    },
+    {
+      "date": "2026-11-08",
+      "decision": "The close-check reports and never blocks a run.",
+      "why": "No wired hook may block a turn. A loud FAIL fixes the silence without stalling the pipeline."
+    },
+    {
+      "date": "2026-11-10",
+      "decision": "Build the router before the backfill.",
+      "why": "Backfilling without routing would only add more long briefs that nothing reads."
+    }
+  ],
+  "open": [
+    {
+      "question": "Keep the Rooms page in the post-event flow, or cut it? No entries have been added since 28 September, so the close-check fails on every run until this is settled.",
+      "owner": "Alex"
+    },
+    {
+      "question": "Is the synthesizer's routing block reliable enough to parse automatically? It gets proven on the Agentics brief first.",
+      "owner": "Claude Code"
+    },
+    {
+      "question": "How did the Agentics post perform? The last post with graded performance is from 10 September, so this needs a fresh LinkedIn export.",
+      "owner": "Alex"
+    }
+  ],
+  "risks": [
+    {
+      "risk": "Event names are typed by hand, so one event can end up with two slugs, as Agentics already has. A batch backfill would multiply this.",
+      "mitigation": "Derive the slug once from the Notion title, in the same PR as the router."
+    },
+    {
+      "risk": "A close-check that fails on every run for a known reason (Rooms) teaches people to ignore it.",
+      "mitigation": "Decide Rooms before the next post-event run, and wire or cut the check to match."
+    },
+    {
+      "risk": "Routed follow-ups pile up unworked, which moves the reading gap from the brief to the issue tracker.",
+      "mitigation": "Routing yield (routed items closed ÷ created) is judged at 30 days. If it stays low, cut the routes that nobody works."
+    }
+  ],
+  "log": [
+    {
+      "date": "2026-11-10",
+      "text": "Status review: pilot and first build complete. Router plus lite mode is next, ahead of the backfill."
+    },
+    {
+      "date": "2026-11-08",
+      "text": "Run ledger, close-check and preflight merged (PR #313). The first live close-check on Agentics printed FAIL (2)."
+    },
+    {
+      "date": "2026-11-08",
+      "text": "Post-event working files made private by default (PR #310)."
+    },
+    {
+      "date": "2026-11-07",
+      "text": "Manual routing pilot: the Agentics brief produced five tracked follow-ups."
+    },
+    {
+      "date": "2026-11-05",
+      "text": "Systems review of the post-event stage written and committed as the spec."
+    }
+  ],
+  "links": [
+    {
+      "label": "Spec: robustness and value (v2)",
+      "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/blob/main/docs/proposals/2026-11-05-post-event-robustness-and-value.md"
+    },
+    {
+      "label": "Consumption audit (v1)",
+      "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/blob/main/docs/proposals/2026-11-05-post-event-consumption-audit.md"
+    },
+    {
+      "label": "Run ledger and close-check (PR #313)",
+      "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/313"
+    },
+    {
+      "label": "Privacy default (PR #310)",
+      "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/310"
+    }
+  ],
+  "tracking": [
+    "YED-335",
+    "YED-372",
+    "YED-373",
+    "YED-374",
+    "YED-363",
+    "YED-366"
+  ],
+  "stack": [
+    "Claude Code",
+    "Python",
+    "Notion",
+    "Supabase Postgres",
+    "Linear"
+  ]
+}
