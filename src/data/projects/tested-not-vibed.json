@@ -110,7 +110,7 @@
   "log": [
     {
       "date": "2026-11-10",
-      "text": "Sampling throughput measured: 100 of 100 samples in 150 seconds, about 2,400 an hour against a floor of 60, so the rate does not limit the study. The runner now retries silent empty outputs and logs each retry. Suite scaffolded and the pre-registration drafted."
+      "text": "Sampling throughput measured: 100 of 100 samples (4 after one retry) in 150 seconds, about 2,400 an hour against a floor of 60, so the rate does not limit the study. The runner now retries empty or failed outputs and logs each retry. Suite scaffolded and the pre-registration drafted."
     },
     {
       "date": "2026-11-08",
