@@ -15,8 +15,8 @@
   "destination": "A pre-registered study published with its raw samples, grader code and agreement between graders, so a stranger can re-run it. The rulebook keeps only the rules that beat saying nothing, and the count of rules tested appears on this page as a metric. Anyone can check by re-running the suite.",
   "showcase": [
     "Designing a behaviour eval the way a lab would (designed, not yet run): pre-registration before the first sample, a no-guidance control, yes/no graders and a rep count set for statistical power",
-    "Screening many failure types against the control first instead of hand-picking test cases, with a written ranking rule that lets the author remove a type but never add one",
-    "Measuring the sampling rate before committing to the design, and publishing every retry instead of only the successes",
+    "Screening many failure types against the control first instead of hand-picking test cases, with a written ranking rule that lets the author remove a type for one stated reason but never add one",
+    "Measuring the sampling rate before committing to the design, and counting every retry in the data that will be published instead of only the successes",
     "Sizing a build by two budgets: the hours only Alex can give (decisions, labels, reads) and the hours agents can run overnight",
     "Applying a method from software engineering (test the instruction against its absence first) to sales and marketing writing"
   ],
@@ -49,7 +49,7 @@
       "title": "Failure types chosen from Alex's review comments",
       "status": "active",
       "date": "2026-11-12",
-      "note": "Comments are exported and ranked by the written rule. Alex hand-labels 50 to check the classifier."
+      "note": "Comment export under way. Ranking follows the written rule, and Alex hand-labels 50 to check the classifier."
     },
     {
       "title": "Pre-registration signed and frozen by hash",
@@ -107,13 +107,13 @@
       "source": {
         "label": "First-party timed test, 100 samples at concurrency 4"
       },
-      "note": "The full design needs at most about 770 samples."
+      "note": "The confirmatory runs need at most about 770 samples."
     },
     {
       "label": "Style-guide lines tested against a no-guidance control",
       "baseline": "0 (none had ever been tested)",
       "current": "0",
-      "target": "Every failure type the control fails, tested in 5 arms by 29 November",
+      "target": "Every failure type the control fails, tested in up to 5 arms by 29 November",
       "asOf": "2026-11-10",
       "source": {
         "label": "First-party check of the pipeline repo"
@@ -158,7 +158,7 @@
       "owner": "Alex"
     },
     {
-      "question": "Sign the pre-registration: confirm the failure-type list, state a prediction before any sample, and pick the marketplace skill used as arm D.",
+      "question": "Sign the pre-registration: confirm the failure-type list, state a prediction before any sample, and pick the marketplace GTM skill tested as one of the arms.",
       "owner": "Alex"
     },
     {
@@ -173,7 +173,7 @@
     },
     {
       "risk": "No failure type fails the control often enough to test, so there is nothing to compare.",
-      "mitigation": "By design: the null result is pre-committed. A short note publishes by 22 November and the hours move to the other lanes."
+      "mitigation": "The null-result note is written into the draft pre-registration and freezes when it is signed on 14 November. A short note then publishes by 22 November and the hours move to the other lanes."
     },
     {
       "risk": "The author wrote the rules, the failure cases and the grader, so a positive result could just be the author agreeing with himself.",
