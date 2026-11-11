@@ -25,7 +25,7 @@ export default function NotFound() {
               Home
             </Link>
             <Link href="/projects" className="text-muted transition-colors hover:text-fg">
-              See what's in flight →
+              See what&apos;s in flight →
             </Link>
           </div>
         </div>
