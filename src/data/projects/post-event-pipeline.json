@@ -10,8 +10,8 @@
   "started": "2026-11-05",
   "target": "2026-12-03",
   "updated": "2026-11-11",
-  "bottomLine": "The pilot and the first build are done. Every post-event run now leaves a ledger of what ran and ends with a close-check that prints PASS or FAIL. On 11 November the Rooms step was cut and the router build got the go-ahead. The router is now in progress: it is being proven on the Agentics brief first, so the backfill of undebriefed rooms gets routed instead of adding more unread briefs.",
-  "healthReason": "The 3 December target holds with no open blocker: both pending decisions were made on 11 November. It turns at-risk if the routing block can't be parsed reliably on the Agentics brief (due 14 November).",
+  "bottomLine": "The pilot and the first build are done, and the router is built. Every post-event run leaves a ledger and ends with a close-check. On 11 November the Rooms step was cut and the router got the go-ahead. The same day it was proven on the Agentics brief, recovering all five hand-routed items blind and adding four more. Next: merge, two more runs with a person approving each plan, then the backfill.",
+  "healthReason": "Ahead of the 3 December target: the router is built and proven a week early. It turns at-risk if the next two runs need hand fixes on more than 1 item in 10.",
   "why": "A systems review of the 4 November Agentics Spotlight run found that post-event is strong at capture and weak at consumption. The brief ran to about 20,000 words across 17 sections, and only two things read it: one round of posts and the graph's claim extraction. The glossary, tools, anecdotes, open loops, unused angles and follow-up state had no reader. The worst failures were also silent: the command itself noted that a skipped graph write still closed green, and a stalled session lost track of which steps had run.",
   "mission": "Every post-event run leaves a ledger of what ran, ends with a check that reads the real state and prints PASS or FAIL, and routes each section of the brief to something that acts on it: an issue, a project idea, a follow-up, a story, a content backlog row.",
   "destination": "Attending a room reliably turns into finished, checked work: posts, follow-ups on a date, build ideas, interview stories and graph claims. Done means three things: the close-check passes or skips with a reason on every new run, routed items are closed at a measurable rate after 30 days, and debrief coverage rises as the backfill runs.",
@@ -50,8 +50,8 @@
       "title": "Brief routing block and router step, with a lite debrief mode and one event name derived from Notion",
       "status": "active",
       "date": "2026-11-18",
-      "hill": "uphill",
-      "note": "Uphill until the routing block parses cleanly on the Agentics brief. After that it is plumbing."
+      "hill": "downhill",
+      "note": "Built and proven on the Agentics brief: a blind pass recovered all 5 hand-routed items and found 4 more. Two titles needed a re-ask for length; no content needed a hand fix. In review (PR #321)."
     },
     {
       "title": "Themes and content plan on every post-event post, plus X cuts",
@@ -102,6 +102,17 @@
         "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/blob/main/docs/proposals/2026-11-05-post-event-robustness-and-value.md"
       },
       "note": "Three days in, from one brief. The spec judges routing yield at 30 days, so this is not yet a result."
+    },
+    {
+      "label": "Router recall against the hand-routed pilot",
+      "baseline": "0 of 5 (no router)",
+      "current": "5 of 5, plus 4 new items",
+      "asOf": "2026-11-11",
+      "source": {
+        "label": "PR #321",
+        "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/321"
+      },
+      "note": "Blind pass on one brief. First-pass format errors: 2 of 9 titles over the length cap, fixed by one re-ask. One event is a small sample; two more runs are planned before writes go automatic."
     },
     {
       "label": "Attended rooms with a post-event debrief",
@@ -155,23 +166,18 @@
   "open": [],
   "nextSteps": [
     {
-      "action": "Merge the Rooms removal (PR #319)",
+      "action": "Merge the Rooms removal, then the router (PRs #319 and #321)",
       "owner": "Alex",
-      "due": "2026-11-12"
+      "due": "2026-11-13"
     },
     {
-      "action": "Prove the routing block: emit and parse it on the Agentics brief, and compare the result with the five hand-routed items",
-      "owner": "Claude Code",
-      "due": "2026-11-14"
-    },
-    {
-      "action": "Open the PR for the router, lite debrief mode and the single event name",
-      "owner": "Claude Code",
-      "due": "2026-11-18"
-    },
-    {
-      "action": "Review and merge the router PR",
+      "action": "Approve the Agentics routing plan: 3 new issues and 1 project idea",
       "owner": "Alex",
+      "due": "2026-11-13"
+    },
+    {
+      "action": "Route the next two post-event runs with a person approving each plan",
+      "owner": "Claude Code",
       "due": "2026-11-20"
     },
     {
@@ -188,7 +194,7 @@
   "assumptions": [
     {
       "assumption": "The synthesizer can write a routing block consistent enough to parse without hand fixes.",
-      "test": "Parse it on the Agentics brief. If more than 1 item in 10 needs a hand fix, the router proposes and a person confirms."
+      "test": "Proven on one brief (no content hand fixes; one re-ask for title length). Two more runs: if more than 1 item in 10 needs a hand fix, the router stays propose-and-confirm."
     },
     {
       "assumption": "Routed follow-ups get worked, not just filed.",
@@ -212,7 +218,7 @@
   "log": [
     {
       "date": "2026-11-11",
-      "text": "Rooms cut from post-event and the hub nav. Router build started."
+      "text": "Rooms cut. Router built and proven on the Agentics brief (PR #321): 5 of 5 hand-routed items recovered blind."
     },
     {
       "date": "2026-11-10",
@@ -255,6 +261,10 @@
     {
       "label": "Rooms removal (PR #319)",
       "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/319"
+    },
+    {
+      "label": "Router (PR #321)",
+      "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/321"
     }
   ],
   "tracking": [
