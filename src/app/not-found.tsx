@@ -24,8 +24,8 @@ export default function NotFound() {
             >
               Home
             </Link>
-            <Link href="/rooms" className="text-muted transition-colors hover:text-fg">
-              Browse the rooms →
+            <Link href="/projects" className="text-muted transition-colors hover:text-fg">
+              See what's in flight →
             </Link>
           </div>
         </div>
