@@ -1,66 +1,141 @@
 {
   "slug": "market-intelligence-lenses",
-  "title": "Market-intelligence lenses",
-  "tagline": "Turning a graph of NYC AI rooms into four readable lenses (attended, research, market, job), fed by scheduled lanes and read every Monday.",
+  "title": "AI intelligence graph",
+  "tagline": "An expanding understanding of the fast-moving AI world, built from public, private and unique sources. Event attendance is one of them.",
   "kind": "project",
   "status": "active",
   "health": "at-risk",
-  "phase": "Phase A: scheduled lanes",
+  "healthWhy": "At risk because the 16 November test depends on phase 1 work that has started but isn't finished (the nightly checking job and the backfill), and on a scheduled runner that failed its first two test runs. Not off track: the design, the decisions and the pilot evidence are in place, and no target date has moved.",
+  "trend": "improving",
+  "confidence": "60%: moderately confident the 16 November brief ships on phase 1",
+  "summary": "At risk, and improving. The graph is meant to be an expanding understanding of the AI world drawn from many sources, but only 3 of the 9 source types that have ever fed it are still writing, and even the event record is incomplete: 30 of 85 attended events have their first-hand notes in it. Phase 1 fixes completeness this week with a nightly job that checks every source and fills the gaps, and starts theme-driven web search; the 16 November Monday brief is the test. From Alex it needs one decision below (how private originals are stored), five minutes setting up a machine, one database change applied, and two builds merged.",
+  "phase": "Phase 1: complete the graph and start the discovery loop",
   "owner": "Alex Yedibalian + Claude Code",
   "started": "2026-11-03",
   "target": "2026-11-25",
-  "updated": "2026-11-08",
-  "why": "Topic trends had quietly stopped absorbing new topics after 8 August. 102 of 272 topics had no theme, and 9 of the 25 events attended since 6 August added nothing to any trend. The health view's tripwire had been firing, but nothing alerted on it.",
-  "mission": "A knowledge graph read through four lenses, sliceable by theme, segment, cohort and time. Each lens is fed by a lane, and every lane has a schedule, a run ledger, an alarm, a named consumer and a kill rule.",
-  "destination": "Every lane writes on schedule and alarms when it goes quiet. A Monday Market Brief reads the lenses, so prep for any room starts from what moved that week, not from a blank page.",
+  "updated": "2026-11-11",
+  "why": "AI moves faster than any one person can follow, and the best view of it combines sources nobody else has together. Public sources are the web, news, papers, models, filings, job boards and social. Private ones are newsletters and correspondence, meeting notes, and the insights and review comments in Notion. Unique ones are the rooms Alex is in and what he publishes. The project started as a fix for a silent failure, when topic trends stopped absorbing new topics on 8 August. A 10 November audit then showed the larger problem. Most sources had gone quiet: 3 of 9 source types still write. Graph writes were the manual last step of long commands, mandatory on paper and never enforced or measured. And the market side polled a fixed list of 40 companies instead of discovering anything.",
+  "mission": "One knowledge graph that keeps growing from every useful source, read through lenses (attended, research, market, job) and sliceable by theme, company, segment and time. Each source arrives through a 'lane': a scheduled job with a run log, an alarm, a reader and a kill rule. A nightly checking job compares every source against the graph and fills the gaps through one guarded writer. A discovery loop lets rising themes and each week's events choose what to search for, across web search, connectors like Clay, newsletters and social. It checks what was said in the room against what the market says, and counts every reuse of a fact.",
+  "destination": "Every source that's worth having feeds the graph on a schedule, with a completeness score and an alarm. Before any room, conversation or post, the brief says what moved in its themes, which companies and people are new, and where Alex's first-hand view agrees or conflicts with the market. The Monday Market Brief is the weekly proof. The graph is the memory behind content, outreach and the job search.",
   "showcase": [
-    "Diagnosing a silent data failure from the live database, and stating the do-nothing baseline before claiming a fix",
-    "Dimensional modelling for analytics: a slice contract with effective-dated theme membership, so a merge never breaks trend comparability",
-    "One guarded client for every pipeline write, with each schema change rehearsed on a twin database before it reaches production",
-    "Operating discipline for pipelines: each lane ships with a ledger, an alarm, a consumer and a kill rule, or it doesn't ship"
+    "Auditing a knowledge graph against its own sources and stating each gap as a dated count before proposing a fix",
+    "Reconciliation over reminders: a nightly job checks what should exist and fills the gap, instead of hoping each manual step ran (the pattern Kubernetes uses)",
+    "A discovery loop: the graph's own trends generate the search questions, read-only agents fetch, and one guarded writer stores the results",
+    "Keeping facts honest over time: each new claim is marked as corroborating, refining, replacing or contradicting older ones, and only real conflicts go to a human",
+    "The operating rule each lane is held to: a run log, an alarm, a reader and a kill rule. The audit found two lanes breaking it, and fixing them is part of this phase"
   ],
   "milestones": [
     {
-      "title": "Diagnose the clustering gap and write the fix plan",
+      "title": "Diagnose the clustering gap and assign the topic backlog to themes",
       "status": "done",
-      "date": "2026-11-03"
+      "date": "2026-11-04"
     },
     {
-      "title": "Topic dedup and in-session theme assignment for the backlog",
-      "status": "done",
-      "date": "2026-11-04",
-      "note": "Three new themes were added after review. Assignment now happens when a topic is created, with a nightly backstop."
-    },
-    {
-      "title": "Lane 0: link every topical claim to topics and companies",
+      "title": "Lanes 0 and 3: link claims to topics and companies; research frontier",
       "status": "done",
       "date": "2026-11-05"
     },
     {
-      "title": "Lane 3: research frontier (trending models and weekly papers)",
+      "title": "Lane 2 (company news): merge the per-company signals build",
+      "status": "next",
+      "note": "Built and reviewed on 8 November, not yet merged. It stays as the per-company part of the discovery loop. Matching the paid vendor is no longer the goal.",
+      "certainty": "executing"
+    },
+    {
+      "title": "Lane 2 (company news): source bake-off",
       "status": "done",
-      "date": "2026-11-05"
+      "date": "2026-11-06"
     },
     {
-      "title": "Lane 1: hiring pulse, from dry run to live writes",
+      "title": "Graph audit, two design reviews and a three-theme pilot sweep",
+      "status": "done",
+      "date": "2026-11-10",
+      "note": "The audit measured what is missing. Two design reviews were written: a discovery loop and a graph-completeness plan. A read-only pilot search showed what theme-driven search finds."
+    },
+    {
+      "title": "Phase 1a: nightly checking job, backfill since April, shared database change",
       "status": "active",
-      "note": "The lane runs weekly in dry-run. Its coverage alarm fired in the 6 November nightly check, which is the alarm doing its job."
+      "note": "The nightly job compares event folders, transcripts and briefs against the graph and saves whatever is missing. The backfill covers every event since April. The database change adds usage counting, alternate names for the same company, and a 'researched' event type, and it is rehearsed on a copy of the database first.",
+      "target": "2026-11-14",
+      "certainty": "executing"
     },
     {
-      "title": "Lane 4: feeds staging table and fetcher",
+      "title": "Phase 1b: daily theme sweeps feeding a Monday Market Brief",
       "status": "active",
-      "note": "Both are reviewed and waiting to merge. The table is rehearsed on the twin, not yet applied to production."
+      "note": "Acceptance test: the 16 November brief ties last week's rooms to the market, with conflicts and new companies called out.",
+      "target": "2026-11-16",
+      "certainty": "figuring-out"
     },
     {
-      "title": "Lane 2: choose the company-signals source before the vendor trial ends",
+      "title": "Move scheduled runs to the always-on machine",
+      "status": "next",
+      "note": "Scheduled runs fire and can search the web. Two test runs could not reach the project's Python environment, and they ran on a laptop that sleeps.",
+      "target": "2026-11-14",
+      "certainty": "figuring-out"
+    },
+    {
+      "title": "Lanes 1 (hiring) and 3 (research papers): start writing or retire",
+      "status": "next",
+      "note": "Both run every week but have written nothing. Each will either go live or be retired on purpose.",
+      "certainty": "figuring-out"
+    },
+    {
+      "title": "Lane 4 feeds, merged into the same staging and classifier path",
       "status": "next"
     },
     {
-      "title": "Monday Market Brief reads the lenses",
+      "title": "Phase 2: more sources — theme-driven web search at full scale, newsletters, Notion insights and review comments, published posts, Clay, social",
+      "status": "later"
+    },
+    {
+      "title": "Phase 3: private sources from the private vault — email, meeting notes, raw transcripts",
       "status": "later"
     }
   ],
   "metrics": [
+    {
+      "label": "Source types still writing to the graph (last 14 days)",
+      "baseline": "3 of 9",
+      "current": "3 of 9",
+      "target": "Every source in the plan, each with an alarm",
+      "asOf": "2026-11-11",
+      "source": {
+        "label": "Read-only query of the production graph, 2026-11-11, grouping writes by source and lane"
+      },
+      "note": "Still writing: event research (web, plus email found during research), post-event first-hand notes, and Notion event rows. Gone quiet between August and September: newsletter mining, Hacker News and Hugging Face trends, the morning refresh, job postings, and the Notion insights import."
+    },
+    {
+      "label": "Attended events with first-hand claims in the graph",
+      "baseline": "30 of 85",
+      "current": "30 of 85",
+      "target": "85 of 85",
+      "asOf": "2026-11-10",
+      "source": {
+        "label": "Read-only query of the production graph, 2026-11-10"
+      },
+      "note": "Counted as attended events with at least one first-hand claim linked to them. April to July is the biggest hole: 12 of 61. Since August it is 18 of 24."
+    },
+    {
+      "label": "Researched events whose research reached the graph",
+      "baseline": "52 of 97",
+      "current": "52 of 97",
+      "target": "97 of 97",
+      "asOf": "2026-11-10",
+      "source": {
+        "label": "Read-only query of the production graph on 2026-11-10, against the pipeline's event folders (partly private)"
+      },
+      "note": "Some folders are events that were researched but not attended. They will get their own event type instead of being counted as attended."
+    },
+    {
+      "label": "Pilot search: companies found that the graph didn't know (descriptive)",
+      "baseline": "0 (no theme search runs today)",
+      "current": "34 of 38 (89%)",
+      "asOf": "2026-11-10",
+      "source": {
+        "label": "Read-only pilot sweep of the three fastest-rising themes, about 120 searches, checked against the production graph on 2026-11-10"
+      },
+      "note": "This describes what one pilot found; it is not yet evidence that theme-driven search beats an alternative. The graph was seeded from a short watchlist, so most companies in any fresh sample would be new. The comparison sample comes with the first scheduled run. Matching is by name. Several events rest on a single news aggregator, and each will be checked at the original source before it is written."
+    },
     {
       "label": "Topics with no theme (invisible to trends)",
       "baseline": "102 of 272",
@@ -69,17 +144,6 @@
       "source": {
         "label": "Baseline: PR #264. Now: read-only query of the production graph, excluding merged-away topics",
         "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/264"
-      },
-      "note": "The one left is unassigned on purpose until a theme fits it."
-    },
-    {
-      "label": "Attended claims with a theme",
-      "baseline": "0 of 1,392",
-      "current": "1,179 of 1,392",
-      "asOf": "2026-11-05",
-      "source": {
-        "label": "PR #295",
-        "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/295"
       }
     },
     {
@@ -91,41 +155,109 @@
         "label": "PR #297",
         "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/297"
       }
+    },
+    {
+      "label": "Recall vs akta (floor 0.60)",
+      "baseline": "0.42 ($0 union)",
+      "current": "0.69 ($0 + Clay)",
+      "target": "0.60",
+      "asOf": "2026-11-06",
+      "source": {
+        "label": "Lane 2 bake-off, runs 1 and 1b (PR #307)",
+        "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/307"
+      },
+      "note": "akta is the paid company-signals trial used as the reference. With dates shifted by 10 days, the null is 0.06–0.13 for the free stack and 0.07–0.18 for the free stack plus Clay. A blinded model labelled the signals; Alex's 20-label spot check agreed on 17 of 20 (first-party, 2026-11-08). Since 10 November this is one input, not the goal. 'Free stack' means news sources that cost nothing. 'Null' is the score from matching on shuffled dates, the luck baseline."
     }
   ],
   "decisions": [
     {
-      "date": "2026-11-03",
-      "decision": "Replace the fixed 30-theme taxonomy with topics and subtopics that can group and evolve.",
-      "why": "A fixed list kept dropping new subjects on the floor."
-    },
-    {
-      "date": "2026-11-04",
-      "decision": "Assign a topic to a theme at the moment it's created, in the session that has full context. The nightly job becomes a backstop.",
-      "why": "The best embedding-only assigner reached 0.90 precision on just 5.9% of topics (PR #266)."
-    },
-    {
       "date": "2026-11-04",
       "decision": "Build four lenses with sliceable cohorts instead of one trend view.",
       "why": "Thin data is a reason to ingest more, not to shrink the scope."
-    }
-  ],
-  "open": [
+    },
     {
-      "question": "Which source replaces the company-signals trial when it lapses at the end of November?",
-      "owner": "Alex"
+      "date": "2026-11-08",
+      "decision": "Lane 2 runs on the free stack plus Clay.",
+      "why": "It was the only measured option that cleared the recall and coverage floors (0.69 and 0.88)."
+    },
+    {
+      "date": "2026-11-10",
+      "decision": "Replace list-polling with a discovery loop: rising themes, coverage gaps and each week's events generate the searches, and the watchlist grows on evidence.",
+      "why": "Matching a vendor on a fixed list defends coverage that already exists. A read-only pilot found that 34 of 38 companies driving the three fastest-rising themes were missing from the graph."
+    },
+    {
+      "date": "2026-11-10",
+      "decision": "Scheduled jobs run the loop. Findings are held in a staging table first, and they're promoted into the graph unattended only after a precision spot-check clears 0.8. The watchlist grows itself, and only contradictions reach Alex.",
+      "why": "Anything that depended on a manual trigger has died in this project before. The one gate kept up front is a quality floor on web-derived claims."
+    },
+    {
+      "date": "2026-11-10",
+      "decision": "Make the graph complete backwards and self-maintaining forwards, with a completeness score per source.",
+      "why": "The audit showed the write steps exist but are skipped silently, so the fix is a reconciler that checks, not a reminder."
+    },
+    {
+      "date": "2026-11-11",
+      "decision": "Events that were researched but not attended get their own 'researched' event type, promoted to attended when attendance is confirmed.",
+      "why": "About 4,900 research claims had no event to attach to. A separate type keeps them findable without overstating attendance."
+    },
+    {
+      "date": "2026-11-11",
+      "decision": "An event counts as attended once its post-event content has been uploaded and Alex has acknowledged it.",
+      "why": "That is the strongest evidence available, it already exists for every event that matters, and it needs no extra step."
+    },
+    {
+      "date": "2026-11-11",
+      "decision": "A nightly checking job keeps the graph complete: it compares every source against the graph and fills the gaps.",
+      "why": "The audit showed the write steps exist but get skipped silently. A job that checks beats a reminder to remember."
     }
   ],
+  "open": [],
   "risks": [
     {
-      "risk": "The nightly health check is red while lane 1 stays in dry-run, and a red check can hide a real failure.",
-      "mitigation": "Take lane 1 writes live after its first Sunday run is checked."
+      "risk": "Web searches lean on news aggregators, so dates and figures can be wrong.",
+      "mitigation": "Fetch the original page for every item before it's written. Let the loop write without review only after a spot check shows at least 80% of its findings are right.",
+      "likelihood": "high",
+      "impact": "medium"
+    },
+    {
+      "risk": "The backfill is large, and duplicate companies and people can multiply across sources.",
+      "mitigation": "Dry-run every batch, map alternate names to one entity, and write everything through the one guarded writer.",
+      "likelihood": "medium",
+      "impact": "medium"
+    },
+    {
+      "risk": "The loop could go quiet again the way earlier lanes did.",
+      "mitigation": "Today's health check flags a lane after 7 quiet days and fails it after 14. Phase 1 tightens daily lanes to 2 and 4.",
+      "likelihood": "medium",
+      "impact": "high"
+    },
+    {
+      "risk": "The Clay credits on hand are limited and will run out after a few runs of the company-news leg.",
+      "mitigation": "Decide on credits or a plan before they run out. The free sources keep flowing either way.",
+      "likelihood": "high",
+      "impact": "low"
     }
   ],
   "log": [
     {
+      "date": "2026-11-10",
+      "text": "Decisions: discovery loop, scheduled routines as the runner, staged writes, autonomous watchlist. Phase 1 is planned to ship this week."
+    },
+    {
+      "date": "2026-11-10",
+      "text": "Pilot theme search: 68 dated events and 38 companies across three rising themes, 34 of them new to the graph."
+    },
+    {
+      "date": "2026-11-10",
+      "text": "Graph audit: 30 of 85 attended events with first-hand claims, 52 of 97 researched events in the graph, first claim written 18 September."
+    },
+    {
+      "date": "2026-11-08",
+      "text": "Decision: lane 2 runs on the free stack plus Clay. The build has started."
+    },
+    {
       "date": "2026-11-06",
-      "text": "Lane 1's coverage alarm fired in the nightly check (issue #308). The structural checks passed."
+      "text": "Lane 2 bake-off: the free stack plus Clay reached 0.69 recall against akta (floor 0.60) and 0.88 coverage."
     },
     {
       "date": "2026-11-05",
@@ -150,18 +282,110 @@
       "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/266"
     },
     {
+      "label": "Lane 2 bake-off (PR #307)",
+      "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/307"
+    },
+    {
       "label": "Pipeline repo",
       "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3"
     }
   ],
   "tracking": [
     "YED-304",
-    "YED-307"
+    "YED-307",
+    "YED-333",
+    "YED-349",
+    "YED-384",
+    "YED-385"
   ],
   "stack": [
     "Supabase Postgres",
     "Python",
-    "GitHub Actions",
-    "Claude Code"
+    "Claude Code scheduled jobs",
+    "GitHub Actions"
+  ],
+  "asks": [
+    {
+      "decision": "Where are private originals stored (email, meeting notes, Notion comments, raw transcripts)?",
+      "recommendation": "Keep the originals in a separate private vault, encrypted and outside the graph and the public repos, with its own key that no scheduled job or pull request can reach. The graph stores what was learned plus a pointer back to the original, so any source can be mined again as the models improve.",
+      "options": [
+        "Store originals in the graph's own database (one key reaches everything, including from public-repo jobs)",
+        "Store only what was learned and discard the originals (lose the ability to re-mine and to quote exactly)"
+      ],
+      "owner": "Alex",
+      "due": "2026-11-14",
+      "costOfDelay": "Email and meeting notes can't join the graph until this is settled. Everything else in phase 1 proceeds.",
+      "reversible": false
+    }
+  ],
+  "sinceLast": {
+    "since": "2026-11-08",
+    "changes": [
+      {
+        "kind": "changed",
+        "text": "The scope widened from a view of NYC AI rooms to an expanding understanding of the AI world, with event attendance as one source among many."
+      },
+      {
+        "kind": "learned",
+        "text": "Audit of the live graph: 30 of 85 attended events have first-hand claims, and 45 of 97 researched events never reached the graph."
+      },
+      {
+        "kind": "learned",
+        "text": "A read-only pilot search of three rising themes found 68 dated events and 38 companies, 34 of them new to the graph. This is descriptive; there's no comparison sample yet."
+      },
+      {
+        "kind": "changed",
+        "text": "The goal changed from matching a paid vendor on 40 companies to a discovery loop over a complete graph."
+      },
+      {
+        "kind": "done",
+        "text": "Two design reviews written. The runner, the write path and the level of autonomy were decided."
+      },
+      {
+        "kind": "slipped",
+        "text": "The scheduled runner: two smoke runs couldn't reach the project's Python environment, and runs currently land on a laptop."
+      },
+      {
+        "kind": "changed",
+        "text": "The lane 2 build moved from done back to waiting on merge."
+      }
+    ]
+  },
+  "issues": [
+    {
+      "issue": "Two lanes (hiring and research papers) run every week but write nothing.",
+      "impact": "Those signals are missing from the market lens, and the health check doesn't count it.",
+      "action": "Start their writes or retire them on purpose, and count zero-write runs as failures.",
+      "owner": "Claude Code"
+    },
+    {
+      "issue": "Scheduled runs can't reach the project's Python environment, and they run on a laptop that sleeps.",
+      "impact": "Nothing can run unattended yet.",
+      "action": "Register the always-on machine, have each run set up its own environment, and fall back to a plain scheduled job if that fails.",
+      "owner": "Alex and Claude Code"
+    },
+    {
+      "issue": "This week's research briefs haven't been written to the graph.",
+      "impact": "Pre-event context and the Monday brief miss them.",
+      "action": "Make them the first batch for the reconciler.",
+      "owner": "Claude Code"
+    }
+  ],
+  "dependencies": [
+    {
+      "on": "Alex",
+      "need": "Register the always-on machine for scheduled runs (about five minutes)",
+      "status": "waiting"
+    },
+    {
+      "on": "Alex",
+      "need": "Apply the shared database change after it's rehearsed on a copy",
+      "status": "waiting"
+    },
+    {
+      "on": "Alex",
+      "need": "Merge the lane 2 build and the feeds staging table",
+      "status": "waiting"
+    }
   ]
 }
