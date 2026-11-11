@@ -6,10 +6,10 @@ import type { Milestone, Project } from "@/lib/projects";
 import { cn } from "@/lib/cn";
 import { HealthPill, KIND, Pill, ProgressBar, fmtDate } from "../ui";
 
-const TREND: Record<NonNullable<Project["trend"]>, string> = {
-  improving: "↗ improving",
-  steady: "→ steady",
-  worsening: "↘ worsening",
+const TREND: Record<NonNullable<Project["trend"]>, { glyph: string; label: string }> = {
+  improving: { glyph: "↗", label: "improving" },
+  steady: { glyph: "→", label: "steady" },
+  worsening: { glyph: "↘", label: "worsening" },
 };
 
 const CERTAINTY: Record<NonNullable<Milestone["certainty"]>, string> = {
@@ -43,6 +43,31 @@ export function ProjectView({
   const { lens } = useLens();
   const ed = lens === "editorial";
   const h2 = ed ? "font-display text-2xl tracking-tight" : "font-mono text-lg font-semibold tracking-tight";
+  // Context (why, what, where, showcase). With a bottom line it moves below the plan, status-report
+  // style; pages without one keep it at the top so they still open with their framing.
+  const context = (
+    <>
+      <section className={cn("mt-12 grid gap-8 sm:grid-cols-3", p.summary && "border-t border-border pt-12")}>
+        <Block title={ed ? "Why it exists" : "problem"} body={p.why} />
+        <Block title={ed ? "What we're building" : "build"} body={p.mission} />
+        <Block title={ed ? "Where it's going" : "definition of done"} body={p.destination} />
+      </section>
+
+      <section className="mt-12 rounded-lg border border-border bg-surface p-6">
+        <h2 className={h2}>{ed ? "What this shows" : "Capabilities exercised"}</h2>
+        <ul className="mt-4 space-y-2 text-sm leading-relaxed">
+          {p.showcase.map((s) => (
+            <li key={s} className="flex gap-3">
+              <span className="text-accent" aria-hidden>
+                →
+              </span>
+              <span>{s}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+    </>
+  );
 
   return (
     <article className="mx-auto w-full max-w-5xl px-6 py-16">
@@ -54,7 +79,11 @@ export function ProjectView({
         <div className="flex flex-wrap items-center gap-2">
           <Pill>{KIND[p.kind]}</Pill>
           <HealthPill project={p} />
-          {p.trend && <Pill>{TREND[p.trend]}</Pill>}
+          {p.trend && (
+            <Pill>
+              <span aria-hidden>{TREND[p.trend].glyph}</span> {TREND[p.trend].label}
+            </Pill>
+          )}
           {p.confidence && <Pill>confidence {p.confidence}</Pill>}
           {parent && (
             <Link href={`/projects/${parent.slug}`} className="font-mono text-[11px] text-muted hover:text-fg">
@@ -84,14 +113,19 @@ export function ProjectView({
           )}
         </dl>
         <p className="mt-2 font-mono text-[11px] text-muted">updated {fmtDate(p.updated)}</p>
+        {!p.summary && p.healthWhy && (
+          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted">Health call: {p.healthWhy}</p>
+        )}
       </header>
+
+      {!p.summary && context}
 
       {/* Status-report order: bottom line, then what's needed, then what changed. Context comes last. */}
       {p.summary && (
         <section className="mt-12 rounded-lg border border-accent/40 bg-surface p-6">
-          <p className="font-mono text-xs uppercase tracking-widest text-muted">
+          <h2 className="font-mono text-xs uppercase tracking-widest text-muted">
             {ed ? "Bottom line" : "bluf"}
-          </p>
+          </h2>
           <p className="mt-3 text-base leading-relaxed">{p.summary}</p>
           {p.healthWhy && (
             <p className="mt-3 text-sm leading-relaxed text-muted">
@@ -105,13 +139,11 @@ export function ProjectView({
       {p.asks.length > 0 && (
         <section className="mt-12">
           <h2 className={h2}>{ed ? "Decisions needed" : "decisions needed"}</h2>
-          <ol className="mt-4 space-y-4">
+          <ol className="mt-4 list-decimal space-y-4 pl-5 marker:font-mono marker:text-xs marker:text-muted">
             {p.asks.map((a, i) => (
-              <li key={a.decision} className="rounded-lg border border-border p-5">
+              <li key={`${i}-${a.decision}`} className="rounded-lg border border-border p-5">
                 <div className="flex flex-wrap items-baseline justify-between gap-2">
-                  <p className="text-sm font-semibold">
-                    {i + 1}. {a.decision}
-                  </p>
+                  <p className="text-sm font-semibold">{a.decision}</p>
                   <span className="font-mono text-[11px] text-muted">
                     {a.owner}
                     {a.due && <> · by {fmtDate(a.due)}</>} · {a.reversible ? "reversible" : "hard to reverse"}
@@ -138,8 +170,8 @@ export function ProjectView({
             <span className="ml-3 font-mono text-[11px] font-normal text-muted">since {fmtDate(p.sinceLast.since)}</span>
           </h2>
           <ul className="mt-4 space-y-2 text-sm leading-relaxed">
-            {p.sinceLast.changes.map((c) => (
-              <li key={c.text} className="grid gap-1 sm:grid-cols-[6rem_1fr]">
+            {p.sinceLast.changes.map((c, i) => (
+              <li key={`${i}-${c.text}`} className="grid gap-1 sm:grid-cols-[6rem_1fr]">
                 <span className={cn("font-mono text-[11px] uppercase tracking-widest", CHANGE[c.kind].cls)}>
                   {CHANGE[c.kind].label}
                 </span>
@@ -227,8 +259,8 @@ export function ProjectView({
             <section>
               <h2 className={h2}>{ed ? "Problems right now" : "issues"}</h2>
               <ul className="mt-4 space-y-4 text-sm leading-relaxed">
-                {p.issues.map((x) => (
-                  <li key={x.issue}>
+                {p.issues.map((x, i) => (
+                  <li key={`${i}-${x.issue}`}>
                     <p>{x.issue}</p>
                     <p className="mt-1 text-muted">Impact: {x.impact}</p>
                     <p className="mt-1 text-muted">
@@ -244,8 +276,8 @@ export function ProjectView({
             <section>
               <h2 className={h2}>{ed ? "Waiting on" : "dependencies"}</h2>
               <ul className="mt-4 space-y-3 text-sm leading-relaxed">
-                {p.dependencies.map((d) => (
-                  <li key={d.on + d.need}>
+                {p.dependencies.map((d, i) => (
+                  <li key={`${i}-${d.on}`}>
                     <span className="font-semibold">{d.on}</span>: {d.need}
                     <span className="ml-2 font-mono text-[11px] text-muted">{d.status}</span>
                   </li>
@@ -313,25 +345,7 @@ export function ProjectView({
         </section>
       )}
 
-      <section className="mt-12 grid gap-8 border-t border-border pt-12 sm:grid-cols-3">
-        <Block title={ed ? "Why it exists" : "problem"} body={p.why} />
-        <Block title={ed ? "What we're building" : "build"} body={p.mission} />
-        <Block title={ed ? "Where it's going" : "definition of done"} body={p.destination} />
-      </section>
-
-      <section className="mt-12 rounded-lg border border-border bg-surface p-6">
-        <h2 className={h2}>{ed ? "What this shows" : "Capabilities exercised"}</h2>
-        <ul className="mt-4 space-y-2 text-sm leading-relaxed">
-          {p.showcase.map((s) => (
-            <li key={s} className="flex gap-3">
-              <span className="text-accent" aria-hidden>
-                →
-              </span>
-              <span>{s}</span>
-            </li>
-          ))}
-        </ul>
-      </section>
+      {p.summary && context}
 
       {subprojects.length > 0 && (
         <section className="mt-12">
