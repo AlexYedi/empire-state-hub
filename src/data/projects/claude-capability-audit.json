@@ -5,16 +5,16 @@
   "kind": "project",
   "status": "active",
   "health": "on-track",
-  "phase": "Deadline fixes shipped; scheduled-agent decision next",
+  "phase": "Fixes and checks done; first scheduled model job next",
   "owner": "Alex Yedibalian + Claude Code",
   "started": "2026-11-10",
   "target": "2026-11-30",
   "updated": "2026-11-11",
-  "bottomLine": "All three deadline fixes shipped on 11 November. The shared skills library no longer names the retiring Sonnet 4.5. The eval study is pinned to a full model ID and a fixed CLI version. And four skills that loaded twice in every session now load once. Next is the biggest gain from the audit, the first scheduled cloud agent. It needs one decision from Alex by 18 November.",
-  "healthReason": "Both risks that scored 6 of 9 cleared when the fixes merged. What's left has no deadline before the 30 November target except the runtime decision, which is two-way.",
+  "bottomLine": "All three deadline fixes shipped on 11 November, and both follow-up checks passed. Agent definitions that name a model by alias follow the current model, and delegated agents can now write to Notion. The eval runner now uses its own verified copy of the CLI, so routine updates can't stop it. The scheduled job runs on the Mac mini, decided 10 November. What's left is putting a model-driven sweep on that schedule.",
+  "healthReason": "Every deadline item is done and no risk is above low. The remaining work runs on a runner that's already decided and installed.",
   "why": "Diagnosis: Anthropic shipped new models, Claude Code features and API tools almost every week from May to November 2026, and nobody had checked them against the work in flight. The audit found that the system runs almost entirely inside Claude Code sessions, not through direct API calls. So the leverage is in agent tooling, and the exposure is in hard-coded model IDs.",
   "mission": "Inventory how each active repo uses Claude (models, Claude Code agents, skills and hooks, CI, direct API calls). Map the May–November 2026 release notes onto that inventory. Then rank what to change, by deadline first and by fit with current priorities second. Adopt a feature only when a named roadmap item needs it.",
-  "destination": "Three conditions. No retired or retiring model is hard-coded anywhere. The eval study runs on a pinned model and CLI version. And one recurring job runs on a schedule as a cloud agent, instead of waiting for someone to start a session. Done when all three hold and every remaining idea is either adopted or explicitly dropped.",
+  "destination": "Three conditions. No retired or retiring model is hard-coded anywhere. The eval study runs on a pinned model and CLI version. And one recurring job that runs a model runs on a schedule, without anyone starting a session. Done when all three hold and every remaining idea is either adopted or explicitly dropped.",
   "showcase": [
     "Treating the AI platform as a moving dependency: auditing releases against real usage instead of adopting features for their own sake",
     "Ranking by deadline and risk first (a model retirement, a moving alias in a pre-registered study), then by fit with the roadmap",
@@ -23,37 +23,20 @@
   ],
   "open": [
     {
-      "question": "Where should the market-intel discovery loop run as a scheduled agent: a Claude Code routine, a Managed Agents scheduled deployment, or manual until the agent factory pilot?",
-      "owner": "Alex Yedibalian",
-      "needBy": "2026-11-18",
-      "unblocks": "The first scheduled agent in the system, and the last condition in the definition of done.",
-      "recommendation": "A Claude Code routine. It reuses the skills and connectors already in place and needs no new infrastructure. Move to Managed Agents only if the loop needs its own budget, or traces outside Claude Code."
-    },
-    {
       "question": "Which beta API features (server-side message threads, on-demand compaction, per-message effort) earn a place in a build, and which wait for general availability?",
       "owner": "Alex Yedibalian"
     }
   ],
   "nextSteps": [
     {
-      "action": "Keep the CLI at the pinned version for the eval study window: turn auto-updates off, or install the pinned version separately for the runner",
-      "owner": "Alex Yedibalian",
-      "due": "2026-11-14"
-    },
-    {
-      "action": "Decide where the market-intel loop runs",
-      "owner": "Alex Yedibalian",
-      "due": "2026-11-18"
-    },
-    {
-      "action": "Confirm that agent definitions naming a model alias need no change",
+      "action": "Test the pipeline's Notion writer agent end to end with a real, validated payload",
       "owner": "Claude Code",
       "due": "2026-11-21"
     },
     {
-      "action": "Retest whether a delegated agent can now write to Notion",
-      "owner": "Claude Code",
-      "due": "2026-11-21"
+      "action": "Put the first model-driven theme sweep on the Mac mini schedule",
+      "owner": "Alex Yedibalian",
+      "due": "2026-11-25"
     }
   ],
   "milestones": [
@@ -77,7 +60,7 @@
       "title": "Pin the eval study to a full model ID and a fixed CLI version",
       "status": "done",
       "date": "2026-11-11",
-      "note": "The runner refuses to sample on any other CLI version, and every sample records which model actually served it."
+      "note": "The runner calls its own copy of the CLI, verified by checksum, so routine Claude Code updates can't move it. Every sample records which model actually served it."
     },
     {
       "title": "Remove duplicate skills that load in every session",
@@ -86,10 +69,16 @@
       "note": "Four skills uploaded to claude.ai as snapshots of the plugin were deleted there. The plugin stays the single source. The one skill that referenced the deleted copies was repointed first."
     },
     {
-      "title": "Run the market-intel discovery loop as a scheduled cloud agent",
-      "status": "next",
-      "hill": "uphill",
-      "note": "Waiting on the runtime decision above."
+      "title": "Check that model aliases and delegated Notion writes work as assumed",
+      "status": "done",
+      "date": "2026-11-11",
+      "note": "Aliases follow the current model on the Anthropic API, and nothing here routes through a provider where they still point at the retiring model. A delegated agent created a Notion page without error."
+    },
+    {
+      "title": "Run the market-intel discovery loop on a schedule",
+      "status": "active",
+      "hill": "downhill",
+      "note": "Runner decided 10 November: the Mac mini, with plain scheduled scripts as the fallback. The nightly reconciler (no model) runs from 12 November. Model-driven sweeps come next."
     },
     {
       "title": "Use the built-in plugin eval runner as a regression check for the shared skills plugin",
@@ -129,10 +118,18 @@
       "current": "0",
       "target": "1",
       "asOf": "2026-11-10",
-      "source": { "label": "First-party scan of CI workflows, 2026-11-10" }
+      "source": {
+        "label": "First-party scan of CI workflows, 2026-11-10"
+      },
+      "note": "The nightly reconciler that started on 12 November runs plain code, so it doesn't count toward this."
     }
   ],
   "decisions": [
+    {
+      "date": "2026-11-11",
+      "decision": "Give the eval runner its own checksum-verified copy of the pinned CLI, instead of turning off updates.",
+      "why": "Freezing the everyday CLI would hold back every other session. A private copy holds the study's version fixed and lets everything else update."
+    },
     {
       "date": "2026-11-11",
       "decision": "Keep the plugin repo as the single source for these skills, and delete the copies uploaded to claude.ai.",
@@ -142,12 +139,17 @@
       "date": "2026-11-11",
       "decision": "Ship the two deadline fixes as small pull requests right away, not through the agent factory gate.",
       "why": "Both were mechanical and time-boxed. Waiting on the factory's first phase would have put a 30 November deadline behind someone else's schedule."
+    },
+    {
+      "date": "2026-11-10",
+      "decision": "Run scheduled market-intel jobs on the Mac mini, with plain scheduled scripts as the fallback. GitHub Actions keep only code-only jobs.",
+      "why": "The jobs need local inputs and credentials that a cloud runner doesn't have. A first scheduled routine on the mini didn't survive a restart, so the fallback is in use."
     }
   ],
   "risks": [
     {
-      "risk": "A routine Claude Code update moves the CLI off the pinned version, and the eval runner stops sampling.",
-      "mitigation": "The runner fails closed, so no mixed data gets in. Hold the CLI at the pinned version for the study window (next step due 14 November)."
+      "risk": "A scheduled routine on the Mac mini loses its environment when the machine restarts.",
+      "mitigation": "The nightly job runs under the plain-script fallback. Routines move back only after one survives a restart."
     },
     {
       "risk": "Adopting features because they're new rather than because a project needs them.",
@@ -158,17 +160,12 @@
       "mitigation": "Unverified items stay off this page. The changelog is re-checked before each adoption."
     }
   ],
-  "assumptions": [
-    {
-      "assumption": "Agent definitions that name a model alias ('sonnet', 'opus') follow the current model and need no change.",
-      "test": "Check against the Claude Code model-configuration docs (next step due 21 November)."
-    },
-    {
-      "assumption": "A scheduled routine can use the same skills and connectors as an interactive session.",
-      "test": "Read the routines docs before the runtime decision on 18 November."
-    }
-  ],
+  "assumptions": [],
   "log": [
+    {
+      "date": "2026-11-11",
+      "text": "Both follow-up checks passed, and the eval runner was made immune to CLI updates. The scheduling question was already settled on 10 November (Mac mini), so the open ask closed."
+    },
     {
       "date": "2026-11-11",
       "text": "All three deadline fixes shipped: the retiring model ID replaced, the eval study pinned, and four duplicate skills removed after the one skill depending on them was repointed. Health moved to on track."
@@ -192,6 +189,16 @@
       "url": "https://code.claude.com/docs/en/changelog"
     }
   ],
-  "tracking": ["YED-365", "YED-384", "YED-352"],
-  "stack": ["Claude Code", "Claude API", "Managed Agents", "GitHub Actions"]
+  "tracking": [
+    "YED-352",
+    "YED-365",
+    "YED-384",
+    "YED-385"
+  ],
+  "stack": [
+    "Claude Code",
+    "Claude API",
+    "Managed Agents",
+    "GitHub Actions"
+  ]
 }
