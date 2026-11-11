@@ -5,10 +5,10 @@
   "kind": "project",
   "status": "active",
   "health": "at-risk",
-  "healthWhy": "At risk because the 16 November acceptance test depends on work that hasn't started (the reconciler and the backfill) and on a scheduled runner that failed its first two smoke runs. Not off track, because the design, the decisions and the pilot evidence are in place and no committed date has slipped.",
+  "healthWhy": "At risk because the 16 November test depends on phase 1 work that has started but isn't finished (the nightly checking job and the backfill), and on a scheduled runner that failed its first two test runs. Not off track: the design, the decisions and the pilot evidence are in place, and no target date has moved.",
   "trend": "improving",
   "confidence": "60%: moderately confident the 16 November brief ships on phase 1",
-  "summary": "At risk, and improving. The graph behind the lenses is only partly complete. 30 of 85 attended events carry first-hand claims, and 45 of 97 researched events never reached it, because graph writes were manual last steps that got skipped silently. The fix is designed: a nightly reconciler that backfills and keeps the graph complete, plus a discovery loop that searches the market from rising themes. To start phase 1 this week, Alex needs to make three of the decisions below (due 12 November) and spend five minutes setting up a machine. The 16 November Monday brief is the acceptance test.",
+  "summary": "At risk, and improving. Only 30 of 85 attended events have their first-hand notes in the knowledge graph, and 45 of 97 researched events never reached it, because saving to the graph was a manual last step that got skipped. Phase 1 fixes that this week with a nightly job that checks every source and fills the gaps; the 16 November Monday brief is the test. From Alex it needs three decisions below (by 12 November), five minutes setting up a machine, one database change applied, and two builds merged.",
   "phase": "Pivot: from fixed lanes to a discovery loop over a complete graph",
   "owner": "Alex Yedibalian + Claude Code",
   "started": "2026-11-03",
@@ -53,9 +53,9 @@
       "note": "The audit measured what is missing. Two design reviews were written: a discovery loop and a graph-completeness plan. A read-only pilot search showed what theme-driven search finds."
     },
     {
-      "title": "Phase 1a: nightly reconciler, backfill since April, shared schema change",
+      "title": "Phase 1a: nightly checking job, backfill since April, shared database change",
       "status": "active",
-      "note": "The reconciler compares event folders, transcripts and briefs against the graph and writes whatever is missing. The backfill covers every event since April. The database change adds usage counting, alternate names for the same company, and a 'researched' event type. It is rehearsed on a copy of the database first.",
+      "note": "The nightly job compares event folders, transcripts and briefs against the graph and saves whatever is missing. The backfill covers every event since April. The database change adds usage counting, alternate names for the same company, and a 'researched' event type, and it is rehearsed on a copy of the database first.",
       "target": "2026-11-14",
       "certainty": "executing"
     },
@@ -189,7 +189,7 @@
   "risks": [
     {
       "risk": "Web searches lean on news aggregators, so dates and figures can be wrong.",
-      "mitigation": "Fetch the original page for every item before it's written, and promote unattended only after a spot check clears 0.8 precision.",
+      "mitigation": "Fetch the original page for every item before it's written. Let the loop write without review only after a spot check shows at least 80% of its findings are right.",
       "likelihood": "high",
       "impact": "medium"
     },
@@ -206,7 +206,7 @@
       "impact": "high"
     },
     {
-      "risk": "The Clay credits on hand cover about two runs of the company-news leg.",
+      "risk": "The Clay credits on hand are limited and will run out after a few runs of the company-news leg.",
       "mitigation": "Decide on credits or a plan before they run out. The free sources keep flowing either way.",
       "likelihood": "high",
       "impact": "low"
@@ -296,7 +296,7 @@
       "recommendation": "Keep the rule that attendance needs evidence, and have the reconciler send a short weekly tick list.",
       "options": [
         "Infer attendance from 'Going' on the calendar",
-        "Keep today's manual process, which has missed at least 7 events"
+        "Keep today's manual process, which has missed attended events"
       ],
       "owner": "Alex",
       "due": "2026-11-12",
@@ -305,9 +305,9 @@
     },
     {
       "decision": "What keeps the graph complete after the backfill?",
-      "recommendation": "A nightly reconciler that checks every source against the graph and fills gaps.",
+      "recommendation": "A nightly job that checks every source against the graph and fills the gaps.",
       "options": [
-        "Blocking checks at the end of each command (breaks the no-blocking-hook rule)",
+        "A check that stops each command until the save is done (the project rules forbid steps that block work)",
         "A weekly manual checklist (the pattern that failed before)"
       ],
       "owner": "Alex",
@@ -323,7 +323,7 @@
         "Leave private sources out"
       ],
       "owner": "Alex",
-      "costOfDelay": "Nothing this week. Phase 3 waits on it.",
+      "costOfDelay": "Nothing this week; phase 3 waits on it. Marked hard to reverse because private text, once stored, can't be fully un-stored. That's why the recommendation never stores it.",
       "reversible": false
     }
   ],
@@ -336,7 +336,7 @@
       },
       {
         "kind": "learned",
-        "text": "A read-only pilot search of three rising themes found 68 dated events and 38 companies, 34 of them new to the graph."
+        "text": "A read-only pilot search of three rising themes found 68 dated events and 38 companies, 34 of them new to the graph. This is descriptive; there's no comparison sample yet."
       },
       {
         "kind": "changed",
