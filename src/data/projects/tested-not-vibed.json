@@ -46,10 +46,10 @@
       "note": "Runner, throughput results, a draft pre-registration and a written rule for choosing failure types. Held locally until its home is chosen."
     },
     {
-      "title": "Failure-type source decided: two branches, settled before signing",
+      "title": "Failure-type source: two branches, Alex picks by 14 November",
       "status": "active",
-      "date": "2026-11-12",
-      "note": "Branch 1 uses Alex's own corrections, if any type clears the written rule (at least 5 corrections on at least 3 drafts). Branch 2 is the written fallback: the anti-patterns file in file order. On 11 November a second source was checked, his working sessions with the drafting agent: 72 corrections in 1,663 messages. Together with the review comments, the candidates fall into 34 types, and none clears the rule. Branch 1 is out unless the rule is changed, which would be a change made after seeing the data."
+      "date": "2026-11-14",
+      "note": "Branch 2 is what the written procedure already says: review comments came back under its floor of 60, so its fallback applies, the anti-patterns file in file order. Branch 1 would use Alex's own corrections instead. That needs three changes made after seeing data, each logged as a deviation: a new source (his working sessions with the drafting agent), a new floor, and a random label sample instead of the first 50. Even then, a check on 11 November found no type that clears the eligibility rule of 5 corrections on 3 drafts: 72 corrections in 1,663 messages sent before 8 November, which together with the review comments fall into 34 types."
     },
     {
       "title": "Pre-registration signed and frozen by hash",
@@ -61,7 +61,7 @@
       "title": "Debrief backfill, first wave of three rooms",
       "status": "done",
       "date": "2026-11-11",
-      "note": "Three rooms written to the private knowledge graph: 223 claims, all held as candidates until Alex reviews the briefs. Two had briefs that never reached the graph; one needed a new brief. A recount found only four undebriefed rooms with a recording, not about 15, so most of the remaining rooms get the lighter tier."
+      "note": "Three rooms written to the private knowledge graph: 223 claims, stored as unreviewed candidates that later runs see flagged as unreviewed. Two had briefs that never reached the graph; one needed a new brief. A first-party recount on 11 November against the graph found only four undebriefed rooms with a recording, fewer than planned. The full tier (a complete brief from a recording) therefore covers few rooms, and the 19 December target rests mostly on the lighter tier (a short brief from Alex's recap)."
     },
     {
       "title": "Eval runner public",
@@ -101,10 +101,10 @@
       "date": "2026-12-19"
     },
     {
-      "title": "Run 2: failure types re-selected from corrections made after signing",
+      "title": "Proposed: run 2, with failure types selected from corrections made after signing",
       "status": "later",
       "date": "2027-01-15",
-      "note": "Same extraction and the same rule, on sessions after 14 November. Comparing the two runs' type lists is a finding in its own right."
+      "note": "Not yet decided. The same session extraction and eligibility rule, applied to sessions after 14 November. If run 1 uses the fallback, run 2 would be the first list drawn from Alex's corrections, compared against run 1's."
     }
   ],
   "metrics": [
@@ -128,7 +128,7 @@
       "source": {
         "label": "First-party export of inline review comments, 11 November 2026"
       },
-      "note": "Input metric. Below the floor, so the fallback source applies and its ranking rule is an open decision. Only these counts leave the private export."
+      "note": "Input metric. Below the floor, so the written fallback applies. Whether to keep it or change the source (branch 1 or 2) is the open decision. Only these counts leave the private export."
     },
     {
       "label": "Style-guide lines tested against a no-guidance control",
@@ -181,29 +181,32 @@
   ],
   "open": [
     {
-      "question": "Pick the failure-type source: branch 1 (Alex's corrections) or branch 2 (the anti-patterns file in file order). The check of his working sessions found no type that clears the written rule, so branch 1 needs the rule changed after seeing the data, logged as a deviation.",
+      "question": "Pick the failure-type source. Branch 2: the written fallback, the anti-patterns file in file order. Branch 1: Alex's own corrections, which needs a new source, a new floor and a new label sample, each logged as a deviation, and still found no eligible type on 11 November.",
       "owner": "Alex",
       "needBy": "2026-11-14",
       "unblocks": "The failure-type list and the signature",
       "recommendation": "Branch 2, signed as written, with the write-up saying the corrections record was too thin to rank."
     },
     {
-      "question": "Label 50 corrections drawn at random from the 72 found in his sessions (this replaces labelling the 17 comments), so the classifier's agreement can be reported against a majority-class baseline. Only needed if branch 1 is chosen; otherwise it serves run 2.",
+      "question": "Only if branch 1 is picked: label 50 corrections drawn at random from the 72 found in his sessions (instead of the first 50 review comments), so the classifier's agreement can be reported against a majority-class baseline. Starts after the branch pick; otherwise it serves the proposed run 2.",
       "owner": "Alex",
       "needBy": "2026-11-14",
       "unblocks": "Branch 1 only",
       "recommendation": "Skip for run 1 if branch 2 is chosen."
     },
     {
-      "question": "Sign the pre-registration: confirm the failure-type list, state a prediction before any sample, and pick the marketplace GTM skill tested as one of the arms. Due 14 November.",
-      "owner": "Alex"
+      "question": "Sign the pre-registration: confirm the failure-type list, state a prediction before any sample, and pick the marketplace GTM skill tested as one of the arms.",
+      "owner": "Alex",
+      "needBy": "2026-11-14"
     },
     {
-      "question": "Where AO-EVAL-SUITE lives: its own public repo (recommended), or a folder in an existing one. Also its licence. Due before the runner goes public on 21 November.",
-      "owner": "Alex"
+      "question": "Where AO-EVAL-SUITE lives: its own public repo (recommended), or a folder in an existing one. Also its licence.",
+      "owner": "Alex",
+      "needBy": "2026-11-21",
+      "unblocks": "The runner going public"
     },
     {
-      "question": "Whether the style-guide update loop should also read his working sessions: it reads review comments, but most corrections happen in conversation, not in comments.",
+      "question": "Whether the style-guide update loop should also read his working sessions: it reads review comments, but since September his corrections have mostly happened in conversation.",
       "owner": "Alex",
       "needBy": "2026-11-25",
       "unblocks": "Run 2's source, and the rulebook audit"
@@ -211,8 +214,8 @@
   ],
   "risks": [
     {
-      "risk": "Issue, live since 11 November: the review-comment export came back with 17 countable comments on 6 of 935 drafts, under the 60 the selection procedure needs. The written fallback (the anti-patterns file in file order) gives a list of eight word and phrase types. Whether to keep that rule or amend it is now a decision by Alex, and the failure-type list and the 14 November signature wait on it.",
-      "mitigation": "Path to green: Alex keeps or amends the rule, any amendment is logged as a deviation with its reason, and the pre-registration is signed by 14 November. Agents prepare the candidate lists under each option so Alex's part is about an hour. If 14 November passes unsigned, every later date moves day for day and the health call goes to off track under the written criteria."
+      "risk": "Issue, live since 11 November: the review-comment export came back with 17 countable comments on 6 of 935 drafts, under the 60 the selection procedure needs, so its written fallback applies (the anti-patterns file in file order). A second check, of Alex's working sessions, found no type that clears the eligibility rule. The failure-type list and the 14 November signature wait on Alex picking branch 1 or 2.",
+      "mitigation": "Path to green: Alex picks a branch (branch 2 recommended), any change is logged as a deviation with its reason, and the pre-registration is signed by 14 November. If 14 November passes unsigned, every later date moves day for day and the health call goes to off track under the written criteria."
     },
     {
       "risk": "Risk: the 14 November sign date slips for any other reason. Trigger: no signed, hashed pre-registration by the end of 14 November. Owner: Alex.",
@@ -236,13 +239,13 @@
     },
     {
       "risk": "Risk: backfilled debriefs written weeks after the event could read as fact to later runs.",
-      "mitigation": "By design, every backfilled claim is tagged as backfill, and nothing public is written from a backfilled event."
+      "mitigation": "Every backfilled claim is tagged as backfill and stored as an unreviewed candidate, which later runs see flagged as unreviewed rather than as approved fact. Nothing public is written from a backfilled event."
     }
   ],
   "log": [
     {
       "date": "2026-11-11",
-      "text": "Second source checked before signing: 1,663 messages from Alex's working sessions up to 7 November held 72 corrections; with the review comments, the candidates fall into 34 types, none clearing the written rule of 5 corrections on 3 drafts. Sessions from before mid-September no longer exist. The source decision now has two written branches, and a second run in January was added. Health stays at risk until the signature. Debrief backfill wave 1 finished early: three rooms, 223 claims held as candidates."
+      "text": "Second source checked before signing: 1,663 messages from Alex's working sessions sent before 8 November held 72 corrections; with the review comments, the candidates fall into 34 types, none clearing the eligibility rule of 5 corrections on 3 drafts. Most sessions from before mid-September no longer exist. The source decision now has two written branches, and a second run in January is proposed. Health stays at risk until the signature. Debrief backfill wave 1 finished early: three rooms, 223 claims stored as unreviewed candidates."
     },
     {
       "date": "2026-11-11",
