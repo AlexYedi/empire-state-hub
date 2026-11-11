@@ -155,10 +155,8 @@ function strings(v: unknown): string[] {
   return [];
 }
 
-function load(): Project[] {
-  const files = readdirSync(DIR).filter((f) => f.endsWith(".json"));
-  const projects = files.map((file) => {
-    const json: unknown = JSON.parse(readFileSync(join(DIR, file), "utf8"));
+/** Validate one project file's parsed JSON. Exported for the fixture tests; throws on any rule break. */
+export function validateProject(file: string, json: unknown): Project {
     if (strings(json).some((s) => PLACEHOLDER.test(s))) {
       throw new Error(`projects/${file}: placeholder marker in public data`);
     }
@@ -174,8 +172,8 @@ function load(): Project[] {
     if (p.sinceLast && p.sinceLast.since > p.updated) {
       throw new Error(`projects/${file}: sinceLast.since is after updated`);
     }
-    // Anti-watermelon: a live project that isn't on track says why, in objective terms.
-    if (p.status === "active" && p.health !== "on-track" && p.summary && !p.healthWhy) {
+    // Anti-watermelon: a live project (active, blocked or paused) that isn't on track says why.
+    if (p.status !== "archived" && p.health !== "on-track" && p.summary && !p.healthWhy) {
       throw new Error(`projects/${file}: a ${p.health} project with a summary needs healthWhy`);
     }
     if (p.completed && p.completed < p.started) throw new Error(`projects/${file}: completed is before started`);
@@ -183,7 +181,13 @@ function load(): Project[] {
       throw new Error(`projects/${file}: a sub-project names its parent, and only a sub-project does`);
     }
     return p;
-  });
+}
+
+function load(): Project[] {
+  const files = readdirSync(DIR).filter((f) => f.endsWith(".json"));
+  const projects = files.map((file) =>
+    validateProject(file, JSON.parse(readFileSync(join(DIR, file), "utf8")) as unknown),
+  );
 
   const bySlug = new Map(projects.map((p) => [p.slug, p]));
   for (const p of projects) {

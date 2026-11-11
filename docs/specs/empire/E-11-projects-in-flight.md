@@ -74,7 +74,7 @@ The page reads like a project status report, in the order a busy reader needs: b
 | Field | Meaning |
 |---|---|
 | `summary` | Bottom line up front, 2–4 sentences. Is it on track? How serious is any problem? What's needed from the reader? Write it last and show it first. |
-| `healthWhy` | The objective reason for the health call. **Required** when a live project that isn't on track has a `summary`. |
+| `healthWhy` | The objective reason for the health call. **Required** when a live project (active, blocked or paused) that isn't on track has a `summary`. With no summary, it shows under the header. Pages without a `summary` keep their context (why, what, where, showcase) at the top. Pages with one move it below the plan. Loader rules are tested in `scripts/fixtures/projects/`. |
 | `trend`, `confidence` | `trend` is `improving`, `steady` or `worsening`. `confidence` is the owner's percentage with a plain-language qualifier. |
 | `asks` | Decisions needed. Each has: `decision`, `recommendation`, `options` (≤3, the alternatives), `owner`, `due?`, `costOfDelay` and `reversible` (a two-way door or a one-way door). Use `asks` instead of `open` when a recommendation exists. |
 | `sinceLast` | `since` (the date of the previous update) plus 1–8 `changes`, each marked `done`, `changed`, `slipped` or `learned`. |
