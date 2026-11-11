@@ -5,18 +5,18 @@
   "kind": "project",
   "status": "active",
   "health": "at-risk",
-  "phase": "Week 1: choosing the failure types and signing the pre-registration",
+  "phase": "Week 1 of 7: pre-registration due 14 November, waiting on one decision and Alex's signature",
   "owner": "Alex Yedibalian + Claude Code",
   "started": "2026-11-04",
   "target": "2026-12-19",
-  "updated": "2026-11-10",
+  "updated": "2026-11-11",
   "why": "The pipeline writes every post, note and brief from a style guide of more than 100 guidance lines. As of 8 November 2026, none of them had been run against a no-guidance control (first-party check of the pipeline repo), so nobody can say which lines change the output.",
-  "mission": "AO-EVAL-SUITE, a public, re-runnable eval suite for GTM agent writing, aimed at Alex's own rulebook. It screens failure types drawn from his review comments against a no-guidance control, then tests rule wordings only where the control fails. Alongside it, an audit of every rule and a backfill of debriefs for attended rooms that never got one.",
+  "mission": "AO-EVAL-SUITE, a public, re-runnable eval suite for GTM agent writing, aimed at Alex's own rulebook. It screens failure types drawn from his written corrections (the source is being decided) against a no-guidance control, then tests rule wordings only where the control fails. Alongside it, an audit of every rule and a backfill of debriefs for attended rooms that never got one.",
   "destination": "A pre-registered study published with its raw samples, grader code and agreement between graders, so a stranger can re-run it. The rulebook keeps only the rules that beat saying nothing, and the count of rules tested appears on this page as a metric. Anyone can check by re-running the suite.",
   "showcase": [
     "Designing a behaviour eval the way a lab would (designed, not yet run): pre-registration before the first sample, a no-guidance control, yes/no graders and a rep count set for statistical power",
-    "Screening many failure types against the control first instead of hand-picking test cases, with a written ranking rule that lets the author remove a type but never add one",
-    "Measuring the sampling rate before committing to the design, and publishing every retry instead of only the successes",
+    "Screening many failure types against the control first instead of hand-picking test cases, with a written ranking rule that lets the author remove a type for one stated reason but never add one",
+    "Measuring the sampling rate before committing to the design, and counting every retry in the data that will be published instead of only the successes",
     "Sizing a build by two budgets: the hours only Alex can give (decisions, labels, reads) and the hours agents can run overnight",
     "Applying a method from software engineering (test the instruction against its absence first) to sales and marketing writing"
   ],
@@ -37,7 +37,7 @@
       "title": "Sampling throughput measured",
       "status": "done",
       "date": "2026-11-10",
-      "note": "About 2,400 samples an hour against a floor of 60. The whole study fits in under an hour of sampling."
+      "note": "About 2,400 samples an hour against a floor of 60. The main design fits in under an hour of sampling, so the shrink rule tied to throughput does not bind."
     },
     {
       "title": "Suite scaffolded and pre-registration drafted",
@@ -46,31 +46,34 @@
       "note": "Runner, throughput results, a draft pre-registration and a written rule for choosing failure types. Held locally until its home is chosen."
     },
     {
-      "title": "Failure types chosen from Alex's review comments",
+      "title": "Failure types chosen from Alex's written corrections",
       "status": "active",
       "date": "2026-11-12",
-      "note": "Comments are exported and ranked by the written rule. Alex hand-labels 50 to check the classifier."
+      "note": "Waiting on one decision. The comment export finished on 11 November with 17 countable comments, under the 60 the written procedure needs, so its fallback applies: the anti-patterns file in file order. Alex decides whether to keep that rule or amend it, with any amendment logged as a deviation before signing."
     },
     {
       "title": "Pre-registration signed and frozen by hash",
       "status": "active",
       "date": "2026-11-14",
-      "note": "No study sample can be generated before this."
+      "note": "The gate on the critical path. No study sample can be generated before this, and every later date moves day for day with it."
     },
     {
       "title": "Debrief backfill, first wave of three rooms",
       "status": "next",
-      "date": "2026-11-15"
+      "date": "2026-11-15",
+      "note": "Independent of the study: it runs whether or not the sign date holds."
     },
     {
       "title": "Eval runner public",
       "status": "next",
-      "date": "2026-11-21"
+      "date": "2026-11-21",
+      "note": "Waits on the repo-home and licence decision."
     },
     {
       "title": "Screen up to 8 failure types against the no-guidance control",
       "status": "next",
-      "date": "2026-11-22"
+      "date": "2026-11-22",
+      "note": "Decision point written in advance: at least one type fails the control 5 of 16 times, or the null note publishes instead of a full run."
     },
     {
       "title": "Full run on the failure types the control fails",
@@ -93,7 +96,7 @@
       "date": "2026-12-13"
     },
     {
-      "title": "Debrief backfill complete for attended rooms",
+      "title": "Debrief backfill covers at least 50 of 60 attended rooms",
       "status": "later",
       "date": "2026-12-19"
     }
@@ -101,23 +104,36 @@
   "metrics": [
     {
       "label": "Sampling throughput",
-      "baseline": "60 samples an hour, the floor below which the study shrinks to two cases",
+      "baseline": "Unmeasured before 10 November",
       "current": "About 2,400 samples an hour (100 of 100 in 150 seconds, 4 after one retry)",
       "asOf": "2026-11-10",
       "source": {
         "label": "First-party timed test, 100 samples at concurrency 4"
       },
-      "note": "The full design needs at most about 770 samples."
+      "note": "Input metric: it bounds how fast the study can run, not whether it finds anything. The main design needs at most 768 samples, so the shrink rule does not bind.",
+      "target": "At least 60 samples an hour, the floor below which the study shrinks to two cases"
+    },
+    {
+      "label": "Review comments available as a failure-type source",
+      "baseline": "0 counted: no review comment had been exported or classified",
+      "current": "17 countable comments by Alex on 6 of 935 drafts swept (May to August 2026)",
+      "target": "60, the floor the written selection procedure sets before its fallback source applies",
+      "asOf": "2026-11-11",
+      "source": {
+        "label": "First-party export of inline review comments, 11 November 2026"
+      },
+      "note": "Input metric. Below the floor, so the fallback source applies and its ranking rule is an open decision. Only these counts leave the private export."
     },
     {
       "label": "Style-guide lines tested against a no-guidance control",
       "baseline": "0 (none had ever been tested)",
       "current": "0",
-      "target": "Every failure type the control fails, tested in 5 arms by 29 November",
-      "asOf": "2026-11-10",
+      "target": "Every failure type the control fails, tested in up to 5 arms by 29 November",
+      "asOf": "2026-11-11",
       "source": {
         "label": "First-party check of the pipeline repo"
-      }
+      },
+      "note": "Output metric: the number this project exists to move. It cannot move before the pre-registration is signed."
     }
   ],
   "decisions": [
@@ -133,7 +149,7 @@
     },
     {
       "date": "2026-11-08",
-      "decision": "Backfilled debriefs feed only the private knowledge graph. Drafts, outreach and CRM records stay out of the backfill, and every backfilled claim is tagged as backfill (by design).",
+      "decision": "Backfilled debriefs write only to the private knowledge graph (Notion event records and the private claims store). Drafts, outreach and CRM records stay out of the backfill, and every backfilled claim is tagged as backfill (by design).",
       "why": "Rooms debriefed weeks later are useful context, but they shouldn't read as first-hand records."
     },
     {
@@ -150,44 +166,69 @@
       "date": "2026-11-10",
       "decision": "The sampler retries an empty or failed output up to twice, and every retry is counted in the published data.",
       "why": "The first timed run lost 2 of 100 samples silently. Dropping them quietly would bias the results; hiding the retries would overstate reliability."
+    },
+    {
+      "date": "2026-11-11",
+      "decision": "Page convention, set by the author (not a study decision): health is called against written criteria. On track: every dated gate is on its date, no gate due within 7 days waits on an open decision or input, and no kill rule has fired. At risk: a gate due within 7 days waits on an open decision or input, or a forecast slip is absorbed by the stated slack (the 12 December write-up date holds); the page then names the path back to on track and its date. Off track: a dated gate has passed without a new date, a kill rule has fired, or 12 December can no longer hold. The most cautious reading governs, and an at-risk call that can't be justified is reported as off track.",
+      "why": "A colour without pre-agreed criteria is a mood. Written criteria let a reader check the call. They were written on 11 November, after the first at-risk call on 10 November; that call was rechecked against them and holds."
     }
   ],
   "open": [
     {
-      "question": "Hand-label 50 of the exported review comments, so the classifier's agreement can be checked against a majority-class baseline.",
+      "question": "Keep or amend the failure-type source before signing. The comment export holds 17 countable comments, under the procedure's floor of 60, so its written fallback applies: the style guide's anti-patterns file in file order. That rule yields eight word and phrase types and leaves out the structural corrections Alex makes most. Amending it now would be a change made after seeing what it produces, so any amendment is logged as a deviation, with the reason, before the signature. Due 14 November; this blocks the failure-type list and the signature.",
       "owner": "Alex"
     },
     {
-      "question": "Sign the pre-registration: confirm the failure-type list, state a prediction before any sample, and pick the marketplace skill used as arm D.",
+      "question": "If the review comments stay a source, hand-label the 17 exported comments so the classifier's agreement can be reported against a majority-class baseline. Due 14 November.",
       "owner": "Alex"
     },
     {
-      "question": "Where AO-EVAL-SUITE lives: its own public repo (recommended), or a folder in an existing one. Also its licence.",
+      "question": "Sign the pre-registration: confirm the failure-type list, state a prediction before any sample, and pick the marketplace GTM skill tested as one of the arms. Due 14 November.",
+      "owner": "Alex"
+    },
+    {
+      "question": "Where AO-EVAL-SUITE lives: its own public repo (recommended), or a folder in an existing one. Also its licence. Due before the runner goes public on 21 November.",
       "owner": "Alex"
     }
   ],
   "risks": [
     {
-      "risk": "The pre-registration is due on 14 November and waits on Alex's labels and sign-off. A slip moves the screen and every date after it.",
-      "mitigation": "The labelling sheet and the ranked list are prepared by agents so Alex's part is about an hour. The screen date moves day for day and the write-up keeps its slack."
+      "risk": "Issue, live since 11 November: the review-comment export came back with 17 countable comments on 6 of 935 drafts, under the 60 the selection procedure needs. The written fallback (the anti-patterns file in file order) gives a list of eight word and phrase types. Whether to keep that rule or amend it is now a decision by Alex, and the failure-type list and the 14 November signature wait on it.",
+      "mitigation": "Path to green: Alex keeps or amends the rule, any amendment is logged as a deviation with its reason, and the pre-registration is signed by 14 November. Agents prepare the candidate lists under each option so Alex's part is about an hour. If 14 November passes unsigned, every later date moves day for day and the health call goes to off track under the written criteria."
     },
     {
-      "risk": "No failure type fails the control often enough to test, so there is nothing to compare.",
-      "mitigation": "By design: the null result is pre-committed. A short note publishes by 22 November and the hours move to the other lanes."
+      "risk": "Risk: the 14 November sign date slips for any other reason. Trigger: no signed, hashed pre-registration by the end of 14 November. Owner: Alex.",
+      "mitigation": "No study sample is generated before the signature, whatever the date. The screen and the full run move day for day; the 12 December write-up keeps its slack because the whole study needs under an hour of sampling."
     },
     {
-      "risk": "The author wrote the rules, the failure cases and the grader, so a positive result could just be the author agreeing with himself.",
+      "risk": "Risk: no failure type fails the control often enough to test, so there is nothing to compare. Trigger, pre-written in the draft pre-registration: by 22 November no type has at least 5 failures in 16 control samples with at least 12 of them gradable. Owner: Alex.",
+      "mitigation": "The null-result note is written into the draft pre-registration and freezes when it is signed. A short null note then publishes, with every cell's count and denominator, and the hours move to the other lanes. A null is a result."
+    },
+    {
+      "risk": "Risk: fewer than two outside graders by 5 December. Trigger: confirmed graders under two on that date. Owner: Alex.",
+      "mitigation": "Pre-agreed in the draft pre-registration: publish with author grading only and say so on the results page. The grader-agreement number is then absent, not estimated."
+    },
+    {
+      "risk": "Risk: the author wrote the rules, the failure cases and the grader, so a positive result could just be the author agreeing with himself.",
       "mitigation": "By design: pre-registration before the first sample, yes/no checks graded by code where possible, a blind grader that never sees the style guide, raw samples published, and outside graders whose agreement is reported."
     },
     {
-      "risk": "Backfilled debriefs written weeks after the event could read as fact to later runs.",
+      "risk": "Assumption: the subscription allows the full study to run across the planned nights: at most about 1,030 study samples (768 in the main design, up to 256 more for the second-model check), plus retries and one grader call per sample. Its daily ceiling has not been measured; the 100-sample timed test is the only datapoint.",
+      "mitigation": "If it binds, the study runs over more nights: at the measured rate even about 2,000 calls take under an hour. The pre-registration's fixed sample counts do not change."
+    },
+    {
+      "risk": "Risk: backfilled debriefs written weeks after the event could read as fact to later runs.",
       "mitigation": "By design, every backfilled claim is tagged as backfill, and nothing public is written from a backfilled event."
     }
   ],
   "log": [
     {
+      "date": "2026-11-11",
+      "text": "Comment export finished: 17 countable comments by Alex on 6 of 935 drafts, under the 60 the selection procedure needs. Its written fallback applies, and whether to keep or amend it is now an open decision before the 14 November sign date. Health stays at risk, unchanged since 10 November; the path to green is that decision plus the signature by 14 November. Health criteria written onto this page."
+    },
+    {
       "date": "2026-11-10",
-      "text": "Sampling throughput measured: 100 of 100 samples (4 after one retry) in 150 seconds, about 2,400 an hour against a floor of 60. Suite scaffolded, pre-registration drafted, and the export of review comments started for choosing failure types."
+      "text": "Sampling throughput measured: 100 of 100 samples (4 after one retry) in 150 seconds, about 2,400 an hour against a floor of 60. Suite scaffolded, pre-registration drafted, and the export of review comments started for choosing failure types. Health called at risk: the sign date depends on Alex's labels and sign-off."
     },
     {
       "date": "2026-11-08",
