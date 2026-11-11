@@ -1,0 +1,225 @@
+{
+  "slug": "tested-not-vibed",
+  "title": "Tested, not vibed: GTM writing evals",
+  "tagline": "Testing which of the instructions behind AI-written GTM copy beat saying nothing, with a public suite anyone can re-run.",
+  "kind": "project",
+  "status": "active",
+  "health": "at-risk",
+  "phase": "Week 1: choosing the failure types and signing the pre-registration",
+  "owner": "Alex Yedibalian + Claude Code",
+  "started": "2026-11-04",
+  "target": "2026-12-19",
+  "updated": "2026-11-10",
+  "why": "The pipeline writes every post, note and brief from a style guide of more than 100 guidance lines. As of 8 November 2026, none of them had been run against a no-guidance control (first-party check of the pipeline repo), so nobody can say which lines change the output.",
+  "mission": "AO-EVAL-SUITE, a public, re-runnable eval suite for GTM agent writing, aimed at Alex's own rulebook. It screens failure types drawn from his review comments against a no-guidance control, then tests rule wordings only where the control fails. Alongside it, an audit of every rule and a backfill of debriefs for attended rooms that never got one.",
+  "destination": "A pre-registered study published with its raw samples, grader code and agreement between graders, so a stranger can re-run it. The rulebook keeps only the rules that beat saying nothing, and the count of rules tested appears on this page as a metric. Anyone can check by re-running the suite.",
+  "showcase": [
+    "Designing a behaviour eval the way a lab would (designed, not yet run): pre-registration before the first sample, a no-guidance control, yes/no graders and a rep count set for statistical power",
+    "Screening many failure types against the control first instead of hand-picking test cases, with a written ranking rule that lets the author remove a type but never add one",
+    "Measuring the sampling rate before committing to the design, and publishing every retry instead of only the successes",
+    "Sizing a build by two budgets: the hours only Alex can give (decisions, labels, reads) and the hours agents can run overnight",
+    "Applying a method from software engineering (test the instruction against its absence first) to sales and marketing writing"
+  ],
+  "milestones": [
+    {
+      "title": "First plan: adopt the method, not the skills",
+      "status": "done",
+      "date": "2026-11-06",
+      "note": "12 moves over 8 weeks, red-teamed before review."
+    },
+    {
+      "title": "Plan rewritten at full scale, claims checked against prior art",
+      "status": "done",
+      "date": "2026-11-08",
+      "note": "Five lanes to the end of the year. Agents build and run the samples. Alex decides, labels and reads."
+    },
+    {
+      "title": "Sampling throughput measured",
+      "status": "done",
+      "date": "2026-11-10",
+      "note": "About 2,400 samples an hour against a floor of 60. The whole study fits in under an hour of sampling."
+    },
+    {
+      "title": "Suite scaffolded and pre-registration drafted",
+      "status": "done",
+      "date": "2026-11-10",
+      "note": "Runner, throughput results, a draft pre-registration and a written rule for choosing failure types. Held locally until its home is chosen."
+    },
+    {
+      "title": "Failure types chosen from Alex's review comments",
+      "status": "active",
+      "date": "2026-11-12",
+      "note": "Comments are exported and ranked by the written rule. Alex hand-labels 50 to check the classifier."
+    },
+    {
+      "title": "Pre-registration signed and frozen by hash",
+      "status": "active",
+      "date": "2026-11-14",
+      "note": "No study sample can be generated before this."
+    },
+    {
+      "title": "Debrief backfill, first wave of three rooms",
+      "status": "next",
+      "date": "2026-11-15"
+    },
+    {
+      "title": "Eval runner public",
+      "status": "next",
+      "date": "2026-11-21"
+    },
+    {
+      "title": "Screen up to 8 failure types against the no-guidance control",
+      "status": "next",
+      "date": "2026-11-22"
+    },
+    {
+      "title": "Full run on the failure types the control fails",
+      "status": "later",
+      "date": "2026-11-29"
+    },
+    {
+      "title": "Three outside graders re-grade blind, with agreement published",
+      "status": "later",
+      "date": "2026-12-10"
+    },
+    {
+      "title": "Eval suite and write-up published",
+      "status": "later",
+      "date": "2026-12-12"
+    },
+    {
+      "title": "Evidence page and an 8-minute walkthrough",
+      "status": "later",
+      "date": "2026-12-13"
+    },
+    {
+      "title": "Debrief backfill complete for attended rooms",
+      "status": "later",
+      "date": "2026-12-19"
+    }
+  ],
+  "metrics": [
+    {
+      "label": "Sampling throughput",
+      "baseline": "60 samples an hour, the floor below which the study shrinks to two cases",
+      "current": "About 2,400 samples an hour (100 of 100 in 150 seconds, 4 after one retry)",
+      "asOf": "2026-11-10",
+      "source": {
+        "label": "First-party timed test, 100 samples at concurrency 4"
+      },
+      "note": "The full design needs at most about 770 samples."
+    },
+    {
+      "label": "Style-guide lines tested against a no-guidance control",
+      "baseline": "0 (none had ever been tested)",
+      "current": "0",
+      "target": "Every failure type the control fails, tested in 5 arms by 29 November",
+      "asOf": "2026-11-10",
+      "source": {
+        "label": "First-party check of the pipeline repo"
+      }
+    }
+  ],
+  "decisions": [
+    {
+      "date": "2026-11-06",
+      "decision": "Adopt the testing method, not the borrowed skills: an instruction stays only if it beats saying nothing.",
+      "why": "Imported skills were written for coding agents. The method transfers to writing, the wording doesn't."
+    },
+    {
+      "date": "2026-11-08",
+      "decision": "Screen many failure types against a control instead of hand-picking two test cases.",
+      "why": "Picking the cases yourself biases the study, and two small cases make the whole result hang on chance."
+    },
+    {
+      "date": "2026-11-08",
+      "decision": "Backfilled debriefs feed only the private knowledge graph. Drafts, outreach and CRM records stay out of the backfill, and every backfilled claim is tagged as backfill (by design).",
+      "why": "Rooms debriefed weeks later are useful context, but they shouldn't read as first-hand records."
+    },
+    {
+      "date": "2026-11-08",
+      "decision": "Make no claim of being first until the write-up publishes with its prior-art section.",
+      "why": "A claim of being first is only as strong as the search behind it, and that search belongs in the public write-up."
+    },
+    {
+      "date": "2026-11-08",
+      "decision": "Plan signed off: five lanes run at once, with agents building and running the samples, and the study design approved ahead of the written pre-registration.",
+      "why": "The proof has to be public before the end-of-year window, and the sampling runs overnight on agent hours, not Alex's."
+    },
+    {
+      "date": "2026-11-10",
+      "decision": "The sampler retries an empty or failed output up to twice, and every retry is counted in the published data.",
+      "why": "The first timed run lost 2 of 100 samples silently. Dropping them quietly would bias the results; hiding the retries would overstate reliability."
+    }
+  ],
+  "open": [
+    {
+      "question": "Hand-label 50 of the exported review comments, so the classifier's agreement can be checked against a majority-class baseline.",
+      "owner": "Alex"
+    },
+    {
+      "question": "Sign the pre-registration: confirm the failure-type list, state a prediction before any sample, and pick the marketplace skill used as arm D.",
+      "owner": "Alex"
+    },
+    {
+      "question": "Where AO-EVAL-SUITE lives: its own public repo (recommended), or a folder in an existing one. Also its licence.",
+      "owner": "Alex"
+    }
+  ],
+  "risks": [
+    {
+      "risk": "The pre-registration is due on 14 November and waits on Alex's labels and sign-off. A slip moves the screen and every date after it.",
+      "mitigation": "The labelling sheet and the ranked list are prepared by agents so Alex's part is about an hour. The screen date moves day for day and the write-up keeps its slack."
+    },
+    {
+      "risk": "No failure type fails the control often enough to test, so there is nothing to compare.",
+      "mitigation": "By design: the null result is pre-committed. A short note publishes by 22 November and the hours move to the other lanes."
+    },
+    {
+      "risk": "The author wrote the rules, the failure cases and the grader, so a positive result could just be the author agreeing with himself.",
+      "mitigation": "By design: pre-registration before the first sample, yes/no checks graded by code where possible, a blind grader that never sees the style guide, raw samples published, and outside graders whose agreement is reported."
+    },
+    {
+      "risk": "Backfilled debriefs written weeks after the event could read as fact to later runs.",
+      "mitigation": "By design, every backfilled claim is tagged as backfill, and nothing public is written from a backfilled event."
+    }
+  ],
+  "log": [
+    {
+      "date": "2026-11-10",
+      "text": "Sampling throughput measured: 100 of 100 samples (4 after one retry) in 150 seconds, about 2,400 an hour against a floor of 60. Suite scaffolded, pre-registration drafted, and the export of review comments started for choosing failure types."
+    },
+    {
+      "date": "2026-11-08",
+      "text": "Plan rewritten at full scale, claims checked against prior art and narrowed, and the plan signed off."
+    },
+    {
+      "date": "2026-11-06",
+      "text": "First plan written, red-teamed and shared for review."
+    },
+    {
+      "date": "2026-11-04",
+      "text": "Attended a talk on test-first agent instructions, which started the project."
+    }
+  ],
+  "links": [
+    {
+      "label": "Pipeline repo",
+      "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3"
+    }
+  ],
+  "tracking": [
+    "YED-338",
+    "YED-365",
+    "YED-366",
+    "YED-367",
+    "YED-368",
+    "YED-369"
+  ],
+  "stack": [
+    "Claude Code",
+    "Python",
+    "Notion",
+    "Supabase Postgres"
+  ]
+}
