@@ -49,7 +49,7 @@
       "title": "Failure-type source: two branches, Alex picks by 14 November",
       "status": "active",
       "date": "2026-11-14",
-      "note": "Branch 2 is what the written procedure already says: review comments came back under its floor of 60, so its fallback applies, the anti-patterns file in file order. Branch 1 would use Alex's own corrections instead. That needs three changes made after seeing data, each logged as a deviation: a new source (his working sessions with the drafting agent), a new floor, and a random label sample instead of the first 50. Even then, a check on 11 November found no type that clears the eligibility rule of 5 corrections on 3 drafts: 72 corrections in 1,663 messages sent before 8 November, which together with the review comments fall into 34 types."
+      "note": "Branch 2 is what the written procedure already says: review comments came back under its floor of 60, so its fallback applies, the anti-patterns file in file order. Branch 1 would use Alex's own corrections instead. That needs three changes made after seeing data, each logged as a deviation: a new source (his working sessions with the drafting agent), a floor counted in corrections rather than comments, and a random label sample instead of the first 50. Even then, a check on 11 November found no type that clears the eligibility rule of 5 corrections on 3 drafts: 72 corrections in 1,663 messages sent before 8 November; with the review comments, the candidate corrections fall into 34 types."
     },
     {
       "title": "Pre-registration signed and frozen by hash",
@@ -61,7 +61,7 @@
       "title": "Debrief backfill, first wave of three rooms",
       "status": "done",
       "date": "2026-11-11",
-      "note": "Three rooms written to the private knowledge graph: 223 claims, stored as unreviewed candidates that later runs see flagged as unreviewed. Two had briefs that never reached the graph; one needed a new brief. A first-party recount on 11 November against the graph found only four undebriefed rooms with a recording, fewer than planned. The full tier (a complete brief from a recording) therefore covers few rooms, and the 19 December target rests mostly on the lighter tier (a short brief from Alex's recap)."
+      "note": "Three rooms written to the private knowledge graph: 223 claims, stored as unreviewed candidates that later runs see flagged as unreviewed. Two had briefs that never reached the graph; one needed a new brief. A first-party recount on 11 November against the graph found four undebriefed rooms with a recording before this wave; three are now done and one remains. The full tier (a complete brief from a recording) therefore covers few rooms, and the 19 December target rests mostly on the lighter tier (a short brief from Alex's recap)."
     },
     {
       "title": "Eval runner public",
