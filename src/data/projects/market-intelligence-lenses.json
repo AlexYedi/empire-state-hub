@@ -1,22 +1,22 @@
 {
   "slug": "market-intelligence-lenses",
-  "title": "Market-intelligence lenses",
-  "tagline": "A complete, self-updating graph of NYC AI rooms and the market around them, read through four lenses: attended, research, market and job.",
+  "title": "AI intelligence graph",
+  "tagline": "An expanding understanding of the fast-moving AI world, built from public, private and unique sources. Event attendance is one of them.",
   "kind": "project",
   "status": "active",
   "health": "at-risk",
   "healthWhy": "At risk because the 16 November test depends on phase 1 work that has started but isn't finished (the nightly checking job and the backfill), and on a scheduled runner that failed its first two test runs. Not off track: the design, the decisions and the pilot evidence are in place, and no target date has moved.",
   "trend": "improving",
   "confidence": "60%: moderately confident the 16 November brief ships on phase 1",
-  "summary": "At risk, and improving. Only 30 of 85 attended events have their first-hand notes in the knowledge graph, and 45 of 97 researched events never reached it, because saving to the graph was a manual last step that got skipped. Phase 1 fixes that this week with a nightly job that checks every source and fills the gaps; the 16 November Monday brief is the test. From Alex it needs three decisions below (by 12 November), five minutes setting up a machine, one database change applied, and two builds merged.",
-  "phase": "Pivot: from fixed lanes to a discovery loop over a complete graph",
+  "summary": "At risk, and improving. The graph is meant to be an expanding understanding of the AI world drawn from many sources, but only 3 of the 9 source types that have ever fed it are still writing, and even the event record is incomplete: 30 of 85 attended events have their first-hand notes in it. Phase 1 fixes completeness this week with a nightly job that checks every source and fills the gaps, and starts theme-driven web search; the 16 November Monday brief is the test. From Alex it needs one decision below (how private originals are stored), five minutes setting up a machine, one database change applied, and two builds merged.",
+  "phase": "Phase 1: complete the graph and start the discovery loop",
   "owner": "Alex Yedibalian + Claude Code",
   "started": "2026-11-03",
   "target": "2026-11-25",
   "updated": "2026-11-11",
-  "why": "It started with a silent failure: from 8 August, topic trends stopped absorbing new topics. On 10 November an audit of the live graph found a wider gap. Only 30 of 85 attended events carry first-hand claims (12 of the 61 from April to July), and 45 of 97 researched events never reached the graph. The graph's first claim was written on 18 September, so anything earlier exists only where a later backfill brought it in. The cause: graph writes were the last step of long manual commands. They were mandatory on paper, but nothing enforced or measured them. The market side was also too small. It polled a fixed list of 40 companies, and one source test was scoped as matching a paid vendor instead of discovering anything new.",
-  "mission": "Make the graph complete backwards and self-maintaining forwards. Data arrives through 'lanes': scheduled jobs that each feed one kind of signal (hiring, company news, research papers, feeds). A nightly reconciler compares every source (event folders, transcripts, research briefs, Notion) against the graph and fills the gaps through one guarded writer. On top of that runs a discovery loop. The themes rising in the graph and each week's events pick what to search for. Read-only agents search the market. New companies join the watchlist when the evidence supports it. Claims heard in the room are checked against what the web says. Every reuse of a fact is counted.",
-  "destination": "Every event since April is in the graph with its research, roster and first-hand claims. Every source has a completeness score and an alarm. Before any room, the brief says what moved in that room's themes this week, which companies are new, and where what speakers said agrees or conflicts with the market. The Monday Market Brief is the weekly proof.",
+  "why": "AI moves faster than any one person can follow, and the best view of it combines sources nobody else has together. Public sources are the web, news, papers, models, filings, job boards and social. Private ones are newsletters and correspondence, meeting notes, and the insights and review comments in Notion. Unique ones are the rooms Alex is in and what he publishes. The project started as a fix for a silent failure, when topic trends stopped absorbing new topics on 8 August. A 10 November audit then showed the larger problem. Most sources had gone quiet: 3 of 9 source types still write. Graph writes were the manual last step of long commands, mandatory on paper and never enforced or measured. And the market side polled a fixed list of 40 companies instead of discovering anything.",
+  "mission": "One knowledge graph that keeps growing from every useful source, read through lenses (attended, research, market, job) and sliceable by theme, company, segment and time. Each source arrives through a 'lane': a scheduled job with a run log, an alarm, a reader and a kill rule. A nightly checking job compares every source against the graph and fills the gaps through one guarded writer. A discovery loop lets rising themes and each week's events choose what to search for, across web search, connectors like Clay, newsletters and social. It checks what was said in the room against what the market says, and counts every reuse of a fact.",
+  "destination": "Every source that's worth having feeds the graph on a schedule, with a completeness score and an alarm. Before any room, conversation or post, the brief says what moved in its themes, which companies and people are new, and where Alex's first-hand view agrees or conflicts with the market. The Monday Market Brief is the weekly proof. The graph is the memory behind content, outreach and the job search.",
   "showcase": [
     "Auditing a knowledge graph against its own sources and stating each gap as a dated count before proposing a fix",
     "Reconciliation over reminders: a nightly job checks what should exist and fills the gap, instead of hoping each manual step ran (the pattern Kubernetes uses)",
@@ -84,15 +84,26 @@
       "status": "next"
     },
     {
-      "title": "Phase 2: weekly Notion re-import, published posts and review comments as claims, entity resolution across sources",
+      "title": "Phase 2: more sources — theme-driven web search at full scale, newsletters, Notion insights and review comments, published posts, Clay, social",
       "status": "later"
     },
     {
-      "title": "Phase 3: private sources, opt-in per item, claims only",
+      "title": "Phase 3: private sources from the private vault — email, meeting notes, raw transcripts",
       "status": "later"
     }
   ],
   "metrics": [
+    {
+      "label": "Source types still writing to the graph (last 14 days)",
+      "baseline": "3 of 9",
+      "current": "3 of 9",
+      "target": "Every source in the plan, each with an alarm",
+      "asOf": "2026-11-11",
+      "source": {
+        "label": "Read-only query of the production graph, 2026-11-11, grouping writes by source and lane"
+      },
+      "note": "Still writing: event research (web, plus email found during research), post-event first-hand notes, and Notion event rows. Gone quiet between August and September: newsletter mining, Hacker News and Hugging Face trends, the morning refresh, job postings, and the Notion insights import."
+    },
     {
       "label": "Attended events with first-hand claims in the graph",
       "baseline": "30 of 85",
@@ -183,6 +194,21 @@
       "date": "2026-11-10",
       "decision": "Make the graph complete backwards and self-maintaining forwards, with a completeness score per source.",
       "why": "The audit showed the write steps exist but are skipped silently, so the fix is a reconciler that checks, not a reminder."
+    },
+    {
+      "date": "2026-11-11",
+      "decision": "Events that were researched but not attended get their own 'researched' event type, promoted to attended when attendance is confirmed.",
+      "why": "About 4,900 research claims had no event to attach to. A separate type keeps them findable without overstating attendance."
+    },
+    {
+      "date": "2026-11-11",
+      "decision": "An event counts as attended once its post-event content has been uploaded and Alex has acknowledged it.",
+      "why": "That is the strongest evidence available, it already exists for every event that matters, and it needs no extra step."
+    },
+    {
+      "date": "2026-11-11",
+      "decision": "A nightly checking job keeps the graph complete: it compares every source against the graph and fills the gaps.",
+      "why": "The audit showed the write steps exist but get skipped silently. A job that checks beats a reminder to remember."
     }
   ],
   "open": [],
@@ -280,56 +306,25 @@
   ],
   "asks": [
     {
-      "decision": "How should events that were researched but not attended be stored?",
-      "recommendation": "Add a 'researched' event type, promoted to attended when there's evidence Alex went.",
+      "decision": "Where are private originals stored (email, meeting notes, Notion comments, raw transcripts)?",
+      "recommendation": "Keep the originals in a separate private vault, encrypted and outside the graph and the public repos, with its own key that no scheduled job or pull request can reach. The graph stores what was learned plus a pointer back to the original, so any source can be mined again as the models improve.",
       "options": [
-        "Leave them only in claim metadata (today's state)",
-        "Mark every researched event as attended (breaks the evidence rule)"
+        "Store originals in the graph's own database (one key reaches everything, including from public-repo jobs)",
+        "Store only what was learned and discard the originals (lose the ability to re-mine and to quote exactly)"
       ],
       "owner": "Alex",
-      "due": "2026-11-12",
-      "costOfDelay": "The backfill can't attach about 4,900 research claims to their events, so phase 1a stalls.",
-      "reversible": true
-    },
-    {
-      "decision": "How is attendance confirmed?",
-      "recommendation": "Keep the rule that attendance needs evidence, and have the reconciler send a short weekly tick list.",
-      "options": [
-        "Infer attendance from 'Going' on the calendar",
-        "Keep today's manual process, which has missed attended events"
-      ],
-      "owner": "Alex",
-      "due": "2026-11-12",
-      "costOfDelay": "Attended counts stay understated and the attended lens stays thin.",
-      "reversible": true
-    },
-    {
-      "decision": "What keeps the graph complete after the backfill?",
-      "recommendation": "A nightly job that checks every source against the graph and fills the gaps.",
-      "options": [
-        "A check that stops each command until the save is done (the project rules forbid steps that block work)",
-        "A weekly manual checklist (the pattern that failed before)"
-      ],
-      "owner": "Alex",
-      "due": "2026-11-12",
-      "costOfDelay": "Without it, the gaps reopen within weeks of the backfill.",
-      "reversible": true
-    },
-    {
-      "decision": "How are private sources handled when they're added in phase 3?",
-      "recommendation": "Claims only, opt-in item by item, and the source text is never stored.",
-      "options": [
-        "Ingest everything",
-        "Leave private sources out"
-      ],
-      "owner": "Alex",
-      "costOfDelay": "Nothing this week; phase 3 waits on it. Marked hard to reverse because private text, once stored, can't be fully un-stored. That's why the recommendation never stores it.",
+      "due": "2026-11-14",
+      "costOfDelay": "Email and meeting notes can't join the graph until this is settled. Everything else in phase 1 proceeds.",
       "reversible": false
     }
   ],
   "sinceLast": {
     "since": "2026-11-08",
     "changes": [
+      {
+        "kind": "changed",
+        "text": "The scope widened from a view of NYC AI rooms to an expanding understanding of the AI world, with event attendance as one source among many."
+      },
       {
         "kind": "learned",
         "text": "Audit of the live graph: 30 of 85 attended events have first-hand claims, and 45 of 97 researched events never reached the graph."
