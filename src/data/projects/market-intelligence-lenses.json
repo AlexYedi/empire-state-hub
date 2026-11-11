@@ -5,11 +5,15 @@
   "kind": "project",
   "status": "active",
   "health": "at-risk",
+  "healthWhy": "At risk because the 16 November acceptance test depends on work that hasn't started (the reconciler and the backfill) and on a scheduled runner that failed its first two smoke runs. Not off track, because the design, the decisions and the pilot evidence are in place and no committed date has slipped.",
+  "trend": "improving",
+  "confidence": "60%: moderately confident the 16 November brief ships on phase 1",
+  "summary": "At risk, and improving. The graph behind the lenses is only partly complete. 30 of 85 attended events carry first-hand claims, and 45 of 97 researched events never reached it, because graph writes were manual last steps that got skipped silently. The fix is designed: a nightly reconciler that backfills and keeps the graph complete, plus a discovery loop that searches the market from rising themes. To start phase 1 this week, Alex needs to make three of the decisions below (due 12 November) and spend five minutes setting up a machine. The 16 November Monday brief is the acceptance test.",
   "phase": "Pivot: from fixed lanes to a discovery loop over a complete graph",
   "owner": "Alex Yedibalian + Claude Code",
   "started": "2026-11-03",
   "target": "2026-11-25",
-  "updated": "2026-11-10",
+  "updated": "2026-11-11",
   "why": "It started with a silent failure: from 8 August, topic trends stopped absorbing new topics. On 10 November an audit of the live graph found a wider gap. Only 30 of 85 attended events carry first-hand claims (12 of the 61 from April to July), and 45 of 97 researched events never reached the graph. The graph's first claim was written on 18 September, so anything earlier exists only where a later backfill brought it in. The cause: graph writes were the last step of long manual commands. They were mandatory on paper, but nothing enforced or measured them. The market side was also too small. It polled a fixed list of 40 companies, and one source test was scoped as matching a paid vendor instead of discovering anything new.",
   "mission": "Make the graph complete backwards and self-maintaining forwards. Data arrives through 'lanes': scheduled jobs that each feed one kind of signal (hiring, company news, research papers, feeds). A nightly reconciler compares every source (event folders, transcripts, research briefs, Notion) against the graph and fills the gaps through one guarded writer. On top of that runs a discovery loop. The themes rising in the graph and each week's events pick what to search for. Read-only agents search the market. New companies join the watchlist when the evidence supports it. Claims heard in the room are checked against what the web says. Every reuse of a fact is counted.",
   "destination": "Every event since April is in the graph with its research, roster and first-hand claims. Every source has a completeness score and an alarm. Before any room, the brief says what moved in that room's themes this week, which companies are new, and where what speakers said agrees or conflicts with the market. The Monday Market Brief is the weekly proof.",
@@ -34,7 +38,8 @@
     {
       "title": "Lane 2 (company news): merge the per-company signals build",
       "status": "next",
-      "note": "Built and reviewed on 8 November, not yet merged. It stays as the per-company part of the discovery loop. Matching the paid vendor is no longer the goal."
+      "note": "Built and reviewed on 8 November, not yet merged. It stays as the per-company part of the discovery loop. Matching the paid vendor is no longer the goal.",
+      "certainty": "executing"
     },
     {
       "title": "Lane 2 (company news): source bake-off",
@@ -50,22 +55,29 @@
     {
       "title": "Phase 1a: nightly reconciler, backfill since April, shared schema change",
       "status": "active",
-      "note": "The reconciler compares event folders, transcripts and briefs against the graph and writes whatever is missing. The backfill covers every event since April. The database change adds usage counting, alternate names for the same company, and a 'researched' event type. It is rehearsed on a copy of the database first."
+      "note": "The reconciler compares event folders, transcripts and briefs against the graph and writes whatever is missing. The backfill covers every event since April. The database change adds usage counting, alternate names for the same company, and a 'researched' event type. It is rehearsed on a copy of the database first.",
+      "target": "2026-11-14",
+      "certainty": "executing"
     },
     {
       "title": "Phase 1b: daily theme sweeps feeding a Monday Market Brief",
       "status": "active",
-      "note": "Acceptance test: the 16 November brief ties last week's rooms to the market, with conflicts and new companies called out."
+      "note": "Acceptance test: the 16 November brief ties last week's rooms to the market, with conflicts and new companies called out.",
+      "target": "2026-11-16",
+      "certainty": "figuring-out"
     },
     {
       "title": "Move scheduled runs to the always-on machine",
       "status": "next",
-      "note": "Scheduled runs fire and can search the web. Two test runs could not reach the project's Python environment, and they ran on a laptop that sleeps."
+      "note": "Scheduled runs fire and can search the web. Two test runs could not reach the project's Python environment, and they ran on a laptop that sleeps.",
+      "target": "2026-11-14",
+      "certainty": "figuring-out"
     },
     {
       "title": "Lanes 1 (hiring) and 3 (research papers): start writing or retire",
       "status": "next",
-      "note": "Both run every week but have written nothing. Each will either go live or be retired on purpose."
+      "note": "Both run every week but have written nothing. Each will either go live or be retired on purpose.",
+      "certainty": "figuring-out"
     },
     {
       "title": "Lane 4 feeds, merged into the same staging and classifier path",
@@ -173,44 +185,31 @@
       "why": "The audit showed the write steps exist but are skipped silently, so the fix is a reconciler that checks, not a reminder."
     }
   ],
-  "open": [
-    {
-      "question": "How should events that were researched but not attended be stored? Recommended: a 'researched' event type, promoted to attended on evidence.",
-      "owner": "Alex"
-    },
-    {
-      "question": "How is attendance confirmed? Recommended: keep the evidence rule, with a weekly tick list from the reconciler.",
-      "owner": "Alex"
-    },
-    {
-      "question": "What is the completeness backstop? Recommended: a nightly reconciler rather than blocking hooks or a weekly checklist.",
-      "owner": "Alex"
-    },
-    {
-      "question": "How are private sources handled? Recommended: claims only, opt-in per item, the source text never stored.",
-      "owner": "Alex"
-    },
-    {
-      "question": "Register the always-on machine as the scheduled-run environment (a five-minute setup on that machine).",
-      "owner": "Alex"
-    }
-  ],
+  "open": [],
   "risks": [
     {
-      "risk": "Scheduled runs currently live on a laptop. When it sleeps, the loop goes quiet, which is the failure the design exists to prevent.",
-      "mitigation": "Move them to the always-on machine. Today's health check flags a lane after 7 quiet days and fails it after 14. Phase 1 tightens daily lanes to flag after 2 and fail after 4."
-    },
-    {
-      "risk": "Two lanes have run on schedule for weeks while writing nothing, and the health check didn't count it.",
-      "mitigation": "Start their writes or retire them on purpose. Phase 1 makes the health check count a run that writes nothing as a failure."
-    },
-    {
       "risk": "Web searches lean on news aggregators, so dates and figures can be wrong.",
-      "mitigation": "Fetch the original page for every item before it is written, and spot-check precision against a floor of 0.8 before the loop runs unattended."
+      "mitigation": "Fetch the original page for every item before it's written, and promote unattended only after a spot check clears 0.8 precision.",
+      "likelihood": "high",
+      "impact": "medium"
     },
     {
-      "risk": "The backfill is large, and entity duplicates can multiply across sources.",
-      "mitigation": "Dry-run every batch first, map alternate names to one company, and write everything through the one guarded writer."
+      "risk": "The backfill is large, and duplicate companies and people can multiply across sources.",
+      "mitigation": "Dry-run every batch, map alternate names to one entity, and write everything through the one guarded writer.",
+      "likelihood": "medium",
+      "impact": "medium"
+    },
+    {
+      "risk": "The loop could go quiet again the way earlier lanes did.",
+      "mitigation": "Today's health check flags a lane after 7 quiet days and fails it after 14. Phase 1 tightens daily lanes to 2 and 4.",
+      "likelihood": "medium",
+      "impact": "high"
+    },
+    {
+      "risk": "The Clay credits on hand cover about two runs of the company-news leg.",
+      "mitigation": "Decide on credits or a plan before they run out. The free sources keep flowing either way.",
+      "likelihood": "high",
+      "impact": "low"
     }
   ],
   "log": [
@@ -278,5 +277,120 @@
     "Python",
     "Claude Code scheduled jobs",
     "GitHub Actions"
+  ],
+  "asks": [
+    {
+      "decision": "How should events that were researched but not attended be stored?",
+      "recommendation": "Add a 'researched' event type, promoted to attended when there's evidence Alex went.",
+      "options": [
+        "Leave them only in claim metadata (today's state)",
+        "Mark every researched event as attended (breaks the evidence rule)"
+      ],
+      "owner": "Alex",
+      "due": "2026-11-12",
+      "costOfDelay": "The backfill can't attach about 4,900 research claims to their events, so phase 1a stalls.",
+      "reversible": true
+    },
+    {
+      "decision": "How is attendance confirmed?",
+      "recommendation": "Keep the rule that attendance needs evidence, and have the reconciler send a short weekly tick list.",
+      "options": [
+        "Infer attendance from 'Going' on the calendar",
+        "Keep today's manual process, which has missed at least 7 events"
+      ],
+      "owner": "Alex",
+      "due": "2026-11-12",
+      "costOfDelay": "Attended counts stay understated and the attended lens stays thin.",
+      "reversible": true
+    },
+    {
+      "decision": "What keeps the graph complete after the backfill?",
+      "recommendation": "A nightly reconciler that checks every source against the graph and fills gaps.",
+      "options": [
+        "Blocking checks at the end of each command (breaks the no-blocking-hook rule)",
+        "A weekly manual checklist (the pattern that failed before)"
+      ],
+      "owner": "Alex",
+      "due": "2026-11-12",
+      "costOfDelay": "Without it, the gaps reopen within weeks of the backfill.",
+      "reversible": true
+    },
+    {
+      "decision": "How are private sources handled when they're added in phase 3?",
+      "recommendation": "Claims only, opt-in item by item, and the source text is never stored.",
+      "options": [
+        "Ingest everything",
+        "Leave private sources out"
+      ],
+      "owner": "Alex",
+      "costOfDelay": "Nothing this week. Phase 3 waits on it.",
+      "reversible": false
+    }
+  ],
+  "sinceLast": {
+    "since": "2026-11-08",
+    "changes": [
+      {
+        "kind": "learned",
+        "text": "Audit of the live graph: 30 of 85 attended events have first-hand claims, and 45 of 97 researched events never reached the graph."
+      },
+      {
+        "kind": "learned",
+        "text": "A read-only pilot search of three rising themes found 68 dated events and 38 companies, 34 of them new to the graph."
+      },
+      {
+        "kind": "changed",
+        "text": "The goal changed from matching a paid vendor on 40 companies to a discovery loop over a complete graph."
+      },
+      {
+        "kind": "done",
+        "text": "Two design reviews written. The runner, the write path and the level of autonomy were decided."
+      },
+      {
+        "kind": "slipped",
+        "text": "The scheduled runner: two smoke runs couldn't reach the project's Python environment, and runs currently land on a laptop."
+      },
+      {
+        "kind": "changed",
+        "text": "The lane 2 build moved from done back to waiting on merge."
+      }
+    ]
+  },
+  "issues": [
+    {
+      "issue": "Two lanes (hiring and research papers) run every week but write nothing.",
+      "impact": "Those signals are missing from the market lens, and the health check doesn't count it.",
+      "action": "Start their writes or retire them on purpose, and count zero-write runs as failures.",
+      "owner": "Claude Code"
+    },
+    {
+      "issue": "Scheduled runs can't reach the project's Python environment, and they run on a laptop that sleeps.",
+      "impact": "Nothing can run unattended yet.",
+      "action": "Register the always-on machine, have each run set up its own environment, and fall back to a plain scheduled job if that fails.",
+      "owner": "Alex and Claude Code"
+    },
+    {
+      "issue": "This week's research briefs haven't been written to the graph.",
+      "impact": "Pre-event context and the Monday brief miss them.",
+      "action": "Make them the first batch for the reconciler.",
+      "owner": "Claude Code"
+    }
+  ],
+  "dependencies": [
+    {
+      "on": "Alex",
+      "need": "Register the always-on machine for scheduled runs (about five minutes)",
+      "status": "waiting"
+    },
+    {
+      "on": "Alex",
+      "need": "Apply the shared database change after it's rehearsed on a copy",
+      "status": "waiting"
+    },
+    {
+      "on": "Alex",
+      "need": "Merge the lane 2 build and the feeds staging table",
+      "status": "waiting"
+    }
   ]
 }
