@@ -13,6 +13,12 @@ const MILESTONE_MARK: Record<Milestone["status"], { mark: string; label: string;
   later: { mark: "·", label: "Later", cls: "text-muted" },
 };
 
+// Shape Up hill chart: uphill = unknowns still open, downhill = executing a settled approach.
+const HILL: Record<NonNullable<Milestone["hill"]>, string> = {
+  uphill: "uphill: figuring it out",
+  downhill: "downhill: making it happen",
+};
+
 export function ProjectView({
   project: p,
   parent,
@@ -25,6 +31,10 @@ export function ProjectView({
   const { lens } = useLens();
   const ed = lens === "editorial";
   const h2 = ed ? "font-display text-2xl tracking-tight" : "font-mono text-lg font-semibold tracking-tight";
+  // Asks with a needed-by date first, soonest first; undated open questions after.
+  const asks = [...p.open].sort((a, b) =>
+    a.needBy && b.needBy ? a.needBy.localeCompare(b.needBy) : a.needBy ? -1 : b.needBy ? 1 : 0,
+  );
 
   return (
     <article className="mx-auto w-full max-w-5xl px-6 py-16">
@@ -66,6 +76,59 @@ export function ProjectView({
         <p className="mt-2 font-mono text-[11px] text-muted">updated {fmtDate(p.updated)}</p>
       </header>
 
+      {(p.bottomLine || p.healthReason || p.pathToGreen) && (
+        <section className="mt-10 rounded-lg border border-accent/40 bg-surface p-6">
+          <p className="font-mono text-xs uppercase tracking-widest text-muted">
+            {ed ? "Bottom line" : "bluf"}
+          </p>
+          {p.bottomLine && <p className="mt-3 text-base leading-relaxed">{p.bottomLine}</p>}
+          {(p.healthReason || p.pathToGreen) && (
+            <dl className="mt-4 grid gap-4 border-t border-border pt-4 sm:grid-cols-2">
+              {p.healthReason && <Meta label="Why this health" value={p.healthReason} />}
+              {p.pathToGreen && <Meta label="Path to green" value={p.pathToGreen} />}
+            </dl>
+          )}
+        </section>
+      )}
+
+      {(asks.length > 0 || p.nextSteps.length > 0) && (
+        <div className="mt-10 grid gap-12 lg:grid-cols-2">
+          {asks.length > 0 && (
+            <section>
+              <h2 className={h2}>{ed ? "What's needed" : "asks"}</h2>
+              <ul className="mt-4 space-y-4 text-sm leading-relaxed">
+                {asks.map((o) => (
+                  <li key={o.question} className="rounded-lg border border-border p-4">
+                    <p>{o.question}</p>
+                    {o.recommendation && <p className="mt-2 text-muted">Recommendation: {o.recommendation}</p>}
+                    {o.unblocks && <p className="mt-1 text-muted">Unblocks: {o.unblocks}</p>}
+                    <p className="mt-2 font-mono text-[11px] text-muted">
+                      owner: {o.owner}
+                      {o.needBy && <> · needed by {fmtDate(o.needBy)}</>}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
+          {p.nextSteps.length > 0 && (
+            <section>
+              <h2 className={h2}>{ed ? "Next steps" : "next actions"}</h2>
+              <ol className="mt-4 divide-y divide-border border-y border-border">
+                {p.nextSteps.map((n) => (
+                  <li key={n.action} className="grid gap-1 py-3 text-sm leading-relaxed sm:grid-cols-[1fr_auto]">
+                    <span>{n.action}</span>
+                    <span className="font-mono text-[11px] text-muted sm:text-right">
+                      {n.owner} · {fmtDate(n.due)}
+                    </span>
+                  </li>
+                ))}
+              </ol>
+            </section>
+          )}
+        </div>
+      )}
+
       <section className="mt-12 grid gap-8 sm:grid-cols-3">
         <Block title={ed ? "Why it exists" : "problem"} body={p.why} />
         <Block title={ed ? "What we're building" : "build"} body={p.mission} />
@@ -106,6 +169,7 @@ export function ProjectView({
                       <span className="ml-2 font-mono text-[11px] text-muted">
                         {s.label}
                         {m.date && <> · {fmtDate(m.date)}</>}
+                        {m.hill && <> · {HILL[m.hill]}</>}
                       </span>
                     </p>
                     {m.note && <p className="mt-1 text-sm leading-relaxed text-muted">{m.note}</p>}
@@ -155,21 +219,8 @@ export function ProjectView({
         </section>
       </div>
 
-      {(p.open.length > 0 || p.risks.length > 0) && (
+      {(p.risks.length > 0 || p.assumptions.length > 0) && (
         <div className="mt-12 grid gap-12 sm:grid-cols-2">
-          {p.open.length > 0 && (
-            <section>
-              <h2 className={h2}>{ed ? "Decisions still open" : "open decisions"}</h2>
-              <ul className="mt-4 space-y-3 text-sm leading-relaxed">
-                {p.open.map((o) => (
-                  <li key={o.question}>
-                    {o.question}
-                    <span className="ml-2 font-mono text-[11px] text-muted">owner: {o.owner}</span>
-                  </li>
-                ))}
-              </ul>
-            </section>
-          )}
           {p.risks.length > 0 && (
             <section>
               <h2 className={h2}>{ed ? "Risks and blockers" : "risks"}</h2>
@@ -178,6 +229,19 @@ export function ProjectView({
                   <li key={r.risk}>
                     <p>{r.risk}</p>
                     <p className="mt-1 text-muted">Mitigation: {r.mitigation}</p>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
+          {p.assumptions.length > 0 && (
+            <section>
+              <h2 className={h2}>{ed ? "What we're assuming" : "assumptions"}</h2>
+              <ul className="mt-4 space-y-4 text-sm leading-relaxed">
+                {p.assumptions.map((a) => (
+                  <li key={a.assumption}>
+                    <p>{a.assumption}</p>
+                    <p className="mt-1 text-muted">How we&apos;ll know: {a.test}</p>
                   </li>
                 ))}
               </ul>

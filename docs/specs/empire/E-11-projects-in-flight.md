@@ -24,6 +24,7 @@ The schema enforces these rules:
 5. No placeholder markers (`TODO`, `TBD`, `[confirm]`) appear in any value.
 6. Unknown keys are refused. Links must be https, and never point at Linear.
 7. Dates are real calendar dates, and `completed` is not before `started`.
+8. `pathToGreen` appears only when `health` is `at-risk` or `off-track`. `hill` applies only to `active` or `next` milestones. `nextSteps` holds at most 6 entries, each with one named owner and a due date.
 
 ## Public-safety rules (AGENTS.md rules 1–5 apply in full)
 
@@ -53,13 +54,19 @@ The schema enforces these rules:
 | `mission` | yes | what's being built |
 | `destination` | yes | what done looks like, and how anyone would know |
 | `showcase` | yes, 1–5 | what the work demonstrates, written for a hiring manager |
-| `milestones` | yes, ≥1 | `done`, `active`, `next` or `later`, with optional `date` and `note` |
+| `milestones` | yes, ≥1 | `done`, `active`, `next` or `later`, with optional `date`, `note` and `hill` (`uphill` = still figuring out the approach, `downhill` = executing a settled one; Shape Up hill chart) |
 | `metrics` | — | `label`, `baseline`, `current`, `target?`, `asOf`, `source`, `note?` |
 | `decisions` | — | made: `date`, `decision`, `why` |
-| `open` | — | still open: `question`, `owner` |
+| `bottomLine` (≤480), `healthReason` (≤280), `pathToGreen` (≤280) | — | Bottom line up front, rendered first: the status in a few sentences, why the health is what it is, and (at-risk or off-track only) what turns it green |
+| `open` | — | still open: `question`, `owner`; it becomes an **ask** with `needBy`, `unblocks`, `recommendation`. Asks render under the bottom line, soonest first |
+| `nextSteps` | — | ≤6 moves as owner, action, `due`: one named owner per step, never a team |
+| `assumptions` | — | the RAID "A": `assumption` and the `test` that settles it |
 | `risks` | — | `risk`, `mitigation` |
 | `log` | — | ≤8 milestone-level entries |
 | `links`, `tracking`, `stack` | — | public links, Linear IDs as text, tools |
+
+## Page order and why
+The page reads as a status report first and a case study second. That follows the standard practice for status reporting: bottom line up front, an honest health call with its reason, explicit asks with a needed-by date, and next steps as owner, action and date. Context (why, mission, destination, showcase), progress (milestones with hill stage, metrics against baselines), RAID (risks and assumptions), the decision log and the update log follow. Every new field is optional, so a project without them renders as before.
 
 ## Lifecycle
 

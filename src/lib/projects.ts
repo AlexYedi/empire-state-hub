@@ -35,14 +35,22 @@ const Source = z.object({ label: Text, url: Url.optional() }).strict();
 
 export const MilestoneStatus = z.enum(["done", "active", "next", "later"]);
 
+// Hill-chart stage (Shape Up): "uphill" = still figuring out the approach, unknowns open;
+// "downhill" = approach settled, executing. Only meaningful for work not yet done.
+export const HillStage = z.enum(["uphill", "downhill"]);
+
 const Milestone = z
   .object({
     title: Text,
     status: MilestoneStatus,
     date: IsoDate.optional(),
     note: Text.optional(),
+    hill: HillStage.optional(),
   })
-  .strict();
+  .strict()
+  .refine((m) => !m.hill || m.status === "active" || m.status === "next", {
+    message: "hill stage applies only to active or next milestones",
+  });
 
 // Null-baseline rule: `baseline` is required. What the number was (or would be) with no build.
 const Metric = z
@@ -58,8 +66,22 @@ const Metric = z
   .strict();
 
 const Decision = z.object({ date: IsoDate, decision: Text, why: Text }).strict();
-const OpenQuestion = z.object({ question: Text, owner: Text }).strict();
+// An open item is an ask when it carries a needed-by date: what is needed, from whom, by when,
+// what it unblocks, and the recommended answer (a report without a framed ask is just a log).
+const OpenQuestion = z
+  .object({
+    question: Text,
+    owner: Text,
+    needBy: IsoDate.optional(),
+    unblocks: Text.optional(),
+    recommendation: Text.optional(),
+  })
+  .strict();
 const Risk = z.object({ risk: Text, mitigation: Text }).strict();
+// RAID's "A": an assumption the plan rests on, and how it gets tested.
+const Assumption = z.object({ assumption: Text, test: Text }).strict();
+// Owner — action — date: one named owner per step, never a team.
+const NextStep = z.object({ action: Text, owner: Text, due: IsoDate }).strict();
 const LogEntry = z.object({ date: IsoDate, text: Text }).strict();
 const Link = z.object({ label: Text, url: Url }).strict();
 
@@ -78,6 +100,10 @@ export const ProjectSchema = z
     target: IsoDate.optional(),
     completed: IsoDate.optional(),
     updated: IsoDate,
+    // Bottom line up front: the status in a few sentences, and why the health is what it is.
+    bottomLine: Text.max(480).optional(),
+    healthReason: Text.max(280).optional(),
+    pathToGreen: Text.max(280).optional(),
     why: Text,
     mission: Text,
     destination: Text,
@@ -87,6 +113,8 @@ export const ProjectSchema = z
     decisions: z.array(Decision).default([]),
     open: z.array(OpenQuestion).default([]),
     risks: z.array(Risk).default([]),
+    assumptions: z.array(Assumption).default([]),
+    nextSteps: z.array(NextStep).max(6, "next steps are the next few moves, not a backlog").default([]),
     log: z.array(LogEntry).max(8, "the log is milestone-level: keep the latest 8").default([]),
     links: z.array(Link).default([]),
     tracking: z.array(z.string().regex(/^[A-Z]+-\d+$/)).default([]),
@@ -123,6 +151,9 @@ function load(): Project[] {
     if (`${p.slug}.json` !== file) throw new Error(`projects/${file}: slug "${p.slug}" must match the file name`);
     if (p.status === "archived" && !p.completed) throw new Error(`projects/${file}: archived needs a completed date`);
     if (p.status !== "archived" && p.completed) throw new Error(`projects/${file}: only archived projects carry completed`);
+    if (p.pathToGreen && p.health === "on-track") {
+      throw new Error(`projects/${file}: pathToGreen is for at-risk or off-track projects`);
+    }
     if (p.updated < p.started) throw new Error(`projects/${file}: updated is before started`);
     if (p.completed && p.completed < p.started) throw new Error(`projects/${file}: completed is before started`);
     if ((p.kind === "sub-project") !== Boolean(p.parent)) {
