@@ -72,25 +72,25 @@
     {
       "label": "Post-event steps verified at the end of a run",
       "baseline": "0 (a skipped graph write closed green)",
-      "current": "5 checks on every run",
-      "asOf": "2026-11-08",
+      "current": "6 checks on every run",
+      "asOf": "2026-11-11",
       "source": {
-        "label": "PR #313",
-        "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/313"
+        "label": "PR #313 and PR #319",
+        "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/319"
       },
-      "note": "Graph event row, claims, themes, the Themes property on posts, and routing rows. The Rooms check was removed with the Rooms step on 11 November."
+      "note": "Graph event row, claims, themes, the Themes property on posts, routing rows, and run-state gaps. The Rooms check was removed on 11 November."
     },
     {
       "label": "Agentics close-check",
       "baseline": "Not measurable before the check existed",
-      "current": "3 pass, 1 skipped, 1 fail",
+      "current": "4 pass, 1 skipped, 1 fail",
       "target": "All pass or skipped with a reason",
       "asOf": "2026-11-11",
       "source": {
-        "label": "Close-check run on 8 November (PR #313)",
-        "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/313"
+        "label": "Close-check run on 11 November (PR #319)",
+        "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/319"
       },
-      "note": "Passing: graph event, 118 claims, 5 themes. Failing: the Themes property on the post. Skipped: routing rows, which the router will write. The Rooms item no longer exists."
+      "note": "Passing: graph event, 118 claims, 5 themes, run-state. Failing: the Themes property on the post. Skipped: routing rows, which the router will write."
     },
     {
       "label": "Routing yield (routed items closed ÷ created)",
@@ -155,8 +155,8 @@
   "open": [],
   "nextSteps": [
     {
-      "action": "Remove the Rooms step and its close-check item from the pipeline",
-      "owner": "Claude Code",
+      "action": "Merge the Rooms removal (PR #319)",
+      "owner": "Alex",
       "due": "2026-11-12"
     },
     {
@@ -251,6 +251,10 @@
     {
       "label": "Privacy default (PR #310)",
       "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/310"
+    },
+    {
+      "label": "Rooms removal (PR #319)",
+      "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/319"
     }
   ],
   "tracking": [
