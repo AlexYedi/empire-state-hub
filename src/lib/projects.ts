@@ -35,11 +35,18 @@ const Source = z.object({ label: Text, url: Url.optional() }).strict();
 
 export const MilestoneStatus = z.enum(["done", "active", "next", "later"]);
 
+// Hill-chart certainty (Shape Up): is the approach still being worked out, or known and executing?
+// More honest than percent-complete while unknowns remain.
+export const Certainty = z.enum(["figuring-out", "executing"]);
+
 const Milestone = z
   .object({
     title: Text,
     status: MilestoneStatus,
     date: IsoDate.optional(),
+    // Planned date for unfinished work, so a slip is visible.
+    target: IsoDate.optional(),
+    certainty: Certainty.optional(),
     note: Text.optional(),
   })
   .strict();
@@ -59,7 +66,33 @@ const Metric = z
 
 const Decision = z.object({ date: IsoDate, decision: Text, why: Text }).strict();
 const OpenQuestion = z.object({ question: Text, owner: Text }).strict();
-const Risk = z.object({ risk: Text, mitigation: Text }).strict();
+const Level = z.enum(["low", "medium", "high"]);
+const Risk = z
+  .object({ risk: Text, mitigation: Text, likelihood: Level.optional(), impact: Level.optional() })
+  .strict();
+
+// Status-report layer (best practice: BLUF, decisions needed, RAID, delta since last update).
+// All optional so existing pages stay valid; the page renders each block only when present.
+export const Trend = z.enum(["improving", "steady", "worsening"]);
+// A decision the owner must make, framed DACI-style: a recommendation, an owner and a deadline,
+// the cost of waiting, and whether it is a two-way door (reversible) or a one-way door.
+const Ask = z
+  .object({
+    decision: Text,
+    recommendation: Text,
+    options: z.array(Text).max(3).default([]),
+    owner: Text,
+    due: IsoDate.optional(),
+    costOfDelay: Text,
+    reversible: z.boolean(),
+  })
+  .strict();
+const Change = z.object({ kind: z.enum(["done", "changed", "slipped", "learned"]), text: Text }).strict();
+// Issues are risks that already happened: they need an action and an owner now.
+const Issue = z.object({ issue: Text, impact: Text, action: Text, owner: Text }).strict();
+const Dependency = z
+  .object({ on: Text, need: Text, status: z.enum(["waiting", "in-progress", "met"]) })
+  .strict();
 const LogEntry = z.object({ date: IsoDate, text: Text }).strict();
 const Link = z.object({ label: Text, url: Url }).strict();
 
@@ -72,6 +105,20 @@ export const ProjectSchema = z
     parent: Slug.optional(),
     status: z.enum(["active", "blocked", "paused", "archived"]),
     health: z.enum(["on-track", "at-risk", "off-track"]),
+    // The objective reason for the health call, so the colour can't drift from the facts.
+    healthWhy: Text.optional(),
+    trend: Trend.optional(),
+    // The owner's confidence in hitting the target, e.g. "55%: moderately confident".
+    confidence: Text.optional(),
+    // Bottom line up front: on track or not, how serious, and what's needed from the reader.
+    summary: Text.optional(),
+    asks: z.array(Ask).default([]),
+    sinceLast: z
+      .object({ since: IsoDate, changes: z.array(Change).min(1).max(8) })
+      .strict()
+      .optional(),
+    issues: z.array(Issue).default([]),
+    dependencies: z.array(Dependency).default([]),
     phase: Text,
     owner: Text,
     started: IsoDate,
@@ -124,6 +171,13 @@ function load(): Project[] {
     if (p.status === "archived" && !p.completed) throw new Error(`projects/${file}: archived needs a completed date`);
     if (p.status !== "archived" && p.completed) throw new Error(`projects/${file}: only archived projects carry completed`);
     if (p.updated < p.started) throw new Error(`projects/${file}: updated is before started`);
+    if (p.sinceLast && p.sinceLast.since > p.updated) {
+      throw new Error(`projects/${file}: sinceLast.since is after updated`);
+    }
+    // Anti-watermelon: a live project that isn't on track says why, in objective terms.
+    if (p.status === "active" && p.health !== "on-track" && p.summary && !p.healthWhy) {
+      throw new Error(`projects/${file}: a ${p.health} project with a summary needs healthWhy`);
+    }
     if (p.completed && p.completed < p.started) throw new Error(`projects/${file}: completed is before started`);
     if ((p.kind === "sub-project") !== Boolean(p.parent)) {
       throw new Error(`projects/${file}: a sub-project names its parent, and only a sub-project does`);
