@@ -61,7 +61,7 @@
       "title": "Debrief backfill, first wave of three rooms",
       "status": "done",
       "date": "2026-11-11",
-      "note": "Three rooms written to the private knowledge graph: 223 claims. On 12 November a model reviewer checked each claim against the event's recording transcript; the 66 it failed or was unsure of got a second, stricter check, which passed 1. Result: 152 approved, 65 rejected and never served to later runs, 6 left as unreviewed candidates because they are marked not for publication. Two had briefs that never reached the graph; one needed a new brief. A first-party recount on 11 November against the graph found four undebriefed rooms with a recording before this wave; three are now done and one remains. The full tier (a complete brief from a recording) therefore covers few rooms, and the 19 December target rests mostly on the lighter tier (a short brief from Alex's recap)."
+      "note": "Three rooms written to the private knowledge graph: 223 claims. On 12 November a model reviewer checked each claim against the event's recording transcript; the 66 it failed or was unsure of got a second, stricter check, which passed 1. Result: 152 approved, 65 rejected and never served from the graph, 6 left as unreviewed candidates because they are marked not for publication. Two had briefs that never reached the graph; one needed a new brief. A first-party recount on 11 November against the graph found four undebriefed rooms with a recording before this wave; three are now done and one remains. The full tier (a complete brief from a recording) therefore covers few rooms, and the 19 December target rests mostly on the lighter tier (a short brief from Alex's recap)."
     },
     {
       "title": "Eval runner public",
@@ -239,7 +239,7 @@
     },
     {
       "risk": "Risk: backfilled debriefs written weeks after the event could read as fact to later runs.",
-      "mitigation": "Every backfilled claim is tagged as backfill and checked by a model reviewer against the event's recording transcript before approval. Rejected claims are never served to later runs; the few left unreviewed are served flagged as unreviewed. Nothing public is written from a backfilled event."
+      "mitigation": "Every backfilled claim is tagged as backfill. Wave 1's claims were checked by a model reviewer against the recording transcripts before approval; later waves have no automatic check yet. Rejected claims are never served from the knowledge graph, and unreviewed ones are served flagged as unreviewed; prior briefs reach later runs only as leads to re-verify. Nothing public is written from a backfilled event."
     }
   ],
   "log": [
