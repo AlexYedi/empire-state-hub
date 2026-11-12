@@ -61,7 +61,7 @@
       "title": "Debrief backfill, first wave of three rooms",
       "status": "done",
       "date": "2026-11-11",
-      "note": "Three rooms written to the private knowledge graph: 223 claims, stored as unreviewed candidates that later runs see flagged as unreviewed. Two had briefs that never reached the graph; one needed a new brief. A first-party recount on 11 November against the graph found four undebriefed rooms with a recording before this wave; three are now done and one remains. The full tier (a complete brief from a recording) therefore covers few rooms, and the 19 December target rests mostly on the lighter tier (a short brief from Alex's recap)."
+      "note": "Three rooms written to the private knowledge graph: 223 claims. On 12 November a model reviewer checked each claim against the event's recording transcript; the 66 it failed or was unsure of got a second, stricter check, which passed 1. Result: 152 approved, 65 rejected and never served to later runs, 6 left as unreviewed candidates because they are marked not for publication. Two had briefs that never reached the graph; one needed a new brief. A first-party recount on 11 November against the graph found four undebriefed rooms with a recording before this wave; three are now done and one remains. The full tier (a complete brief from a recording) therefore covers few rooms, and the 19 December target rests mostly on the lighter tier (a short brief from Alex's recap)."
     },
     {
       "title": "Eval runner public",
@@ -239,10 +239,14 @@
     },
     {
       "risk": "Risk: backfilled debriefs written weeks after the event could read as fact to later runs.",
-      "mitigation": "Every backfilled claim is tagged as backfill and stored as an unreviewed candidate, which later runs see flagged as unreviewed rather than as approved fact. Nothing public is written from a backfilled event."
+      "mitigation": "Every backfilled claim is tagged as backfill and checked by a model reviewer against the event's recording transcript before approval. Rejected claims are never served to later runs; the few left unreviewed are served flagged as unreviewed. Nothing public is written from a backfilled event."
     }
   ],
   "log": [
+    {
+      "date": "2026-11-12",
+      "text": "Backfill wave 1 claims reviewed against the recording transcripts: of 223, 152 approved, 65 rejected, 6 left unreviewed because they are marked not for publication. Rejections by first failed test: 22 not supported by the transcript (slide-only figures included), 17 meaning changed (a hedge dropped or scope widened), 13 the brief-writer's own synthesis, 11 event housekeeping, 2 other. Health unchanged: at risk until the 14 November decision and signature."
+    },
     {
       "date": "2026-11-11",
       "text": "Second source checked before signing: 1,663 messages from Alex's working sessions sent before 8 November held 72 corrections; with the review comments, the candidates fall into 34 types, none clearing the eligibility rule of 5 corrections on 3 drafts. Most sessions from before mid-September no longer exist. The source decision now has two written branches, and a second run in January is proposed. Health stays at risk until the signature. Debrief backfill wave 1 finished early: three rooms, 223 claims stored as unreviewed candidates."
