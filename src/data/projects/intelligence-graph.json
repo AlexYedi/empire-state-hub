@@ -1,0 +1,261 @@
+{
+  "slug": "intelligence-graph",
+  "title": "AI intelligence graph: every brief in, every claim traceable, checked at use",
+  "tagline": "Every event brief loaded into one sourced graph, every workflow wired to read it, and every claim checked when it's used.",
+  "kind": "project",
+  "status": "active",
+  "health": "at-risk",
+  "phase": "Phase 2: design the claim-check layer and wire the readers",
+  "owner": "Alex Yedibalian + Claude Code",
+  "started": "2026-11-10",
+  "target": "2026-12-15",
+  "updated": "2026-11-12",
+  "bottomLine": "On 12 November every pre-event research brief and every post-event brief went into the graph, with privately marked briefs held for review first. All 6,754 research claims are now approved as sourced assertions. The nightly completeness check reports zero false gaps. What's left is the larger half: only two workflows read the graph, and no claim has a fact-check verdict yet. One design will cover both checking and the next extraction version.",
+  "healthReason": "At risk: two workflows of about eight read the graph, so most stored knowledge is never used. Two design drafts (graph v2 and the claim-check layer) need to merge into one ADR before the build starts.",
+  "pathToGreen": "Merge the two drafts into one ADR this week, ship the claim-check log and write-back, and wire interview prep plus pre- and post-event content to read the graph. Green when at least five workflows read it and every claim in outgoing copy is checked.",
+  "why": "Event research and post-event debriefs produced thousands of sourced claims, but most sat in Notion pages that no workflow read. Before 12 November, 5,822 research claims were all unreviewed, only 9 of 52 researched events had a graph row, and the nightly check reported gaps that weren't real. Fact-checks done during research were thrown away, so a claim found wrong could be pulled into the next brief.",
+  "mission": "Load every brief into one graph where each claim traces to its source document, paragraph and link. Approve claims on traceability and check truth when a claim is used. Write every verdict back, so a claim found wrong is kept for the record but never silently reused. Then wire every workflow (research, content, interview prep, the Monday Market Brief) to read the graph.",
+  "destination": "Every workflow that produces analysis reads the graph and logs which claims it used. Every claim in outgoing copy carries a dated verdict with evidence, and a refuted or outdated claim never reaches a new brief. Done means three measured things: at least five workflows reading the graph, every claim in public copy checked, and zero reuse of a known-wrong claim.",
+  "showcase": [
+    "Separating 'is this sourced' from 'is this true': claims are approved on provenance and checked at the point of use, the way Wikidata keeps a deprecated statement with its reason",
+    "Measuring extraction quality with independent labellers against a do-nothing baseline (0.43 for taking every sentence), then adding a second gate when a sample came in under the floor",
+    "Private material handled in layers: briefs marked private are flagged at export, refused by every staging step unless a person signs off, and reviewed in context before anything reaches the graph",
+    "A nightly completeness check on an always-on runner, compared every morning against the previous run"
+  ],
+  "milestones": [
+    {
+      "title": "Nightly completeness check running unattended on the always-on runner",
+      "status": "done",
+      "date": "2026-11-12",
+      "note": "First unattended run at 05:00 ET exited cleanly and compared itself against the prior day."
+    },
+    {
+      "title": "Every brief exported from Notion with privacy layers, and privately marked briefs reviewed",
+      "status": "done",
+      "date": "2026-11-12",
+      "note": "137 research and 32 post-event briefs. Briefs marked private are refused by every staging step until reviewed."
+    },
+    {
+      "title": "All research claims approved; older prose briefs extracted, gated and staged",
+      "status": "done",
+      "date": "2026-11-12",
+      "note": "5,822 sourced claims approved. 932 claims from briefs written before the Evidence Ledger passed two gates and an independent sample."
+    },
+    {
+      "title": "Completeness check matches session-level and undated files to their events",
+      "status": "done",
+      "date": "2026-11-12",
+      "note": "False gaps went from 5 to 0."
+    },
+    {
+      "title": "One ADR for the claim-check layer and graph v2 (layered claims, provenance, time)",
+      "status": "active",
+      "date": "2026-11-14",
+      "hill": "uphill",
+      "note": "Two drafts exist: an append-only claim-check log, and a layered graph with derivation records and validity windows. Both target the same migration, so they become one design."
+    },
+    {
+      "title": "Claim-check log, write-back and corrections in retrieval",
+      "status": "next",
+      "hill": "uphill",
+      "note": "Each check is an append-only row with a verdict, evidence link and date. Retrieval moves refuted or outdated claims to a short Corrections list."
+    },
+    {
+      "title": "Every workflow reads the graph: interview prep, pre- and post-event content, the Market Brief",
+      "status": "later"
+    },
+    {
+      "title": "Fact-checks captured from research, a dedicated checker, and nightly re-checks",
+      "status": "later"
+    },
+    {
+      "title": "Graph v2 layers: better claim extraction, entity resolution, relations, trends, synthesis",
+      "status": "later"
+    }
+  ],
+  "metrics": [
+    {
+      "label": "Research claims approved as sourced assertions",
+      "baseline": "0 of 5,822 (all unreviewed)",
+      "current": "6,754 approved (5,822 ledger + 932 prose)",
+      "asOf": "2026-11-12",
+      "source": {
+        "label": "PR #340 and PR #341",
+        "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/340"
+      },
+      "note": "Approval means traceable to a source, not verified true. Each batch is stamped and reversible."
+    },
+    {
+      "label": "Faithfulness of prose-extracted claims (independent labels)",
+      "baseline": "0.43 (null baseline: every sentence as a claim, pilot)",
+      "current": "191 of 200 (95.5%) across two samples",
+      "target": "At least 95%",
+      "asOf": "2026-11-12",
+      "source": {
+        "label": "PR #341",
+        "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/341"
+      },
+      "note": "First-party measurement. Before the second gate a sample scored 86 of 100; most failures were fragments that meant nothing out of context."
+    },
+    {
+      "label": "Researched events with a graph row",
+      "baseline": "9 of 52 (17%)",
+      "current": "49 of 101 (49%)",
+      "asOf": "2026-11-12",
+      "source": {
+        "label": "Nightly completeness check, first-party measurement"
+      },
+      "note": "The denominator grew because the export found more researched events in Notion."
+    },
+    {
+      "label": "False gaps in the nightly completeness check",
+      "baseline": "5 (events already staged, reported as missing)",
+      "current": "0",
+      "target": "0",
+      "asOf": "2026-11-12",
+      "source": {
+        "label": "PR #342",
+        "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/342"
+      }
+    },
+    {
+      "label": "Workflows that read the graph",
+      "baseline": "2 (event research, Market Brief)",
+      "current": "2",
+      "target": "At least 5",
+      "asOf": "2026-11-12",
+      "source": {
+        "label": "Repo audit of commands and skills, first-party measurement"
+      }
+    },
+    {
+      "label": "Claims with a recorded fact-check verdict",
+      "baseline": "0 (verdicts were not stored)",
+      "current": "0",
+      "target": "Every claim used in outgoing copy",
+      "asOf": "2026-11-12",
+      "source": {
+        "label": "Claim-check design, first-party measurement"
+      }
+    }
+  ],
+  "decisions": [
+    {
+      "date": "2026-11-12",
+      "decision": "Claims are approved on traceability and checked for truth when they are used.",
+      "why": "A wrong claim tied to its source still shows what was said and by whom. Truth goes stale, so only a check at the time of use catches it."
+    },
+    {
+      "date": "2026-11-12",
+      "decision": "An event counts as attended only when post-event content was uploaded for it.",
+      "why": "Attendance is never inferred. Uploaded material is the evidence."
+    },
+    {
+      "date": "2026-11-12",
+      "decision": "A refuted claim is kept and moved to a Corrections list, not deleted.",
+      "why": "Stopping reuse matters; losing the record of what was claimed does not help."
+    }
+  ],
+  "open": [
+    {
+      "question": "Keep the 932 prose claims from older briefs approved, or retire them until the next extractor version is compared head to head?",
+      "owner": "Alex Yedibalian",
+      "needBy": "2026-11-14",
+      "unblocks": "The ADR and the extractor comparison",
+      "recommendation": "Keep them. They passed two gates and two samples, the comparison can retire them later, and the approval is reversible."
+    },
+    {
+      "question": "What monthly web-search budget can the fact-checker use?",
+      "owner": "Alex Yedibalian",
+      "needBy": "2026-11-15",
+      "unblocks": "Web checks at scale, beyond the checks research already makes",
+      "recommendation": "Capture the checks research already does first, then set a monthly cap once searches per verdict are measured."
+    }
+  ],
+  "risks": [
+    {
+      "risk": "A wrong 'refuted' verdict hides a true claim.",
+      "mitigation": "Refuted claims stay visible in the Corrections list with their evidence, and any verdict can be retracted."
+    },
+    {
+      "risk": "Searching to check a claim discloses the claim's text to a search engine.",
+      "mitigation": "By design, only research claims are eligible for web checks; first-hand and private material is excluded."
+    },
+    {
+      "risk": "The design keeps growing while the wiring work waits.",
+      "mitigation": "The readers are wired in parallel with the check layer, not after it."
+    }
+  ],
+  "assumptions": [
+    {
+      "assumption": "Recording the checks research already makes covers most claims that get used, at no extra search cost.",
+      "test": "Share of claims used in a brief that carry a verdict, four weeks after capture ships."
+    }
+  ],
+  "nextSteps": [
+    {
+      "action": "Decide on the 932 prose claims and the search budget",
+      "owner": "Alex Yedibalian",
+      "due": "2026-11-14"
+    },
+    {
+      "action": "Merge the graph v2 and claim-check drafts into one ADR, with an adversarial review",
+      "owner": "Claude Code",
+      "due": "2026-11-14"
+    },
+    {
+      "action": "Run the judge pilot: about 100 claims labelled by Alex and two independent judges",
+      "owner": "Claude Code",
+      "due": "2026-11-15"
+    },
+    {
+      "action": "Build the claim-check migration, write-back verbs and Corrections in retrieval",
+      "owner": "Claude Code",
+      "due": "2026-11-18"
+    },
+    {
+      "action": "Wire interview prep and pre- and post-event content to read the graph",
+      "owner": "Claude Code",
+      "due": "2026-11-20"
+    }
+  ],
+  "log": [
+    {
+      "date": "2026-11-12",
+      "text": "Briefs exported and reviewed; 6,754 research claims approved; prose claims gated to 95.5% faithfulness; completeness check false gaps cut to 0; claim-check design drafted."
+    },
+    {
+      "date": "2026-11-11",
+      "text": "Always-on runner set up; nightly completeness check scheduled."
+    }
+  ],
+  "links": [
+    {
+      "label": "Research and review verbs (PR #340)",
+      "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/340"
+    },
+    {
+      "label": "Prose self-check gate (PR #341)",
+      "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/341"
+    },
+    {
+      "label": "Completeness check aliases (PR #342)",
+      "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/342"
+    }
+  ],
+  "tracking": [
+    "YED-384",
+    "YED-386",
+    "YED-399",
+    "YED-406",
+    "YED-407",
+    "YED-410",
+    "YED-411"
+  ],
+  "stack": [
+    "Supabase (Postgres + pgvector)",
+    "Python",
+    "Claude Code (headless on a Mac mini)",
+    "Notion API"
+  ]
+}
