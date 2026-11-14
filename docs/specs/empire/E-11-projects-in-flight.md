@@ -63,6 +63,7 @@ The schema enforces these rules:
 | `assumptions` | — | the RAID "A": `assumption` and the `test` that settles it |
 | `risks` | — | `risk`, `mitigation` |
 | `log` | — | ≤8 milestone-level entries |
+| `options` | — | ≤5 paths still being chosen between: `name`, optional `slug` (the path's own page), `caseFor`, `caseAgainst`, `opportunity`, `payoff`, `vision`. Renders as "The paths, compared" after the showcase |
 | `links`, `tracking`, `stack` | — | public links, Linear IDs as text, tools |
 
 ## Page order and why

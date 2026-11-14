@@ -1,0 +1,175 @@
+{
+  "slug": "ground-truth-hackathon",
+  "title": "Ground Truth: three paths, one engine",
+  "tagline": "A one-day build for You.com's live-agents hackathon. Three tracks, one verification engine underneath, and a pick made on the evidence, not the vibe.",
+  "kind": "sprint",
+  "status": "active",
+  "health": "on-track",
+  "phase": "Pick made: Why-Now Wire leads on the Live Wire track; build starts 10:30",
+  "owner": "Alex Yedibalian + Claude Code",
+  "started": "2026-11-13",
+  "target": "2026-11-14",
+  "updated": "2026-11-14",
+  "bottomLine": "The pick is Why-Now Wire: an agent that only acts on change it can prove. The morning probe passed its kill test, with real changes confirmed by several independent publishers inside a one-day window. The verification engine becomes its safeguard rather than the product. DiligenceLive stays the fallback. Every call, search, page reads and inference, runs on You.com.",
+  "healthReason": "The lead path's riskiest assumption, that a weekend has corroborated news, held up in a live probe. What's left is build risk on a fixed clock, with a cut line on every block.",
+  "why": "Every language model is frozen at its training cutoff, and when it doesn't know, it guesses with confidence. That is the gap the hackathon names: an agent that knows what's true right now, searches the live web, reads the sources and shows its receipts. The do-nothing baseline is a model answering from memory, and it can't tell you a fact changed last Tuesday, because it has no idea Tuesday happened.",
+  "mission": "One verification engine and three products on top of it. The engine runs three searches per claim (neutral, counter-evidence, primary source), re-reads the pages, has the model return only a stance label and a verbatim quote, and has plain code apply the rules: the quote must actually be on the page, every number must match, newer credible evidence beats older, unknown sources never decide. The three products differ in what goes in (a drafted email, an analyst memo, a stream of world events) and what comes out (a locked Send button, a cited memo, a held outreach draft).",
+  "destination": "A working live demo and a submission by 15:30 on 14 November, half an hour before the deadline, with a public repo, a short video and a real run recorded as a fallback. Done when the demo shows at least one claim the model got wrong because the world moved, caught live with a quote, a URL and a page date, and a safeguard refusing to act on stage.",
+  "showcase": [
+    "Choosing between three products on evidence: a red-team pass, a pre-mortem and live probes before committing a single day of build",
+    "Designing one engine that serves three different buyers, so the pick can change at kickoff without losing the build",
+    "The model reads, code decides: verdicts and gates live in plain, table-tested rules, not in a prompt",
+    "Reporting against a do-nothing baseline: the same questions answered by a model with no search",
+    "Planning a one-day build backwards from the deadline, with a working end-to-end slice an hour in and a cut line on every block"
+  ],
+  "options": [
+    {
+      "name": "Still True (Receipts)",
+      "slug": "still-true",
+      "caseFor": "It owns the one axis the rest of the field will ignore: time. Most fact-checkers ask whether a claim is supported; this asks whether it is still true today, and only a live-web agent can answer that. The demo has a clean moment of surprise (a sentence that was true when the model learned it and is wrong now), and the safeguard is visible: Send returns a refusal until every claim has a dated receipt. The buyer is concrete: the revenue leader whose AI writes outbound.",
+      "caseAgainst": "Receipts is the track where many teams will build a fact-checker, so it must not look like one. The demo depends on page dates being publish dates, not crawl dates, and a bad date produces a wrong verdict on screen. Paywalled sources can push a run toward a wall of 'can't confirm'. It is the narrowest of the three products.",
+      "opportunity": "Time as a first-class axis: the same claim checked as of last week and as of today, side by side, with the flip shown live. Plus a release gate rather than a score: an HTTP refusal that only a named human can override, and the override is logged.",
+      "payoff": "The strongest technical story of the three (rules in code, exact quote matching, a fail-closed gate, a baseline eval) and a product Alex can sell in his own words, because the pain is a sales email that congratulates a buyer on last year's news.",
+      "vision": "The expiry-date layer for everything machines write. Every claim leaves with an as-of date and a receipt, gets re-checked after it's sent, and triggers a correction when the world moves. At scale the check log becomes a changelog of the world, an index of what stopped being true and when, that every agent consults before it acts. Certificates did this for websites; this does it for facts."
+    },
+    {
+      "name": "DiligenceLive (The Analyst)",
+      "slug": "diligence-live",
+      "caseFor": "The track's brief maps directly onto it: replace a 40-hour research memo with a 4-minute one, every claim cited. Investors are an obvious buyer and are likely in the room. It is the most forgiving demo: even a partly working run produces a useful memo, so it fails soft.",
+      "caseAgainst": "It is the most crowded idea in the room; research memos are what most teams reach for first. You.com's own research endpoint does much of the heavy lifting, so the differentiation has to come from re-verifying every claim rather than generating the memo. Runs are slower, which costs stage time.",
+      "opportunity": "Treating disagreement as the product: a panel that shows where credible sources conflict, with both quotes, instead of averaging them away. And re-verifying the memo's own claims with fresh searches, never trusting the sources the model says it used.",
+      "payoff": "Direct exposure to investors as users, and a portfolio piece that shows judgment about source quality, which is the hard part of research automation.",
+      "vision": "A living memo. Every claim in it is a subscription: when a fact changes, the memo amends itself and says which part of the investment thesis moved. Across a portfolio that becomes thesis-drift monitoring. Across many firms it becomes a shared graph of verified facts about private companies, built from receipts instead of self-reported data."
+    },
+    {
+      "name": "Why-Now Wire (Live Wire)",
+      "slug": "why-now-wire",
+      "caseFor": "It is the purest expression of the hackathon's thesis: an agent that wakes up when the world changes and acts. It sits on Alex's home turf, turning account signals into outreach, so the pitch is first-hand. It has the biggest ceiling of the three.",
+      "caseAgainst": "Trigger quality is the hard part: the naive rule (two domains naming the account) fired on 14 of 15 accounts in the probe, mostly on evergreen pages, so event detection has to be built, not assumed. Acting on triggers raises the safety bar, so drafts are held for approval. The weekend-news risk was tested and held up.",
+      "opportunity": "Corroboration before action: a trigger fires only when two independent domains confirm it, and a ledger of what was already seen means it never alerts twice on the same story. Paired with the verification engine, every drafted message cites the event that justified it.",
+      "payoff": "The best fit with Alex's career story, AI-native go-to-market, and the clearest demo of an agent taking action rather than writing a report.",
+      "vision": "An event-sourced view of every account: the world's changes as a stream, each account's state rebuilt from it, and agents that act inside approval policies. As approvals accumulate, autonomy is earned rule by rule until routine plays run on their own, each one citing the change that triggered it."
+    }
+  ],
+  "milestones": [
+    {
+      "title": "Organizer brief, tracks and rules captured; sponsor APIs checked against their docs",
+      "status": "done",
+      "date": "2026-11-13"
+    },
+    {
+      "title": "Ideas scored, red-teamed and narrowed to one engine with three products",
+      "status": "done",
+      "date": "2026-11-13"
+    },
+    {
+      "title": "Architecture, pre-mortem and a one-day block plan with cut lines",
+      "status": "done",
+      "date": "2026-11-13"
+    },
+    {
+      "title": "Three repos scaffolded with secret scanning on every commit; no product code",
+      "status": "done",
+      "date": "2026-11-13"
+    },
+    {
+      "title": "Live probe of each path against the search API",
+      "status": "done",
+      "date": "2026-11-14"
+    },
+    {
+      "title": "Pick made (Why-Now Wire); build starts at 10:30",
+      "status": "done",
+      "date": "2026-11-14"
+    },
+    {
+      "title": "Submitted by 15:30; live demo",
+      "status": "later",
+      "date": "2026-11-14"
+    }
+  ],
+  "decisions": [
+    {
+      "date": "2026-11-13",
+      "decision": "One verification engine with three products on top, rather than three separate builds",
+      "why": "The pick can change at kickoff without losing the build, and the hard part (verification) is shared."
+    },
+    {
+      "date": "2026-11-13",
+      "decision": "Scaffold the three repos the night before, with no product code until 10:30",
+      "why": "The rules allow research and design beforehand but not pre-built projects. Empty scaffolds remove setup time without crossing that line."
+    },
+    {
+      "date": "2026-11-14",
+      "decision": "Lead with Why-Now Wire on the Live Wire track; Still True becomes its safeguard, DiligenceLive the fallback",
+      "why": "The probe found real, independently confirmed changes in a one-day window, and the real-time agent is the missing piece in an existing research workflow, where the other two would largely duplicate it."
+    },
+    {
+      "date": "2026-11-14",
+      "decision": "All model calls go through the You.com Inference Router, with open-weight models and no tools declared",
+      "why": "One vendor end to end (search, page reads and inference), and the model still only labels; code decides. A rules-only path is built first so an inference outage cannot block the demo."
+    }
+  ],
+  "open": [
+    {
+      "question": "Does the inference router's structured output hold up on the chosen model?",
+      "owner": "Claude Code",
+      "needBy": "2026-11-14",
+      "unblocks": "The model-backed labeler and drafter (the rules-only path runs without it)",
+      "recommendation": "Test one structured-output call as soon as event credits are live; fall back to plain JSON mode plus validation if strict schemas are rejected."
+    }
+  ],
+  "assumptions": [
+    {
+      "assumption": "Search page dates reflect publication on article pages",
+      "test": "Probe, 14 Nov: within a day of the URL date on 24 of 24 dated URLs. Undated evergreen pages carry the crawl time, so they never decide recency."
+    },
+    {
+      "assumption": "A weekend day has enough corroborated change to demo live",
+      "test": "Probe, 14 Nov: several accounts showed one change covered by many independent publishers in a one-day window. Re-verified at 10:30."
+    }
+  ],
+  "risks": [
+    {
+      "risk": "The live web or the venue network is slow during the demo",
+      "mitigation": "A recorded real run is replayed through the same event stream, clearly labelled as a replay"
+    },
+    {
+      "risk": "Scope grows during the day and pushes the freeze",
+      "mitigation": "A hard feature freeze at 14:30 and a cut line on every block"
+    },
+    {
+      "risk": "Counting pages instead of events: a naive two-sources rule flagged 14 of 15 accounts, mostly on evergreen pages",
+      "mitigation": "Filter to article-like pages, cluster by event, collapse syndicated copies, and count only original publishers"
+    }
+  ],
+  "nextSteps": [
+    {
+      "action": "Walking skeleton: one account, one verified trigger, end to end in the browser by 11:30",
+      "owner": "Claude Code",
+      "due": "2026-11-14"
+    },
+    {
+      "action": "Test the inference router once event credits land",
+      "owner": "Claude Code",
+      "due": "2026-11-14"
+    },
+    {
+      "action": "Submit the project and video by 15:30",
+      "owner": "Alex Yedibalian",
+      "due": "2026-11-14"
+    }
+  ],
+  "links": [
+    {
+      "label": "Hackathon page (Devpost)",
+      "url": "https://ground-truth-you-hack.devpost.com/"
+    }
+  ],
+  "stack": [
+    "You.com Search, Contents and Inference Router",
+    "FastAPI",
+    "Server-sent events",
+    "Pydantic"
+  ]
+}
