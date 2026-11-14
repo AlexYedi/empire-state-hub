@@ -1,0 +1,48 @@
+{
+  "slug": "diligence-live",
+  "title": "DiligenceLive",
+  "tagline": "A 4-minute investor diligence memo where every claim is re-checked against live sources, and where sources disagree, you see both.",
+  "kind": "sub-project",
+  "parent": "ground-truth-hackathon",
+  "status": "active",
+  "health": "on-track",
+  "phase": "Designed as the fallback; live probe tonight",
+  "owner": "Alex Yedibalian + Claude Code",
+  "started": "2026-11-13",
+  "target": "2026-11-14",
+  "updated": "2026-11-13",
+  "bottomLine": "The fallback path for The Analyst track. A research run drafts a diligence memo on a company; then the shared verification engine re-checks every claim with fresh searches and a page re-read, never trusting the sources the model says it used. The hero view is a conflict panel: where credible sources disagree, both quotes sit side by side.",
+  "healthReason": "It reuses the shared engine, so most of its build is the same as the lead path. Its risk is differentiation in a crowded track, not feasibility.",
+  "why": "An investor's first-pass memo on a company takes days of reading, and a model-written one is fast but unaccountable: sources can be stale, misread or invented. The do-nothing baseline is a research memo whose citations nobody re-checks.",
+  "mission": "A memo compiler with a verifier attached. The memo is drafted with a research call, split into claims, and each claim is re-verified by the engine; the memo renders with a verdict and receipt beside every sentence, and a conflict panel for claims where credible sources split.",
+  "destination": "On stage, a memo on a real company is produced in minutes, at least one claim from the draft is shown to be wrong or out of date, and one genuine source conflict is shown with both quotes. Done when every sentence in the memo carries a verdict and a link to the page it came from.",
+  "showcase": [
+    "Never trusting a model's own citations: every claim is re-searched and re-read before it counts",
+    "Making disagreement visible instead of averaging it away",
+    "Reusing one engine across products, so a fallback costs hours, not a rebuild"
+  ],
+  "milestones": [
+    { "title": "Designed on the shared engine", "status": "done", "date": "2026-11-13" },
+    { "title": "Repo scaffolded with secret scanning", "status": "done", "date": "2026-11-13" },
+    { "title": "Probe: does re-verification find real conflicts on a recent company?", "status": "active", "hill": "uphill", "date": "2026-11-13" },
+    { "title": "Memo with a verdict on every sentence", "status": "later", "date": "2026-11-14" }
+  ],
+  "assumptions": [
+    {
+      "assumption": "Re-verification finds claims in a fresh memo that are wrong, stale or disputed",
+      "test": "Run a memo on a company with recent news and count the claims that don't survive re-checking"
+    }
+  ],
+  "risks": [
+    {
+      "risk": "Looks like the many other research-memo builds in the room",
+      "mitigation": "Lead with the conflict panel and the claims that failed re-checking, not with the memo itself"
+    },
+    {
+      "risk": "Research runs are slow on stage",
+      "mitigation": "Generate the memo before walking up and verify it live"
+    }
+  ],
+  "nextSteps": [{ "action": "Run the conflict probe on a recently funded company", "owner": "Claude Code", "due": "2026-11-13" }],
+  "stack": ["You.com Research, Search and Contents APIs", "Claude", "FastAPI"]
+}

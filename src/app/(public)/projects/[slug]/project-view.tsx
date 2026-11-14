@@ -149,6 +149,43 @@ export function ProjectView({
         </ul>
       </section>
 
+      {p.options.length > 0 && (
+        <section className="mt-12">
+          <h2 className={h2}>{ed ? "The paths, compared" : "options compared"}</h2>
+          <div className="mt-6 grid gap-6 lg:grid-cols-3">
+            {p.options.map((o) => (
+              <div key={o.name} className="rounded-lg border border-border p-5">
+                <p className="text-base font-semibold">
+                  {o.slug ? (
+                    <Link href={`/projects/${o.slug}`} className="hover:text-accent">
+                      {o.name} →
+                    </Link>
+                  ) : (
+                    o.name
+                  )}
+                </p>
+                <dl className="mt-4 space-y-4 text-sm leading-relaxed">
+                  {(
+                    [
+                      ["The case for", o.caseFor],
+                      ["The case against", o.caseAgainst],
+                      ["What's new in it", o.opportunity],
+                      ["Worth executing because", o.payoff],
+                      ["If it lands", o.vision],
+                    ] as const
+                  ).map(([label, body]) => (
+                    <div key={label}>
+                      <dt className="font-mono text-[10px] uppercase tracking-widest text-muted">{label}</dt>
+                      <dd className="mt-1">{body}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
       <div className="mt-12 grid gap-12 lg:grid-cols-[1fr_1.2fr]">
         <section>
           <h2 className={h2}>{ed ? "Milestones" : "milestones"}</h2>
