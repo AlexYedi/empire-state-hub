@@ -6,13 +6,13 @@
   "parent": "ground-truth-hackathon",
   "status": "active",
   "health": "on-track",
-  "phase": "Designed; live probe tonight; build starts 10:30 on 14 November if picked",
+  "phase": "Not entered on its own: its engine is the safeguard inside Why-Now Wire",
   "owner": "Alex Yedibalian + Claude Code",
   "started": "2026-11-13",
   "target": "2026-11-14",
-  "updated": "2026-11-13",
-  "bottomLine": "The lead path for the Receipts track. A drafted email is split into claims, each claim is checked against today's web, and every claim gets one of three verdicts with a verbatim quote, a URL and a page date: still true, changed, or can't confirm. Send stays locked until each blocking claim is fixed or a named person types an override reason. Tonight's probe tests the one assumption that could sink it: whether page dates are trustworthy.",
-  "healthReason": "The design is settled and the environment is ready. The main unknown, page-date quality, gets tested before the build starts.",
+  "updated": "2026-11-14",
+  "bottomLine": "Not entered as its own product. Its verification engine (exact quotes re-found on the page, dated sources, rules in code) is the safeguard inside Why-Now Wire, the lead path. The send-gate idea stands for later: catching facts that expired between when the AI learned them and when you hit send.",
+  "healthReason": "Parked for the day, not dropped: the engine ships inside the lead path.",
   "why": "Hallucination detectors check an answer against the documents it was given. None of them notices when a fact was true at training time and has since changed. In sales that is the email congratulating a buyer on a funding round that was superseded last week. In a first-party probe on 13 November, a model answering without search was out of date on most of a dozen companies picked because they had recently changed. The sample was selected for change, so it shows the failure exists, not how often it happens.",
   "mission": "A send-gate for AI-drafted outreach. Three searches per claim (neutral, counter-evidence, primary source), the pages re-read in full, the model returning only a stance label and a quote, and plain code deciding the verdict: the quote must be found on the page, every number in the claim must appear in the quote, newer credible evidence beats older, and an unknown source never decides. 'Can't confirm' is the default; every other verdict has to be earned.",
   "destination": "On stage, a model-written email is checked live, one claim flips to 'changed' with its quote and date, Send is refused, the fix is accepted and Send unlocks. Done when that runs end to end on a fresh draft generated that morning, and an eval against the no-search baseline is shown as counts.",
@@ -23,12 +23,36 @@
     "Exact matching on numbers, so a changed figure can never pass as close enough"
   ],
   "milestones": [
-    { "title": "Architecture, verdict rules and safeguards designed", "status": "done", "date": "2026-11-13" },
-    { "title": "Repo scaffolded with secret scanning", "status": "done", "date": "2026-11-13" },
-    { "title": "Probe: do page dates match publish dates?", "status": "active", "hill": "uphill", "date": "2026-11-13" },
-    { "title": "One claim end to end in the browser", "status": "next", "date": "2026-11-14" },
-    { "title": "Full draft checked live, Send refused, run saved as a replay", "status": "later", "date": "2026-11-14" },
-    { "title": "Re-check over time and baseline eval", "status": "later", "date": "2026-11-14" }
+    {
+      "title": "Architecture, verdict rules and safeguards designed",
+      "status": "done",
+      "date": "2026-11-13"
+    },
+    {
+      "title": "Repo scaffolded with secret scanning",
+      "status": "done",
+      "date": "2026-11-13"
+    },
+    {
+      "title": "Probe: do page dates match publish dates?",
+      "status": "done",
+      "date": "2026-11-14"
+    },
+    {
+      "title": "One claim end to end in the browser",
+      "status": "next",
+      "date": "2026-11-14"
+    },
+    {
+      "title": "Full draft checked live, Send refused, run saved as a replay",
+      "status": "later",
+      "date": "2026-11-14"
+    },
+    {
+      "title": "Re-check over time and baseline eval",
+      "status": "later",
+      "date": "2026-11-14"
+    }
   ],
   "assumptions": [
     {
@@ -51,8 +75,17 @@
     }
   ],
   "nextSteps": [
-    { "action": "Run the page-date probe on recent stories", "owner": "Claude Code", "due": "2026-11-13" },
-    { "action": "Get one claim running end to end in the browser", "owner": "Claude Code", "due": "2026-11-14" }
+    {
+      "action": "Revisit as a stand-alone send-gate after the event",
+      "owner": "Alex Yedibalian",
+      "due": "2026-11-21"
+    }
   ],
-  "stack": ["You.com Search and Contents APIs", "Claude", "FastAPI", "Server-sent events", "Pydantic"]
+  "stack": [
+    "You.com Search and Contents APIs",
+    "You.com Inference Router (open-weight models)",
+    "FastAPI",
+    "Server-sent events",
+    "Pydantic"
+  ]
 }

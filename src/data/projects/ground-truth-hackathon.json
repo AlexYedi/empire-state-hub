@@ -5,13 +5,13 @@
   "kind": "sprint",
   "status": "active",
   "health": "on-track",
-  "phase": "Prep: three paths scaffolded and being explored; the pick is made at kickoff",
+  "phase": "Pick made: Why-Now Wire leads on the Live Wire track; build starts 10:30",
   "owner": "Alex Yedibalian + Claude Code",
   "started": "2026-11-13",
   "target": "2026-11-14",
-  "updated": "2026-11-13",
-  "bottomLine": "Three paths are scaffolded, one per track, all on the same engine: search the live web, re-read the pages, let the model label what each passage says, and let plain code decide. The current lean is Still True (Receipts), because it owns an axis nobody else is likely to show: time. DiligenceLive is the safe fallback. Why-Now Wire has the biggest ceiling and the riskiest Saturday. Each path gets a live probe tonight before anything is locked.",
-  "healthReason": "Design is done and the environments are ready. Nothing is built yet, by the rules: product code starts at 10:30 on the day. The open risk is choosing a path whose demo depends on the web cooperating on a quiet weekend.",
+  "updated": "2026-11-14",
+  "bottomLine": "The pick is Why-Now Wire: an agent that only acts on change it can prove. The morning probe passed its kill test, with real changes confirmed by several independent publishers inside a one-day window. The verification engine becomes its safeguard rather than the product. DiligenceLive stays the fallback. Every call, search, page reads and inference, runs on You.com.",
+  "healthReason": "The lead path's riskiest assumption, that a weekend has corroborated news, held up in a live probe. What's left is build risk on a fixed clock, with a cut line on every block.",
   "why": "Every language model is frozen at its training cutoff, and when it doesn't know, it guesses with confidence. That is the gap the hackathon names: an agent that knows what's true right now, searches the live web, reads the sources and shows its receipts. The do-nothing baseline is a model answering from memory, and it can't tell you a fact changed last Tuesday, because it has no idea Tuesday happened.",
   "mission": "One verification engine and three products on top of it. The engine runs three searches per claim (neutral, counter-evidence, primary source), re-reads the pages, has the model return only a stance label and a verbatim quote, and has plain code apply the rules: the quote must actually be on the page, every number must match, newer credible evidence beats older, unknown sources never decide. The three products differ in what goes in (a drafted email, an analyst memo, a stream of world events) and what comes out (a locked Send button, a cited memo, a held outreach draft).",
   "destination": "A working live demo and a submission by 15:30 on 14 November, half an hour before the deadline, with a public repo, a short video and a real run recorded as a fallback. Done when the demo shows at least one claim the model got wrong because the world moved, caught live with a quote, a URL and a page date, and a safeguard refusing to act on stage.",
@@ -45,20 +45,48 @@
       "name": "Why-Now Wire (Live Wire)",
       "slug": "why-now-wire",
       "caseFor": "It is the purest expression of the hackathon's thesis: an agent that wakes up when the world changes and acts. It sits on Alex's home turf, turning account signals into outreach, so the pitch is first-hand. It has the biggest ceiling of the three.",
-      "caseAgainst": "It needs the world to move on the day, and weekends are quiet for funding news, filings and launches. Trigger quality is hard: one article is noise, so a trigger needs two independent sources, which a slow news day may not supply. Acting on triggers raises the safety bar, so drafts must be held for approval.",
+      "caseAgainst": "Trigger quality is the hard part: the naive rule (two domains naming the account) fired on 14 of 15 accounts in the probe, mostly on evergreen pages, so event detection has to be built, not assumed. Acting on triggers raises the safety bar, so drafts are held for approval. The weekend-news risk was tested and held up.",
       "opportunity": "Corroboration before action: a trigger fires only when two independent domains confirm it, and a ledger of what was already seen means it never alerts twice on the same story. Paired with the verification engine, every drafted message cites the event that justified it.",
       "payoff": "The best fit with Alex's career story, AI-native go-to-market, and the clearest demo of an agent taking action rather than writing a report.",
       "vision": "An event-sourced view of every account: the world's changes as a stream, each account's state rebuilt from it, and agents that act inside approval policies. As approvals accumulate, autonomy is earned rule by rule until routine plays run on their own, each one citing the change that triggered it."
     }
   ],
   "milestones": [
-    { "title": "Organizer brief, tracks and rules captured; sponsor APIs checked against their docs", "status": "done", "date": "2026-11-13" },
-    { "title": "Ideas scored, red-teamed and narrowed to one engine with three products", "status": "done", "date": "2026-11-13" },
-    { "title": "Architecture, pre-mortem and a one-day block plan with cut lines", "status": "done", "date": "2026-11-13" },
-    { "title": "Three repos scaffolded with secret scanning on every commit; no product code", "status": "done", "date": "2026-11-13" },
-    { "title": "Live probe of each path against the search API", "status": "active", "hill": "uphill", "date": "2026-11-13" },
-    { "title": "Pick confirmed at kickoff; build starts at 10:30", "status": "next", "date": "2026-11-14" },
-    { "title": "Submitted by 15:30; live demo", "status": "later", "date": "2026-11-14" }
+    {
+      "title": "Organizer brief, tracks and rules captured; sponsor APIs checked against their docs",
+      "status": "done",
+      "date": "2026-11-13"
+    },
+    {
+      "title": "Ideas scored, red-teamed and narrowed to one engine with three products",
+      "status": "done",
+      "date": "2026-11-13"
+    },
+    {
+      "title": "Architecture, pre-mortem and a one-day block plan with cut lines",
+      "status": "done",
+      "date": "2026-11-13"
+    },
+    {
+      "title": "Three repos scaffolded with secret scanning on every commit; no product code",
+      "status": "done",
+      "date": "2026-11-13"
+    },
+    {
+      "title": "Live probe of each path against the search API",
+      "status": "done",
+      "date": "2026-11-14"
+    },
+    {
+      "title": "Pick made (Why-Now Wire); build starts at 10:30",
+      "status": "done",
+      "date": "2026-11-14"
+    },
+    {
+      "title": "Submitted by 15:30; live demo",
+      "status": "later",
+      "date": "2026-11-14"
+    }
   ],
   "decisions": [
     {
@@ -70,25 +98,35 @@
       "date": "2026-11-13",
       "decision": "Scaffold the three repos the night before, with no product code until 10:30",
       "why": "The rules allow research and design beforehand but not pre-built projects. Empty scaffolds remove setup time without crossing that line."
+    },
+    {
+      "date": "2026-11-14",
+      "decision": "Lead with Why-Now Wire on the Live Wire track; Still True becomes its safeguard, DiligenceLive the fallback",
+      "why": "The probe found real, independently confirmed changes in a one-day window, and the real-time agent is the missing piece in an existing research workflow, where the other two would largely duplicate it."
+    },
+    {
+      "date": "2026-11-14",
+      "decision": "All model calls go through the You.com Inference Router, with open-weight models and no tools declared",
+      "why": "One vendor end to end (search, page reads and inference), and the model still only labels; code decides. A rules-only path is built first so an inference outage cannot block the demo."
     }
   ],
   "open": [
     {
-      "question": "Which path goes on stage?",
-      "owner": "Alex Yedibalian",
+      "question": "Does the inference router's structured output hold up on the chosen model?",
+      "owner": "Claude Code",
       "needBy": "2026-11-14",
-      "unblocks": "The 10:30 build start and the block plan",
-      "recommendation": "Still True, unless tonight's probe shows page dates are unreliable or kickoff changes the tracks. DiligenceLive is the fallback."
+      "unblocks": "The model-backed labeler and drafter (the rules-only path runs without it)",
+      "recommendation": "Test one structured-output call as soon as event credits are live; fall back to plain JSON mode plus validation if strict schemas are rejected."
     }
   ],
   "assumptions": [
     {
-      "assumption": "Search results carry page dates that reflect publication, often enough to rank evidence by recency",
-      "test": "Compare page dates against known publish dates for a handful of recent stories in tonight's probe"
+      "assumption": "Search page dates reflect publication on article pages",
+      "test": "Probe, 14 Nov: within a day of the URL date on 24 of 24 dated URLs. Undated evergreen pages carry the crawl time, so they never decide recency."
     },
     {
-      "assumption": "A model without search is confidently out of date on recently changed facts",
-      "test": "Run the same questions with and without search and count the stale answers"
+      "assumption": "A weekend day has enough corroborated change to demo live",
+      "test": "Probe, 14 Nov: several accounts showed one change covered by many independent publishers in a one-day window. Re-verified at 10:30."
     }
   ],
   "risks": [
@@ -99,13 +137,39 @@
     {
       "risk": "Scope grows during the day and pushes the freeze",
       "mitigation": "A hard feature freeze at 14:30 and a cut line on every block"
+    },
+    {
+      "risk": "Counting pages instead of events: a naive two-sources rule flagged 14 of 15 accounts, mostly on evergreen pages",
+      "mitigation": "Filter to article-like pages, cluster by event, collapse syndicated copies, and count only original publishers"
     }
   ],
   "nextSteps": [
-    { "action": "Run the live probe for each path and record the kill test result", "owner": "Claude Code", "due": "2026-11-13" },
-    { "action": "Confirm the pick at kickoff", "owner": "Alex Yedibalian", "due": "2026-11-14" },
-    { "action": "Submit the project and video", "owner": "Alex Yedibalian", "due": "2026-11-14" }
+    {
+      "action": "Walking skeleton: one account, one verified trigger, end to end in the browser by 11:30",
+      "owner": "Claude Code",
+      "due": "2026-11-14"
+    },
+    {
+      "action": "Test the inference router once event credits land",
+      "owner": "Claude Code",
+      "due": "2026-11-14"
+    },
+    {
+      "action": "Submit the project and video by 15:30",
+      "owner": "Alex Yedibalian",
+      "due": "2026-11-14"
+    }
   ],
-  "links": [{ "label": "Hackathon page (Devpost)", "url": "https://ground-truth-you-hack.devpost.com/" }],
-  "stack": ["You.com Search and Contents APIs", "Claude", "FastAPI", "Server-sent events", "OpenCrawl"]
+  "links": [
+    {
+      "label": "Hackathon page (Devpost)",
+      "url": "https://ground-truth-you-hack.devpost.com/"
+    }
+  ],
+  "stack": [
+    "You.com Search, Contents and Inference Router",
+    "FastAPI",
+    "Server-sent events",
+    "Pydantic"
+  ]
 }
