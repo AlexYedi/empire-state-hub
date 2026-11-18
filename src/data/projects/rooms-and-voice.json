@@ -1,0 +1,174 @@
+{
+  "slug": "rooms-and-voice",
+  "title": "Rooms and voice",
+  "kind": "project",
+  "status": "active",
+  "health": "on-track",
+  "tagline": "Every room attended becomes checked posts and dated follow-ups, at about two posts a week, with the event pipeline in maintenance.",
+  "phase": "Maintenance and close-out: router merge, two supervised runs",
+  "owner": "Alex Yedibalian + Claude Code",
+  "started": "2026-11-18",
+  "target": "2027-01-15",
+  "updated": "2026-11-18",
+  "bottomLine": "The event pipeline already produces about two posts a week. This track keeps it there, closes the post-event routing work by 3 December, and clears the stale content queue. Growth in volume is not the goal; finishing what each room starts is.",
+  "healthReason": "The post-event router is a week ahead of its 3 December target. The risk is a backlog of stale early-November content items, triaged on 20 November.",
+  "why": "Rooms are where the writing, the community standing and the conversations come from. The pipeline produces well; the gap is finishing: drafts and follow-ups that never close.",
+  "mission": "Keep research and drafting running for attended events, merge and prove the post-event router, hold the publishing cadence, and clear any content item older than ten days.",
+  "destination": "On 3 December the router is merged and proven on two supervised runs and the post-event project closes. Through 15 January the cadence holds at about two posts a week, with no content item older than ten days.",
+  "showcase": [
+    "Holding a cadence instead of growing it: a stated target that is deliberately not a growth target",
+    "A run ledger and read-only close-check on every post-event run, so a skipped step shows up instead of closing green",
+    "Routing each section of a long event brief to a dated follow-up, then measuring how many close in 30 days"
+  ],
+  "milestones": [
+    {
+      "title": "Stale content items triaged: keep at most two, cancel the rest",
+      "status": "active",
+      "date": "2026-11-20",
+      "hill": "downhill"
+    },
+    {
+      "title": "Post-event router merged; first supervised run",
+      "status": "next",
+      "date": "2026-11-25"
+    },
+    {
+      "title": "Second supervised run; post-event project closed",
+      "status": "next",
+      "date": "2026-12-03"
+    },
+    {
+      "title": "Eval write-up post goes out through the normal content flow",
+      "status": "later",
+      "date": "2026-12-15"
+    },
+    {
+      "title": "Cadence held for eight weeks; decide on Long Reads and X on the hub",
+      "status": "later",
+      "date": "2027-01-15"
+    }
+  ],
+  "metrics": [
+    {
+      "label": "Posts per week",
+      "baseline": "About 2: the pipeline already produces this with no new build",
+      "current": "About 2",
+      "target": "Hold at about 2",
+      "asOf": "2026-11-18",
+      "source": {
+        "label": "Content Drafts database, weekly count"
+      }
+    },
+    {
+      "label": "Post-event runs that end with a close-check verdict",
+      "baseline": "0 before 11 November: a failed step could close green",
+      "current": "1 run checked",
+      "target": "Every new run: PASS, or a skip with a reason",
+      "asOf": "2026-11-18",
+      "source": {
+        "label": "Post-event run ledgers"
+      }
+    },
+    {
+      "label": "Content items past their due date",
+      "baseline": "Grows by about 2 a week with no triage",
+      "current": "At least 6",
+      "target": "0 by 21 November",
+      "asOf": "2026-11-18",
+      "source": {
+        "label": "Issue tracker, content items"
+      }
+    }
+  ],
+  "decisions": [
+    {
+      "date": "2026-11-18",
+      "decision": "Only events marked Going get the full research and content flow; pending events get a footnote unless they meet the event filter.",
+      "why": "Holds the cadence without widening the review queue."
+    },
+    {
+      "date": "2026-11-18",
+      "decision": "No new X build. The X cuts the drafting skills already produce get posted as they are.",
+      "why": "The cheapest way to be on X is to post what already exists."
+    },
+    {
+      "date": "2026-11-18",
+      "decision": "The late 'An Obvious week' series is cancelled.",
+      "why": "The trial it covered ended 6 November, and a late series has no pilot."
+    }
+  ],
+  "open": [
+    {
+      "question": "Which stale recaps are still worth shipping?",
+      "owner": "Alex",
+      "needBy": "2026-11-20",
+      "recommendation": "Keep one only if there is uploaded content for it. Cancel the rest."
+    },
+    {
+      "question": "Is the planned late-December talk date fixed, and who is the audience?",
+      "owner": "Alex",
+      "needBy": "2026-11-24",
+      "recommendation": "If fixed, prep starts 14 December; if not, move it to January."
+    }
+  ],
+  "risks": [
+    {
+      "risk": "A busy event week takes a whole session for content.",
+      "mitigation": "Content runs in one session; the graph track yields its slot that week."
+    },
+    {
+      "risk": "Posts slip in the holiday weeks.",
+      "mitigation": "One post in each of the two holiday weeks is the plan, not a miss."
+    }
+  ],
+  "assumptions": [
+    {
+      "assumption": "Routed follow-ups get acted on.",
+      "test": "The 30-day close rate, first read 11 December."
+    }
+  ],
+  "nextSteps": [
+    {
+      "action": "Triage the six stale early-November content items",
+      "owner": "Alex",
+      "due": "2026-11-20"
+    },
+    {
+      "action": "Merge the two open carousel PRs",
+      "owner": "Alex",
+      "due": "2026-11-20"
+    },
+    {
+      "action": "Merge the router and run it supervised on the next attended room",
+      "owner": "Claude Code",
+      "due": "2026-11-25"
+    }
+  ],
+  "log": [
+    {
+      "date": "2026-11-18",
+      "text": "Track opened in the 18 November re-plan. The post-event pipeline project became its sub-project."
+    }
+  ],
+  "links": [],
+  "tracking": [
+    "YED-336",
+    "YED-300",
+    "YED-294",
+    "YED-291",
+    "YED-290",
+    "YED-289",
+    "YED-381",
+    "YED-375",
+    "YED-310",
+    "YED-360",
+    "YED-270",
+    "YED-274",
+    "YED-369"
+  ],
+  "stack": [
+    "Claude Code",
+    "Notion",
+    "Headless Chrome"
+  ]
+}

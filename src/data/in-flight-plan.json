@@ -1,0 +1,100 @@
+{
+  "charted": "2026-11-18",
+  "horizon": "2027-01-15",
+  "headline": "Too many parallel sessions, one reviewer: re-charted to three public tracks.",
+  "approach": [
+    "By mid-November about a dozen Claude sessions were building at once across five repos. They produced work faster than one person could review it: 18 open pull requests, more than 40 overdue items and a habit of approving without reading. Each session was sensible; together they had lost the plot.",
+    "The re-plan treats review attention as the constraint (Goldratt's Theory of Constraints) and sizes the work to it. At most two Claude sessions run at once, each names its track and milestone before it starts, and anything new gets a date on or after 5 January.",
+    "Three tracks are public below. A fourth runs privately and isn't shown here. Nothing was deleted: work that doesn't fit before January is frozen with an owner and one review date, and privacy items are sequenced first, never dropped."
+  ],
+  "principles": [
+    {
+      "title": "Two sessions, maximum",
+      "text": "One track per session; a session that can't name its milestone doesn't start."
+    },
+    {
+      "title": "Finish before widening",
+      "text": "Land what is in flight, then freeze. New lanes, sources and features queue for 5 January."
+    },
+    {
+      "title": "Privacy first",
+      "text": "Open exposures close before any graph work resumes."
+    },
+    {
+      "title": "One weekly review",
+      "text": "Fridays, 30 minutes: numbers against their baselines, health, re-date or cancel anything overdue, one edit per page."
+    }
+  ],
+  "tracks": [
+    {
+      "slug": "tested-not-vibed",
+      "role": "the build: a public, pre-registered eval suite, published 15 December"
+    },
+    {
+      "slug": "rooms-and-voice",
+      "role": "the voice: events into checked posts and follow-ups, about two a week"
+    },
+    {
+      "slug": "graph-and-guardrails",
+      "role": "the platform: privacy first, land the graph, then hold steady to January"
+    }
+  ],
+  "calendar": [
+    {
+      "week": "Nov 18–21",
+      "focus": "Consolidate: merge or close open PRs, privacy triage, sign the eval pre-registration."
+    },
+    {
+      "week": "Nov 23–27",
+      "focus": "Eval screen 24 November; exposures closed and runner green 25 November; router merged.",
+      "dead": false
+    },
+    {
+      "week": "Nov 30–Dec 4",
+      "focus": "Full eval run; post-event project closes 3 December; capability audit shipped."
+    },
+    {
+      "week": "Dec 7–11",
+      "focus": "Outside graders finish; graph v2 lands and the graph track freezes 11 December."
+    },
+    {
+      "week": "Dec 14–18",
+      "focus": "Eval suite and write-up published 15 December."
+    },
+    {
+      "week": "Dec 21–Jan 1",
+      "focus": "Holiday weeks: one post each, nothing that needs a reply or the runner.",
+      "dead": true
+    },
+    {
+      "week": "Jan 4–8",
+      "focus": "January queue reviewed 5 January; rulebook cut from the eval results."
+    },
+    {
+      "week": "Jan 11–15",
+      "focus": "Eval posts 2 to 4 out; decide Long Reads, X on the hub and the next build."
+    }
+  ],
+  "parked": [
+    {
+      "item": "Public NYC AI Rooms MCP server",
+      "until": "the 5 January review; first January build candidate"
+    },
+    {
+      "item": "New graph lanes and sources",
+      "until": "the 5 January review"
+    },
+    {
+      "item": "Agent factory features beyond the CI review",
+      "until": "the 5 January review"
+    },
+    {
+      "item": "GTM-OS hub and GTM University",
+      "until": "11 January"
+    },
+    {
+      "item": "X surfaces on the hub",
+      "until": "11 January"
+    }
+  ]
+}

@@ -5,11 +5,11 @@
   "kind": "project",
   "status": "active",
   "health": "at-risk",
-  "phase": "Week 1 of 7: pre-registration due 14 November; the source check is done, one decision and Alex's signature remain",
+  "phase": "Re-charted 18 November: signature due 20 November, publish 15 December",
   "owner": "Alex Yedibalian + Claude Code",
   "started": "2026-11-04",
-  "target": "2026-12-19",
-  "updated": "2026-11-11",
+  "target": "2026-12-15",
+  "updated": "2026-11-18",
   "why": "The pipeline writes every post, note and brief from a style guide of more than 100 guidance lines. As of 8 November 2026, none of them had been run against a no-guidance control (first-party check of the pipeline repo), so nobody can say which lines change the output.",
   "mission": "AO-EVAL-SUITE, a public, re-runnable eval suite for GTM agent writing, aimed at Alex's own rulebook. It screens failure types against a no-guidance control, then tests rule wordings only where the control fails. The types come from his written corrections, or from the rules he wrote down when his corrections are too thin to rank. Alongside it, an audit of every rule and a backfill of debriefs for attended rooms that never got one.",
   "destination": "A pre-registered study published with its raw samples, grader code and agreement between graders, so a stranger can re-run it. The rulebook keeps only the rules that beat saying nothing, and the count of rules tested appears on this page as a metric. Anyone can check by re-running the suite.",
@@ -46,15 +46,15 @@
       "note": "Runner, throughput results, a draft pre-registration and a written rule for choosing failure types. Held locally until its home is chosen."
     },
     {
-      "title": "Failure-type source: two branches, Alex picks by 14 November",
+      "title": "Failure-type source picked (recommended: branch 2, the written fallback)",
       "status": "active",
-      "date": "2026-11-14",
+      "date": "2026-11-20",
       "note": "Branch 2 is what the written procedure already says: review comments came back under its floor of 60, so its fallback applies, the anti-patterns file in file order. Branch 1 would use Alex's own corrections instead. That needs three changes made after seeing data, each logged as a deviation: a new source (his working sessions with the drafting agent), a floor counted in corrections rather than comments, and a random label sample instead of the first 50. Even then, a check on 11 November found no type that clears the eligibility rule of 5 corrections on 3 drafts: 72 corrections in 1,663 messages sent before 8 November; with the review comments, the candidate corrections fall into 34 types."
     },
     {
       "title": "Pre-registration signed and frozen by hash",
       "status": "active",
-      "date": "2026-11-14",
+      "date": "2026-11-20",
       "note": "The gate on the critical path. No study sample can be generated before this, and every later date moves day for day with it."
     },
     {
@@ -66,45 +66,47 @@
     {
       "title": "Eval runner public",
       "status": "next",
-      "date": "2026-11-21",
+      "date": "2026-11-23",
       "note": "Waits on the repo-home and licence decision."
     },
     {
       "title": "Screen up to 8 failure types against the no-guidance control",
       "status": "next",
-      "date": "2026-11-22",
+      "date": "2026-11-24",
       "note": "Decision point written in advance: at least one type fails the control 5 of 16 times, or the null note publishes instead of a full run."
     },
     {
       "title": "Full run on the failure types the control fails",
       "status": "later",
-      "date": "2026-11-29"
+      "date": "2026-12-01"
     },
     {
-      "title": "Three outside graders re-grade blind, with agreement published",
+      "title": "Outside graders re-grade blind, with agreement published",
       "status": "later",
-      "date": "2026-12-10"
+      "date": "2026-12-11",
+      "note": "Proposed for the pre-registration: two graders by 11 December and a third as an addendum, written in before the hash so it is a design choice, not a deviation."
     },
     {
       "title": "Eval suite and write-up published",
       "status": "later",
-      "date": "2026-12-12"
+      "date": "2026-12-15",
+      "note": "The write-up doubles as the pilot hub long read."
     },
     {
       "title": "Evidence page and an 8-minute walkthrough",
       "status": "later",
-      "date": "2026-12-13"
+      "date": "2026-12-16"
     },
     {
-      "title": "Debrief backfill covers at least 50 of 60 attended rooms",
+      "title": "Posts 2 to 4 out, and the rulebook cut to the rules that beat the control",
       "status": "later",
-      "date": "2026-12-19"
+      "date": "2027-01-14"
     },
     {
       "title": "Proposed: run 2, with failure types selected from corrections made after signing",
       "status": "later",
       "date": "2027-01-15",
-      "note": "Not yet decided. The same session extraction and eligibility rule, applied to sessions after 14 November. If run 1 uses the fallback, run 2 would be the first list drawn from Alex's corrections, compared against run 1's."
+      "note": "Not started in this window; decided after run 1 publishes."
     }
   ],
   "metrics": [
@@ -177,32 +179,37 @@
       "date": "2026-11-11",
       "decision": "Page convention, set by the author (not a study decision): health is called against written criteria. On track: every dated gate is on its date, no gate due within 7 days waits on an open decision or input, and no kill rule has fired. At risk: a gate due within 7 days waits on an open decision or input, or a forecast slip is absorbed by the stated slack (the 12 December write-up date holds); the page then names the path back to on track and its date. Off track: a dated gate has passed without a new date, a kill rule has fired, or 12 December can no longer hold. The most cautious reading governs, and an at-risk call that can't be justified is reported as off track.",
       "why": "A colour without pre-agreed criteria is a mood. Written criteria let a reader check the call. They were written on 11 November, after the first at-risk call on 10 November; that call was rechecked against them and holds."
+    },
+    {
+      "date": "2026-11-18",
+      "decision": "Re-plan: this study is one of three public tracks. The debrief backfill moves to the graph track; this page covers the study and its four posts only. Every date after the signature moves six days.",
+      "why": "Too many parallel sessions had outrun one reviewer. The study is the build that best shows evaluation work, so it keeps a dedicated session."
     }
   ],
   "open": [
     {
       "question": "Pick the failure-type source. Branch 2: the written fallback, the anti-patterns file in file order. Branch 1: Alex's own corrections, which needs a new source, a new floor and a new label sample, each logged as a deviation, and still found no eligible type on 11 November.",
       "owner": "Alex",
-      "needBy": "2026-11-14",
+      "needBy": "2026-11-20",
       "unblocks": "The failure-type list and the signature",
       "recommendation": "Branch 2, signed as written, with the write-up saying the corrections record was too thin to rank."
     },
     {
       "question": "Only if branch 1 is picked: label 50 corrections drawn at random from the 72 found in his sessions (instead of the first 50 review comments), so the classifier's agreement can be reported against a majority-class baseline. Starts after the branch pick; otherwise it serves the proposed run 2.",
       "owner": "Alex",
-      "needBy": "2026-11-14",
+      "needBy": "2026-11-20",
       "unblocks": "Branch 1 only",
       "recommendation": "Skip for run 1 if branch 2 is chosen."
     },
     {
       "question": "Sign the pre-registration: confirm the failure-type list, state a prediction before any sample, and pick the marketplace GTM skill tested as one of the arms.",
       "owner": "Alex",
-      "needBy": "2026-11-14"
+      "needBy": "2026-11-20"
     },
     {
       "question": "Where AO-EVAL-SUITE lives: its own public repo (recommended), or a folder in an existing one. Also its licence.",
       "owner": "Alex",
-      "needBy": "2026-11-21",
+      "needBy": "2026-11-23",
       "unblocks": "The runner going public"
     },
     {
@@ -210,6 +217,13 @@
       "owner": "Alex",
       "needBy": "2026-11-25",
       "unblocks": "Run 2's source, and the rulebook audit"
+    },
+    {
+      "question": "How many outside graders, given the holidays: three as designed, two by 11 December with a third as an addendum, or human re-grading moved to January?",
+      "owner": "Alex",
+      "needBy": "2026-11-20",
+      "unblocks": "The signature",
+      "recommendation": "Two by 11 December plus a third as an addendum, written into the pre-registration before the hash."
     }
   ],
   "risks": [
@@ -243,6 +257,10 @@
     }
   ],
   "log": [
+    {
+      "date": "2026-11-18",
+      "text": "Re-charted with the rest of the in-flight work: one of three public tracks, dates moved six days, publish 15 December."
+    },
     {
       "date": "2026-11-12",
       "text": "Backfill wave 1 claims reviewed against the recording transcripts: of 223, 152 approved, 65 rejected, 6 left unreviewed because they are marked not for publication. Rejections by first failed test: 22 not supported by the transcript (slide-only figures included), 17 meaning changed (a hedge dropped or scope widened), 13 the brief-writer's own synthesis, 11 event housekeeping, 2 other. Health unchanged: at risk until the 14 November decision and signature."
@@ -286,12 +304,44 @@
     "YED-368",
     "YED-369",
     "YED-402",
-    "YED-403"
+    "YED-403",
+    "YED-427",
+    "YED-433"
   ],
   "stack": [
     "Claude Code",
     "Python",
     "Notion",
     "Supabase Postgres"
+  ],
+  "bottomLine": "One of three public tracks after the 18 November re-plan. The design, the runner and the throughput test are done; the pre-registration is not signed, so every later date has moved six days. The source pick and the signature are due 20 November, the screen runs 24 November and the suite and write-up publish 15 December.",
+  "healthReason": "The pre-registration gate passed 14 November without a signature. Under this page's own written criteria a passed gate with a new date is at risk, not off track, because the 15 December publish still holds.",
+  "pathToGreen": "Back on track the day the pre-registration is signed and frozen by hash, due 20 November.",
+  "nextSteps": [
+    {
+      "action": "Pick the failure-type source and grader count; sign the pre-registration",
+      "owner": "Alex",
+      "due": "2026-11-20"
+    },
+    {
+      "action": "Choose the repo home and licence",
+      "owner": "Alex",
+      "due": "2026-11-23"
+    },
+    {
+      "action": "Finish the study runner (interleaved blocks, resume, manifest check)",
+      "owner": "Claude Code",
+      "due": "2026-11-23"
+    },
+    {
+      "action": "Run the screen and report against the 5-of-16 rule",
+      "owner": "Claude Code",
+      "due": "2026-11-24"
+    },
+    {
+      "action": "Ask the outside graders",
+      "owner": "Alex",
+      "due": "2026-11-24"
+    }
   ]
 }

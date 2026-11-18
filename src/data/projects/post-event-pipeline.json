@@ -2,14 +2,14 @@
   "slug": "post-event-pipeline",
   "title": "Post-event pipeline: from capture to consumption",
   "tagline": "The post-event stage records a room in depth, then almost nothing reads the record. This project makes every run finish loudly and route what it learned.",
-  "kind": "project",
+  "kind": "sub-project",
   "status": "active",
   "health": "on-track",
   "phase": "Phase 2: routing builds",
   "owner": "Alex Yedibalian + Claude Code",
   "started": "2026-11-05",
   "target": "2026-12-03",
-  "updated": "2026-11-11",
+  "updated": "2026-11-18",
   "bottomLine": "The pilot and the first build are done, and the router is built. Every post-event run leaves a ledger and ends with a close-check. On 11 November the Rooms step was cut and the router got the go-ahead. The same day it was proven on the Agentics brief, recovering all five hand-routed items blind and adding four more. Next: merge, two more runs with a person approving each plan, then the backfill.",
   "healthReason": "Ahead of the 3 December target: the router is built and proven a week early. It turns at-risk if the next two runs need hand fixes on more than 1 item in 10.",
   "why": "A systems review of the 4 November Agentics Spotlight run found that post-event is strong at capture and weak at consumption. The brief ran to about 20,000 words across 17 sections, and only two things read it: one round of posts and the graph's claim extraction. The glossary, tools, anecdotes, open loops, unused angles and follow-up state had no reader. The worst failures were also silent: the command itself noted that a skipped graph write still closed green, and a stalled session lost track of which steps had run.",
@@ -217,6 +217,10 @@
   ],
   "log": [
     {
+      "date": "2026-11-18",
+      "text": "Now a sub-project of the Rooms and voice track. Closes 3 December after two supervised router runs."
+    },
+    {
       "date": "2026-11-11",
       "text": "Rooms cut. Router built and proven on the Agentics brief (PR #321): 5 of 5 hand-routed items recovered blind."
     },
@@ -282,5 +286,6 @@
     "Notion",
     "Supabase Postgres",
     "Linear"
-  ]
+  ],
+  "parent": "rooms-and-voice"
 }
