@@ -3,13 +3,13 @@
   "title": "Agent factory",
   "tagline": "A repo-agnostic system where agents write, test and review every pull request, and a human decides only what needs judgment.",
   "kind": "project",
-  "status": "active",
+  "status": "archived",
   "health": "on-track",
-  "phase": "Phase 0: portable core and gate",
+  "phase": "Folded into Intelligence graph and guardrails",
   "owner": "Alex Yedibalian + Claude Code",
   "started": "2026-11-05",
   "target": "2026-11-13",
-  "updated": "2026-11-08",
+  "updated": "2026-11-18",
   "why": "For a week an external autonomous builder opened most of the pull requests here. When its trial ended, the in-house coding sessions were the only builder again, and review needed to be a system rather than one person's attention.",
   "mission": "A portable gate any repo can adopt, designed so tests run with no secrets, a reviewer agent sees only the diff, as data, with no tools, and each change is sorted into a risk tier. Low-risk tiers merge without a human; privacy code, migrations and workflow files always stop for a person.",
   "destination": "A reference-only pull request merges with no human touch, a guarded one stops for review, and the reviewer has been back-tested on a labelled set of past pull requests. A day-14 read-out decides whether it stays.",
@@ -32,15 +32,15 @@
     },
     {
       "title": "Portable core: test workflow with no secrets, gate workflow defined from the base branch",
-      "status": "active"
+      "status": "later"
     },
     {
       "title": "Separate identities for authoring, approving and merging",
-      "status": "next"
+      "status": "later"
     },
     {
       "title": "Pilot on this pipeline repo",
-      "status": "next"
+      "status": "later"
     },
     {
       "title": "Day-14 read-out against a baseline of human-authored PRs, with a kill rule",
@@ -69,6 +69,10 @@
   ],
   "log": [
     {
+      "date": "2026-11-18",
+      "text": "Folded into the graph and guardrails track on 18 November. The CI review gate keeps running; new factory features wait for January."
+    },
+    {
       "date": "2026-11-06",
       "text": "Go decision taken on all three design questions. Phase 0 build started."
     },
@@ -87,5 +91,8 @@
     "GitHub Apps",
     "Claude Code",
     "Python"
-  ]
+  ],
+  "completed": "2026-11-18",
+  "bottomLine": "Folded into the graph and guardrails track on 18 November. The CI review gate keeps running; new factory features wait for January.",
+  "nextSteps": []
 }

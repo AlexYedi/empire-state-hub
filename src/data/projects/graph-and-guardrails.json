@@ -1,0 +1,217 @@
+{
+  "slug": "graph-and-guardrails",
+  "title": "Intelligence graph and guardrails",
+  "kind": "project",
+  "status": "active",
+  "health": "at-risk",
+  "tagline": "Close open privacy and security items first, land the graph work already in flight, get the scheduled jobs green, then hold steady until January.",
+  "phase": "Step 1 of 4: privacy and security triage",
+  "owner": "Alex Yedibalian + Claude Code",
+  "started": "2026-11-18",
+  "target": "2026-12-11",
+  "updated": "2026-11-18",
+  "bottomLine": "Three weeks of graph, guard, factory and runner work landed fast, faster than it could be reviewed. This track lands it in a fixed order: privacy and security items first, then the scheduled jobs and health checks, then the graph wiring, then a hardening batch. On 11 December it freezes to maintenance until the 5 January review.",
+  "healthReason": "A production health check has been red since 6 November, the always-on runner is logged out, and privacy items are past their dates.",
+  "pathToGreen": "On track when every item classed as an exposure is closed and the health check and runner are green, due 25 November.",
+  "why": "The intelligence graph is the longest-lived asset here: an expanding record of the AI market built from events and public sources. The work outran review, so the next month is about landing it safely rather than widening it.",
+  "mission": "Classify every open privacy item as an exposure or hardening; close the exposures; get the runner and health checks green with three scheduled jobs; finish the graph wiring already in flight with real consumers; then stop adding scope until January.",
+  "destination": "On 25 November no exposure-class item is open. On 11 December graph v2 is merged, health checks are green, the runner runs three jobs, and the hardening batch is in. From 12 December to 4 January the track is maintenance only.",
+  "showcase": [
+    "Sequencing by the real constraint: one reviewer's attention, not engineering capacity",
+    "Privacy defects treated as defects in every layer, even when a backstop would catch them",
+    "A deliberate freeze: new lanes and sources go to one dated January review instead of being dropped or started"
+  ],
+  "milestones": [
+    {
+      "title": "Privacy items classified as exposure or hardening; guard-file change reviewed by a human",
+      "status": "active",
+      "date": "2026-11-20",
+      "hill": "uphill"
+    },
+    {
+      "title": "Every exposure closed; runner back on three scheduled jobs; health checks green",
+      "status": "next",
+      "date": "2026-11-25"
+    },
+    {
+      "title": "Claude capability audit closed as shipped",
+      "status": "next",
+      "date": "2026-11-30"
+    },
+    {
+      "title": "Graph v2 wiring finished with the Monday Market Brief as a consumer; claim review policy applied; hardening batch merged",
+      "status": "later",
+      "date": "2026-12-11"
+    },
+    {
+      "title": "Maintenance only: no new lanes, sources or factory features",
+      "status": "later",
+      "date": "2027-01-04"
+    },
+    {
+      "title": "January queue reviewed and ranked",
+      "status": "later",
+      "date": "2027-01-05"
+    }
+  ],
+  "metrics": [
+    {
+      "label": "Scheduled jobs running on the always-on runner",
+      "baseline": "0: the runner is logged out",
+      "current": "0 of 3",
+      "target": "3 by 25 November",
+      "asOf": "2026-11-18",
+      "source": {
+        "label": "Runner job logs"
+      }
+    },
+    {
+      "label": "Claims reviewed",
+      "baseline": "43 reviewed of 2,508 candidates",
+      "current": "43",
+      "target": "Policy decided 21 November, applied by 11 December",
+      "asOf": "2026-11-18",
+      "source": {
+        "label": "Claims store, status counts"
+      }
+    },
+    {
+      "label": "Open pull requests across the two repos",
+      "baseline": "18, and growing with every parallel session",
+      "current": "18",
+      "target": "5 or fewer by 21 November",
+      "asOf": "2026-11-18",
+      "source": {
+        "label": "GitHub, open PRs"
+      }
+    },
+    {
+      "label": "Tracked items past their due date",
+      "baseline": "More than 40, and growing",
+      "current": "More than 40",
+      "target": "5 or fewer by 21 November",
+      "asOf": "2026-11-18",
+      "source": {
+        "label": "Issue tracker"
+      }
+    }
+  ],
+  "decisions": [
+    {
+      "date": "2026-11-18",
+      "decision": "The order inside the track is fixed: exposures, then health checks and the runner, then graph wiring, then hardening.",
+      "why": "Privacy items are never dropped, only sequenced, and anything that is a live exposure goes first."
+    },
+    {
+      "date": "2026-11-18",
+      "decision": "The agent factory's CI review keeps running. Auto-merge and other factory features wait for January.",
+      "why": "It is the one independent review running while human review capacity is the constraint."
+    },
+    {
+      "date": "2026-11-18",
+      "decision": "Graph items not on the finish list move to one queue with a single review date, 5 January.",
+      "why": "Frozen with an owner and a date, not abandoned."
+    },
+    {
+      "date": "2026-11-18",
+      "decision": "The debrief backfill runs here as an unattended job: private records and claims only, no drafts, no CRM.",
+      "why": "It is graph work, and it can run without a review session."
+    }
+  ],
+  "open": [
+    {
+      "question": "Claim review policy: 2,508 candidates, 43 reviewed.",
+      "owner": "Alex",
+      "needBy": "2026-11-21",
+      "unblocks": "The 11 December graph milestone",
+      "recommendation": "Model review on traceability, with Alex sampling 50. Fact-checking stays at the point of use."
+    },
+    {
+      "question": "Should research inferences enter the graph as low-confidence leads?",
+      "owner": "Alex",
+      "needBy": "2026-11-20",
+      "recommendation": "Admit them flagged as inference, kept out of anything published until checked."
+    },
+    {
+      "question": "Does sequencing the rest of the graph to January sit right?",
+      "owner": "Alex",
+      "needBy": "2026-11-20",
+      "recommendation": "Yes: review attention is the constraint. If not, the graph takes the second session and the eval study slips."
+    }
+  ],
+  "risks": [
+    {
+      "risk": "The track swallows the plan again.",
+      "mitigation": "One session, a fixed order and a hard stop on 11 December."
+    },
+    {
+      "risk": "A guard change gets waved through.",
+      "mitigation": "Guard, filter and allowlist diffs are read by a human in one sitting, with self-test output attached."
+    },
+    {
+      "risk": "The runner goes offline over the holidays.",
+      "mitigation": "Nothing in the plan depends on it between 21 December and 3 January."
+    }
+  ],
+  "assumptions": [
+    {
+      "assumption": "The red health check has a fixable cause, not an alarm from a frozen lane.",
+      "test": "Read the failing workflow's last run before changing anything."
+    }
+  ],
+  "nextSteps": [
+    {
+      "action": "Classify every open privacy item as exposure or hardening",
+      "owner": "Claude Code",
+      "due": "2026-11-20"
+    },
+    {
+      "action": "Review and merge the pending guard-file change with self-test output",
+      "owner": "Alex",
+      "due": "2026-11-20"
+    },
+    {
+      "action": "Log the runner back in; diagnose the failed sweep",
+      "owner": "Alex",
+      "due": "2026-11-20"
+    },
+    {
+      "action": "Diagnose the red health check from its last failing run",
+      "owner": "Claude Code",
+      "due": "2026-11-20"
+    }
+  ],
+  "log": [
+    {
+      "date": "2026-11-18",
+      "text": "Track opened in the 18 November re-plan. Absorbs the agent factory and market-intelligence lenses pages; the Claude capability audit became its sub-project."
+    }
+  ],
+  "links": [],
+  "tracking": [
+    "YED-384",
+    "YED-407",
+    "YED-262",
+    "YED-264",
+    "YED-263",
+    "YED-379",
+    "YED-376",
+    "YED-417",
+    "YED-311",
+    "YED-320",
+    "YED-363",
+    "YED-443",
+    "YED-441",
+    "YED-423",
+    "YED-355",
+    "YED-353",
+    "YED-426",
+    "YED-204"
+  ],
+  "stack": [
+    "Supabase",
+    "Python",
+    "GitHub Actions",
+    "Claude Code"
+  ]
+}

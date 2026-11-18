@@ -2,10 +2,11 @@
 
 import Link from "next/link";
 import { useLens } from "@/components/lens-provider";
+import type { InFlightPlan } from "@/lib/in-flight-plan";
 import type { Project } from "@/lib/projects";
 import { HealthPill, KIND, ProgressBar, fmtDate, nowMilestone } from "./ui";
 
-export function ProjectsIndex({ projects }: { projects: Project[] }) {
+export function ProjectsIndex({ projects, plan }: { projects: Project[]; plan?: InFlightPlan }) {
   const { lens } = useLens();
   const ed = lens === "editorial";
   const live = projects.filter((p) => p.status !== "archived");
@@ -36,6 +37,8 @@ export function ProjectsIndex({ projects }: { projects: Project[] }) {
         {live.length} in flight · {archived.length} archived
         {latest && <> · last update {fmtDate(latest)}</>}
       </p>
+
+      {plan && <PlanBlock plan={plan} byslug={byslug} ed={ed} />}
 
       <section className="mt-10">
         {live.length === 0 ? (
@@ -131,5 +134,90 @@ function ProjectCard({ project: p, parent, ed }: { project: Project; parent?: Pr
         </p>
       </div>
     </Link>
+  );
+}
+
+function daysBetween(a: string, b: string): number {
+  return Math.round((Date.parse(`${b}T00:00:00Z`) - Date.parse(`${a}T00:00:00Z`)) / 86_400_000);
+}
+
+function PlanBlock({ plan, byslug, ed }: { plan: InFlightPlan; byslug: Map<string, Project>; ed: boolean }) {
+  const left = daysBetween(plan.charted, plan.horizon);
+  return (
+    <section className="mt-10 rounded-lg border border-border bg-surface p-6">
+      <p className="font-mono text-[11px] uppercase tracking-widest text-muted">
+        {ed ? "The plan" : "plan // re-charted"} · {fmtDate(plan.charted)} · {left} days to {fmtDate(plan.horizon)}
+      </p>
+      <h2 className={ed ? "mt-3 font-display text-2xl tracking-tight" : "mt-3 font-mono text-xl font-semibold tracking-tight"}>
+        {plan.headline}
+      </h2>
+      <div className="mt-4 space-y-3 text-base leading-relaxed">
+        {plan.approach.map((para, i) => (
+          <p key={i}>{para}</p>
+        ))}
+      </div>
+
+      {plan.principles.length > 0 && (
+        <ul className="mt-6 grid gap-3 sm:grid-cols-2">
+          {plan.principles.map((pr) => (
+            <li key={pr.title} className="rounded-md border border-border p-3 text-sm">
+              <span className="font-medium">{pr.title}.</span> <span className="text-muted">{pr.text}</span>
+            </li>
+          ))}
+        </ul>
+      )}
+
+      <p className="mt-8 font-mono text-[11px] uppercase tracking-widest text-muted">{ed ? "The tracks" : "tracks"}</p>
+      <ol className="mt-3 space-y-2 text-sm">
+        {plan.tracks.map((t, i) => {
+          const p = byslug.get(t.slug);
+          return (
+            <li key={t.slug} className="flex gap-3">
+              <span className="font-mono text-muted">{i + 1}</span>
+              <span>
+                {p ? (
+                  <Link href={`/projects/${p.slug}`} className="font-medium hover:text-accent">
+                    {p.title}
+                  </Link>
+                ) : (
+                  <span className="font-medium">{t.slug}</span>
+                )}{" "}
+                <span className="text-muted">— {t.role}</span>
+              </span>
+            </li>
+          );
+        })}
+      </ol>
+
+      {plan.calendar.length > 0 && (
+        <>
+          <p className="mt-8 font-mono text-[11px] uppercase tracking-widest text-muted">{ed ? "Week by week" : "calendar"}</p>
+          <ul className="mt-3 divide-y divide-border border-y border-border text-sm">
+            {plan.calendar.map((w) => (
+              <li key={w.week} className={`flex flex-col gap-1 py-2 sm:flex-row sm:gap-4 ${w.dead ? "text-muted" : ""}`}>
+                <span className="w-40 shrink-0 font-mono text-[11px] uppercase tracking-widest">
+                  {w.week}
+                  {w.dead && " · slow week"}
+                </span>
+                <span>{w.focus}</span>
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
+
+      {plan.parked.length > 0 && (
+        <>
+          <p className="mt-8 font-mono text-[11px] uppercase tracking-widest text-muted">{ed ? "Parked on purpose" : "frozen"}</p>
+          <ul className="mt-3 space-y-1 text-sm">
+            {plan.parked.map((x) => (
+              <li key={x.item}>
+                <span>{x.item}</span> <span className="text-muted">— until {x.until}</span>
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
+    </section>
   );
 }

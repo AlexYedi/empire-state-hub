@@ -3,13 +3,13 @@
   "title": "Market-intelligence lenses",
   "tagline": "Turning a graph of NYC AI rooms into four readable lenses (attended, research, market, job), fed by scheduled lanes and read every Monday.",
   "kind": "project",
-  "status": "active",
+  "status": "archived",
   "health": "at-risk",
-  "phase": "Phase A: scheduled lanes",
+  "phase": "Folded into Intelligence graph and guardrails",
   "owner": "Alex Yedibalian + Claude Code",
   "started": "2026-11-03",
   "target": "2026-11-25",
-  "updated": "2026-11-08",
+  "updated": "2026-11-18",
   "why": "Topic trends had quietly stopped absorbing new topics after 8 August. 102 of 272 topics had no theme, and 9 of the 25 events attended since 6 August added nothing to any trend. The health view's tripwire had been firing, but nothing alerted on it.",
   "mission": "A knowledge graph read through four lenses, sliceable by theme, segment, cohort and time. Each lens is fed by a lane, and every lane has a schedule, a run ledger, an alarm, a named consumer and a kill rule.",
   "destination": "Every lane writes on schedule and alarms when it goes quiet. A Monday Market Brief reads the lenses, so prep for any room starts from what moved that week, not from a blank page.",
@@ -43,17 +43,17 @@
     },
     {
       "title": "Lane 1: hiring pulse, from dry run to live writes",
-      "status": "active",
+      "status": "later",
       "note": "The lane runs weekly in dry-run. Its coverage alarm fired in the 6 November nightly check, which is the alarm doing its job."
     },
     {
       "title": "Lane 4: feeds staging table and fetcher",
-      "status": "active",
+      "status": "later",
       "note": "Both are reviewed and waiting to merge. The table is rehearsed on the twin, not yet applied to production."
     },
     {
       "title": "Lane 2: choose the company-signals source before the vendor trial ends",
-      "status": "next"
+      "status": "later"
     },
     {
       "title": "Monday Market Brief reads the lenses",
@@ -124,6 +124,10 @@
   ],
   "log": [
     {
+      "date": "2026-11-18",
+      "text": "Folded into the graph and guardrails track on 18 November. The lanes already writing keep running; new lanes and sources wait for the 5 January review."
+    },
+    {
       "date": "2026-11-06",
       "text": "Lane 1's coverage alarm fired in the nightly check (issue #308). The structural checks passed."
     },
@@ -163,5 +167,8 @@
     "Python",
     "GitHub Actions",
     "Claude Code"
-  ]
+  ],
+  "completed": "2026-11-18",
+  "bottomLine": "Folded into the graph and guardrails track on 18 November. The lanes already writing keep running; new lanes and sources wait for the 5 January review.",
+  "nextSteps": []
 }
