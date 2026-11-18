@@ -5,7 +5,7 @@
   "kind": "project",
   "status": "active",
   "health": "at-risk",
-  "phase": "Source decided 14 November; build arms, fixtures and graders by 21 November, then sign",
+  "phase": "Ready to sign: build verified 18 November; signature due 19 November",
   "owner": "Alex Yedibalian + Claude Code",
   "started": "2026-11-04",
   "target": "2026-12-15",
@@ -54,8 +54,8 @@
     {
       "title": "Pre-registration signed and frozen by hash",
       "status": "active",
-      "date": "2026-11-22",
-      "note": "Waits on the arms, fixtures and graders the hash covers (due 21 November); then Alex states his prior and signs."
+      "date": "2026-11-19",
+      "note": "Build verified 18 November. Waiting only on the stated prior and the signature."
     },
     {
       "title": "Debrief backfill, first wave of three rooms",
@@ -190,7 +190,7 @@
     {
       "question": "Sign the pre-registration: confirm the failure-type list, state a prediction before any sample, and pick the marketplace GTM skill tested as one of the arms.",
       "owner": "Alex",
-      "needBy": "2026-11-22"
+      "needBy": "2026-11-19"
     },
     {
       "question": "Where AO-EVAL-SUITE lives: its own public repo (recommended), or a folder in an existing one. Also its licence.",
@@ -245,6 +245,10 @@
   "log": [
     {
       "date": "2026-11-18",
+      "text": "Pre-sign build verified complete (arms, fixtures, graders, manifest dry run); sign sheet written. Signature due 19 November."
+    },
+    {
+      "date": "2026-11-18",
       "text": "Re-charted with the rest of the in-flight work: one of three public tracks, dates moved six days, publish 15 December."
     },
     {
@@ -270,10 +274,6 @@
     {
       "date": "2026-11-06",
       "text": "First plan written, red-teamed and shared for review."
-    },
-    {
-      "date": "2026-11-04",
-      "text": "Attended a talk on test-first agent instructions, which started the project."
     }
   ],
   "links": [
@@ -300,28 +300,18 @@
     "Notion",
     "Supabase Postgres"
   ],
-  "bottomLine": "One of three public tracks after the 18 November re-plan. The design, the runner and the throughput test are done; the pre-registration is not signed, so every later date has moved six days. The source was decided on 14 November; the signature follows the remaining build work on 22 November, the screen runs 24 November and the suite and write-up publish 15 December.",
-  "healthReason": "The pre-registration gate passed 14 November without a signature. Under this page's own written criteria a passed gate with a new date is at risk, not off track, because the 15 December publish still holds.",
-  "pathToGreen": "Back on track the day the pre-registration is signed and frozen by hash, due 22 November.",
+  "bottomLine": "Everything the pre-registration hash covers is built and verified: arms for all eight failure types, fixtures with a clean leak scan, about 40 seeded grader tests passing, and a manifest dry run over 73 files. A sign sheet sets out the three remaining text decisions and the prior Alex has to state. Signing is due 19 November, which keeps the 24 November screen and the 15 December publish.",
+  "healthReason": "At risk until the signature, which is the only open gate. The build work behind it is complete.",
+  "pathToGreen": "On track the day the pre-registration is signed and frozen by hash, due 19 November.",
   "nextSteps": [
     {
-      "action": "Build arms A to C, fixtures, graders and the hash manifest",
-      "owner": "Claude Code",
-      "due": "2026-11-21"
-    },
-    {
-      "action": "State the prior, choose the grader count and sign the pre-registration",
+      "action": "State the prior, settle the three pre-sign edits and sign",
       "owner": "Alex",
-      "due": "2026-11-22"
+      "due": "2026-11-19"
     },
     {
       "action": "Choose the repo home and licence",
       "owner": "Alex",
-      "due": "2026-11-23"
-    },
-    {
-      "action": "Finish the study runner (interleaved blocks, resume, manifest check)",
-      "owner": "Claude Code",
       "due": "2026-11-23"
     },
     {
