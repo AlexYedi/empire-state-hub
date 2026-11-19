@@ -82,6 +82,20 @@ const Risk = z.object({ risk: Text, mitigation: Text }).strict();
 const Assumption = z.object({ assumption: Text, test: Text }).strict();
 // Owner — action — date: one named owner per step, never a team.
 const NextStep = z.object({ action: Text, owner: Text, due: IsoDate }).strict();
+// Options compared: for a project still choosing between paths. Each path gets the case for,
+// the case against, what's new in it, what executing it is worth, and the vision if it lands.
+// `slug` points at the path's own sub-project page when there is one.
+const OptionCase = z
+  .object({
+    name: Text,
+    slug: Slug.optional(),
+    caseFor: Text,
+    caseAgainst: Text,
+    opportunity: Text,
+    payoff: Text,
+    vision: Text,
+  })
+  .strict();
 const LogEntry = z.object({ date: IsoDate, text: Text }).strict();
 const Link = z.object({ label: Text, url: Url }).strict();
 
@@ -115,6 +129,7 @@ export const ProjectSchema = z
     risks: z.array(Risk).default([]),
     assumptions: z.array(Assumption).default([]),
     nextSteps: z.array(NextStep).max(6, "next steps are the next few moves, not a backlog").default([]),
+    options: z.array(OptionCase).max(5).default([]),
     log: z.array(LogEntry).max(8, "the log is milestone-level: keep the latest 8").default([]),
     links: z.array(Link).default([]),
     tracking: z.array(z.string().regex(/^[A-Z]+-\d+$/)).default([]),

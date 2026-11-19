@@ -1,0 +1,76 @@
+{
+  "slug": "why-now-wire",
+  "title": "Why-Now Wire",
+  "tagline": "An agent that only acts on change it can prove: it watches a book of accounts, confirms what changed, and drafts the outreach, held for a human to approve.",
+  "kind": "sub-project",
+  "parent": "ground-truth-hackathon",
+  "status": "active",
+  "health": "on-track",
+  "phase": "Picked as the lead; build starts 10:30 on 14 November",
+  "owner": "Alex Yedibalian + Claude Code",
+  "started": "2026-11-13",
+  "target": "2026-11-14",
+  "updated": "2026-11-14",
+  "bottomLine": "The lead path, for the Live Wire track. It sweeps the last day of news for a list of accounts, groups results into events, counts only original publishers, and fires a trigger when two independent ones confirm the change and the quote is re-found on the page. Each trigger gets a brief and a held draft. Nothing sends without a named approval.",
+  "healthReason": "The morning probe passed the kill test: real, independently confirmed changes in a one-day window. The remaining risk is trigger precision, which is designed for and measured.",
+  "why": "Sellers learn about a funding round, a leadership change or a launch days late, from a stale enrichment record or a teammate. The do-nothing baseline is a weekly manual scan of the news, or a single-source alert that fires on rumours.",
+  "mission": "An account watcher. Fresh-news searches over a list of accounts, a ledger of what has been seen so nothing alerts twice, a trigger rule that needs two independent domains, the verification engine on the trigger's claims, and an outreach draft citing the event, held for approval.",
+  "destination": "On stage, a change that happened in the last day appears as a confirmed trigger with two sources, and the drafted message cites it, waiting for approval. Done when a live sweep produces that without hand-picking the story.",
+  "showcase": [
+    "Corroboration before action: two independent sources or no trigger",
+    "Polling plus a seen-ledger, a simple form of change data capture that never alerts twice",
+    "Human approval as the default for anything that goes out",
+    "Events, not pages: clustering by event and collapsing syndicated copies before counting sources",
+    "Measured against a naive two-sources rule that fired on 14 of 15 accounts"
+  ],
+  "milestones": [
+    {
+      "title": "Designed on the shared engine",
+      "status": "done",
+      "date": "2026-11-13"
+    },
+    {
+      "title": "Repo scaffolded with secret scanning",
+      "status": "done",
+      "date": "2026-11-13"
+    },
+    {
+      "title": "Probe: corroborated triggers in a 24-hour window",
+      "status": "done",
+      "date": "2026-11-14"
+    },
+    {
+      "title": "Live sweep producing a held, cited draft",
+      "status": "later",
+      "date": "2026-11-14"
+    }
+  ],
+  "assumptions": [
+    {
+      "assumption": "A list of around fifteen active companies yields at least one corroborated change per day, even on a weekend",
+      "test": "Sweep the list tonight with a one-day freshness window and count triggers with two independent domains"
+    }
+  ],
+  "risks": [
+    {
+      "risk": "Nothing happens on the day, and the demo shows an empty feed",
+      "mitigation": "Widen the list to fast-moving sectors and keep a recorded real sweep as a labelled replay"
+    },
+    {
+      "risk": "Syndicated copies of one story look like independent confirmation",
+      "mitigation": "Count distinct original publishers, not distinct URLs"
+    }
+  ],
+  "nextSteps": [
+    {
+      "action": "One verified trigger end to end in the browser by 11:30",
+      "owner": "Claude Code",
+      "due": "2026-11-14"
+    }
+  ],
+  "stack": [
+    "You.com Search, Contents and Inference Router",
+    "FastAPI",
+    "Server-sent events"
+  ]
+}
