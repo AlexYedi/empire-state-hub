@@ -10,7 +10,7 @@
   "started": "2026-11-18",
   "target": "2026-12-11",
   "updated": "2026-11-18",
-  "bottomLine": "The first pass is done. All 14 open privacy items are classified: 3 are live exposures and 11 are hardening. One exposure needs the hosting provider to act, and that request is filed. The other two share a single guard fix. The scheduled sweep's 18 November crash is fixed and waiting for review. The red health check has three separate causes, none of them in the computed numbers: two are checks that could never pass, and one is a scheduled job that has failed since a secret was moved.",
+  "bottomLine": "The first pass is done. All 14 open privacy items are classified: 3 are live exposures and 11 are hardening. One exposure needs the hosting provider to act, and that request is filed. The other two share one guard fix. The scheduled sweep's 18 November crash is fixed and waiting for review. The red health check has three separate causes, none in the computed numbers: two are checks that could never pass, and one is a scheduled job that has failed since a secret was moved.",
   "healthReason": "Still at risk: the three exposures stay open until the provider acts and the guard fix lands, and the health check stays red until its checks are rescoped.",
   "pathToGreen": "On track once the sweep fix merges, the guard fix lands, the health-check scopes are corrected and the provider confirms its removal. All due 25 November.",
   "why": "The intelligence graph is the longest-lived asset here: an expanding record of the AI market built from events and public sources. The work outran review, so the next month is about landing it safely rather than widening it.",
