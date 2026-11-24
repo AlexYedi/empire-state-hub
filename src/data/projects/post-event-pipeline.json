@@ -4,14 +4,14 @@
   "tagline": "The post-event stage records a room in depth, then almost nothing reads the record. This project makes every run finish loudly and route what it learned.",
   "kind": "sub-project",
   "status": "active",
-  "health": "on-track",
-  "phase": "Phase 2: routing builds",
+  "health": "at-risk",
+  "phase": "Phase 3: supervised runs and close",
   "owner": "Alex Yedibalian + Claude Code",
   "started": "2026-11-05",
   "target": "2026-12-03",
-  "updated": "2026-11-18",
-  "bottomLine": "The pilot and the first build are done, and the router is built. Every post-event run leaves a ledger and ends with a close-check. On 11 November the Rooms step was cut and the router got the go-ahead. The same day it was proven on the Agentics brief, recovering all five hand-routed items blind and adding four more. Next: merge, two more runs with a person approving each plan, then the backfill.",
-  "healthReason": "Ahead of the 3 December target: the router is built and proven a week early. It turns at-risk if the next two runs need hand fixes on more than 1 item in 10.",
+  "updated": "2026-11-24",
+  "bottomLine": "The router is merged and has routed one live run: the 18 November Postgres meetup, which produced a follow-up to check the speaker's slides and a second-post backlog item. Every run leaves a ledger and ends with a close-check. Two supervised runs remain before the project closes, and no room since 18 November has an uploaded recording, transcript or notes.",
+  "healthReason": "The router merged on 11 November, but the first supervised run, due 25 November, has no room with an upload yet. The project still turns at-risk on quality if more than 1 item in 10 needs a hand fix.",
   "why": "A systems review of the 4 November Agentics Spotlight run found that post-event is strong at capture and weak at consumption. The brief ran to about 20,000 words across 17 sections, and only two things read it: one round of posts and the graph's claim extraction. The glossary, tools, anecdotes, open loops, unused angles and follow-up state had no reader. The worst failures were also silent: the command itself noted that a skipped graph write still closed green, and a stalled session lost track of which steps had run.",
   "mission": "Every post-event run leaves a ledger of what ran, ends with a check that reads the real state and prints PASS or FAIL, and routes each section of the brief to something that acts on it: an issue, a project idea, a follow-up, a story, a content backlog row.",
   "destination": "Attending a room reliably turns into finished, checked work: posts, follow-ups on a date, build ideas, interview stories and graph claims. Done means three things: the close-check passes or skips with a reason on every new run, routed items are closed at a measurable rate after 30 days, and debrief coverage rises as the backfill runs.",
@@ -48,10 +48,15 @@
     },
     {
       "title": "Brief routing block and router step, with a lite debrief mode and one event name derived from Notion",
+      "status": "done",
+      "date": "2026-11-11",
+      "note": "Merged as PR #332. Proven on the Agentics brief: a blind pass recovered all 5 hand-routed items and found 4 more."
+    },
+    {
+      "title": "Two supervised router runs, then the project closes",
       "status": "active",
-      "date": "2026-11-18",
-      "hill": "downhill",
-      "note": "Built and proven on the Agentics brief: a blind pass recovered all 5 hand-routed items and found 4 more. Two titles needed a re-ask for length; no content needed a hand fix. In review (PR #321)."
+      "date": "2026-12-03",
+      "note": "First live routing on 19 November (Postgres meetup). The first supervised run is waiting for a room with an upload."
     },
     {
       "title": "Themes and content plan on every post-event post, plus X cuts",
@@ -109,8 +114,8 @@
       "current": "5 of 5, plus 4 new items",
       "asOf": "2026-11-11",
       "source": {
-        "label": "PR #321",
-        "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/321"
+        "label": "PR #332",
+        "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/332"
       },
       "note": "Blind pass on one brief. First-pass format errors: 2 of 9 titles over the length cap, fixed by one re-ask. One event is a small sample; two more runs are planned before writes go automatic."
     },
@@ -166,29 +171,19 @@
   "open": [],
   "nextSteps": [
     {
-      "action": "Merge the Rooms removal, then the router (PRs #319 and #321)",
+      "action": "Pick the room for the first supervised run",
       "owner": "Alex",
-      "due": "2026-11-13"
+      "due": "2026-11-25"
     },
     {
-      "action": "Approve the Agentics routing plan: 3 new issues and 1 project idea",
-      "owner": "Alex",
-      "due": "2026-11-13"
-    },
-    {
-      "action": "Route the next two post-event runs with a person approving each plan",
-      "owner": "Claude Code",
-      "due": "2026-11-20"
-    },
-    {
-      "action": "Themes and content plan on post-event posts",
-      "owner": "Claude Code",
-      "due": "2026-11-26"
-    },
-    {
-      "action": "First routed backfill batch, with the close-check run on each event",
+      "action": "Run it with a person approving the routing plan, run the close-check and record the hand-fix rate",
       "owner": "Claude Code",
       "due": "2026-12-03"
+    },
+    {
+      "action": "First read of the 30-day routing yield",
+      "owner": "Claude Code",
+      "due": "2026-12-11"
     }
   ],
   "assumptions": [
@@ -216,6 +211,10 @@
     }
   ],
   "log": [
+    {
+      "date": "2026-11-24",
+      "text": "Router merged (since 11 November) and used live once, on 19 November. The first supervised run is waiting for a room with an upload."
+    },
     {
       "date": "2026-11-18",
       "text": "Now a sub-project of the Rooms and voice track. Closes 3 December after two supervised router runs."
@@ -267,8 +266,8 @@
       "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/319"
     },
     {
-      "label": "Router (PR #321)",
-      "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/321"
+      "label": "Router (PR #332)",
+      "url": "https://github.com/AlexYedi/Empire_State_Events_Pipeline_Take_3/pull/332"
     }
   ],
   "tracking": [
