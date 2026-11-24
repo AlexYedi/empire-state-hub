@@ -3,15 +3,15 @@
   "title": "Rooms and voice",
   "kind": "project",
   "status": "active",
-  "health": "on-track",
+  "health": "at-risk",
   "tagline": "Every room attended becomes checked posts and dated follow-ups, at about two posts a week, with the event pipeline in maintenance.",
-  "phase": "Maintenance and close-out: router merge, two supervised runs",
+  "phase": "Close-out: two supervised router runs, holiday-week cadence",
   "owner": "Alex Yedibalian + Claude Code",
   "started": "2026-11-18",
   "target": "2027-01-15",
-  "updated": "2026-11-18",
+  "updated": "2026-11-24",
   "bottomLine": "The event pipeline already produces about two posts a week. This track keeps it there, closes the post-event routing work by 3 December, and clears the stale content queue. Growth in volume is not the goal; finishing what each room starts is.",
-  "healthReason": "The post-event router is a week ahead of its 3 December target. The risk is a backlog of stale early-November content items, triaged on 20 November.",
+  "healthReason": "The first supervised router run was due 25 November and has no qualifying room: nothing has been uploaded from a room since the 18 November run. If that run counts as the first, the track is back on track.",
   "why": "Rooms are where the writing, the community standing and the conversations come from. The pipeline produces well; the gap is finishing: drafts and follow-ups that never close.",
   "mission": "Keep research and drafting running for attended events, merge and prove the post-event router, hold the publishing cadence, and clear any content item older than ten days.",
   "destination": "On 3 December the router is merged and proven on two supervised runs and the post-event project closes. Through 15 January the cadence holds at about two posts a week, with no content item older than ten days.",
@@ -25,12 +25,14 @@
       "title": "Stale content items triaged: keep at most two, cancel the rest",
       "status": "active",
       "date": "2026-11-20",
-      "hill": "downhill"
+      "hill": "downhill",
+      "note": "The first six were cancelled on 18 November. A second batch of ten went to a keep-or-cancel call on 24 November."
     },
     {
       "title": "Post-event router merged; first supervised run",
-      "status": "next",
-      "date": "2026-11-25"
+      "status": "active",
+      "date": "2026-11-25",
+      "note": "The router merged on 11 November. The first run is waiting for a room with an uploaded recording, transcript or notes."
     },
     {
       "title": "Second supervised run; post-event project closed",
@@ -52,29 +54,31 @@
     {
       "label": "Posts per week",
       "baseline": "About 2: the pipeline already produces this with no new build",
-      "current": "About 2",
+      "current": "About 3 (9 posts from drafts created 1–21 November)",
       "target": "Hold at about 2",
-      "asOf": "2026-11-18",
+      "asOf": "2026-11-24",
       "source": {
-        "label": "Content Drafts database, weekly count"
-      }
+        "label": "Content Drafts database, published rows"
+      },
+      "note": "Counted by draft creation date, a proxy for publish date. Thanksgiving week is planned as one post."
     },
     {
       "label": "Post-event runs that end with a close-check verdict",
       "baseline": "0 before 11 November: a failed step could close green",
       "current": "1 run checked",
       "target": "Every new run: PASS, or a skip with a reason",
-      "asOf": "2026-11-18",
+      "asOf": "2026-11-24",
       "source": {
         "label": "Post-event run ledgers"
-      }
+      },
+      "note": "The 19 November run's ledger has not been read back yet."
     },
     {
       "label": "Content items past their due date",
       "baseline": "Grows by about 2 a week with no triage",
-      "current": "At least 6",
-      "target": "0 by 21 November",
-      "asOf": "2026-11-18",
+      "current": "5, plus 1 due today",
+      "target": "0",
+      "asOf": "2026-11-24",
       "source": {
         "label": "Issue tracker, content items"
       }
@@ -95,20 +99,25 @@
       "date": "2026-11-18",
       "decision": "The late 'An Obvious week' series is cancelled.",
       "why": "The trial it covered ended 6 November, and a late series has no pilot."
+    },
+    {
+      "date": "2026-11-19",
+      "decision": "No late-December talk this cycle. The eval findings become a recorded walkthrough.",
+      "why": "It saves prep hours in the holiday weeks."
     }
   ],
   "open": [
     {
-      "question": "Which stale recaps are still worth shipping?",
+      "question": "Which of the ten open content items still ship?",
       "owner": "Alex",
-      "needBy": "2026-11-20",
-      "recommendation": "Keep one only if there is uploaded content for it. Cancel the rest."
+      "needBy": "2026-11-26",
+      "recommendation": "Keep the second Postgres post and the check of the speaker's slide numbers it depends on. Close the rest."
     },
     {
-      "question": "Is the planned late-December talk date fixed, and who is the audience?",
+      "question": "Which room is the first supervised router run?",
       "owner": "Alex",
-      "needBy": "2026-11-24",
-      "recommendation": "If fixed, prep starts 14 December; if not, move it to January."
+      "needBy": "2026-11-25",
+      "recommendation": "Count the 19 November run if its routing plan was approved before it wrote; otherwise run the next room with an upload."
     }
   ],
   "risks": [
@@ -129,22 +138,26 @@
   ],
   "nextSteps": [
     {
-      "action": "Triage the six stale early-November content items",
+      "action": "Answer the content triage and first-run questions",
       "owner": "Alex",
-      "due": "2026-11-20"
+      "due": "2026-11-26"
     },
     {
-      "action": "Merge the two open carousel PRs",
-      "owner": "Alex",
-      "due": "2026-11-20"
-    },
-    {
-      "action": "Merge the router and run it supervised on the next attended room",
+      "action": "Research the 2 December summit and the week's other events; post the Upcoming Week roundup on 29 November",
       "owner": "Claude Code",
-      "due": "2026-11-25"
+      "due": "2026-11-29"
+    },
+    {
+      "action": "Draft the eval write-up, then the post and long read",
+      "owner": "Claude Code",
+      "due": "2026-12-03"
     }
   ],
   "log": [
+    {
+      "date": "2026-11-24",
+      "text": "Thanksgiving week has no events on the calendar, so its one post is the next week's roundup. Ten content items sent for a keep-or-cancel call. The first supervised router run is waiting for an uploaded room."
+    },
     {
       "date": "2026-11-18",
       "text": "Track opened in the 18 November re-plan. The post-event pipeline project became its sub-project."
